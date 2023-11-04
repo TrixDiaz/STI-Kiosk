@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('product_id')->unique()->index();
             $table->string('product_name');
             $table->integer('product_price');
-            $table->integer('product_quantity');
+            $table->integer('product_stock');
             $table->string('product_description');
             $table->string('product_image')->nullable();
             $table->string('product_classification')->nullable();

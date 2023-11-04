@@ -16,8 +16,8 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 
 class ProductResource extends Resource
@@ -38,6 +38,7 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 TextInput::make('product_id')
+                    ->label('PID')
                     ->readOnly()
                     ->default($randomNumber)
                     ->required(), 
@@ -45,27 +46,33 @@ class ProductResource extends Resource
                     ->required()
                     ->maxLength(255),
                 TextInput::make('product_price')
+                    ->label('Price')
                     ->required()
                     ->numeric(),
-                TextInput::make('product_quantity')
+                TextInput::make('product_stock')
+                    ->label('Stocks')
                     ->required()
                     ->numeric(),
                 TextInput::make('product_description')
+                    ->label('Description')
                     ->required()
                     ->maxLength(255),
                 FileUpload::make('product_image')
-                    ->image()
-                    ->required(),
+                    ->label('attachment')
+                    ->image(),
                 TextInput::make('product_classification')
+                    ->label('Category')
                     ->required()
                     ->maxLength(255),
                 Select::make('product_status')
+                    ->label('Status')
                     ->options([
                         'active' => 'Active',
                         'inactive' => 'Inactive',
                     ])
                     ->required(),
                 DatePicker::make('product_expiration')
+                     ->label('Expiry')
                      ->native(false)
                      ->timezone('Asia/Manila')
                      ->displayFormat('d/m/Y')
@@ -89,8 +96,8 @@ class ProductResource extends Resource
                     ->label('Price')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('product_quantity')
-                    ->label('Qty')
+                TextColumn::make('product_stock')
+                    ->label('Stocks')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('product_description')
@@ -99,7 +106,8 @@ class ProductResource extends Resource
                     ->words(10)
                     ->toggleable(isToggledHiddenByDefault: true),
                 ImageColumn::make('product_image')
-                    ->label('attachment'),
+                    ->label('attachment')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('product_classification')
                     ->label('Category')
                     ->searchable()
@@ -122,16 +130,19 @@ class ProductResource extends Resource
                     ->since(),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\ForceDeleteBulkAction::make(),
+                Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -141,6 +152,14 @@ class ProductResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
     
     public static function getPages(): array
