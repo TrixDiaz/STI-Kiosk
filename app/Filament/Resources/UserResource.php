@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Textarea;
+use Filament\Infolists\Components\Tabs;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,6 +32,21 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Tabs::make('Label')
+                ->tabs([
+                    Tabs\Tab::make('Tab 1')
+                        ->schema([
+                            // ...
+                        ]),
+                    Tabs\Tab::make('Tab 2')
+                        ->schema([
+                            // ...
+                        ]),
+                    Tabs\Tab::make('Tab 3')
+                        ->schema([
+                            // ...
+                        ]),
+                    ]),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
