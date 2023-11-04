@@ -33,7 +33,7 @@ class ProductResource extends Resource
     public static function form(Form $form): Form
     {
 
-        $randomNumber = "" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $randomNumber = "PID" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
         return $form
             ->schema([
@@ -79,31 +79,47 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('product_id')
-                    ->searchable(),
+                    ->label('PID')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('product_name')
+                    ->label('Name')
                     ->searchable(),
                 TextColumn::make('product_price')
+                    ->label('Price')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('product_quantity')
+                    ->label('Qty')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('product_description')
-                    ->searchable(),
-                ImageColumn::make('product_image'),
+                    ->label('Description')
+                    ->searchable()
+                    ->words(10)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                ImageColumn::make('product_image')
+                    ->label('attachment'),
                 TextColumn::make('product_classification')
-                    ->searchable(),
+                    ->label('Category')
+                    ->searchable()
+                    ->words(10)
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('product_status')
-                    ->searchable(),
-                    TextColumn::make('product_expiration')
+                    ->label('Status')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('product_expiration')
+                    ->label('Expiry')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                    TextColumn::make('created_at')
-                        ->dateTime()
-                        ->sortable()
-                        ->toggleable(isToggledHiddenByDefault: true)
-                        ->since(),
+                TextColumn::make('created_at')
+                    ->label('Created')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->since(),
             ])
             ->filters([
                 //
@@ -111,6 +127,7 @@ class ProductResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
