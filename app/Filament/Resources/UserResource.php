@@ -8,8 +8,8 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Infolists\Components\Tabs;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,21 +32,6 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Tabs::make('Label')
-                ->tabs([
-                    Tabs\Tab::make('Tab 1')
-                        ->schema([
-                            // ...
-                        ]),
-                    Tabs\Tab::make('Tab 2')
-                        ->schema([
-                            // ...
-                        ]),
-                    Tabs\Tab::make('Tab 3')
-                        ->schema([
-                            // ...
-                        ]),
-                    ]),
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -59,17 +44,14 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->maxLength(255),
-                Textarea::make('two_factor_secret')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
-                Textarea::make('two_factor_recovery_codes')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
-                DateTimePicker::make('two_factor_confirmed_at'),
-                TextInput::make('current_team_id')
-                    ->numeric(),
-                TextInput::make('profile_photo_path')
-                    ->maxLength(2048),
+                Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->preload(),
+                Select::make('permissions')
+                    ->multiple()
+                    ->relationship('permissions', 'name')
+                    ->preload(),
             ]);
     }
 
@@ -84,17 +66,6 @@ class UserResource extends Resource
                 TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),
-                TextColumn::make('two_factor_confirmed_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('current_team_id')
-                    ->numeric()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('profile_photo_path')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

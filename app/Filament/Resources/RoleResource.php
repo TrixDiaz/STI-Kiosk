@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\RoleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RoleResource\RelationManagers;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 
 class RoleResource extends Resource
@@ -31,6 +32,10 @@ class RoleResource extends Resource
         return $form
             ->schema([
                TextInput::make('name'),
+               Select::make('permissions')
+                    ->multiple()
+                    ->relationship('permissions', 'name')
+                    ->preload(),
             ]);
     }
 

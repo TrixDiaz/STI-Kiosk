@@ -9,6 +9,7 @@ use App\Models\Permission;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 // use Spatie\Permission\Models\Permission;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,6 +32,10 @@ class PermissionResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name'),
+                Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->preload(),
             ]);
     }
 
