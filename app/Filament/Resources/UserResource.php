@@ -9,7 +9,9 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,26 +34,37 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                DateTimePicker::make('email_verified_at'),
-                TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
-                Select::make('roles')
-                    ->multiple()
-                    ->relationship('roles', 'name')
-                    ->preload(),
-                Select::make('permissions')
-                    ->multiple()
-                    ->relationship('permissions', 'name')
-                    ->preload(),
+
+                Fieldset::make('Account Information')
+                    ->schema([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('password')
+                            ->password()
+                            ->default('@Ctona123')
+                            ->prefix('@Ctona123')
+                            ->visibleOn(['create'])
+                            ->readOnly(),
+                        DateTimePicker::make('email_verified_at')
+                            ->native(false),
+                    ])->columns(3),
+                Fieldset::make('User Management')
+                    ->schema([
+                        Select::make('roles')
+                            ->multiple()
+                            ->relationship('roles', 'name')
+                            ->preload(),
+                        Select::make('permissions')
+                            ->multiple()
+                            ->relationship('permissions', 'name')
+                            ->preload(),
+                    ])->columns(2),
+
             ]);
     }
 
@@ -63,14 +76,14 @@ class UserResource extends Resource
                     ->searchable(),
                 TextColumn::make('email')
                     ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
+                IconColumn::make('email_verified_at')
+                    ->label('Account Status')
+                    ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->since()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -87,13 +100,13 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
@@ -108,7 +121,7 @@ class UserResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -116,5 +129,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }
 }

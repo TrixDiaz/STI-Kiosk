@@ -13,9 +13,10 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        
         <!-- Styles -->
         @livewireStyles
+        @livewire('database-notifications')
     </head>
     <body class="font-sans antialiased">
         <x-banner />

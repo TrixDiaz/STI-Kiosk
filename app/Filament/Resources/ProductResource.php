@@ -10,15 +10,18 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProductResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use Filament\Forms\Components\Textarea;
 
 class ProductResource extends Resource
 {
@@ -41,43 +44,60 @@ class ProductResource extends Resource
                     ->label('PID')
                     ->readOnly()
                     ->default($randomNumber)
-                    ->required(), 
-                TextInput::make('product_name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('product_price')
-                    ->label('Price')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('product_stock')
-                    ->label('Stocks')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('product_description')
-                    ->label('Description')
-                    ->required()
-                    ->maxLength(255),
+                    ->columnSpanFull()
+                    ->required(),
+
+                Section::make('New Product')
+                    ->description('The items you have selected for purchase')
+                    ->icon('heroicon-m-shopping-bag')
+                    ->schema([
+                        TextInput::make('product_name')
+                            ->required()
+                            ->maxLength(255),
+                        Textarea::make('product_description')
+                            ->label('Description')
+                            ->required()
+                            ->maxLength(255),
+
+                    ]),
+                Fieldset::make('Product Information')
+                    ->schema([
+                        TextInput::make('product_price')
+                            ->label('Price')
+                            ->required()
+                            ->numeric(),
+                        TextInput::make('product_classification')
+                            ->label('Category')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('product_stock')
+                            ->label('Stocks')
+                            ->required()
+                            ->numeric(),
+                    ])
+                    ->columns(3),
+
+                Fieldset::make(' Information')
+                    ->schema([
+                        Select::make('product_status')
+                            ->label('Status')
+                            ->options([
+                                'active' => 'Active',
+                                'inactive' => 'Inactive',
+                            ])
+                            ->required(),
+                        DatePicker::make('product_expiration')
+                            ->label('Expiry')
+                            ->native(false)
+                            ->timezone('Asia/Manila')
+                            ->displayFormat('d/m/Y')
+                            ->required(),
+                    ])->columns(2),
                 FileUpload::make('product_image')
                     ->label('attachment')
-                    ->image(),
-                TextInput::make('product_classification')
-                    ->label('Category')
-                    ->required()
-                    ->maxLength(255),
-                Select::make('product_status')
-                    ->label('Status')
-                    ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
-                    ])
-                    ->required(),
-                DatePicker::make('product_expiration')
-                     ->label('Expiry')
-                     ->native(false)
-                     ->timezone('Asia/Manila')
-                     ->displayFormat('d/m/Y')
-                     ->required(),
-                    
+                    ->image()
+                    ->columnSpanFull(),
+
             ]);
     }
 
@@ -106,6 +126,7 @@ class ProductResource extends Resource
                     ->words(10)
                     ->toggleable(isToggledHiddenByDefault: true),
                 ImageColumn::make('product_image')
+                    ->circular()
                     ->label('attachment')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('product_classification')
@@ -140,13 +161,13 @@ class ProductResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
@@ -161,7 +182,7 @@ class ProductResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -169,5 +190,5 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
-    }    
+    }
 }
