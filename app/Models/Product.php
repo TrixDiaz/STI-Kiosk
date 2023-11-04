@@ -16,6 +16,7 @@ class Product extends Model
         'product_description',
         'product_image',
         'product_classification',
+        'product_expiration',
         'product_status',
     ];
 

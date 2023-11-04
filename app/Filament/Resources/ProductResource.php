@@ -8,15 +8,17 @@ use App\Models\Product;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Field;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ProductResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProductResource\RelationManagers;
-use Filament\Forms\Components\Field;
 
 class ProductResource extends Resource
 {
@@ -37,7 +39,8 @@ class ProductResource extends Resource
             ->schema([
                 TextInput::make('product_id')
                     ->readOnly()
-                    ->default($randomNumber), 
+                    ->default($randomNumber)
+                    ->required(), 
                 TextInput::make('product_name')
                     ->required()
                     ->maxLength(255),
@@ -56,9 +59,18 @@ class ProductResource extends Resource
                 TextInput::make('product_classification')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('product_status')
-                    ->required()
-                    ->maxLength(255),
+                Select::make('product_status')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                    ])
+                    ->required(),
+                DatePicker::make('product_expiration')
+                     ->native(false)
+                     ->timezone('Asia/Manila')
+                     ->displayFormat('d/m/Y')
+                     ->required(),
+                    
             ]);
     }
 
@@ -83,15 +95,15 @@ class ProductResource extends Resource
                     ->searchable(),
                 TextColumn::make('product_status')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->since(),
-                TextColumn::make('updated_at')
+                    TextColumn::make('product_expiration')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                    TextColumn::make('created_at')
+                        ->dateTime()
+                        ->sortable()
+                        ->toggleable(isToggledHiddenByDefault: true)
+                        ->since(),
             ])
             ->filters([
                 //

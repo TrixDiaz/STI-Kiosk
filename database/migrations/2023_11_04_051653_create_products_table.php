@@ -18,9 +18,10 @@ return new class extends Migration
             $table->integer('product_price');
             $table->integer('product_quantity');
             $table->string('product_description');
-            $table->string('product_image');
+            $table->string('product_image')->nullable();
             $table->string('product_classification')->nullable();
             $table->string('product_status');
+            $table->date('product_expiration')->format('d-m-Y')->nullable();
             $table->timestamps();
         });
     }
