@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id');
+            $table->uuid('product_id')->unique()->index();
             $table->string('product_name');
-            $table->string('product_price');
-            $table->string('product_quantity');
+            $table->integer('product_price');
+            $table->integer('product_quantity');
             $table->string('product_description');
-            $table->string('product_classification');
+            $table->string('product_image');
+            $table->string('product_classification')->nullable();
             $table->string('product_status');
             $table->timestamps();
         });
