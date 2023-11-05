@@ -10,11 +10,28 @@ class Cart extends Component
 {
     public $count = 0;
     public $cart = [];
+    public $cartSubtotal = 0; // Initialize cart subtotal
    
 
     public function mount()
     {
         $this->cart = session('cart', []);
+        $this->calculateCartSubtotal();
+        
+    }
+
+    // Function to calculate item totals and cart subtotal
+    public function calculateCartSubtotal()
+    {
+        $subtotal = 0;
+
+        foreach ($this->cart as $id => $item) {
+            $itemTotal = $item['product_price'] * $item['quantity'];
+            $subtotal += $itemTotal;
+            $this->cart[$id]['item_total'] = $itemTotal; // Store the item total in the cart data
+        }
+    
+        $this->cartSubtotal = $subtotal;
     }
     
     public function increment()

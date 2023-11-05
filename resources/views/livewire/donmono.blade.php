@@ -1,5 +1,7 @@
 <div>
     <x-kiosk-layout>
+
+
         <div class="py-10">
             <div class="mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

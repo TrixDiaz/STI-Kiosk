@@ -1,16 +1,3 @@
-{{-- <ul>
-    @foreach ($cart as $id => $item)
-        <li class="mb-2">
-             - Price:  - 
-            <button  type="button"
-                class="text-red-600 ml-2 focus:outline-none">
-                Remove Item
-            </button>
-        </li>
-    @endforeach
-</ul> --}}
-
-
 <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
     <!--
       Background backdrop, show/hide based on slide-over state.
@@ -59,36 +46,35 @@
                   <div class="flow-root">
                     <ul role="list" class="-my-6 divide-y divide-gray-200">
                         @forelse ($cart as $id => $item)
-                      <li class="flex py-6">
-                        <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                          <img src="/storage/{{ $item['product_image'] }}" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
-                        </div>
-  
-                        <div class="ml-4 flex flex-1 flex-col">
-                          <div>
-                            <div class="flex justify-between text-base font-medium text-gray-900">
-                              <h3>
-                                <a href="#">{{ $item['product_name'] }}</a>
-                              </h3>
-                              <p class="ml-4">₱{{ $item['product_price'] }}</p>
-                            </div>
-                            <p class="mt-1 text-sm text-gray-500">{{ $item['product_classification'] }}</p>
-                          </div>
-                          <div class="flex flex-1 items-end justify-between text-sm">
-                            <p class="text-gray-500">Quantity: {{ $item['quantity'] }}</p>
-  
-                            <div class="flex">
-                              <button wire:click="removeItem({{ $id }})" type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      @empty
-                        <p class="text-md capitalize">No Item Found continue shopping</p>                          
-                      @endforelse
-
-                      <!-- More products... -->
+                            <li class="flex py-6">
+                                <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    <img src="/storage/{{ $item['product_image'] }}" alt="Product Image" class="h-full w-full object-cover object-center">
+                                </div>
+                    
+                                <div class="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                        <div class="flex justify-between text-base font-medium text-gray-900">
+                                            <h3>
+                                                <a href="#">{{ $item['product_name'] }}</a>
+                                            </h3>
+                                            <p class="ml-4">₱{{ $item['product_price'] }}</p>
+                                        </div>
+                                        <p class="mt-1 text-sm text-gray-500">{{ $item['product_classification'] }}</p>
+                                    </div>
+                                    <div class="flex flex-1 items-end justify-between text-sm">
+                                        <p class="text-gray-500">Quantity: {{ $item['quantity'] }}</p>
+                                        <p class="text-gray-500">Total: ₱{{ number_format($item['item_total'], 2) }}</p> <!-- Display item total -->
+                                        <div class="flex">
+                                            <button wire:click="removeItem({{ $id }})" type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        @empty
+                            <p class="text-md capitalize">No Item Found. Continue shopping</p>
+                        @endforelse
                     </ul>
+                    
                   </div>
                 </div>
               </div>
@@ -96,7 +82,7 @@
               <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                 <div class="flex justify-between text-base font-medium text-gray-900">
                   <p>Subtotal</p>
-                  <p>$262.00</p>
+                  <p>₱{{ number_format($cartSubtotal, 2) }}</p>
                 </div>
                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                 <div class="mt-6">

@@ -17,6 +17,8 @@
 
     <!-- Styles -->
     @livewireStyles
+   
+
     {{-- @livewire('database-notifications') --}}
 </head>
 
