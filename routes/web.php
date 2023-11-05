@@ -1,7 +1,8 @@
 <?php
 
 use App\Livewire\Cart;
-use App\Livewire\Ramen;
+use App\Livewire\Donmono;
+use App\Livewire\Ippinryori;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,9 @@ Route::get('/order', function () {
     return view('order.order');
 })->name('order');
 
-Route::get('/ramen', Ramen::class)->name('ramen');
+
+Route::get('/Donmono', Donmono::class)->name('donmono');
+Route::get('/Ippin-Ryori', Ippinryori::class)->name('ippin');
 
 Route::middleware([
     'auth:sanctum',

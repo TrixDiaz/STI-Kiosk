@@ -40,7 +40,7 @@
             <ul>
                 <!-- Items Section -->
                 <li class="hover:bg-gray-100">
-                    <a href="ramen"
+                    <a href="{{ route('donmono') }}"
                         class="h-16 px-6 flex justify-center items-center w-full
 					focus:text-orange-500">
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -56,7 +56,7 @@
                 </li>
 
                 <li class="hover:bg-gray-100">
-                    <a href="ramen"
+                    <a href="{{ route('ippin') }}"
                         class="h-16 px-6 flex justify-center items-center w-full
 					focus:text-orange-500">
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
