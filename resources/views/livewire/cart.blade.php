@@ -42,7 +42,7 @@
                   </div>
                 </div>
   
-                <div class="mt-8">
+                <div class="mt-8 overflow-y-auto h-auto">
                   <div class="flow-root">
                     <ul role="list" class="-my-6 divide-y divide-gray-200">
                         @forelse ($cart as $id => $item)
