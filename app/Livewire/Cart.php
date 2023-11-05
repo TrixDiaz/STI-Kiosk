@@ -49,8 +49,12 @@ class Cart extends Component
         if (isset($this->cart[$id])) {
             unset($this->cart[$id]);
             session(['cart' => $this->cart]);
+            
+            // Recalculate the cart subtotal after removing the item
+            $this->calculateCartSubtotal();
         }
     }
+    
     
     
     public function render()
