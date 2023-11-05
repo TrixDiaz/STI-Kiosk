@@ -37,10 +37,13 @@ Route::get('/kiosk', function () {
     return view('kiosk');
 })->name('kiosk');
 
+Route::get('/cart', function () {
+    return view('cart');
+})->name('cart');
+
 Route::get('/order', function () {
     return view('order.order');
 })->name('order');
-
 
 Route::get('/Donmono', Donmono::class)->name('donmono');
 Route::get('/Ippin-Ryori', Ippinryori::class)->name('ippin');

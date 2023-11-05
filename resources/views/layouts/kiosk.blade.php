@@ -22,6 +22,7 @@
 
 <body class="font-sans antialiased">
     <!-- component -->
+  
     <div class="h-screen w-screen flex bg-gray-200">
         <!-- container -->
 
@@ -30,7 +31,8 @@
 
             <div class="h-16 flex items-center w-full">
                 <!-- Logo Section -->
-                <a class="h-6 w-6 mx-auto" href="/kiosk">
+                <a class="h-6 w-6 mx-auto" href="/kiosk"  
+                wire:navigate>
                     <img class="h-6 w-6 mx-auto" src="/images/iz-logo.png" alt="svelte logo" />
                 </a>
             </div>
@@ -39,6 +41,7 @@
                 <!-- Items Section -->
                 <li class="hover:bg-gray-100">
                     <a href="{{ route('donmono') }}"
+                    wire:navigate
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                        Donmono
@@ -48,6 +51,7 @@
 
                 <li class="hover:bg-gray-100">
                     <a href="{{ route('ippin') }}"
+                    wire:navigate
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                         Ippin
@@ -57,6 +61,7 @@
 
                 <li class="hover:bg-gray-100">
                     <a href="{{ route('kushiyaki') }}"
+                    wire:navigate
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
 
@@ -67,6 +72,7 @@
 
                 <li class="hover:bg-gray-100">
                     <a href="{{ route('makizushi') }}"
+                    wire:navigate
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                       
@@ -77,6 +83,7 @@
 
                 <li class="hover:bg-gray-100">
                     <a href="{{ route('zensai') }}"
+                    wire:navigate
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                       zensai
@@ -85,6 +92,7 @@
 
                 <li class="hover:bg-gray-100">
                     <a href="{{ route('men') }}"
+                    wire:navigate
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                        men
@@ -93,6 +101,7 @@
 
                 <li class="hover:bg-gray-100">
                   <a href="{{ route('nigirizushi') }}"
+                  wire:navigate
                       class="h-16 px-6 flex justify-center items-center w-full uppercase
         focus:text-orange-500">
                       nigirizushi
@@ -101,6 +110,7 @@
 
               <li class="hover:bg-gray-100">
                 <a href="{{ route('ochazuke') }}"
+                wire:navigate
                     class="h-16 px-6 flex justify-center items-center w-full uppercase
       focus:text-orange-500">
                    ochazuke
@@ -109,6 +119,7 @@
 
             <li class="hover:bg-gray-100">
               <a href="{{ route('ramen') }}"
+              wire:navigate
                   class="h-16 px-6 flex justify-center items-center w-full uppercase
     focus:text-orange-500">
                 ramen
@@ -117,6 +128,7 @@
 
           <li class="hover:bg-gray-100">
             <a href="{{ route('salad') }}"
+            wire:navigate
                 class="h-16 px-6 flex justify-center items-center w-full uppercase
   focus:text-orange-500">
              salad
@@ -125,6 +137,7 @@
 
         <li class="hover:bg-gray-100">
           <a href="{{ route('sashimi') }}"
+          wire:navigate
               class="h-16 px-6 flex justify-center items-center w-full uppercase
 focus:text-orange-500">
               sashimi
@@ -133,6 +146,7 @@ focus:text-orange-500">
 
       <li class="hover:bg-gray-100">
         <a href="{{ route('tempura') }}"
+        wire:navigate
             class="h-16 px-6 flex justify-center items-center w-full uppercase
 focus:text-orange-500">
             tempura
@@ -141,6 +155,7 @@ focus:text-orange-500">
 
     <li class="hover:bg-gray-100">
       <a href="{{ route('yakizakana') }}"
+      wire:navigate
           class="h-16 px-6 flex justify-center items-center w-full uppercase
 focus:text-orange-500">
         yakizakana
@@ -153,8 +168,18 @@ focus:text-orange-500">
         {{-- Page Content --}}
         <div class="flex w-full bg-slate-50 overflow-y-auto h-auto">
             {{ $slot }}
+
+            <div class="float-right p-3">
+                @if(Request::is('cart'))
+                    <a href="{{ route('kiosk') }}" wire:navigate>Back</a>
+                @else
+                    <a href="{{ route('cart') }}" wire:navigate>Cart(@cartCount)</a>
+                @endif
+            </div>
+            
+            
         </div>
-       <livewire:cart/>
+       
 
     </div>
 
