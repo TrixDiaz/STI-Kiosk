@@ -37,7 +37,9 @@ class Donmono extends Component
                 "product_name" => $product->product_name,
                 "product_image" => $product->product_image,
                 "product_price" => $product->product_price,
+                "product_classification" => $product->product_classification,
                 "quantity" => 1,
+                
             ];
         }
 
