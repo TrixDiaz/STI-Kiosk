@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Cart;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
@@ -16,11 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-    $products = Product::all();
-    return view('welcome', compact('products'));
-
+    return view('welcome');
 });
+
+Route::get('/order', function () {
+    return view('order.order');
+})->name('order');
 
 Route::middleware([
     'auth:sanctum',

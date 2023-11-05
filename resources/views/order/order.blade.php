@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>STI</title>
+    <title>Order</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -35,7 +35,6 @@
             tab-size: 4;
             font-family: Figtree, sans-serif;
             font-feature-settings: normal
-            
         }
 
         body {
@@ -830,72 +829,131 @@
         }
     </style>
 
+
+
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
 
-<body class="antialiased">
-    <div
-        class="bg-[url('/images/izakayabg.jpg')] relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
-      
-        {{-- Authentication --}}
-        {{-- @if (Route::has('login'))    
-                                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                                    @else
-                                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+<body>
 
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                                        @endif
-                                    @endauth
-                                </div>
-                    @endif --}}
+    
+   <!-- component -->
+<div class="h-screen w-screen flex bg-gray-200">
+	<!-- container -->
 
-     
-     {{-- Modal --}}
-        <div x-data="{ open: true }" class="z-20">
-            <button @click="open = true">Tap to Start</button>
-        
-            <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
-                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <div x-show="open" class="fixed inset-0 transition-opacity ease-in duration-300" aria-hidden="true">
-                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                    </div>
-        
-                    <!-- This is the actual modal dialog -->
-                    <div x-show="open" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
-                        <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <div class="sm:flex sm:items-start">
-                                <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                    <img src="/images/izakaya-header.png" class="max-h-80" alt="header">
-                                    <img src="/images/intro-image.png" class="animate-bounce max-h-60 my-10 place-self-center" alt="Ramen">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between bg-orange-300 px-4 py-3 sm:px-6">
-                            <div class="order-first">
-                                <img src="/images/iz-logo.png" class="max-h-20" alt="logo">
-                            </div>
-                           <div class="order-last">
-                             <a href="{{ route('order') }}" @click="open = false" type="button" class="animate-pulse w-full justify-center px-4 py-5 font-bold text-white text-2xl uppercase">
-                                Tap to Start
-                            </a>
-                           </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      
+	<aside
+		class="flex flex-col items-center bg-white text-gray-700 shadow h-full">
+		<!-- Side Nav Bar-->
 
+		<div class="h-16 flex items-center w-full">
+			<!-- Logo Section -->
+			<a class="h-6 w-6 mx-auto" href="http://svelte.dev/">
+				<img
+					class="h-6 w-6 mx-auto"
+					src="/images/iz-logo.png"
+					alt="logo" />
+			</a>
+		</div>
 
-            
+		<ul>
+			<!-- Items Section -->
+			<li class="hover:bg-gray-100">
+				<a
+					href="."
+					class="h-16 px-6 flex flex justify-center items-center w-full
+					focus:text-orange-500">
+                    <img
+					class="h-6 w-6 mx-auto"
+					src="/images/btn-01.png"
+					alt="logo" />
+                    
+				</a>
+			</li>
 
-    </div>
+			<li class="hover:bg-gray-100">
+				<a
+					href="."
+					class="h-16 px-6 flex flex justify-center items-center w-full
+					focus:text-orange-500">
+					<img
+					class="h-6 w-6 mx-auto"
+					src="/images/btn-01.png"
+					alt="logo" />
+
+				</a>
+			</li>
+
+			<li class="hover:bg-gray-100">
+				<a
+					href="."
+					class="h-16 px-6 flex flex justify-center items-center w-full
+					focus:text-orange-500">
+
+					<img
+					class="h-6 w-6 mx-auto"
+					src="/images/btn-01.png"
+					alt="logo" />
+
+				</a>
+			</li>
+
+			<li class="hover:bg-gray-100">
+				<a
+					href="."
+					class="h-16 px-6 flex flex justify-center items-center w-full
+					focus:text-orange-500">
+					<img
+					class="h-6 w-6 mx-auto"
+					src="/images/btn-01.png"
+					alt="logo" />
+
+				</a>
+			</li>
+
+			<li class="hover:bg-gray-100">
+				<a
+					href="."
+					class="h-16 px-6 flex flex justify-center items-center w-full
+					focus:text-orange-500">
+					<img
+					class="h-6 w-6 mx-auto"
+					src="/images/btn-01.png"
+					alt="logo" />
+				</a>
+			</li>
+
+			<li class="hover:bg-gray-100">
+				<a
+					href="."
+					class="h-16 px-6 flex flex justify-center items-center w-full
+					focus:text-orange-500">
+					<img
+					class="h-6 w-6 mx-auto"
+					src="/images/btn-01.png"
+					alt="logo" />
+				</a>
+			</li>
+
+		</ul>
+
+		<div class="mt-auto h-16 flex items-center w-full">
+			<!-- Action Section -->
+			<button
+				class="h-16 w-10 mx-auto flex flex justify-center items-center
+				w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
+				<img
+					class="h-6 w-6 mx-auto"
+					src="/images/btn-01.png"
+					alt="logo" />
+
+			</button>
+		</div>
+
+	</aside>
+</div>
     @livewireScripts
 </body>
 
