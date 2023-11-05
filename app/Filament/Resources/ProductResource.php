@@ -88,9 +88,12 @@ class ProductResource extends Resource
                             ->required(),
                         DatePicker::make('product_expiration')
                             ->label('Expiry')
-                            ->native(false)
                             ->timezone('Asia/Manila')
                             ->displayFormat('d/m/Y')
+                            ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
+                            ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
+                            ->native(false)
+                            ->readOnly('edit')
                             ->required(),
                     ])->columns(2),
                 FileUpload::make('product_image')
