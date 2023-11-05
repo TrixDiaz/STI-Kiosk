@@ -30,7 +30,7 @@
 
             <div class="h-16 flex items-center w-full">
                 <!-- Logo Section -->
-                <a class="h-6 w-6 mx-auto" href="/">
+                <a class="h-6 w-6 mx-auto" href="/kiosk">
                     <img class="h-6 w-6 mx-auto" src="/images/iz-logo.png" alt="svelte logo" />
                 </a>
             </div>
@@ -56,7 +56,7 @@
                 </li>
 
                 <li class="hover:bg-gray-100">
-                    <a href="."
+                    <a href="{{ route('kushiyaki') }}"
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
 
@@ -66,7 +66,7 @@
                 </li>
 
                 <li class="hover:bg-gray-100">
-                    <a href="."
+                    <a href="{{ route('makizushi') }}"
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                       
@@ -76,7 +76,7 @@
                 </li>
 
                 <li class="hover:bg-gray-100">
-                    <a href="."
+                    <a href="{{ route('zensai') }}"
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                       zensai
@@ -84,7 +84,7 @@
                 </li>
 
                 <li class="hover:bg-gray-100">
-                    <a href="."
+                    <a href="{{ route('men') }}"
                         class="h-16 px-6 flex justify-center items-center w-full uppercase
 					focus:text-orange-500">
                        men
@@ -92,7 +92,7 @@
                 </li>
 
                 <li class="hover:bg-gray-100">
-                  <a href="."
+                  <a href="{{ route('nigirizushi') }}"
                       class="h-16 px-6 flex justify-center items-center w-full uppercase
         focus:text-orange-500">
                       nigirizushi
@@ -100,7 +100,7 @@
               </li>
 
               <li class="hover:bg-gray-100">
-                <a href="."
+                <a href="{{ route('ochazuke') }}"
                     class="h-16 px-6 flex justify-center items-center w-full uppercase
       focus:text-orange-500">
                    ochazuke
@@ -108,7 +108,7 @@
             </li>
 
             <li class="hover:bg-gray-100">
-              <a href="."
+              <a href="{{ route('ramen') }}"
                   class="h-16 px-6 flex justify-center items-center w-full uppercase
     focus:text-orange-500">
                 ramen
@@ -116,7 +116,7 @@
           </li>
 
           <li class="hover:bg-gray-100">
-            <a href="."
+            <a href="{{ route('salad') }}"
                 class="h-16 px-6 flex justify-center items-center w-full uppercase
   focus:text-orange-500">
              salad
@@ -124,7 +124,7 @@
         </li>
 
         <li class="hover:bg-gray-100">
-          <a href="."
+          <a href="{{ route('sashimi') }}"
               class="h-16 px-6 flex justify-center items-center w-full uppercase
 focus:text-orange-500">
               sashimi
@@ -132,7 +132,7 @@ focus:text-orange-500">
       </li>
 
       <li class="hover:bg-gray-100">
-        <a href="."
+        <a href="{{ route('tempura') }}"
             class="h-16 px-6 flex justify-center items-center w-full uppercase
 focus:text-orange-500">
             tempura
@@ -140,7 +140,7 @@ focus:text-orange-500">
     </li>
 
     <li class="hover:bg-gray-100">
-      <a href="."
+      <a href="{{ route('yakizakana') }}"
           class="h-16 px-6 flex justify-center items-center w-full uppercase
 focus:text-orange-500">
         yakizakana
