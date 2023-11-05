@@ -51,7 +51,13 @@ class UserResource extends Resource
                             ->visibleOn(['create'])
                             ->readOnly(),
                         DateTimePicker::make('email_verified_at')
-                            ->native(false),
+                            ->label('Account Activation')
+                            ->timezone('Asia/Manila')
+                            ->displayFormat('d/m/Y')
+                            ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
+                            ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
+                            ->native(false)
+                            ->readOnly('edit'),
                     ])->columns(3),
                 Fieldset::make('User Management')
                     ->schema([

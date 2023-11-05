@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -54,6 +55,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 
     /**
@@ -68,5 +70,11 @@ class User extends Authenticatable
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->hasRole([1, 2]);
+    }
+
+    public function getEmailVerifiedAttribute()
+    {
+        // If email_verified_at is not null and not false, return true, else return false
+        return !is_null($this->attributes['email_verified_at']) && $this->attributes['email_verified_at'] !== false;
     }
 }

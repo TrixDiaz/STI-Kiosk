@@ -136,8 +136,8 @@
                 </div>
             </div> --}}
 
-            Kiosk
-            @foreach ($products as $product)
+        
+           
                  
 <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -166,13 +166,16 @@
             <td class="px-6 py-4">
                 Laptop
             </td>
+           <td class="text-gray-900">
+            <a href="#" >Add to Card</a>
+           </td>
         </tr>
            @endforeach
         </tbody>
     </table>
 </div>
 
-            @endforeach
+           
 
         </div>
     </body>
