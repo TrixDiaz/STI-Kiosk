@@ -7,11 +7,16 @@ use Livewire\Component;
 
 class Donmono extends Component
 {
-   
+   public $products;
+
+   public function addToCart($id)
+   {
+    dd($id);
+   }
 
     public function render()
     {
-        $products = Product::all();
-        return view('livewire.donmono', compact('products'));
+        $this->products = Product::all();
+        return view('livewire.donmono');
     }
 }

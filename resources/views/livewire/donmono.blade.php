@@ -8,7 +8,7 @@
                          <!-- Product 1 -->
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
                    
-                       <button class="hover:bg-gray-400">
+                       <button wire:click="addToCart({{ $product->id }})" class="hover:bg-gray-400">
                         <div class="shadow-lg">
                             <img src="/storage/{{ $product->product_image }}"
                                 alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
