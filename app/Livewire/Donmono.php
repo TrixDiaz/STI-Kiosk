@@ -2,12 +2,16 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
 use Livewire\Component;
 
 class Donmono extends Component
 {
+   
+
     public function render()
     {
-        return view('livewire.donmono');
+        $products = Product::all();
+        return view('livewire.donmono', compact('products'));
     }
 }

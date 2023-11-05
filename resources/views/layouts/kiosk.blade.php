@@ -154,34 +154,7 @@ focus:text-orange-500">
         <div class="flex w-full bg-slate-50 overflow-y-auto h-auto">
             {{ $slot }}
         </div>
-        {{-- Order list --}}
-        <div class="w-1/4 p-4 bg-white shadow overflow-y-auto h-auto">
-            <h1 class="font-semibold uppercase">Order List</h1>
-            <div class="flex justify-between py-3">
-                <div class="order-first">
-                    <p>Product</p>
-                    <p>Ramen</p>
-                </div>
-                <div class="order-second">
-                    <p>Price</p>
-                    <p>100</p>
-                </div>
-                <div class="order-last">
-                    <p>QTY</p>
-                    <p>2</p>
-                </div>
-            </div>
-            <hr class="py-1">
-            <div class="flex justify-between">
-                <div class="order-first uppercase">
-                    <p>total</p>
-                </div>
-                <div class="order-last">
-                    <p>200</p>
-                </div>
-
-            </div>
-        </div>
+       <livewire:cart/>
 
     </div>
 
