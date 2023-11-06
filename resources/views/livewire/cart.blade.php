@@ -92,7 +92,7 @@
                   <p>
                     or
                     <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
-                      Continue Shopping
+                      <a href="{{ route('kiosk') }}">Continue Shopping</a>
                       <span aria-hidden="true"> &rarr;</span>
                     </button>
                   </p>
