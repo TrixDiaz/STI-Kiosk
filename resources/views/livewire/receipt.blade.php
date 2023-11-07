@@ -49,7 +49,7 @@
             <div class="text-gray-700 mb-2">John Doe</div>
             <div class="text-gray-700 mb-2">123 Main St.</div>
             <div class="text-gray-700 mb-2">Anytown, USA 12345</div>
-            <div class="text-gray-700">johndoe@example.com</div>
+            {{-- <div class="text-gray-700">johndoe@example.com</div> --}}
         </div>
         <table class="w-full mb-8">
             <thead>
