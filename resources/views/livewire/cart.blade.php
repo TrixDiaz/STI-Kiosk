@@ -85,9 +85,9 @@
                   <p>₱{{ number_format($cartSubtotal, 2) }}</p>
                 </div>
                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                <div class="mt-6">
-                  <a wire:click="checkout" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
-                  <a href="{{ route('receipt') }}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Over the Counter</a>
+                <div class="flex justify-between mt-6">
+                  <a wire:click="checkout" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-12 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Pay Via QR</a>
+                  <a href="{{ route('receipt') }}" class=" flex items-center justify-center rounded-md border border-transparent bg-transparent px-6 py-3 text-base font-medium text-indigo-600 shadow-sm hover:bg-white hover:text-black">Over the Counter</a>
                 </div>
                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                   <p>
