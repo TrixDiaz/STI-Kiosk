@@ -23,16 +23,21 @@ class SupplierResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                TextInput::make('name')
+        return $form->schema([
+            TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+                TextInput::make('company')
+                ->required()
+                ->maxLength(255),
+                TextInput::make('contact')
                 ->required()
                 ->maxLength(255),
             TextInput::make('email')
                 ->email()
                 ->required()
                 ->maxLength(255),
-            ]);
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -41,29 +46,27 @@ class SupplierResource extends Resource
             ->columns([
                 TextColumn::make('name')
                 ->searchable(),
+                TextColumn::make('company')
+                ->searchable(),
+                TextColumn::make('contact')
+                ->searchable(),
             TextColumn::make('email')
                 ->searchable(),
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->actions([Tables\Actions\EditAction::make()])
+            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+                //
+            ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -71,5 +74,5 @@ class SupplierResource extends Resource
             'create' => Pages\CreateSupplier::route('/create'),
             'edit' => Pages\EditSupplier::route('/{record}/edit'),
         ];
-    }    
+    }
 }
