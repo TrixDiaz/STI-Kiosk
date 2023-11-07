@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
@@ -27,7 +30,10 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+       
+
+        
     }
 
     /**
@@ -61,4 +67,7 @@ class CheckoutController extends Controller
     {
         //
     }
+
+    
+    
 }

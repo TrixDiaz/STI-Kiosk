@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('product_price');
             $table->string('product_image')->nullable();
             $table->string('product_classification')->nullable();
+            $table->string('payment_status');
             $table->string('product_status');
             $table->timestamps();
         });

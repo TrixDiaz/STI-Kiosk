@@ -6,9 +6,11 @@ use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,7 +29,7 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('product_id')
+                Forms\Components\TextInput::make('order_id')
                     ->required()
                     ->maxLength(36),
                 Forms\Components\TextInput::make('product_name')
@@ -40,6 +42,7 @@ class OrderResource extends Resource
                     ->image(),
                 Forms\Components\TextInput::make('product_classification')
                     ->maxLength(255),
+                    TextInput::make('payment_status'),
             ]);
     }
 
@@ -47,7 +50,7 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('product_id')
+                Tables\Columns\TextColumn::make('order_id')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('product_name')
                     ->searchable(),
@@ -57,6 +60,7 @@ class OrderResource extends Resource
                 Tables\Columns\ImageColumn::make('product_image'),
                 Tables\Columns\TextColumn::make('product_classification')
                     ->searchable(),
+                    TextColumn::make('payment_status'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -3,20 +3,22 @@
 use App\Models\User;
 use App\Livewire\Men;
 use App\Livewire\Cart;
+use App\Livewire\Ramen;
+use App\Livewire\Salad;
 use App\Models\Product;
+use App\Livewire\Zensai;
 use App\Livewire\Donmono;
+use App\Livewire\Sashimi;
+use App\Livewire\Tempura;
+use App\Livewire\Ochazuke;
 use App\Livewire\Kushiyaki;
 use App\Livewire\Makizushi;
 use App\Livewire\Ippinryori;
-use App\Livewire\Nigirizushi;
-use App\Livewire\Ochazuke;
-use App\Livewire\Ramen;
-use App\Livewire\Salad;
-use App\Livewire\Sashimi;
-use App\Livewire\Tempura;
 use App\Livewire\Yakizakana;
-use App\Livewire\Zensai;
+use App\Livewire\Nigirizushi;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckoutController;
+use App\Livewire\Cashier\Donmono as CashierDonmono;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +43,12 @@ Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
 
+
 Route::get('/order', function () {
     return view('order.order');
 })->name('order');
 
+// Session Route
 Route::get('/Donmono', Donmono::class)->name('donmono');
 Route::get('/Ippin-Ryori', Ippinryori::class)->name('ippin');
 Route::get('/Kushiyaki', Kushiyaki::class)->name('kushiyaki');
@@ -59,6 +63,13 @@ Route::get('/Tempura', Tempura::class)->name('tempura');
 Route::get('/Yakizakana', Yakizakana::class)->name('yakizakana');
 Route::get('/Zensai', Zensai::class)->name('zensai');
 
+// Cashier Route
+Route::get('/Cashier/Donmono', CashierDonmono::class)->name('cashier.donmono');
+
+Route::post('/Checkout',[CheckoutController::class,'store'])->name('checkout.store');
+
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -67,4 +78,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/cashier/cart', function () {
+        return view('cashierCart');
+    })->name('cashier.cart');
 });
