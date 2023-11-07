@@ -63,15 +63,12 @@ Route::get('/Sashimi', Sashimi::class)->name('sashimi');
 Route::get('/Tempura', Tempura::class)->name('tempura');
 Route::get('/Yakizakana', Yakizakana::class)->name('yakizakana');
 Route::get('/Zensai', Zensai::class)->name('zensai');
-// Route::get('/qrPayment', QrGenerator::class)->name('qrgenerator');
+Route::get('/qrPayment', QrGenerator::class)->name('qrPayment');
 
 // Cashier Route
 Route::get('/Cashier/Donmono', CashierDonmono::class)->name('cashier.donmono');
 
 Route::post('/Checkout',[CheckoutController::class,'store'])->name('checkout.store');
-
-Route::get('/qr',[CheckoutController::class,'qrCode'])->name('qrCode');
-
 
 
 Route::middleware([

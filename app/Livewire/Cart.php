@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Product;
 use Livewire\Component;
+use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
@@ -43,8 +44,44 @@ class Cart extends Component
         $this->cart = [];
         session(['cart' => $this->cart]);
 
+        $data = [
+            'data' => [
+                'attributes' => [
+                    'line_items' => [
+                        [
+                            'currency' => 'PHP',
+                            'amount' => $this->cartSubtotal * 100,
+                            'description' => 'text',
+                            'name' => 'Add Credits',
+                            'quantity' => 1,
+                        ],
+                    ],
+                    'payment_method_types' => ['card', 'gcash'],
+                    'success_url' => route('dashboard'),
+                    'cancel_url' => route('dashboard'),
+                    'description' => 'text',
+                ],
+            ],
+        ];
+
+        $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
+            ->withHeader('Content-Type: application/json')
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+            ->withData($data)
+            ->asJson()
+            ->post();
+
+            // dd($response);
+      Session::put('session_id', $response->data->id);
+
+        // return redirect()->to($response->data->attributes->checkout_url);
+
+        // Storing the checkout_url in the session
+Session::put('checkout_url', $response->data->attributes->checkout_url);
+
         // Redirect or display a success message
-        return back(); // Replace with your success route
+        return redirect()->route('qrPayment');
     }
     
 

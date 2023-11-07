@@ -1,3 +1,3 @@
 <div>
-    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
+    {!! QrCode::size(300)->generate(Session::get('checkout_url')) !!}
 </div>
