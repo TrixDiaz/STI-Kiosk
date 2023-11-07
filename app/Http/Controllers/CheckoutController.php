@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CheckoutController extends Controller
 {
@@ -68,6 +69,17 @@ class CheckoutController extends Controller
         //
     }
 
+    public function qrCode()
+    {
+        return QrCode::size(200)
+        ->backgroundColor(255, 255, 0)
+        ->color(0, 0, 255)
+        ->margin(1)
+        ->generate('https://checkout.paymongo.com/cs_QwKhXTq88ugDuXV4tycMak3N_client_mdVrX3UHvMLfez3dQ3JG2AC5#cGtfdGVzdF93eWc5d2RkVE5tWjJzSk5SZzFyeDlnd0s=');
+
+        // View 
+        // {!! QrCode::size(300)->generate('sampleText') !!}
+    }
     
     
 }
