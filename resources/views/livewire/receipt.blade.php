@@ -1,5 +1,40 @@
-<div>
+<div id="invoice-container">
+    <style>
+        @media print { 
+            /* Apply styles for printing only */
+            body * {
+                visibility: hidden;
+            }
+            #invoice-container, #invoice-container * {
+                visibility: visible;
+            }
+            .invoice-container {
+                max-width: unset;
+                box-shadow: none;
+                border: 0;
+                background-color: #fffffff;
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                margin: 0;
+                padding: 15px;
+                font-size: 14px;
+                line-height: 1rem;
+            }
+            #print {
+                display: none; /* Hide the "Print" button in print mode */
+            }
+        }
+    </style>
+    
     <div class="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-auto mt-8">
+        <div class="flex flex-row-reverse">
+            <button type="button" id="print" class="text-green-700  hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                Print
+            </button>
+        </div>
         <h1 class="font-bold text-2xl my-4 text-center text-blue-600">KRP Services</h1>
         <hr class="mb-2">
         <div class="flex justify-between mb-6">
@@ -46,5 +81,18 @@
         </table>
         <div class="text-gray-700 mb-2">Thank you for your business!</div>
         <div class="text-gray-700 text-sm">Please remit payment within 30 days.</div>
+        
+      
     </div>
+   
 </div>
+<script src="{{ asset('js/html2.js') }}"></script>
+
+<script>
+ let printBtn = document.querySelector("#print")
+
+ printBtn.addEventListener("click", function() {
+    print();
+ })
+
+</script>
