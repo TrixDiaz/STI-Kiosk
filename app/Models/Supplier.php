@@ -12,6 +12,7 @@ class Supplier extends Model
         'email',
         'company',
         'contact',
+        'status',
     ];
 
     use HasFactory;
