@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
 use App\Livewire\Cashier\Donmono as CashierDonmono;
 use App\Livewire\QrGenerator;
+use App\Livewire\Receipt;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,7 @@ Route::get('/Tempura', Tempura::class)->name('tempura');
 Route::get('/Yakizakana', Yakizakana::class)->name('yakizakana');
 Route::get('/Zensai', Zensai::class)->name('zensai');
 Route::get('/qrPayment', QrGenerator::class)->name('qrPayment');
+Route::get('/receipt', Receipt::class)->name('receipt');
 
 // Cashier Route
 Route::get('/Cashier/Donmono', CashierDonmono::class)->name('cashier.donmono');
