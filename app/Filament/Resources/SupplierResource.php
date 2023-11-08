@@ -14,12 +14,17 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SupplierResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SupplierResource\RelationManagers;
+use Filament\Forms\Components\Select;
 
 class SupplierResource extends Resource
 {
     protected static ?string $model = Supplier::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationGroup = 'Suppliers';
 
     public static function form(Form $form): Form
     {
@@ -37,6 +42,11 @@ class SupplierResource extends Resource
                 ->email()
                 ->required()
                 ->maxLength(255),
+                Select::make('status')
+                ->options([
+                    'active' => 'ACTIVE',
+                    'inactive' => 'INACTIVE'
+                ])
         ]);
     }
 
@@ -50,8 +60,9 @@ class SupplierResource extends Resource
                 ->searchable(),
                 TextColumn::make('contact')
                 ->searchable(),
-            TextColumn::make('email')
+                TextColumn::make('email')
                 ->searchable(),
+                TextColumn::make('name'),
             ])
             ->filters([
                 //

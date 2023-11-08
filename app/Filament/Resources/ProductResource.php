@@ -31,7 +31,7 @@ class ProductResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationGroup = 'Product';
+    protected static ?string $navigationGroup = 'Products';
 
     public static function form(Form $form): Form
     {
@@ -54,8 +54,8 @@ class ProductResource extends Resource
                         TextInput::make('product_name')
                             ->required()
                             ->maxLength(255),
-                        Textarea::make('product_description')
-                            ->label('Description')
+                            TextInput::make('product_classification')
+                            ->label('Category')
                             ->required()
                             ->maxLength(255),
 
@@ -66,27 +66,12 @@ class ProductResource extends Resource
                             ->label('Price')
                             ->required()
                             ->numeric(),
-                        TextInput::make('product_classification')
-                            ->label('Category')
-                            ->required()
-                            ->maxLength(255),
+                      
                         TextInput::make('product_stock')
                             ->label('Stocks')
                             ->required()
                             ->numeric(),
-                    ])
-                    ->columns(3),
-
-                Fieldset::make(' Information')
-                    ->schema([
-                        Select::make('product_status')
-                            ->label('Status')
-                            ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
-                            ])
-                            ->required(),
-                        DatePicker::make('product_expiration')
+                            DatePicker::make('product_expiration')
                             ->label('Expiry')
                             ->timezone('Asia/Manila')
                             ->displayFormat('d/m/Y')
@@ -95,7 +80,23 @@ class ProductResource extends Resource
                             ->native(false)
                             ->readOnly('edit')
                             ->required(),
-                    ])->columns(2),
+                    ])
+                    ->columns(3),
+
+                // Fieldset::make(' Information')
+                //     ->schema([
+                //         Select::make('product_status')
+                //             ->label('Status')
+                //             ->options([
+                //                 'in stock' => 'IN STOCK',
+                //                 'minimum stock' => 'MINUMUM STOCK LEVEL',
+                //                 'low stock' => 'LOW STOCK LEVEL',
+                //                 'critical' => 'CRITICAL',
+                //                 'out of stock' => 'OUT OF STOCK',
+                //             ])
+                //             ->required(),
+                       
+                //     ])->columns(2),
                 FileUpload::make('product_image')
                     ->label('attachment')
                     ->image()
@@ -123,11 +124,7 @@ class ProductResource extends Resource
                     ->label('Stocks')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('product_description')
-                    ->label('Description')
-                    ->searchable()
-                    ->words(10)
-                    ->toggleable(isToggledHiddenByDefault: true),
+          
                 ImageColumn::make('product_image')
                     ->circular()
                     ->label('attachment')
