@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Product;
+use App\Models\Stock;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 
@@ -16,19 +17,19 @@ class Donmono extends Component
 
     public function mount()
     {
-        $this->products = Product::all();
+        $this->products = Stock::all();
         
     }
 
     public function addToCart($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Stock::findOrFail($id);
     
         // Retrieve the current cart from the session
         $this->cart = session('cart', []);
     
         // Generate a unique orderID
-        $orderID = "PID" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        // $orderID = "" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
     
         // Check if the product is already in the cart
         if (isset($this->cart[$id])) {
@@ -37,11 +38,11 @@ class Donmono extends Component
         } else {
             // Add the product to the cart with the generated orderID
             $this->cart[$id] = [
-                "order_id" => $orderID,
+                // "order_id" => $orderID,
                 "product_name" => $product->product_name,
                 "product_image" => $product->product_image,
                 "product_price" => $product->product_price,
-                "product_classification" => $product->product_classification,
+                // "product_category" => $product->product_category,
                 "quantity" => 1,
             ];
         }

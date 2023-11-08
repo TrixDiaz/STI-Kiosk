@@ -13,8 +13,10 @@ class Order extends Model
         'order_id', 
         'product_name',
         'product_price',
-        'product_image',
-        'product_classification',
+        'quantity',
+        'order',
+        'total',
+        'product_category',
         'product_status',
         'payment_status',
     ];

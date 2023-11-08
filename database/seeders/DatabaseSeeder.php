@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Stock;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\AdminSeeder;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         Product::factory(10)->create();
         Category::factory(10)->create();
+        Stock::factory(10)->create();
 
         $this->call(RoleSeeder::class);
         $this->call(PermissionSeeder::class);

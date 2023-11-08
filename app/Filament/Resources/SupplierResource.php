@@ -58,6 +58,8 @@ class SupplierResource extends Resource
                 
                 Select::make('product_id')
                 ->label('Select a Product')
+                ->multiple()
+                ->searchable()
                 ->options(function () {
                     // Retrieve all products and format them for the select dropdown.
                     $products = Product::all();
@@ -67,7 +69,7 @@ class SupplierResource extends Resource
 
                     return $options;
                 })
-                 ->multiple(false), // Set to true if you want to allow selecting multiple products
+                 ->native(false), // Set to true if you want to allow selecting multiple products
                 Select::make('status')
                 ->options([
                     'active' => 'ACTIVE',

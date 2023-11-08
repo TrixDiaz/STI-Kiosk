@@ -38,11 +38,12 @@ class OrderResource extends Resource
                 Forms\Components\TextInput::make('product_price')
                     ->required()
                     ->numeric(),
-                Forms\Components\FileUpload::make('product_image')
-                    ->image(),
-                Forms\Components\TextInput::make('product_classification')
+                Forms\Components\TextInput::make('product_category')
                     ->maxLength(255),
+                    TextInput::make('quantity'),
+                    TextColumn::make('total'),
                     TextInput::make('payment_status'),
+                    TextInput::make('product_status'),
             ]);
     }
 
@@ -57,10 +58,12 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('product_price')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('product_image'),
-                Tables\Columns\TextColumn::make('product_classification')
+                Tables\Columns\TextColumn::make('product_category')
                     ->searchable(),
                     TextColumn::make('payment_status'),
+                    TextColumn::make('quantity'),
+                    TextColumn::make('total'),
+                    TextColumn::make('product_status'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

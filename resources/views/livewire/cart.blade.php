@@ -59,7 +59,7 @@
                                             </h3>
                                             <p class="ml-4">₱{{ $item['product_price'] }}</p>
                                         </div>
-                                        <p class="mt-1 text-sm text-gray-500">{{ $item['product_classification'] }}</p>
+                                        {{-- <p class="mt-1 text-sm text-gray-500">{{ $item['product_category'] }}</p> --}}
                                     </div>
                                     <div class="flex flex-1 items-end justify-between text-sm">
                                         <p class="text-gray-500">Quantity: {{ $item['quantity'] }}</p>

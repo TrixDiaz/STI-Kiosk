@@ -23,26 +23,40 @@ class Cart extends Component
 
     public function checkout()
     {
-        // Generate a unique orderID
-        $orderID = "OID" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        
+         // Generate a unique orderID
+    do {
+        $orderID = "" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-        // Insert cart items into the order table
-        foreach ($this->cart as $id => $item) {
-            DB::table('orders')->insert([
-                'order_id' => $orderID,
-                'product_name' => $item['product_name'],
-                'product_price' => $item['product_price'],
-                'product_image' => $item['product_image'],
-                'product_classification' => $item['product_classification'],
-                'payment_status' => 'pending',
-                
-                // Add other fields as needed
-            ]);
+        // Check if the generated orderID already exists in the orders table
+        $existingOrder = DB::table('orders')->where('order_id', $orderID)->first();
+
+        if ($existingOrder) {
+            // If the orderID exists, kill the existing session
+            session()->flush();
         }
+    } while ($existingOrder);
 
-        // After inserting into the order table, you can clear the cart
-        $this->cart = [];
-        session(['cart' => $this->cart]);
+    // Initialize an array to store order details
+    $orderDetails = [];
+
+    // Insert cart items into the order table and collect order details
+    foreach ($this->cart as $id => $item) {
+        $orderDetails[] = [
+            'order_id' => $orderID,
+            'product_name' => $item['product_name'],
+            'product_price' => $item['product_price'],
+            'quantity' => $item['quantity'], // Include the quantity in the order details
+            'total' => $this->cartSubtotal,
+        ];
+    }
+
+    // Insert order details into the database
+    DB::table('orders')->insert($orderDetails);
+
+    // After inserting into the order table, you can clear the cart
+    $this->cart = [];
+    session(['cart' => $this->cart]);
 
         $data = [
             'data' => [

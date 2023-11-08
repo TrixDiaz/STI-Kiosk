@@ -3,6 +3,7 @@
 namespace App\Livewire\Cashier;
 
 use App\Models\Product;
+use App\Models\Stock;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -15,7 +16,7 @@ class Donmono extends Component
 
     public function mount()
     {
-        $this->products = Product::all();
+        $this->products = Stock::all();
     }
 
     public function addToCart($productId)
@@ -23,7 +24,7 @@ class Donmono extends Component
         if (Auth::check()) {
             // User is authenticated, add the product to the shopping cart
             // You can implement your cart logic here
-            $product = Product::find($productId);
+            $product = Stock::find($productId);
             if ($product) {
                 $this->cart[] = $product;
             }
