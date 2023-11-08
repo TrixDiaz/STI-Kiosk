@@ -83,24 +83,23 @@ class ProductResource extends Resource
                     ])
                     ->columns(3),
 
-                // Fieldset::make(' Information')
-                //     ->schema([
-                //         Select::make('product_status')
-                //             ->label('Status')
-                //             ->options([
-                //                 'in stock' => 'IN STOCK',
-                //                 'minimum stock' => 'MINUMUM STOCK LEVEL',
-                //                 'low stock' => 'LOW STOCK LEVEL',
-                //                 'critical' => 'CRITICAL',
-                //                 'out of stock' => 'OUT OF STOCK',
-                //             ])
-                //             ->required(),
-                       
-                //     ])->columns(2),
-                FileUpload::make('product_image')
-                    ->label('attachment')
-                    ->image()
-                    ->columnSpanFull(),
+                Fieldset::make(' Information')
+                    ->schema([
+                        Select::make('product_status')
+                            ->label('Status')
+                            ->options([
+                                'in stock' => 'IN STOCK',
+                                'minimum stock' => 'MINUMUM STOCK LEVEL',
+                                'low stock' => 'LOW STOCK LEVEL',
+                                'critical' => 'CRITICAL',
+                                'out of stock' => 'OUT OF STOCK',
+                            ])
+                            ->required(),
+                            FileUpload::make('product_image')
+                            ->label('attachment')
+                            ->image(),
+                    ])->columns(2),
+                
 
             ]);
     }
