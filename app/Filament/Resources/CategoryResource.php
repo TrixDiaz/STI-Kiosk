@@ -29,7 +29,7 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('category')
+                TextInput::make('product_category')
                     ->label('Category')
                     ->required()
                     ->maxLength(255),
@@ -44,7 +44,7 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-            TextColumn::make('category')
+            TextColumn::make('product_category')
                 ->label('Category')
                 ->searchable(),
             ])

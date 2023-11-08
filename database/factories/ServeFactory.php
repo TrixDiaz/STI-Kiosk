@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Serve>
  */
-class CategoryFactory extends Factory
+class ServeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_name' => $this->faker->userName(),
-            'product_category' => $this->faker->userName(),
+            'order_id' => $this->faker->uuid(),
+            'product_status' => 'Now Serving',
         ];
     }
 }

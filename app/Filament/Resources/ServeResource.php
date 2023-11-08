@@ -2,26 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers;
-use App\Models\Order;
+use App\Filament\Resources\ServeResource\Pages;
+use App\Filament\Resources\ServeResource\RelationManagers;
+use App\Models\Serve;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class OrderResource extends Resource
+class ServeResource extends Resource
 {
-    protected static ?string $model = Order::class;
+    protected static ?string $model = Serve::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationGroup = 'Orders';
 
@@ -29,7 +27,12 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-               
+                Forms\Components\TextInput::make('order_id')
+                    ->required()
+                    ->maxLength(36),
+                Forms\Components\TextInput::make('product_status')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -37,7 +40,10 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-              
+                Tables\Columns\TextColumn::make('order_id')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('product_status')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -70,9 +76,9 @@ class OrderResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOrders::route('/'),
-            'create' => Pages\CreateOrder::route('/create'),
-            'edit' => Pages\EditOrder::route('/{record}/edit'),
+            'index' => Pages\ListServes::route('/'),
+            'create' => Pages\CreateServe::route('/create'),
+            'edit' => Pages\EditServe::route('/{record}/edit'),
         ];
     }    
 }

@@ -28,7 +28,7 @@ class QueueResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            TextInput::make('name')
+            TextInput::make('order_id')
                 ->required()
                 ->maxLength(255),
             TextInput::make('product_status')
@@ -41,7 +41,7 @@ class QueueResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('order_id')
                 ->searchable(),
                 TextColumn::make('product_status')
                     ->searchable(),
