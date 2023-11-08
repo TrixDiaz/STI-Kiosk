@@ -2,18 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Stock extends Model
 {
-    use SoftDeletes;
 
     protected $fillable = [
         'product_id',
         'product_name',
-        'product_price',
         'product_stock',
         'product_image',
         'product_classification',
@@ -22,15 +19,4 @@ class Product extends Model
     ];
 
     use HasFactory;
-
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
-    
-    public function order()
-{
-    return $this->belongsTo(Order::class);
-}
-
 }
