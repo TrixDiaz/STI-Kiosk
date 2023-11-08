@@ -5,9 +5,14 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Stock;
+use App\Models\Product;
+use App\Models\Category;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Wizard;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
@@ -17,9 +22,6 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\StockResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\StockResource\RelationManagers;
-use App\Models\Category;
-use App\Models\Product;
-use Filament\Forms\Components\Select;
 
 class StockResource extends Resource
 {
@@ -37,42 +39,66 @@ class StockResource extends Resource
         
         return $form
             ->schema([
-                TextInput::make('product_id')
-                    ->label('Product ID')
-                    ->readOnly()
-                    ->default($randomNumber)
-                    ->columnSpanFull()
-                    ->required(),
-                Select::make('product_name')
-                    ->label('Name')
-                    ->searchable()
-                    ->required('create')
-                    ->options(Product::all()->pluck('product_name', 'product_name'))
-                    ->live(),
-                TextInput::make('product_stock')
-                    ->label('Stock')
-                    ->required()
-                    ->numeric(),
-                DatePicker::make('product_expiration')
-                    ->label('Expiration')
-                    ->required()
-                    ->disabledOn('edit')
-                    ->native(false),
-                Select::make('product_status')
-                    ->label('Status')
-                    ->options([
-                        'inStock' => 'IN Stock',
-                        'lowStock' => 'Low Stock',
-                        'critical' => 'Critical',
+                Wizard::make([
+                    Wizard\Step::make('Create Stock')
+                        ->schema([
+                            TextInput::make('product_id')
+                            ->label('Product ID')
+                            ->readOnly()
+                            ->default($randomNumber)
+                            ->columnSpanFull()
+                            ->required(),
+                            Select::make('product_name')
+                            ->label('Name')
+                            ->searchable()
+                            ->required('create')
+                            ->options(Product::all()->pluck('product_name', 'product_name'))
+                            ->live(),
+                            TextInput::make('product_price')
+                            ->label('Price')
+                            ->required()
+                            ->numeric(),
+                        ]),
+                    Wizard\Step::make('Storage')
+                        ->schema([
+                            TextInput::make('product_stock')
+                            ->label('Stock')
+                            ->required()
+                            ->numeric(),
+                            Select::make('product_category')
+                            ->label('Category')
+                            ->searchable()
+                            // ->required('create')
+                            ->options(Category::all()->pluck('category', 'category')),
+                        ]),
+                    Wizard\Step::make('Status')
+                        ->schema([
+                    Datepicker::make('product_expiration')
+                        ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
+                        ->format('Y-m-d')
+                        ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
+                        ->required('create')
+                        ->visibleOn('create', 'view')
+                        ->native(false)
+                        ->disabledOn('edit'),
+                     Select::make('product_status')
+                        ->label('Status')
+                        ->options([
+                            'In Stock' => 'In Stock',
+                            'Low Stock' => 'Low Stock',
+                            'Critical' => 'Critical',
+                        ])
+                        ->native(false)
+                        ->required(),
+                   
+                            ]),
                     ])
-                    ->native(false)
-                    ->required(),
-                Select::make('category')
-                    ->label('Category')
-                    ->searchable()
-                    ->required('create')
-                    ->options(Category::all()->pluck('category', 'category'))
-                    ->live(),
+                    ->submitAction(new HtmlString('<button type="submit">Submit</button>'))
+                    ->columnSpanFull(),
+
+                
+                
+               
             ]);
     }
 
