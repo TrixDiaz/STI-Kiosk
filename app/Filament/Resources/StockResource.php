@@ -2,16 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StockResource\Pages;
-use App\Filament\Resources\StockResource\RelationManagers;
-use App\Models\Stock;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Stock;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\StockResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\StockResource\RelationManagers;
+use App\Models\Category;
+use App\Models\Product;
+use Filament\Forms\Components\Select;
 
 class StockResource extends Resource
 {
@@ -25,25 +33,46 @@ class StockResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $randomNumber = "" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        
         return $form
             ->schema([
-                Forms\Components\TextInput::make('product_id')
-                    ->required()
-                    ->maxLength(36),
-                Forms\Components\TextInput::make('product_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('product_stock')
+                TextInput::make('product_id')
+                    ->label('Product ID')
+                    ->readOnly()
+                    ->default($randomNumber)
+                    ->columnSpanFull()
+                    ->required(),
+                Select::make('product_name')
+                    ->label('Name')
+                    ->searchable()
+                    ->required('create')
+                    ->options(Product::all()->pluck('product_name', 'product_name'))
+                    ->live(),
+                TextInput::make('product_stock')
+                    ->label('Stock')
                     ->required()
                     ->numeric(),
-                Forms\Components\FileUpload::make('product_image')
-                    ->image(),
-                Forms\Components\TextInput::make('product_classification')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('product_status')
+                DatePicker::make('product_expiration')
+                    ->label('Expiration')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('product_expiration'),
+                    ->disabledOn('edit')
+                    ->native(false),
+                Select::make('product_status')
+                    ->label('Status')
+                    ->options([
+                        'inStock' => 'IN Stock',
+                        'lowStock' => 'Low Stock',
+                        'critical' => 'Critical',
+                    ])
+                    ->native(false)
+                    ->required(),
+                Select::make('category')
+                    ->label('Category')
+                    ->searchable()
+                    ->required('create')
+                    ->options(Category::all()->pluck('category', 'category'))
+                    ->live(),
             ]);
     }
 
@@ -51,26 +80,23 @@ class StockResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('product_id')
+                TextColumn::make('product_id')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('product_name')
+                TextColumn::make('product_name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('product_stock')
+                TextColumn::make('product_stock')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\ImageColumn::make('product_image'),
-                Tables\Columns\TextColumn::make('product_classification')
+                TextColumn::make('product_status')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('product_status')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('product_expiration')
+                TextColumn::make('product_expiration')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -3,19 +3,20 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Tables;
 use App\Models\Role;
+use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 // use Spatie\Permission\Models\Role;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\RoleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\RoleResource\RelationManagers;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
 
 class RoleResource extends Resource
 {
@@ -31,11 +32,16 @@ class RoleResource extends Resource
     {
         return $form
             ->schema([
-               TextInput::make('name'),
-               Select::make('permissions')
-                    ->multiple()
-                    ->relationship('permissions', 'name')
-                    ->preload(),
+                Section::make('User Roles')
+                ->description('Prevent other user trying to access confidentials Tabs')
+                ->schema([
+                    TextInput::make('name')
+                    ->required(),
+                    Select::make('permissions')
+                        ->multiple()
+                        ->relationship('permissions', 'name')
+                        ->preload(),
+                ])->columns(2),
             ]);
     }
 

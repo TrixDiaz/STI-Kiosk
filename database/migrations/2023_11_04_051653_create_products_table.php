@@ -15,12 +15,9 @@ return new class extends Migration
             $table->id();
             $table->uuid('product_id')->unique()->index();
             $table->string('product_name');
-            $table->integer('product_price');
-            $table->integer('product_stock');
             $table->string('product_image')->nullable();
-            $table->string('product_classification')->nullable();
-            $table->string('product_status');
-            $table->date('product_expiration')->format('d-m-Y')->nullable();
+            $table->string('product_status')->nullable();
+            // $table->date('product_expiration')->format('d-m-Y')->nullable();
             $table->timestamps();
         });
     }

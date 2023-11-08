@@ -36,71 +36,30 @@ class ProductResource extends Resource
     public static function form(Form $form): Form
     {
 
-        $randomNumber = "PID" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $randomNumber = "" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
         return $form
             ->schema([
-                TextInput::make('product_id')
-                    ->label('PID')
-                    ->readOnly()
-                    ->default($randomNumber)
-                    ->columnSpanFull()
-                    ->required(),
-
-                Section::make('New Product')
+                    Section::make('New Product')
                     ->description('The items you have selected for purchase')
                     ->icon('heroicon-m-shopping-bag')
                     ->schema([
-                        TextInput::make('product_name')
+                     Fieldset::make('Product')
+                        ->schema([
+                            TextInput::make('product_id')
+                            ->label('ID')
+                            ->readOnly()
+                            ->default($randomNumber)
+                            ->required(),
+                            TextInput::make('product_name')
+                            ->label('Name')
                             ->required()
                             ->maxLength(255),
-                            TextInput::make('product_classification')
-                            ->label('Category')
-                            ->required()
-                            ->maxLength(255),
-
+                     ]),
+                        FileUpload::make('product_image')
+                        ->label('Attachment')
+                        ->image(),
                     ]),
-                Fieldset::make('Product Information')
-                    ->schema([
-                        TextInput::make('product_price')
-                            ->label('Price')
-                            ->required()
-                            ->numeric(),
-                      
-                        TextInput::make('product_stock')
-                            ->label('Stocks')
-                            ->required()
-                            ->numeric(),
-                            DatePicker::make('product_expiration')
-                            ->label('Expiry')
-                            ->timezone('Asia/Manila')
-                            ->displayFormat('d/m/Y')
-                            ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
-                            ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
-                            ->native(false)
-                            ->readOnly('edit')
-                            ->required(),
-                    ])
-                    ->columns(3),
-
-                Fieldset::make(' Information')
-                    ->schema([
-                        Select::make('product_status')
-                            ->label('Status')
-                            ->options([
-                                'in stock' => 'IN STOCK',
-                                'minimum stock' => 'MINUMUM STOCK LEVEL',
-                                'low stock' => 'LOW STOCK LEVEL',
-                                'critical' => 'CRITICAL',
-                                'out of stock' => 'OUT OF STOCK',
-                            ])
-                            ->required(),
-                            FileUpload::make('product_image')
-                            ->label('attachment')
-                            ->image(),
-                    ])->columns(2),
-                
-
             ]);
     }
 
@@ -115,19 +74,10 @@ class ProductResource extends Resource
                 TextColumn::make('product_name')
                     ->label('Name')
                     ->searchable(),
-                TextColumn::make('product_price')
-                    ->label('Price')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('product_stock')
-                    ->label('Stocks')
-                    ->numeric()
-                    ->sortable(),
-          
                 ImageColumn::make('product_image')
                     ->circular()
                     ->label('attachment')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('product_classification')
                     ->label('Category')
                     ->searchable()
@@ -136,11 +86,6 @@ class ProductResource extends Resource
                 TextColumn::make('product_status')
                     ->label('Status')
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('product_expiration')
-                    ->label('Expiry')
-                    ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Created')

@@ -30,11 +30,12 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    protected static ?string $navigationLabel = 'Users';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
                 Fieldset::make('Account Information')
                     ->schema([
                         TextInput::make('name')
@@ -58,7 +59,7 @@ class UserResource extends Resource
                             ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
                             ->native(false)
                             ->readOnly('edit'),
-                    ])->columns(3),
+                    ])->columns(2),
                 Fieldset::make('User Management')
                     ->schema([
                         Select::make('roles')

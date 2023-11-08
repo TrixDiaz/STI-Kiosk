@@ -23,29 +23,30 @@ class CategoryResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationGroup = 'Products';
+    protected static ?string $navigationGroup = 'Products'; 
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                ->required()
-                ->maxLength(255),
                 TextInput::make('category')
-                ->required()
-                ->maxLength(255),
+                    ->label('Category')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
+
+    
+
+
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
-                    TextColumn::make('category')
-                    ->searchable(),
+            TextColumn::make('category')
+                ->label('Category')
+                ->searchable(),
             ])
             ->filters([
                 //
