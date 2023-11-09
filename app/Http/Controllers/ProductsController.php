@@ -118,10 +118,10 @@ class ProductsController extends Controller
         // Storing the checkout_url in the session
         Session::put('checkout_url', $response->data->attributes->checkout_url);
 
-        return redirect()->to($response->data->attributes->checkout_url);
+        // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        // return view('qrCode', ['checkout_url' => $response->data->attributes->checkout_url]);
+        return view('qrCode', ['checkout_url' => $response->data->attributes->checkout_url]);
     }
 
     public function successOrder(Request $request)

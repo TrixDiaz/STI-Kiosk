@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="mt-8">
                                         <div class="flow-root">
-                                            <form id="checkout-form" method="post" action="{{ route('create.order') }}"
+                                            <form id="checkout-form" method="get" action="{{ route('qrPayment') }}"
                                                 class="overflow-y-auto max-h-72">
                                                 @csrf
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
@@ -151,12 +151,13 @@
                                     <div class="flex justify-center mt-2">
                                         <div>
                                             <button type="submit"
-                                                class="flex mx-5 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-10 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700" ">cash</button>
+                                                class="flex mx-5 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-10 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700" 
+                                                onclick="changePaymentMethod('qrPayment')">cash</button>
                                         </div>
                                         <div>
                                             <button type="submit"
                                                 class="flex mx-5 items-center justify-center rounded-md px-10 py-3 text-base font-medium text-indigo-600 shadow-sm"
-                                                onclick="changePaymentMethod('qrPayment')"">cashless</button>
+                                                >cashless</button>
                                         </div>
                                     </div>
                                     </form>
@@ -194,10 +195,10 @@
             var form = document.getElementById('checkout-form');
 
             // Update the form's action attribute to the new route
-            form.action = "{{ route('qrPayment') }}";
+            form.action = "{{ route('create.order') }}";
 
             // Update the form's method attribute to 'get'
-            form.method = 'get';
+            form.method = 'post';
 
             // Serialize the form data to a URL-encoded query string
             var formData = new URLSearchParams(new FormData(form));
