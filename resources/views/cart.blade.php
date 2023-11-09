@@ -134,7 +134,7 @@
                                         <div> <button type="submit"
                                                 class="flex mx-5 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-10 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Cash</button>
                                         </div>
-                                        <div> <a href="#"
+                                        <div> <a href="{{ route('qrCode') }}"
                                                 class="flex mx-5 items-center justify-center rounded-md px-10 py-3 text-base font-medium text-indigo-600 shadow-sm ">Cashless</a>
                                         </div>
                                     </div>
