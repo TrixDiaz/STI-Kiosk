@@ -12,10 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -204,30 +201,37 @@ focus:text-orange-500">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
-          AOS.init()
+            AOS.init()
         </script>
         <script>
-          $(document).ready(function () {
-            // Add smooth scrolling to all links
-            $('a').on('click', function (event) {
-              if (this.hash !== '') {
-                event.preventDefault()
-    
-                var hash = this.hash
-    
-                $('html, body').animate(
-                  {
-                    scrollTop: $(hash).offset().top,
-                  },
-                  800,
-                  function () {
-                    window.location.hash = hash
-                  }
-                )
-              }
+            $(document).ready(function() {
+                // Add smooth scrolling to all links
+                $('a').on('click', function(event) {
+                    if (this.hash !== '') {
+                        event.preventDefault()
+
+                        var hash = this.hash
+
+                        $('html, body').animate({
+                                scrollTop: $(hash).offset().top,
+                            },
+                            800,
+                            function() {
+                                window.location.hash = hash
+                            }
+                        )
+                    }
+                })
             })
-          })
+
+
+            // Add an event listener for the 'dblclick' event on the document
+            document.addEventListener('dblclick', function() {
+                // Reload the page with the same URL
+                window.location.reload();
+            });
         </script>
+
 
     </div>
 

@@ -51,5 +51,7 @@ Route::get('donmono', [ProductsController::class, 'index'])->name('donmono');
 Route::get('addToCart/{id}', [ProductsController::class, 'store'])->name('addToCart');
 Route::get('/remove-from-cart/{id}', [ProductsController::class, 'destroy'])->name('cart.remove');
 Route::post('/create-order', [ProductsController::class, 'createOrder'])->name('create.order');
+Route::get('/order/{orderID}', [ProductsController::class, 'showOrder'])->name('order');
+
 
 

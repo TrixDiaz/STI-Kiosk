@@ -15,7 +15,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('products.donmono',compact('products'));
+        return view('products.donmono', compact('products'));
     }
 
     /**
@@ -34,10 +34,10 @@ class ProductsController extends Controller
         $product = Stock::findOrFail($id);
 
         $cart = session()->get('cart', []);
-        
+
         $orderType = $request->input('order_type'); // Get the selected order type from the request
 
-        if(isset($cart[$id])) {
+        if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
@@ -49,58 +49,65 @@ class ProductsController extends Controller
             ];
         }
 
-        session()->put('cart',$cart);
-        return redirect()->back()->with('success', 'Product add to cart Successfully!');
+        session()->put('cart', $cart);
+        return redirect()
+            ->back()
+            ->with('success', 'Product add to cart Successfully!');
     }
 
     /**
      * Display the specified resource.
      */
     public function createOrder(Request $request)
-{
-    // Retrieve products from the session
-    $cart = session('cart');
+    {
+        // Retrieve products from the session
+        $cart = session('cart');
 
-    $orderID = "" . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-    $orderDetails = [];
+        $orderDetails = [];
 
-     // Retrieve additional data from the request
-     $total = $request->input('total');
-     $orderType = $request->input('order_type');
+        // Retrieve additional data from the request
+        $total = $request->input('total');
+        $orderType = $request->input('order_type');
 
-    // You can now insert the products into your orders table.
-    // Assuming you have an "Order" model and an "orders" table:
-    foreach ($cart as $item) {
-        $orderDetails[] = [
-            'order_id' => $orderID,
-            'product_name' => $item['product_name'],
-            'product_price' => $item['product_price'],
-            'quantity' => $item['quantity'],
-            'order_type' => $orderType,
-            'total' => $total,
-            // Add other fields as needed
-        ];
+        // You can now insert the products into your orders table.
+        // Assuming you have an "Order" model and an "orders" table:
+        foreach ($cart as $item) {
+            $orderDetails[] = [
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $orderType,
+                'total' => $total,
+                // Add other fields as needed
+            ];
+        }
+
+        // Insert all the order details into the database
+        Order::insert($orderDetails);
+
+        // Optionally, you can clear the cart after the order is created
+        session()->forget('cart');
+
+        // Redirect back or to a confirmation page
+        return redirect()->route('order', ['orderID' => $orderID])->with('success', 'Order has been created successfully.');
+
     }
-
-    // Insert all the order details into the database
-    Order::insert($orderDetails);
-
-    // Optionally, you can clear the cart after the order is created
-    session()->forget('cart');
-
-    // Redirect back or to a confirmation page
-    return redirect()->route('kiosk')->with('success', 'Order has been created successfully.');
-}
-
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function showOrder($orderID)
     {
-        //
+        // Retrieve the order details from the database based on the order ID
+        $orderDetails = Order::where('order_id', $orderID)->get();
+    
+        // You can pass the order details to a view for displaying
+        return view('order', ['orderDetails' => $orderDetails]);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -116,12 +123,14 @@ class ProductsController extends Controller
     public function destroy(string $id)
     {
         $cart = session('cart', []);
-        
+
         if (isset($cart[$id])) {
             unset($cart[$id]);
             session()->put('cart', $cart);
         }
 
-        return redirect()->route('cart')->with('success', 'Item removed from the cart successfully.');
+        return redirect()
+            ->route('cart')
+            ->with('success', 'Item removed from the cart successfully.');
     }
 }

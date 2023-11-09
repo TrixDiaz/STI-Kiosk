@@ -100,7 +100,7 @@
                                                 class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                                 <div class="block">
                                                     <div class="w-full text-lg font-semibold">Dine in</div>
-                                                    {{-- <div class="w-full">Good for small websites</div> --}}
+                                                
                                                 </div>
                                                 <svg class="w-5 h-5 ml-3" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -118,7 +118,7 @@
                                                 class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                                 <div class="block">
                                                     <div class="w-full text-lg font-semibold">Take out</div>
-                                                    {{-- <div class="w-full">Good for large websites</div> --}}
+                                                  
                                                 </div>
                                                 <svg class="w-5 h-5 ml-3" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
