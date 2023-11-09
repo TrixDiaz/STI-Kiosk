@@ -2,13 +2,13 @@
 
 
     <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-     
+
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
         <div class="fixed inset-0 ">
             <div class="absolute inset-0 ">
                 <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
-                
+
                     <div data-aos="fade-left" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
                         <div class="pointer-events-auto w-screen max-w-md">
                             <div class="flex h-full flex-col overflow-y-auto bg-white shadow-xl">
@@ -33,37 +33,47 @@
                                     </div>
                                     <div class="mt-8">
                                         <div class="flow-root">
-                                            <form method="post" action="{{ route('create.order') }}" class="overflow-y-auto max-h-72">
+                                            <form id="checkout-form" method="post" action="{{ route('create.order') }}"
+                                                class="overflow-y-auto max-h-72">
                                                 @csrf
-                                                @method('post')
                                                 <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                     @if (session('cart'))
                                                         @foreach (session('cart') as $id => $item)
                                                             <li class="flex py-6">
-                                                                <div class="h-24 w-24 flex-shrink-0  rounded-md border border-gray-200">
+                                                                <div
+                                                                    class="h-24 w-24 flex-shrink-0  rounded-md border border-gray-200">
                                                                     <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
                                                                         alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
                                                                         class="h-full w-full object-cover object-center">
                                                                 </div>
-                                                
+
                                                                 <div class="ml-4 flex flex-1 flex-col">
                                                                     <div>
-                                                                        <div class="flex justify-between text-base font-medium text-gray-900">
+                                                                        <div
+                                                                            class="flex justify-between text-base font-medium text-gray-900">
                                                                             <h3>
-                                                                                <a href="#">{{ $item['product_name'] }}</a>
+                                                                                <a
+                                                                                    href="#">{{ $item['product_name'] }}</a>
                                                                             </h3>
-                                                                            <p class="ml-4">₱ {{ $item['product_price'] }}</p>
+                                                                            <p class="ml-4">₱
+                                                                                {{ $item['product_price'] }}</p>
                                                                         </div>
-                                                                        <p class="mt-1 text-sm text-gray-500 float-left">
+                                                                        <p
+                                                                            class="mt-1 text-sm text-gray-500 float-left">
                                                                             {{ $item['product_category'] }}
                                                                         </p>
                                                                     </div>
-                                                                    <div class="flex flex-1 items-end justify-between text-sm">
-                                                                        <p class="text-gray-500">Qty {{ $item['quantity'] }}</p>
-                                                
-                                                                        <p class="text-gray-500">Total: ₱ {{ $item['product_price'] * $item['quantity'] }}</p> <!-- Add this line -->
+                                                                    <div
+                                                                        class="flex flex-1 items-end justify-between text-sm">
+                                                                        <p class="text-gray-500">Qty
+                                                                            {{ $item['quantity'] }}</p>
+
+                                                                        <p class="text-gray-500">Total: ₱
+                                                                            {{ $item['product_price'] * $item['quantity'] }}
+                                                                        </p> <!-- Add this line -->
                                                                         <div class="flex">
-                                                                            <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                            <button type="button"
+                                                                                class="font-medium text-indigo-600 hover:text-indigo-500"
                                                                                 onclick="confirmRemove('{{ route('cart.remove', $id) }}')">Remove</button>
                                                                         </div>
                                                                     </div>
@@ -74,7 +84,7 @@
                                                         <p>Your cart is empty.</p>
                                                     @endif
                                                 </ul>
-                                                
+
 
 
                                         </div>
@@ -82,25 +92,33 @@
                                 </div>
 
                                 <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                                    @php $total = 0 @endphp
-                                        @foreach ((array) session('cart') as $id => $item)
-                                            @php $total += $item['product_price'] * $item['quantity'] @endphp
-                                        @endforeach
+                                    @php
+                                        $total = 0;
+                                    @endphp
+
+                                    @foreach ((array) session('cart') as $id => $item)
+                                        @php
+                                            $total += $item['product_price'] * $item['quantity'];
+                                        @endphp
+                                    @endforeach
                                     <div class="flex justify-between text-base pb-3 font-medium text-gray-900">
-                                        <div><p>Subtotal</p></div>
-                                        
-                                      <div> <input type="text" value="{{ $total }}" name="total" class="hidden">₱ {{ $total }}</div>
+                                        <div>
+                                            <p>Subtotal</p>
+                                        </div>
+
+                                        <div> <input type="text" value="{{ $total }}" name="total"
+                                                class="hidden">₱ {{ $total }}</div>
                                     </div>
 
                                     <ul class="grid w-full gap-6 grid-cols-2 ">
                                         <li>
-                                            <input type="radio" id="dine-in" name="order_type"
-                                                value="dine_in" class="hidden peer" required>
+                                            <input type="radio" id="dine-in" name="order_type" value="dine_in"
+                                                class="hidden peer" required>
                                             <label for="dine-in"
                                                 class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                                 <div class="block">
                                                     <div class="w-full text-lg font-semibold">Dine in</div>
-                                                
+
                                                 </div>
                                                 <svg class="w-5 h-5 ml-3" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -118,7 +136,7 @@
                                                 class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                                 <div class="block">
                                                     <div class="w-full text-lg font-semibold">Take out</div>
-                                                  
+
                                                 </div>
                                                 <svg class="w-5 h-5 ml-3" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -131,11 +149,14 @@
                                         </li>
                                     </ul>
                                     <div class="flex justify-center mt-2">
-                                        <div> <button type="submit"
-                                                class="flex mx-5 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-10 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Cash</button>
+                                        <div>
+                                            <button type="submit"
+                                                class="flex mx-5 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-10 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700" ">cash</button>
                                         </div>
-                                        <div> <a href="{{ route('qrCode') }}"
-                                                class="flex mx-5 items-center justify-center rounded-md px-10 py-3 text-base font-medium text-indigo-600 shadow-sm ">Cashless</a>
+                                        <div>
+                                            <button type="submit"
+                                                class="flex mx-5 items-center justify-center rounded-md px-10 py-3 text-base font-medium text-indigo-600 shadow-sm"
+                                                onclick="changePaymentMethod('qrPayment')"">cashless</button>
                                         </div>
                                     </div>
                                     </form>
@@ -146,7 +167,7 @@
                                             or
                                             <button type="button"
                                                 class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                Continue Shopping
+                                                <a href="{{ route('kiosk') }}">Continue Shopping</a>
                                                 <span aria-hidden="true"> &rarr;</span>
                                             </button>
                                         </p>
@@ -166,5 +187,33 @@
             }
         }
     </script>
+
+    <script>
+        function changePaymentMethod(paymentMethod) {
+            // Get the form element by its id
+            var form = document.getElementById('checkout-form');
+
+            // Update the form's action attribute to the new route
+            form.action = "{{ route('qrPayment') }}";
+
+            // Update the form's method attribute to 'get'
+            form.method = 'get';
+
+            // Serialize the form data to a URL-encoded query string
+            var formData = new URLSearchParams(new FormData(form));
+
+            // You can store the form data in a hidden input field
+            // so that it can be passed to the qrPayment route
+            var hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'form_data';
+            hiddenInput.value = formData.toString();
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
+
 
 </x-kiosk-layout>
