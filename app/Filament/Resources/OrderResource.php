@@ -29,7 +29,7 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-               
+                
             ]);
     }
 
@@ -37,7 +37,11 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-              
+              TextColumn::make('order_id'),
+              TextColumn::make('product_name'),
+              TextColumn::make('product_price'),
+              TextColumn::make('quantity'),
+              TextColumn::make('order_type'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

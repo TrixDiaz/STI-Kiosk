@@ -16,6 +16,7 @@ class Order extends Model
         'quantity',
         'order',
         'total',
+        'order_type',
         'product_category',
         'product_status',
         'payment_status',

@@ -14,6 +14,8 @@ class Cart extends Component
     public $count = 0;
     public $cart = [];
     public $cartSubtotal = 0; // Initialize cart subtotal
+    public $orderType = 'dine-in'; // Default to Dine-In
+
 
     public function mount()
     {
@@ -40,6 +42,9 @@ class Cart extends Component
     // Initialize an array to store order details
     $orderDetails = [];
 
+    // Add the selected order type to the order details
+    $orderType = $this->orderType;
+
     // Insert cart items into the order table and collect order details
     foreach ($this->cart as $id => $item) {
         $orderDetails[] = [
@@ -48,6 +53,7 @@ class Cart extends Component
             'product_price' => $item['product_price'],
             'quantity' => $item['quantity'], // Include the quantity in the order details
             'total' => $this->cartSubtotal,
+            'order_type' => $orderType, // Include the order type
         ];
     }
 
