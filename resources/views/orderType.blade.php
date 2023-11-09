@@ -35,6 +35,7 @@
             tab-size: 4;
             font-family: Figtree, sans-serif;
             font-feature-settings: normal
+            
         }
 
         body {
@@ -829,9 +830,7 @@
         }
     </style>
 
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -841,95 +840,46 @@
     <div
         class="bg-[url('/images/izakayabg.jpg')] relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
-        {{-- Authentication --}}
-        {{-- @if (Route::has('login'))    
-                                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                                    @else
-                                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                                        @endif
-                                    @endauth
-                                </div>
-                    @endif --}}
-
-
-        {{-- Modal --}}
+     
+     {{-- Modal --}}
+        <div x-data="{ open: true }" class="z-20">
+            <button @click="open = true">Tap to Start</button>
         
-        <div x-data="{ open: true }" class="z-20"
-        >
-            {{-- <button @click="open = true">Tap to Start</button> --}}
-
             <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <div x-show="open" class="fixed inset-0 transition-opacity ease-in duration-300"
-                        aria-hidden="true">
+                    <div x-show="open" class="fixed inset-0 transition-opacity ease-in duration-300" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
-
+        
                     <!-- This is the actual modal dialog -->
-                    <div
-                    data-aos="fade-up"
-                    data-aos-duration="2000"
-                    class="mx-auto max-w-screen-sm text-center"
-                  >
-                    <div x-show="open"
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
+                    <div x-show="open" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
                         <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <div class="sm:flex sm:items-start">
                                 <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                     <img src="/images/izakaya-header.png" class="max-h-80" alt="header">
-                                    <img src="/images/intro-image.png"
-                                        class="animate-bounce max-h-60 my-10 place-self-center" alt="Ramen">
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <img src="/images/btn-01.png" alt="">
+                                            <button>
+                                                <a href="{{ route('kiosk') }}">Kiosk</a>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <img src="/images/btn-02.png" alt="">
+                                            <button>
+                                                Dine
+                                                <input type="text" name="out" class="hidden">
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between bg-orange-300 px-4 py-3 sm:px-6">
-                            <div class="order-first">
-                                <img src="/images/iz-logo.png" class="max-h-20" alt="logo">
-                            </div>
-                            <div class="order-last">
-                                <a href="{{ route('orderType') }}" wire:navigate {{-- @click="open = false" --}} type="button"
-                                    class="animate-pulse w-full justify-center px-4 py-5 font-bold text-white text-2xl uppercase">
-                                    Tap to Start
-                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init()
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Add smooth scrolling to all links
-                $('a').on('click', function(event) {
-                    if (this.hash !== '') {
-                        event.preventDefault()
-
-                        var hash = this.hash
-
-                        $('html, body').animate({
-                                scrollTop: $(hash).offset().top,
-                            },
-                            800,
-                            function() {
-                                window.location.hash = hash
-                            }
-                        )
-                    }
-                })
-            })
-        </script>
 
     </div>
     @livewireScripts
