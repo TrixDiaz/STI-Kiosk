@@ -222,7 +222,7 @@
 
     <!-- Toggler -->
     <div class="flex justify-stretch">
-        <div class="order-1">
+        <div class="ml-4 order-1">
             <button
                 class="m-5 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                 data-te-sidenav-toggle-ref data-te-target="#sidenav-5" aria-controls="#sidenav-5" aria-haspopup="true">
