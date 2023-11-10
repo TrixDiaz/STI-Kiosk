@@ -14,9 +14,11 @@ use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\Wizard\Step;
-use Filament\Forms\Components\DatePicker;
 use App\Filament\Resources\StockResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\StockResource\RelationManagers;
@@ -87,6 +89,9 @@ class StockResource extends Resource
                         ])
                         ->native(false)
                         ->required(),
+                        FileUpload::make('product_image')
+                        ->label('Attachment')
+                        ->image(),
                             ]),
                     ])
                     ->submitAction(new HtmlString('<button type="submit">Submit</button>'))
@@ -103,6 +108,10 @@ class StockResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('product_name')
                     ->searchable(),
+                    ImageColumn::make('product_image')
+                    ->circular()
+                    ->label('attachment')
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('product_stock')
                     ->numeric()
                     ->sortable(),

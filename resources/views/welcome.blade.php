@@ -841,22 +841,6 @@
     <div
         class="bg-[url('/images/izakayabg.jpg')] relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
-        {{-- Authentication --}}
-        {{-- @if (Route::has('login'))    
-                                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                                    @auth
-                                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                                    @else
-                                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
-
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                                        @endif
-                                    @endauth
-                                </div>
-                    @endif --}}
-
-
         {{-- Modal --}}
         
         <div x-data="{ open: true }" class="z-20"
@@ -883,7 +867,7 @@
                                 <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                     <img src="/images/izakaya-header.png" class="max-h-80" alt="header">
                                     <img src="/images/intro-image.png"
-                                        class="animate-bounce max-h-60 my-10 place-self-center" alt="Ramen">
+                                        class="animate-bounce max-h-96 my-10 place-self-center" alt="Ramen">
                                 </div>
                             </div>
                         </div>
@@ -892,7 +876,7 @@
                                 <img src="/images/iz-logo.png" class="max-h-20" alt="logo">
                             </div>
                             <div class="order-last">
-                                <a href="{{ route('kiosk') }}" wire:navigate {{-- @click="open = false" --}} type="button"
+                                <a href="{{ route('kiosk') }}" {{-- @click="open = false" --}} type="button"
                                     class="animate-pulse w-full justify-center px-4 py-5 font-bold text-white text-2xl uppercase">
                                     Tap to Start
                                 </a>

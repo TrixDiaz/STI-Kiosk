@@ -20,6 +20,7 @@ class Order extends Model
         'product_category',
         'product_status',
         'payment_status',
+        'product_image',
     ];
 
     use HasFactory;

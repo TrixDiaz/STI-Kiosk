@@ -890,7 +890,7 @@
                   </a>
                    @endauth
                 </div>
-                <h1 class="font-bold text-2xl my-4 text-center text-blue-600">Name of Client</h1>
+                <h1 class="font-bold text-2xl my-4 text-center text-blue-600">Izakaya Shonantei</h1>
                 <hr class="mb-2">
                 <div class="flex justify-between mb-6">
                     <h1 class="text-lg font-bold">Invoice</h1>
@@ -910,28 +910,31 @@
                     <thead>
                         <tr>
                             <th class="text-left font-bold text-gray-700">Product</th>
-                            <th class="text-right font-bold text-gray-700">Amount</th>
                             <th class="text-right font-bold text-gray-700">Qty</th>
+                            <th class="text-right font-bold text-gray-700">Amount</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($orderDetails as $orderDetail)
                         <tr>
                             <td class="text-left text-gray-700">{{ $orderDetail->product_name }}</td>
-                            <td class="text-right text-gray-700">{{ $orderDetail->product_price }}</td>
                             <td class="text-right text-gray-700">{{ $orderDetail->quantity }}</td>
+                            <td class="text-right text-gray-700">{{ $orderDetail->product_price }}</td>
+                           
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <td class="text-left font-bold text-gray-700">Total</td>
+                            <td class=""></td>
                             <td class="text-right font-bold text-gray-700">{{ $orderDetail->total }}</td>
                         </tr>
                     </tfoot>
                 </table>
-                <div class="text-gray-700 mb-2">Thank you for your business!</div>
-                <div class="text-gray-700 text-sm">Please remit payment within 30 days.</div>
+                <div class="text-gray-700 mb-2">Thanks for visiting us!</div>
+                <div class="text-gray-700 text-sm uppercase">{{ $orderDetail->order_type }}</div>
             </div>
               
             </div>

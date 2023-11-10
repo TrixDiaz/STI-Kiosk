@@ -853,12 +853,15 @@
             <div class="camera absolute top-4"></div>
             <div class="flex w-full flex-row justify-between items-center mb-2 px-2 text-gray-50 z-10 absolute top-7">
                 <div class="flex flex-row items-center ">
+                   <a href="{{ route('kiosk') }}">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-8 w-8 p-2 cursor-pointer hover:bg-gray-500 text-gray-50 rounded-full mr-3" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg> <span class="text-sm">QR Code</span>
+                    class="h-8 w-8 p-2 cursor-pointer hover:bg-gray-500 text-gray-50 rounded-full mr-3" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg> 
+                   </a>
+                    <span class="text-sm">QR Code</span>
                 </div>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg"

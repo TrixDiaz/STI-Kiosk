@@ -13,6 +13,7 @@ class Stock extends Model
         'product_name',
         'product_stock',
         'product_price',
+        'product_image',
         'product_expiration',
         'product_category',
         'product_status',

@@ -27,11 +27,10 @@
 
     <x-banner />
 
-
     <!-- Sidenav -->
     <div class="">
         <nav id="sidenav-5"
-            class="fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
+            class="fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='true']:translate-x-0 dark:bg-zinc-800"
             data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-accordion="true">
             <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
                 <li class="relative">
@@ -142,87 +141,170 @@
             <button type="button"
                 class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                 data-te-toggle="modal" data-te-target="#rightTopModal" data-te-ripple-init data-te-ripple-color="light">
-                Top Right
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                </svg>
+
             </button>
             <!-- Modal top right-->
-<div
-data-te-modal-init
-class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-id="rightTopModal"
-tabindex="-1"
-aria-labelledby="rightTopModalLabel"
-aria-hidden="true">
-<div
-  data-te-modal-dialog-ref
-  class="pointer-events-none absolute right-7 h-auto w-full translate-x-[100%] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
-  <div
-    class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-    <div
-      class="flex flex-shrink-0 items-center justify-between rounded-t-md bg-info-600 p-4 dark:border-b dark:border-neutral-500 dark:bg-transparent">
-      <h5
-        class="text-xl font-medium leading-normal text-white"
-        id="rightTopModalLabel">
-        Product in the cart
-      </h5>
-      <button
-        type="button"
-        class="box-content rounded-none border-none text-white hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
-        data-te-modal-dismiss
-        aria-label="Close">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="h-6 w-6">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-    <div class="relative flex flex-auto p-4" data-te-modal-body-ref>
-      <span class="text-info-600 [&>svg]:h-16 [&>svg]:w-20">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor">
-          <path
-            d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-        </svg>
-      </span>
-      <div class="ml-8">
-        <p class="my-4">
-          Do you need more time to make a purchase decision?
-        </p>
-        <p class="my-4">
-          No pressure, your product will be waiting for you in the cart.
-        </p>
-      </div>
-    </div>
-    <div
-      class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-      <button
-        type="button"
-        class="mr-2 inline-block rounded bg-info px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
-        data-te-ripple-init
-        data-te-ripple-color="light">
-        Go to the cart
-      </button>
-      <button
-        type="button"
-        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-        data-te-modal-dismiss
-        data-te-ripple-init
-        data-te-ripple-color="light">
-        Close
-      </button>
-    </div>
-  </div>
-</div>
-</div>
+            <div data-te-modal-init
+                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+                id="rightTopModal" tabindex="-1" aria-labelledby="rightTopModalLabel" aria-hidden="true">
+                <div data-te-modal-dialog-ref
+                    class="pointer-events-none absolute right-7 h-auto w-full translate-x-[100%] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
+                    <div
+                        class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+
+                        <div
+                            class="flex flex-shrink-0 items-center justify-between rounded-t-md bg-info-600 p-4 dark:border-b dark:border-neutral-500 dark:bg-transparent">
+                            <h5 class="text-xl font-medium leading-normal text-white" id="rightTopModalLabel">
+                                Product in the cart
+                            </h5>
+                            <button type="button"
+                                class="box-content rounded-none border-none text-white hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                data-te-modal-dismiss aria-label="Close">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="max-h-80 mt-5 mx-3" data-te-modal-body-ref>
+
+                            <form id="checkout-form" method="post" action="{{ route('create.order') }}"
+                                class="overflow-y-auto max-h-72">
+                                @csrf
+                                <ul role="list" class="-my-6 divide-y divide-gray-200">
+                                    @if (session('cart'))
+                                        @foreach (session('cart') as $id => $item)
+                                            <li class="flex py-6">
+                                                <div
+                                                    class="h-24 w-24 flex-shrink-0  rounded-md border border-gray-200">
+                                                    <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
+                                                        alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+                                                        class="h-full w-full object-cover object-center">
+                                                </div>
+
+                                                <div class="ml-4 flex flex-1 flex-col">
+                                                    <div>
+                                                        <div
+                                                            class="flex justify-between text-base font-medium text-gray-900">
+                                                            <h3>
+                                                                <a href="#">{{ $item['product_name'] }}</a>
+                                                            </h3>
+                                                            <p class="ml-4">₱
+                                                                {{ $item['product_price'] }}</p>
+                                                        </div>
+                                                        <p class="mt-1 text-sm text-gray-500 float-left">
+                                                            {{ $item['product_category'] }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="flex flex-1 items-end justify-between text-sm">
+                                                        <p class="text-gray-500">Qty
+                                                            {{ $item['quantity'] }}</p>
+
+                                                        <p class="text-gray-500">Total: ₱
+                                                            {{ $item['product_price'] * $item['quantity'] }}
+                                                        </p> <!-- Add this line -->
+                                                        <div class="flex">
+                                                            <button type="button"
+                                                                class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                onclick="confirmRemove('{{ route('cart.remove', $id) }}')">Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <p>Your cart is empty.</p>
+                                    @endif
+                                </ul>
+
+                                {{-- End of Body Cart --}}
+                        </div>
+                        <div class="border-gray-200 px-4 sm:px-6">
+                            @php
+                                $total = 0;
+                            @endphp
+
+                            @foreach ((array) session('cart') as $id => $item)
+                                @php
+                                    $total += $item['product_price'] * $item['quantity'];
+                                @endphp
+                            @endforeach
+                            <div class="flex justify-between text-base pb-3 font-medium text-gray-900">
+                                <div>
+                                    <p>Subtotal</p>
+                                </div>
+
+                                <div> <input type="text" value="{{ $total }}" name="total"
+                                        class="hidden">₱ {{ $total }}</div>
+                            </div>
+
+                            <ul class="grid w-full gap-2 grid-cols-2 ">
+                                <li>
+                                    <input type="radio" id="dine-in" name="order_type" value="dine in"
+                                        class="hidden peer uppercase" required>
+                                    <label for="dine-in"
+                                        class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                        <div class="block">
+                                            <div class="w-full text-lg font-semibold">Dine in</div>
+
+                                        </div>
+                                        <svg class="w-3 h-3 ml-3" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                        </svg>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="take-out" name="order_type" value="take out"
+                                        class="hidden peer uppercase">
+                                    <label for="take-out"
+                                        class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                        <div class="block">
+                                            <div class="w-full text-lg font-semibold">Take out</div>
+
+                                        </div>
+                                        <svg class="w-5 h-5 ml-3" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                        </svg>
+                                    </label>
+                                </li>
+                            </ul>
+                            </form>
+                           
+                        </div>
+                        <div
+                            class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                            <button type="submit"
+                                class="mr-2 inline-block rounded bg-info px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
+                                data-te-ripple-init data-te-ripple-color="light"
+                                onclick="changePaymentMethod('cash')">
+                                Cash
+                            </button>
+                            <button type="submit"
+                                class="mr-2 inline-block rounded bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#e4a11b] transition duration-150 ease-in-out hover:bg-warning-600 hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:bg-warning-600 focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:outline-none focus:ring-0 active:bg-warning-700 active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(228,161,27,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)]"
+                                onclick="changePaymentMethod('qrPayment')">
+                                Cashless
+                            </button>
+                            <button type="button"
+                                class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                                data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
+                                Close
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -239,8 +321,8 @@ aria-hidden="true">
                 <div class="font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
                     data-dismissible="alert" id="success-alert">
                     <div class="absolute top-4 left-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -295,6 +377,48 @@ aria-hidden="true">
             })
         })
     </script>
+    <script>
+        function confirmRemove(removeUrl) {
+            if (confirm('Are you sure you want to remove this item from the cart?')) {
+                window.location.href = removeUrl;
+            }
+        }
+    </script>
+
+<script>
+    function changePaymentMethod(paymentMethod) {
+        // Get the form element by its id
+        var form = document.getElementById('checkout-form');
+
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Update the form's action attribute to the new route
+        if (paymentMethod === 'cash') {
+            form.action = "{{ route('create.order') }}";
+            form.method = 'post';
+        } else if (paymentMethod === 'qrPayment') {
+            form.action = "{{ route('qrPayment') }}";
+            form.method = 'get';
+        }
+
+        // Remove existing hidden input fields with name 'payment_method'
+        var existingInput = form.querySelector('input[name="payment_method"]');
+        if (existingInput) {
+            existingInput.remove();
+        }
+
+        // Create a new hidden input for payment_method
+        var hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'payment_method';
+        hiddenInput.value = paymentMethod;
+        form.appendChild(hiddenInput);
+
+        // Submit the form
+        form.submit();
+    }
+</script>
 
 </body>
 

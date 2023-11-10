@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('product_stock');
             $table->integer('product_price');
             $table->string('product_status');
+            $table->string('product_image');
             $table->string('product_category');
             $table->date('product_expiration')->format('Y-m-d')->nullable();
             $table->timestamps();

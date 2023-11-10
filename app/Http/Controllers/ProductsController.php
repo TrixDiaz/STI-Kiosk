@@ -16,7 +16,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Stock::all();
         return view('products.donmono', compact('products'));
     }
 
@@ -264,8 +264,6 @@ class ProductsController extends Controller
      *
      * Fetch Orders
      **/
-
-   
 
     /**
      *
