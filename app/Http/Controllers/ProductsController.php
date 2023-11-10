@@ -20,14 +20,7 @@ class ProductsController extends Controller
         return view('products.donmono', compact('products'));
     }
 
-    public function serve()
-    {
-        // Retrieve all data from the "queue" and "serve" tables
-        $queues = DB::table('queues')->get();
-        $serves = DB::table('serves')->get();
-
-        return view('serve', compact('queues', 'serves'));
-    }
+    
 
     public function destroyServe(Serve $serve)
     {
@@ -272,32 +265,7 @@ class ProductsController extends Controller
      * Fetch Orders
      **/
 
-    public function orders()
-    {
-        $uniqueOrderIDs = DB::table('orders')
-            ->select('order_id')
-            ->distinct()
-            ->get();
-
-        $orders = [];
-
-        foreach ($uniqueOrderIDs as $order) {
-            $orderInfo = DB::table('orders')
-                ->select('product_name', 'quantity', 'order_type')
-                ->where('order_id', $order->order_id)
-                ->get();
-
-            $orderType = $orderInfo->first()->order_type;
-
-            $orders[] = [
-                'order_id' => $order->order_id,
-                'order_info' => $orderInfo,
-                'order_type' => $orderType,
-            ];
-        }
-
-        return view('orders', compact('orders'));
-    }
+   
 
     /**
      *

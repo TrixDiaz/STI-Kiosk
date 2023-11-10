@@ -90,7 +90,7 @@
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         @if (Auth::check())
                                             <!-- User is authenticated, you can safely access user properties -->
-                                            Welcome, {{ Auth::user()->name }}
+                                            {{ Auth::user()->name }}
                                         @else
                                             <!-- User is not authenticated, show a message or something else -->
                                             Welcome to the dashboard!
