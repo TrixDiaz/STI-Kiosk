@@ -62,6 +62,8 @@ Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
 Route::post('/serve/{order}', [ProductsController::class, 'orderServe'])->name('order.serve');
 Route::post('/serving/{order}', [ProductsController::class, 'serving'])->name('serving');
 Route::post('/create-order', [ProductsController::class, 'createOrder'])->name('create.order');
+// Delete Method
+Route::delete('/serve/{serve}', [ProductsController::class, 'destroyServe'])->name('serve.destroy');
 
 
 

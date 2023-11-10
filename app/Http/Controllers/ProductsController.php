@@ -20,24 +20,29 @@ class ProductsController extends Controller
         return view('products.donmono', compact('products'));
     }
 
-
-
     public function serve()
     {
         // Retrieve all data from the "queue" and "serve" tables
         $queues = DB::table('queues')->get();
         $serves = DB::table('serves')->get();
-    
+
         return view('serve', compact('queues', 'serves'));
     }
-    
-    
+
+    public function destroyServe(Serve $serve)
+    {
+        $serve->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Order served and removed from the "serve" table');
+    }
+
     public function queue()
     {
         $queues = Queue::all();
         return view('queue', compact('queues'));
     }
-
 
     public function orderServe(Request $request, Order $order)
     {
@@ -53,8 +58,7 @@ class ProductsController extends Controller
             ->with('success', 'Order served successfully');
     }
 
-
-     /**
+    /**
      * Get the User order and store to Shopping Cart Session
      */
     public function store(Request $request, $id)
@@ -241,23 +245,25 @@ class ProductsController extends Controller
             ->with('success', 'Item removed from the cart successfully.');
     }
 
-/**
-     * Remove the specified order id from queue 
+    /**
+     * Remove the specified order id from queue
      * and insert to serve.
      */
     public function serving(Request $request, Queue $order)
-{
-    // Insert the order into the "serve" table
-    Serve::create([
-        'order_id' => $order->order_id,
-        // Add any other fields you need for the "serve" table
-    ]);
+    {
+        // Insert the order into the "serve" table
+        Serve::create([
+            'order_id' => $order->order_id,
+            // Add any other fields you need for the "serve" table
+        ]);
 
-    // Delete the order from the "queue" table
-    $order->delete();
+        // Delete the order from the "queue" table
+        $order->delete();
 
-    return redirect()->route('queue')->with('success', 'Order served successfully');
-}
+        return redirect()
+            ->route('queue')
+            ->with('success', 'Order served successfully');
+    }
 
     /**
      *
