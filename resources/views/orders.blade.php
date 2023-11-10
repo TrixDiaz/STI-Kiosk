@@ -839,6 +839,11 @@
 
 <body class="antialiased">
 
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-10">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -887,8 +892,10 @@
                             {{ $order['order_type'] }}
                         </td>
                         <td>
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">prepare</a>
+                            <a href="{{ route('prepare.order', ['order_id' => $order['order_id']]) }}"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Prepare</a>
                         </td>
+                        
                     </tr>
                 @endforeach
             </tbody>

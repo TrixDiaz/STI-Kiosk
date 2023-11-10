@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Queue;
+use App\Models\Serve;
 use App\Models\Stock;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -18,40 +20,43 @@ class ProductsController extends Controller
         return view('products.donmono', compact('products'));
     }
 
-    public function orders()
-{
-    $uniqueOrderIDs = DB::table('orders')
-        ->select('order_id')
-        ->distinct()
-        ->get();
 
-    $orders = [];
 
-    foreach ($uniqueOrderIDs as $order) {
-        $orderInfo = DB::table('orders')
-            ->select('product_name', 'quantity','order_type')
-            ->where('order_id', $order->order_id)
-            ->get();
-
-            $orderType = $orderInfo->first()->order_type;
-
-        $orders[] = [
-            'order_id' => $order->order_id,
-            'order_info' => $orderInfo,
-            'order_type' => $orderType,
-        ];
-    }
-
-    return view('orders', compact('orders'));
-}
-
-    
-
-    public function insertQueue()
+    public function serve()
     {
-
+        // Retrieve all data from the "queue" and "serve" tables
+        $queues = DB::table('queues')->get();
+        $serves = DB::table('serves')->get();
+    
+        return view('serve', compact('queues', 'serves'));
+    }
+    
+    
+    public function queue()
+    {
+        $queues = Queue::all();
+        return view('queue', compact('queues'));
     }
 
+
+    public function orderServe(Request $request, Order $order)
+    {
+        // Move the order to the "serve" table
+        Serve::create([
+            'order_id' => $order->order_id,
+            // Add any other fields you need for the "serve" table
+        ]);
+        $order->delete(); // Delete the order from the "queue" table
+
+        return redirect()
+            ->back()
+            ->with('success', 'Order served successfully');
+    }
+
+
+     /**
+     * Get the User order and store to Shopping Cart Session
+     */
     public function store(Request $request, $id)
     {
         $product = Stock::findOrFail($id);
@@ -78,6 +83,9 @@ class ProductsController extends Controller
             ->with('success', 'Product add to cart Successfully!');
     }
 
+    /**
+     * Get the User order and insert to Order Table
+     */
     public function createOrder(Request $request)
     {
         // Retrieve products from the session
@@ -115,6 +123,9 @@ class ProductsController extends Controller
             ->with('success', 'Order has been created successfully.');
     }
 
+    /**
+     * Qr Code Generator
+     */
     public function qrPayment(Request $request)
     {
         $total = $request->input('total');
@@ -159,6 +170,9 @@ class ProductsController extends Controller
         return view('qrCode', ['checkout_url' => $response->data->attributes->checkout_url]);
     }
 
+    /**
+     * Success Payment in API
+     */
     public function successOrder(Request $request)
     {
         // Retrieve products from the session
@@ -198,6 +212,9 @@ class ProductsController extends Controller
             ->with('success', 'Order has been created successfully.');
     }
 
+    /**
+     * Fetch all the orders of Customer | Receipt
+     */
     public function showOrder($orderID)
     {
         // Retrieve the order details from the database based on the order ID
@@ -222,5 +239,77 @@ class ProductsController extends Controller
         return redirect()
             ->route('cart')
             ->with('success', 'Item removed from the cart successfully.');
+    }
+
+/**
+     * Remove the specified order id from queue 
+     * and insert to serve.
+     */
+    public function serving(Request $request, Queue $order)
+{
+    // Insert the order into the "serve" table
+    Serve::create([
+        'order_id' => $order->order_id,
+        // Add any other fields you need for the "serve" table
+    ]);
+
+    // Delete the order from the "queue" table
+    $order->delete();
+
+    return redirect()->route('queue')->with('success', 'Order served successfully');
+}
+
+    /**
+     *
+     * Fetch Orders
+     **/
+
+    public function orders()
+    {
+        $uniqueOrderIDs = DB::table('orders')
+            ->select('order_id')
+            ->distinct()
+            ->get();
+
+        $orders = [];
+
+        foreach ($uniqueOrderIDs as $order) {
+            $orderInfo = DB::table('orders')
+                ->select('product_name', 'quantity', 'order_type')
+                ->where('order_id', $order->order_id)
+                ->get();
+
+            $orderType = $orderInfo->first()->order_type;
+
+            $orders[] = [
+                'order_id' => $order->order_id,
+                'order_info' => $orderInfo,
+                'order_type' => $orderType,
+            ];
+        }
+
+        return view('orders', compact('orders'));
+    }
+
+    /**
+     *
+     * Delete From Order Insert to Queue
+     **/
+
+    public function prepareOrder($order_id)
+    {
+        // Soft delete the order from the orders table
+        DB::table('orders')
+            ->where('order_id', $order_id)
+            ->delete();
+
+        // Insert the order ID into the queue table
+        DB::table('queues')->insert([
+            'order_id' => $order_id,
+        ]);
+
+        return redirect()
+            ->back()
+            ->with('success', 'Order prepared and added to the queue.');
     }
 }

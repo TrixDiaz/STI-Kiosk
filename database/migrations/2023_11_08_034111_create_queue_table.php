@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('queues', function (Blueprint $table) {
             $table->id();
-            $table->uuid('order_id')->unique()->index();
-            $table->string('product_status');
+            $table->bigInteger('order_id')->unique()->index();
+            $table->string('product_status')->default('preparing');
             $table->timestamps();
         });
     }

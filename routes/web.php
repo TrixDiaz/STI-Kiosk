@@ -21,9 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('/');
 
-Route::get('/queue', function () {
-    return view('queue');
-})->name('queue');
 
 Route::get('/kiosk', function () {
     return view('kiosk');
@@ -32,7 +29,6 @@ Route::get('/kiosk', function () {
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
-
 
 Route::get('/order', function () {
     return view('orderType');
@@ -50,15 +46,22 @@ Route::middleware([
 });
 
 
-// Products 
+// Get Method
+Route::get('/prepare-order/{order_id}', [ProductsController::class, 'prepareOrder'])->name('prepare.order');
 Route::get('donmono', [ProductsController::class, 'index'])->name('donmono');
 Route::get('orders', [ProductsController::class, 'orders'])->name('orders');
 Route::get('/qrPayment', [ProductsController::class, 'qrPayment'])->name('qrPayment');
 Route::get('/successOrder', [ProductsController::class, 'successOrder'])->name('successOrder');
 Route::get('addToCart/{id}', [ProductsController::class, 'store'])->name('addToCart');
 Route::get('/remove-from-cart/{id}', [ProductsController::class, 'destroy'])->name('cart.remove');
-Route::post('/create-order', [ProductsController::class, 'createOrder'])->name('create.order');
 Route::get('/order/{orderID}', [ProductsController::class, 'showOrder'])->name('order');
+
+Route::get('serve', [ProductsController::class, 'serve'])->name('serve');
+Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
+// Post Method
+Route::post('/serve/{order}', [ProductsController::class, 'orderServe'])->name('order.serve');
+Route::post('/serving/{order}', [ProductsController::class, 'serving'])->name('serving');
+Route::post('/create-order', [ProductsController::class, 'createOrder'])->name('create.order');
 
 
 
