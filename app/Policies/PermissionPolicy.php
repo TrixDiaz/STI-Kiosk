@@ -13,7 +13,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasRole([1,2]);
+        return $user->hasRole([1]);
     }
 
     /**

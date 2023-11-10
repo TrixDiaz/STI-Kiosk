@@ -67,9 +67,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
-    public function canAccessPanel(Panel $panel): bool
+    public function canAccessPanel(Panel $panel)
     {
-        return $this->hasRole([1, 2]);
+        return $this->hasRole([1]);
     }
 
     public function getEmailVerifiedAttribute()

@@ -50,7 +50,7 @@
                     <ul class="overflow-y-auto h-auto">
                         <!-- Items Section -->
                         <li class="hover:bg-gray-100">
-                            <a href="{{ route('cashier.donmono') }}"
+                            <a href="#"
                             wire:navigate
                                 class="h-16 px-6 flex justify-center items-center w-full uppercase
                             focus:text-orange-500">
@@ -59,7 +59,7 @@
                             </a>
                         </li>
         
-                        <li class="hover:bg-gray-100">
+                        {{-- <li class="hover:bg-gray-100">
                             <a href="{{ route('ippin') }}"
                             wire:navigate
                                 class="h-16 px-6 flex justify-center items-center w-full uppercase
@@ -172,7 +172,7 @@
               </a>
           </li>
         
-                    </ul>
+                    </ul> --}}
         
                 </aside>
                 {{-- Page Content --}}
@@ -183,12 +183,12 @@
                         @if(Request::is('cart'))
                             {{-- <a href="{{ route('kiosk') }}" wire:navigate>Back</a> --}}
                         @else
-                        <button type="button" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        {{-- <button type="button" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <a href="{{ route('cashier.cart') }}" wire:navigate>Cart</a>
                             <span class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
                                 @cartCount
                             </span>
-                          </button>
+                          </button> --}}
                         @endif
                     </div>
                     

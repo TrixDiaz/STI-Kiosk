@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->uuid('product_id')->unique()->index();
+            $table->integer('product_id')->unique()->index();
             $table->string('product_name');
             $table->integer('product_stock');
             $table->integer('product_price');
             $table->string('product_status');
             $table->string('product_category');
-            $table->date('product_expiration')->format('d-m-Y')->nullable();
+            $table->date('product_expiration')->format('Y-m-d')->nullable();
             $table->timestamps();
         });
     }

@@ -13,8 +13,7 @@ class ListStocks extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-            ->label('Create Product'),
+            Actions\CreateAction::make(),
         ];
     }
 }
