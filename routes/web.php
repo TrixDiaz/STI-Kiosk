@@ -62,20 +62,30 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 // Get Method
 Route::get('/prepare-order/{order_id}', [ProductsController::class, 'prepareOrder'])->name('prepare.order');
-Route::get('donmono', [ProductsController::class, 'index'])->name('donmono');
-
-Route::get('/qrPayment', [ProductsController::class, 'qrPayment'])->name('qrPayment');
 Route::get('/successOrder', [ProductsController::class, 'successOrder'])->name('successOrder');
 Route::get('addToCart/{id}', [ProductsController::class, 'store'])->name('addToCart');
 Route::get('/remove-from-cart/{id}', [ProductsController::class, 'destroy'])->name('cart.remove');
 Route::get('/order/{orderID}', [ProductsController::class, 'showOrder'])->name('order');
 
-Route::get('/', [ProductsController::class, 'start'])->name('/');
-Route::get('/kiosk', [ProductsController::class, 'kiosk'])->name('kiosk');
-Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
+Route::get('/qrPayment', [ProductsController::class, 'qrPayment'])->name('qrPayment');
+// Route::get('/', [ProductsController::class, 'start'])->name('/');
+// Route::get('/kiosk', [ProductsController::class, 'kiosk'])->name('kiosk');
+// Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
+// Route::get('/donmono', [ProductsController::class, 'index'])->name('donmono');
+
 // Post Method
 Route::post('/serve/{order}', [ProductsController::class, 'orderServe'])->name('order.serve');
 Route::post('/serving/{order}', [ProductsController::class, 'serving'])->name('serving');
 Route::post('/create-order', [ProductsController::class, 'createOrder'])->name('create.order');
 // Delete Method
 Route::delete('/serve/{serve}', [ProductsController::class, 'destroyServe'])->name('serve.destroy');
+
+Route::controller(ProductsController::class)->group(function () {
+//    Get post
+    Route::get('/','start')->name('/');
+    Route::get('/kiosk','kiosk')->name('kiosk');   
+    Route::get('/queue','queue')->name('queue');   
+// Product Routes
+    Route::get('/donmono','index')->name('donmono');   
+   
+ });
