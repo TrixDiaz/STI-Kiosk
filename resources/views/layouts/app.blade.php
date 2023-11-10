@@ -69,14 +69,15 @@
 
     @stack('modals')
 
+    @livewireScripts
 
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/tabs.js"></script>
     <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-    @livewireScripts
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+
     <script>
         AOS.init()
     </script>

@@ -11,235 +11,290 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
     @livewireStyles
-
-
     {{-- @livewire('database-notifications') --}}
 </head>
 
 <body class="font-sans antialiased">
-    <!-- component -->
 
-    <div class="h-screen w-screen flex bg-gray-200">
-        <!-- container -->
+    <x-banner />
 
-        <aside class="flex flex-col items-center bg-white text-gray-700 shadow h-full">
-            <!-- Side Nav Bar-->
 
-            <div class="h-16 flex items-center w-full">
-                <!-- Logo Section -->
-                <a class="h-6 w-6 mx-auto" href="/kiosk" wire:navigate>
-                    <img class="h-6 w-6 mx-auto" src="/images/iz-logo.png" alt="svelte logo" />
-                </a>
-            </div>
-
-            <ul class="overflow-y-auto h-auto">
-                <!-- Items Section -->
-                <li class="hover:bg-gray-100">
-                    <a href="#" wire:navigate
-                        class="h-16 px-6 flex justify-center items-center w-full uppercase
-					focus:text-orange-500">
-                        Donmono
-
-                    </a>
-                </li>
-
-                {{-- <li class="hover:bg-gray-100">
-                    <a href="{{ route('ippin') }}"
-                    wire:navigate
-                        class="h-16 px-6 flex justify-center items-center w-full uppercase
-					focus:text-orange-500">
-                        Ippin
-
-                    </a>
-                </li>
-
-                <li class="hover:bg-gray-100">
-                    <a href="{{ route('kushiyaki') }}"
-                    wire:navigate
-                        class="h-16 px-6 flex justify-center items-center w-full uppercase
-					focus:text-orange-500">
-
-                        kushiyaki
-
-                    </a>
-                </li>
-
-                <li class="hover:bg-gray-100">
-                    <a href="{{ route('makizushi') }}"
-                    wire:navigate
-                        class="h-16 px-6 flex justify-center items-center w-full uppercase
-					focus:text-orange-500">
-                      
-          makisushi
-
-                    </a>
-                </li>
-
-                <li class="hover:bg-gray-100">
-                    <a href="{{ route('zensai') }}"
-                    wire:navigate
-                        class="h-16 px-6 flex justify-center items-center w-full uppercase
-					focus:text-orange-500">
-                      zensai
-                    </a>
-                </li>
-
-                <li class="hover:bg-gray-100">
-                    <a href="{{ route('men') }}"
-                    wire:navigate
-                        class="h-16 px-6 flex justify-center items-center w-full uppercase
-					focus:text-orange-500">
-                       men
-                    </a>
-                </li>
-
-                <li class="hover:bg-gray-100">
-                  <a href="{{ route('nigirizushi') }}"
-                  wire:navigate
-                      class="h-16 px-6 flex justify-center items-center w-full uppercase
-        focus:text-orange-500">
-                      nigirizushi
-                  </a>
-              </li>
-
-              <li class="hover:bg-gray-100">
-                <a href="{{ route('ochazuke') }}"
-                wire:navigate
-                    class="h-16 px-6 flex justify-center items-center w-full uppercase
-      focus:text-orange-500">
-                   ochazuke
-                </a>
-            </li>
-
-            <li class="hover:bg-gray-100">
-              <a href="{{ route('ramen') }}"
-              wire:navigate
-                  class="h-16 px-6 flex justify-center items-center w-full uppercase
-    focus:text-orange-500">
-                ramen
-              </a>
-          </li>
-
-          <li class="hover:bg-gray-100">
-            <a href="{{ route('salad') }}"
-            wire:navigate
-                class="h-16 px-6 flex justify-center items-center w-full uppercase
-  focus:text-orange-500">
-             salad
-            </a>
-        </li>
-
-        <li class="hover:bg-gray-100">
-          <a href="{{ route('sashimi') }}"
-          wire:navigate
-              class="h-16 px-6 flex justify-center items-center w-full uppercase
-focus:text-orange-500">
-              sashimi
-          </a>
-      </li>
-
-      <li class="hover:bg-gray-100">
-        <a href="{{ route('tempura') }}"
-        wire:navigate
-            class="h-16 px-6 flex justify-center items-center w-full uppercase
-focus:text-orange-500">
-            tempura
-        </a>
-    </li>
-
-    <li class="hover:bg-gray-100">
-      <a href="{{ route('yakizakana') }}"
-      wire:navigate
-          class="h-16 px-6 flex justify-center items-center w-full uppercase
-focus:text-orange-500">
-        yakizakana
-      </a>
-  </li> --}}
-
-            </ul>
-
-        </aside>
-        {{-- Page Content --}}
-        <div class="flex w-full bg-slate-50 overflow-y-auto h-auto">
-
-            <div class="block">
-                @if (session('success'))
-                    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-                        role="alert">
-                        <span class="font-medium">{{ session('success') }}</span>
-                    </div>
-                @endif
-            </div>
-
-            {{ $slot }}
-
-            <div class="float-right p-3">
-                @if (Request::is('cart'))
-                    {{-- <a href="{{ route('kiosk') }}" wire:navigate>Back</a> --}}
-                @else
-                    <button type="button"
-                        class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <a href="{{ route('cart') }}" wire:navigate>Cart</a>
-                        <span
-                            class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
-                            @cartCount
+    <!-- Sidenav -->
+    <div class="">
+        <nav id="sidenav-5"
+            class="fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800"
+            data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-accordion="true">
+            <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
+                <li class="relative">
+                    <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                        data-te-sidenav-link-ref>
+                        <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+                            </svg>
                         </span>
-                    </button>
-                @endif
+                        <span>Link 1</span>
+                    </a>
+                </li>
+                <li class="relative">
+                    <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                        data-te-sidenav-link-ref>
+                        <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="h-4 w-4">
+                                <path fill-rule="evenodd"
+                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm2.023 6.828a.75.75 0 10-1.06-1.06 3.75 3.75 0 01-5.304 0 .75.75 0 00-1.06 1.06 5.25 5.25 0 007.424 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span>Category 1</span>
+                        <span
+                            class="absolute right-0 ml-auto mr-[0.8rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-gray-600 dark:[&>svg]:text-gray-300"
+                            data-te-sidenav-rotate-icon-ref>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="h-5 w-5">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </a>
+                    <ul class="!visible relative m-0 hidden list-none p-0 data-[te-collapse-show]:block "
+                        data-te-sidenav-collapse-ref>
+                        <li class="relative">
+                            <a class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                data-te-sidenav-link-ref>Link 2</a>
+                        </li>
+                        <li class="relative">
+                            <a class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                data-te-sidenav-link-ref>Link 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="relative">
+                    <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                        data-te-sidenav-link-ref>
+                        <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="h-4 w-4">
+                                <path fill-rule="evenodd"
+                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm2.023 6.828a.75.75 0 10-1.06-1.06 3.75 3.75 0 01-5.304 0 .75.75 0 00-1.06 1.06 5.25 5.25 0 007.424 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span>Category 2</span>
+                        <span
+                            class="absolute right-0 ml-auto mr-[0.8rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-gray-600 dark:[&>svg]:text-gray-300"
+                            data-te-sidenav-rotate-icon-ref>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="h-5 w-5">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </a>
+                    <ul class="show !visible relative m-0 hidden list-none p-0 data-[te-collapse-show]:block "
+                        data-te-sidenav-collapse-ref>
+                        <li class="relative">
+                            <a class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                data-te-sidenav-link-ref>Link 4</a>
+                        </li>
+                        <li class="relative">
+                            <a class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                data-te-sidenav-link-ref>Link 5</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- Sidenav -->
+
+    <!-- Toggler -->
+    <div class="flex justify-between">
+        <div class="order-first">
+            <button
+                class="m-5 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                data-te-sidenav-toggle-ref data-te-target="#sidenav-5" aria-controls="#sidenav-5" aria-haspopup="true">
+                <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                        <path fill-rule="evenodd"
+                            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </span>
+            </button>
+        </div>
+        <div class="order-last p-5">
+            <!-- Button trigger modal -->
+            <button type="button"
+                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                data-te-toggle="modal" data-te-target="#rightTopModal" data-te-ripple-init data-te-ripple-color="light">
+                Top Right
+            </button>
+            <!-- Modal top right-->
+<div
+data-te-modal-init
+class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+id="rightTopModal"
+tabindex="-1"
+aria-labelledby="rightTopModalLabel"
+aria-hidden="true">
+<div
+  data-te-modal-dialog-ref
+  class="pointer-events-none absolute right-7 h-auto w-full translate-x-[100%] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
+  <div
+    class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+    <div
+      class="flex flex-shrink-0 items-center justify-between rounded-t-md bg-info-600 p-4 dark:border-b dark:border-neutral-500 dark:bg-transparent">
+      <h5
+        class="text-xl font-medium leading-normal text-white"
+        id="rightTopModalLabel">
+        Product in the cart
+      </h5>
+      <button
+        type="button"
+        class="box-content rounded-none border-none text-white hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+        data-te-modal-dismiss
+        aria-label="Close">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-6 w-6">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="relative flex flex-auto p-4" data-te-modal-body-ref>
+      <span class="text-info-600 [&>svg]:h-16 [&>svg]:w-20">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor">
+          <path
+            d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+        </svg>
+      </span>
+      <div class="ml-8">
+        <p class="my-4">
+          Do you need more time to make a purchase decision?
+        </p>
+        <p class="my-4">
+          No pressure, your product will be waiting for you in the cart.
+        </p>
+      </div>
+    </div>
+    <div
+      class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+      <button
+        type="button"
+        class="mr-2 inline-block rounded bg-info px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
+        data-te-ripple-init
+        data-te-ripple-color="light">
+        Go to the cart
+      </button>
+      <button
+        type="button"
+        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+        data-te-modal-dismiss
+        data-te-ripple-init
+        data-te-ripple-color="light">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Toggler -->
+
+
+    <!-- Page Content -->
+    <main class="">
+        @if (session('success'))
+            <div data-aos="fade-left" data-aos-duration="1000">
+                <div class="font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
+                    data-dismissible="alert" id="success-alert">
+                    <div class="absolute top-4 left-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="ml-8 mr-12">{{ session('success') }}</div>
+                </div>
             </div>
 
-
-        </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init()
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Add smooth scrolling to all links
-                $('a').on('click', function(event) {
-                    if (this.hash !== '') {
-                        event.preventDefault()
-
-                        var hash = this.hash
-
-                        $('html, body').animate({
-                                scrollTop: $(hash).offset().top,
-                            },
-                            800,
-                            function() {
-                                window.location.hash = hash
-                            }
-                        )
-                    }
-                })
-            })
-
-
-            // Add an event listener for the 'dblclick' event on the document
-            document.addEventListener('dblclick', function() {
-                // Reload the page with the same URL
-                window.location.reload();
-            });
-        </script>
-
-
+            <script>
+                // Close the success message after 2 seconds
+                setTimeout(function() {
+                    document.getElementById('success-alert').remove();
+                }, 2000);
+            </script>
+        @endif
+        {{ $slot }}
+    </main>
     </div>
 
     @stack('modals')
 
+
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/tabs.js"></script>
+    <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
     @livewireScripts
 
+    <script>
+        AOS.init()
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Add smooth scrolling to all links
+            $('a').on('click', function(event) {
+                if (this.hash !== '') {
+                    event.preventDefault()
 
+                    var hash = this.hash
+
+                    $('html, body').animate({
+                            scrollTop: $(hash).offset().top,
+                        },
+                        800,
+                        function() {
+                            window.location.hash = hash
+                        }
+                    )
+                }
+            })
+        })
+    </script>
 
 </body>
 
