@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,10 +21,11 @@ class Product extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function order()
-    {
-        return $this->belongsTo(Order::class);
-    }
+    // Product.php
+public function orders()
+{
+    return $this->belongsToMany(Order::class);
+}
 
    
 

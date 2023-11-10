@@ -7,6 +7,7 @@ use App\Models\Stock;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class ProductsController extends Controller
@@ -15,6 +16,40 @@ class ProductsController extends Controller
     {
         $products = Product::all();
         return view('products.donmono', compact('products'));
+    }
+
+    public function orders()
+{
+    $uniqueOrderIDs = DB::table('orders')
+        ->select('order_id')
+        ->distinct()
+        ->get();
+
+    $orders = [];
+
+    foreach ($uniqueOrderIDs as $order) {
+        $orderInfo = DB::table('orders')
+            ->select('product_name', 'quantity','order_type')
+            ->where('order_id', $order->order_id)
+            ->get();
+
+            $orderType = $orderInfo->first()->order_type;
+
+        $orders[] = [
+            'order_id' => $order->order_id,
+            'order_info' => $orderInfo,
+            'order_type' => $orderType,
+        ];
+    }
+
+    return view('orders', compact('orders'));
+}
+
+    
+
+    public function insertQueue()
+    {
+
     }
 
     public function store(Request $request, $id)

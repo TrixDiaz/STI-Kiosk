@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('/');
 
+Route::get('/queue', function () {
+    return view('queue');
+})->name('queue');
+
 Route::get('/kiosk', function () {
     return view('kiosk');
 })->name('kiosk');
@@ -48,6 +52,7 @@ Route::middleware([
 
 // Products 
 Route::get('donmono', [ProductsController::class, 'index'])->name('donmono');
+Route::get('orders', [ProductsController::class, 'orders'])->name('orders');
 Route::get('/qrPayment', [ProductsController::class, 'qrPayment'])->name('qrPayment');
 Route::get('/successOrder', [ProductsController::class, 'successOrder'])->name('successOrder');
 Route::get('addToCart/{id}', [ProductsController::class, 'store'])->name('addToCart');
