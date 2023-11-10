@@ -56,7 +56,7 @@ class SupplierResource extends Resource
                     ->maxLength(255),
                 ])->columns(3),
                 
-                Select::make('product_id')
+                Select::make('product_name')
                 ->label('Select a Product')
                 ->multiple()
                 ->searchable()
