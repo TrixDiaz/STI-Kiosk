@@ -40,8 +40,10 @@ class ProductsController extends Controller
 
     public function queue()
     {
-        $queues = Queue::all();
-        return view('queue', compact('queues'));
+        $queues = DB::table('queues')->get();
+        $serves = DB::table('serves')->get();
+    
+        return view('queue', compact('queues','serves'));
     }
 
     public function orderServe(Request $request, Order $order)

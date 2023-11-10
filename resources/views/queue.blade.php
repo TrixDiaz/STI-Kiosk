@@ -838,42 +838,68 @@
 </head>
 
 <body class="antialiased">
-    @if(session('success'))
+@if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-10">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="py-3">
-                        Order ID
-                    </th>
-                    <th scope="col" class="py-3">
-                        Action
-                    </th>
+<div class="flex">
+    <!-- Table for "Queue" -->
+    <table class="w-1/2 text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3">
+                    Preparing
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($queues as $queue)
+                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <td scope="row"
+                        class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $queue->order_id }}
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('serving', $queue->id) }}">
+                            @csrf
+                            <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Serve</button>
+                        </form>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($queues as $queue)
-                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                        <td scope="row"
-                            class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $queue->order_id }}
-                        </td>
-                        <td>
-                            <form method="POST" action="{{ route('serving', $queue->id) }}">
-                                @csrf
-                                <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Serve</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
+
+    <!-- Table for "Serve" -->
+    <table class="w-1/2 text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 text-green-400">
+                    Now Serving
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($serves as $serve)
+                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    <td scope="row"
+                        class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $serve->order_id }}
+                    </td>
+                    <td>
+                    <form method="POST" action="{{ route('serve.destroy', $serve->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Done</button>
+                    </form>
+                </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
     
 
 

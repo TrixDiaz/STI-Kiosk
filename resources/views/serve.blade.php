@@ -883,13 +883,7 @@
                         class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $serve->order_id }}
                     </td>
-                    <td>
-                        <form method="POST" action="{{ route('serve.destroy', $serve->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Done</button>
-                        </form>
-                    </td>
+                  
                 </tr>
             @endforeach
         </tbody>
