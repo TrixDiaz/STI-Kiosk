@@ -86,6 +86,17 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/kiosk','kiosk')->name('kiosk');   
     Route::get('/queue','queue')->name('queue');   
 // Product Routes
-    Route::get('/donmono','donmono')->name('donmono');   
-   
+    Route::get('/donmono','donmono')->name('donmono'); 
+    Route::get('/ippin','ippin')->name('ippin');   
+    Route::get('/kushiyaki','kushiyaki')->name('kushiyaki'); 
+    Route::get('/makizushi','makizushi')->name('makizushi'); 
+    Route::get('/men','men')->name('men'); 
+    Route::get('/nigirizushi','nigirizushi')->name('nigirizushi'); 
+    Route::get('/ochazuke','ochazuke')->name('ochazuke'); 
+    Route::get('/ramen','ramen')->name('ramen'); 
+    Route::get('/salad','salad')->name('salad'); 
+    Route::get('/sashimi','sashimi')->name('sashimi'); 
+    Route::get('/tempura','tempura')->name('tempura'); 
+    Route::get('/tempura','yakizakana')->name('yakizakana'); 
+    Route::get('/zensai','zensai')->name('zensai'); 
  });

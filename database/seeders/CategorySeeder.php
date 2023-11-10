@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
         Category::create(['product_category' => 'Donmono']);
         Category::create(['product_category' => 'Ippin ryori']);
         Category::create(['product_category' => 'Kushiyaki']);
-        Category::create(['product_category' => 'Aakizushi']);
+        Category::create(['product_category' => 'Makizushi']);
         Category::create(['product_category' => 'Men']);
         Category::create(['product_category' => 'Nigirizushi']);
         Category::create(['product_category' => 'Ochazuke']);
