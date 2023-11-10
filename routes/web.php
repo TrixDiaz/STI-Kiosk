@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductsController;
 
@@ -18,13 +19,6 @@ use App\Http\Controllers\ProductsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
-
-Route::get('/kiosk', function () {
-    return view('kiosk');
-})->name('kiosk');
 
 Route::get('/cart', function () {
     return view('cart');
@@ -76,7 +70,8 @@ Route::get('addToCart/{id}', [ProductsController::class, 'store'])->name('addToC
 Route::get('/remove-from-cart/{id}', [ProductsController::class, 'destroy'])->name('cart.remove');
 Route::get('/order/{orderID}', [ProductsController::class, 'showOrder'])->name('order');
 
-
+Route::get('/', [ProductsController::class, 'start'])->name('/');
+Route::get('/kiosk', [ProductsController::class, 'kiosk'])->name('kiosk');
 Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
 // Post Method
 Route::post('/serve/{order}', [ProductsController::class, 'orderServe'])->name('order.serve');

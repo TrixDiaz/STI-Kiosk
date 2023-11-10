@@ -20,7 +20,17 @@ class ProductsController extends Controller
         return view('products.donmono', compact('products'));
     }
 
-    
+    public function start()
+    {
+        session()->forget('cart');
+        return view('welcome');
+    }
+
+    public function kiosk()
+    {
+        session()->forget('cart');
+        return view('kiosk');
+    }
 
     public function destroyServe(Serve $serve)
     {
