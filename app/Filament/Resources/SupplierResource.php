@@ -58,14 +58,14 @@ class SupplierResource extends Resource
                 
                 Select::make('product_name')
                 ->label('Select a Product')
-                ->multiple()
+              
                 ->searchable()
                 ->options(function () {
                     // Retrieve all products and format them for the select dropdown.
                     $products = Product::all();
 
                     // Create an array of options with product IDs as keys and product names as values.
-                    $options = $products->pluck('product_name', 'id')->toArray();
+                    $options = $products->pluck('product_name', 'product_name')->toArray();
 
                     return $options;
                 })
