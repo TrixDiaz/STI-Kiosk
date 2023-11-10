@@ -7,10 +7,10 @@
                         <a href="{{ route('addToCart', $product->id) }}">
                             <img src="/storage/{{ $product->product_image }}"
                                 class="max-h-60 max-w-full bg-cover rounded-lg" alt="" />
-                            <div class="absolute bottom-0 left-0">
-                                <div class="flex justify-between w-full text-black text-lg bg-slate-50 bg-opacity-70 font-semibold text-md px-2 py-4 rounded-md">
+                            <div class="">
+                                <div class="flex justify-between w-full text-black text-lg font-semibold text-md px-2 py-4 rounded-md">
                                     <div class="uppercase pr-5">{{ $product->product_name }}</div>
-                                    <div class="">₱{{ $product->product_price }}</div>
+                                    <div class="">₱ {{ $product->product_price }}</div>
                                     <div class="hidden">{{ $product->product_category }}</div>
                                 </div>
                             </div>
