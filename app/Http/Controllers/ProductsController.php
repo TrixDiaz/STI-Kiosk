@@ -256,7 +256,7 @@ class ProductsController extends Controller
         $order->delete();
 
         return redirect()
-            ->route('queue')
+            ->route('dashboard')
             ->with('success', 'Order served successfully');
     }
 
