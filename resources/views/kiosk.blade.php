@@ -1,186 +1,160 @@
 <x-kiosk-layout>
 
-    <div class="py-10">
+    <div class="py-0">
         <div class="mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
                 <!-- Product  -->
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="/images/donmono.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/ippin.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/kushiyaki.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/makisushi.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/men.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/nigiri.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/ochazuke.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/ramen.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/salad.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/sashimi.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/tempura.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/yakizakana.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>
                 {{-- End of Product --}}
 
                  <!-- Product  -->
-                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3">
+                 <div class="p-2">
                     <a href="{{ route('donmono') }}">
                         <div class="shadow-lg">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1PJP1yETL6YMVHvnr6zpr8kksRLkheZLScbqxy6cwWIPUfdq6jT2CBDmuBPkG5onCXf8&usqp=CAU"
-                                alt="Product Image" class="w-full h-60 p-3 shadow-md"> <!-- Set the height here -->
-                                <div class="items-center text-center">
-                                    <h2 class="text-lg font-semibold p-3 uppercase">Donmono</h2>
-                                </div>
+                            <img src="images/zenkai.jpeg"
+                                alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                
                         </div>
                     </a>
                 </div>

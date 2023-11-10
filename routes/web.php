@@ -86,6 +86,6 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/kiosk','kiosk')->name('kiosk');   
     Route::get('/queue','queue')->name('queue');   
 // Product Routes
-    Route::get('/donmono','index')->name('donmono');   
+    Route::get('/donmono','donmono')->name('donmono');   
    
  });

@@ -8,9 +8,9 @@
                             <img src="/storage/{{ $product->product_image }}"
                                 class="max-h-60 max-w-full bg-cover rounded-lg" alt="" />
                             <div class="">
-                                <div class="flex justify-between w-full text-black text-lg font-semibold text-md px-2 py-4 rounded-md">
-                                    <div class="uppercase pr-5">{{ $product->product_name }}</div>
-                                    <div class="">₱ {{ $product->product_price }}</div>
+                                <div class="flex flex-col w-full text-black text-lg text-md px-2 py-2 rounded-md">
+                                    <div class="uppercase"><p class="font-thin">{{ $product->product_name }}</p></div>
+                                    <div class=""><p class="font-semibold">₱ {{ $product->product_price }}</p></div>
                                     <div class="hidden">{{ $product->product_category }}</div>
                                 </div>
                             </div>

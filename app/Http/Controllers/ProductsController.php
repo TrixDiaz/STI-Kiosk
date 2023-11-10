@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Session;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function donmono()
     {
-        $products = Stock::all();
+        $products = Stock::where('product_category', 'Donmono')->get();
+
         return view('products.donmono', compact('products'));
     }
 
