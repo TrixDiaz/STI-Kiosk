@@ -3,8 +3,10 @@
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\View\Components\KioskLayout;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\KioskController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductsController;
 
@@ -68,9 +70,9 @@ Route::get('/remove-from-cart/{id}', [ProductsController::class, 'destroy'])->na
 Route::get('/order/{orderID}', [ProductsController::class, 'showOrder'])->name('order');
 
 Route::get('/qrPayment', [ProductsController::class, 'qrPayment'])->name('qrPayment');
-// Route::get('/', [ProductsController::class, 'start'])->name('/');
-// Route::get('/kiosk', [ProductsController::class, 'kiosk'])->name('kiosk');
-// Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
+Route::get('/', [ProductsController::class, 'start'])->name('/');
+Route::get('/kiosk', [ProductsController::class, 'kiosk'])->name('kiosk');
+Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
 // Route::get('/donmono', [ProductsController::class, 'index'])->name('donmono');
 
 // Post Method
@@ -80,11 +82,7 @@ Route::post('/create-order', [ProductsController::class, 'createOrder'])->name('
 // Delete Method
 Route::delete('/serve/{serve}', [ProductsController::class, 'destroyServe'])->name('serve.destroy');
 
-Route::controller(ProductsController::class)->group(function () {
-//    Get post
-    Route::get('/','start')->name('/');
-    Route::get('/kiosk','kiosk')->name('kiosk');   
-    Route::get('/queue','queue')->name('queue');   
+Route::controller(KioskController::class)->group(function () {  
 // Product Routes
     Route::get('/donmono','donmono')->name('donmono'); 
     Route::get('/ippin','ippin')->name('ippin');   
@@ -97,6 +95,6 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/salad','salad')->name('salad'); 
     Route::get('/sashimi','sashimi')->name('sashimi'); 
     Route::get('/tempura','tempura')->name('tempura'); 
-    Route::get('/tempura','yakizakana')->name('yakizakana'); 
+    Route::get('/yakizakana','yakizakana')->name('yakizakana'); 
     Route::get('/zensai','zensai')->name('zensai'); 
  });
