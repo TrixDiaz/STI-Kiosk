@@ -131,11 +131,6 @@ class ProductsController extends Controller
             ->with('success', 'Order has been created successfully.');
     }
 
-    public function qrCode()
-    {
-        return view('qrCode');
-    }
-
     /**
      * Qr Code Generator
      */
@@ -201,7 +196,7 @@ class ProductsController extends Controller
         // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return redirect()->route('qrCode', ['checkout_url' => $response->data->attributes->checkout_url]);
+        return view('qrCode', ['checkout_url' => $response->data->attributes->checkout_url]);
     }
 
     /**
