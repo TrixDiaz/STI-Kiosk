@@ -29,7 +29,7 @@ class ProductsController extends Controller
 
     public function kiosk()
     {
-        session()->forget('cart');
+        
         return view('kiosk');
     }
 
