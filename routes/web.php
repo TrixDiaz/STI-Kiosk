@@ -73,7 +73,7 @@ Route::get('/qrPayment', [ProductsController::class, 'qrPayment'])->name('qrPaym
 Route::get('/', [ProductsController::class, 'start'])->name('/');
 Route::get('/kiosk', [ProductsController::class, 'kiosk'])->name('kiosk');
 Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
-// Route::get('/donmono', [ProductsController::class, 'index'])->name('donmono');
+Route::get('/qrCode', [ProductsController::class, 'qrCode'])->name('qrCode');
 
 // Post Method
 Route::post('/serve/{order}', [ProductsController::class, 'orderServe'])->name('order.serve');
