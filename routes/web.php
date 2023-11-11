@@ -23,7 +23,7 @@ use App\Http\Controllers\ProductsController;
 
 
 Route::get('/cart', function () {
-    return view('cart');
+    return view('kiosk');
 })->name('cart');
 
 Route::get('/order', function () {
