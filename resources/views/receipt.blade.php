@@ -962,7 +962,7 @@
                     </tfoot>
                 </table>
                 <div class="text-gray-700 mb-2">Thanks for visiting us!</div>
-                <div class="text-gray-700 text-sm uppercase">{{ $orderDetail->order_type }}</div>
+                <div class="text-gray-700 text-sm uppercase">Disclaimer this is not your offical Receipt!</div>
             </div>
 
         </div>
