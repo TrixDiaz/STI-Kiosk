@@ -2,101 +2,125 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class KioskController extends Controller
 {
-   // Products
+   /** 
+    *Start 
+    **/
 
-   public function donmono()
-   {
-       $products = Stock::where('product_category', 'Donmono')->get();
+    public function start()
+    {
+        session()->forget('cart'); // Clear the Session in Cart
+        return view('welcome'); // Tab to Start 
+    }
 
-       return view('products.donmono', compact('products'));
-   }
+    public function kiosk()
+    {
+        return view('kiosk'); // Return to Kiosk 
+    }
 
-   public function ippin()
-   {
-       $products = Stock::where('product_category', 'Ippin ryori')->get();
+    /**
+     * Find by ID the User order and store to Shopping Cart Session
+     */
+    public function addToCart(Request $request, $id)
+    {
+        $product = Stock::findOrFail($id);
 
-       return view('products.ippin', compact('products'));
-   }
+        $cart = session()->get('cart', []);
 
-   public function kushiyaki()
-   {
-       $products = Stock::where('product_category', 'Kushiyaki')->get();
+        $orderType = $request->input('order_type'); // Get the selected order type from the input
+        
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'product_name' => $product->product_name,
+                'product_price' => $product->product_price,
+                'product_category' => $product->product_category,
+                'quantity' => 1,
+                'order_type' => $orderType, 
+            ];
+        }
+        session()->put('cart', $cart); // update the cart
+        
+        return redirect()->back()->with('success', 'Product add to cart Successfully!');
+    }
 
-       return view('products.kushiyaki', compact('products'));
-   }
+     /**
+     * Remove the specified resource from shopping cart.
+     */
 
-   public function makizushi()
-   {
-       $products = Stock::where('product_category', 'Makizushi')->get();
+    public function removeFromCart(string $id)
+    {
+        $cart = session('cart', []);
 
-       return view('products.makisushi', compact('products'));
-   }
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
 
-   public function men()
-   {
-       $products = Stock::where('product_category', 'Men')->get();
+        return redirect()->route('cart')->with('success', 'Item removed from the cart successfully.');
+    }
 
-       return view('products.men', compact('products'));
-   }
+    /**
+     * Get the User order from shopping cart and insert to Order Table and will return to receipt show the order
+     */
+    public function createOrder(Request $request)
+    {
+        $orderDetails = []; // Declarad null array
 
-   public function nigirizushi()
-   {
-       $products = Stock::where('product_category', 'Nigirizushi')->get();
+        $cart = session('cart'); // Retrieve products from the session
 
-       return view('products.nigirizushi', compact('products'));
-   }
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
+        
+        $total = $request->input('total'); // Get the Total Request from input
+        
+        $orderType = $request->input('order_type'); // Get the order type Request from input
+        
+        // You can now insert the products into your orders table.
+        foreach ($cart as $item) {
+            $orderDetails[] = [
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $orderType,
+                'total' => $total,
+                // Add other fields as needed
+            ];
+        }
+      
+        Order::insert($orderDetails);   // Insert all the order details into the database
 
-   public function ochazuke()
-   {
-       $products = Stock::where('product_category', 'Ochazuke')->get();
+        session()->forget('cart'); // Optionally, you can clear the cart after the order is created
 
-       return view('products.ochazuke', compact('products'));
-   }
+        return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order has been created successfully.');
+    }
 
-   public function ramen()
-   {
-       $products = Stock::where('product_category', 'Ramen')->get();
+     /**
+     * Fetch all the orders of Customer or Receipt
+     */
+    public function showReceipt($orderID)
+    {
+        // Retrieve the order details from the database based on the order ID
+        $orderDetails = Order::where('order_id', $orderID)->get();
 
-       return view('products.ramen', compact('products'));
-   }
+        // You can pass the order details to a view for displaying
+        return view('receipt', ['orderDetails' => $orderDetails]);
+    }
 
-   public function salad()
-   {
-       $products = Stock::where('product_category', 'Salad')->get();
 
-       return view('products.salad', compact('products'));
-   }
 
-   public function sashimi()
-   {
-       $products = Stock::where('product_category', 'Sashimi')->get();
 
-       return view('products.sashimi', compact('products'));
-   }
 
-   public function tempura()
-   {
-       $products = Stock::where('product_category', 'Tempura')->get();
 
-       return view('products.tempura', compact('products'));
-   }
 
-   public function yakizakana()
-   {
-       $products = Stock::where('product_category', 'Yakizakana')->get();
 
-       return view('products.yakizakana', compact('products'));
-   }
 
-   public function zensai()
-   {
-       $products = Stock::where('product_category', 'Zensai')->get();
 
-       return view('products.zensai', compact('products'));
-   }
+
 }

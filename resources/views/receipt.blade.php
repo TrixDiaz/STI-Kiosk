@@ -839,56 +839,84 @@
 
 <body class="antialiased bg-[url('/images/izakayabg.jpg')]">
 
-        -<div id="invoice-container">
-            <style>
-                @media print { 
-                    /* Apply styles for printing only */
-                    body * {
-                        visibility: hidden;
-                    }
-                    #invoice-container, #invoice-container * {
-                        visibility: visible;
-                    }
-                    .invoice-container {
-                        max-width: unset;
-                        box-shadow: none;
-                        border: 0;
-                        background-color: #fffffff;
-                        height: 100%;
-                        width: 100%;
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        margin: 0;
-                        padding: 15px;
-                        font-size: 14px;
-                        line-height: 1rem;
-                    }
-                    #print {
-                        display: none; /* Hide the "Print" button in print mode */
-                    }
+    @if (session('success'))
+        <div data-aos="fade-left" data-aos-duration="2000">
+            <div class="font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
+                data-dismissible="alert" id="success-alert">
+                <div class="absolute top-4 left-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div class="ml-8 mr-12">{{ session('success') }}</div>
+            </div>
+        </div>
+
+        <script>
+            // Close the success message after 2 seconds
+            setTimeout(function() {
+                document.getElementById('success-alert').remove();
+            }, 2000);
+        </script>
+    @endif
+
+    -<div id="invoice-container">
+        <style>
+            @media print {
+
+                /* Apply styles for printing only */
+                body * {
+                    visibility: hidden;
                 }
-            </style>
-            
-            <div
-                    data-aos="fade-up"
-                    data-aos-duration="2000"
-                    class="mx-auto max-w-screen-sm text-center"
-                  >
+
+                #invoice-container,
+                #invoice-container * {
+                    visibility: visible;
+                }
+
+                .invoice-container {
+                    max-width: unset;
+                    box-shadow: none;
+                    border: 0;
+                    background-color: #fffffff;
+                    height: 100%;
+                    width: 100%;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    margin: 0;
+                    padding: 15px;
+                    font-size: 14px;
+                    line-height: 1rem;
+                }
+
+                #print {
+                    display: none;
+                    /* Hide the "Print" button in print mode */
+                }
+            }
+        </style>
+
+        <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
             <div class="bg-white border rounded-lg shadow-lg px-6 py-8 max-w-md mx-auto mt-8">
                 <div class="flex flex-row-reverse">
-                    <button type="button" id="print" class="text-green-700  hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    <button type="button" id="print"
+                        class="text-green-700  hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
                         Print
                     </button>
-                   @auth
-                   <a href="{{ route('/') }}" class="text-green-700  hover:text-white border border-none hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
-                    Back to Merchant
-                  </a>
-                  @else
-                  <a href="/" class="text-green-700  hover:text-white border border-none hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
-                    Back to Merchant
-                  </a>
-                   @endauth
+                    @auth
+                        <a href="{{ route('/') }}"
+                            class="text-green-700  hover:text-white border border-none hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
+                            Back to Merchant
+                        </a>
+                    @else
+                        <a href="/"
+                            class="text-green-700  hover:text-white border border-none hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
+                            Back to Merchant
+                        </a>
+                    @endauth
                 </div>
                 <h1 class="font-bold text-2xl my-4 text-center text-blue-600">Izakaya Shonantei</h1>
                 <hr class="mb-2">
@@ -912,17 +940,17 @@
                             <th class="text-left font-bold text-gray-700">Product</th>
                             <th class="text-right font-bold text-gray-700">Qty</th>
                             <th class="text-right font-bold text-gray-700">Amount</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($orderDetails as $orderDetail)
-                        <tr>
-                            <td class="text-left text-gray-700">{{ $orderDetail->product_name }}</td>
-                            <td class="text-right text-gray-700">{{ $orderDetail->quantity }}</td>
-                            <td class="text-right text-gray-700">{{ $orderDetail->product_price }}</td>
-                           
-                        </tr>
+                        @foreach ($orderDetails as $orderDetail)
+                            <tr>
+                                <td class="text-left text-gray-700">{{ $orderDetail->product_name }}</td>
+                                <td class="text-right text-gray-700">{{ $orderDetail->quantity }}</td>
+                                <td class="text-right text-gray-700">{{ $orderDetail->product_price }}</td>
+
+                            </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
@@ -936,48 +964,47 @@
                 <div class="text-gray-700 mb-2">Thanks for visiting us!</div>
                 <div class="text-gray-700 text-sm uppercase">{{ $orderDetail->order_type }}</div>
             </div>
-              
-            </div>
-           
+
         </div>
-        <script src="{{ asset('js/html2.js') }}"></script>
-        
-        <script>
-         let printBtn = document.querySelector("#print")
-        
-         printBtn.addEventListener("click", function() {
+
+    </div>
+    <script src="{{ asset('js/html2.js') }}"></script>
+
+    <script>
+        let printBtn = document.querySelector("#print")
+
+        printBtn.addEventListener("click", function() {
             print();
-         })
-        
-        </script>
-        
+        })
+    </script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init()
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Add smooth scrolling to all links
-                $('a').on('click', function(event) {
-                    if (this.hash !== '') {
-                        event.preventDefault()
 
-                        var hash = this.hash
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init()
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Add smooth scrolling to all links
+            $('a').on('click', function(event) {
+                if (this.hash !== '') {
+                    event.preventDefault()
 
-                        $('html, body').animate({
-                                scrollTop: $(hash).offset().top,
-                            },
-                            800,
-                            function() {
-                                window.location.hash = hash
-                            }
-                        )
-                    }
-                })
+                    var hash = this.hash
+
+                    $('html, body').animate({
+                            scrollTop: $(hash).offset().top,
+                        },
+                        800,
+                        function() {
+                            window.location.hash = hash
+                        }
+                    )
+                }
             })
-        </script>
+        })
+    </script>
 
     @livewireScripts
 </body>

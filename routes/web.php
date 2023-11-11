@@ -62,28 +62,21 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('dashboard');
 });
 
-// Get Method
-Route::get('/prepare-order/{order_id}', [ProductsController::class, 'prepareOrder'])->name('prepare.order');
-Route::get('/successOrder', [ProductsController::class, 'successOrder'])->name('successOrder');
-Route::get('addToCart/{id}', [ProductsController::class, 'store'])->name('addToCart');
-Route::get('/remove-from-cart/{id}', [ProductsController::class, 'destroy'])->name('cart.remove');
-Route::get('/order/{orderID}', [ProductsController::class, 'showOrder'])->name('order');
+Route::controller(ProductsController::class)->group(function () { 
+    Route::get('queue', 'queue')->name('queue');
+    Route::get('/qrCode','qrCode')->name('qrCode');
+ 
+    Route::get('/successOrder/{order_id}','successOrder')->name('successOrder');
+    Route::get('/prepare-order/{order_id}','prepareOrder')->name('prepare.order');
+    
+   
+    Route::get('/qrPayment','qrPayment')->name('qrPayment');
+    Route::post('/serve/{order}', 'orderServe')->name('order.serve');
+    Route::post('/serving/{order}','serving')->name('serving');
+    
+    Route::delete('/serve/{serve}','destroyServe')->name('serve.destroy');
 
-Route::get('/qrPayment', [ProductsController::class, 'qrPayment'])->name('qrPayment');
-Route::get('/', [ProductsController::class, 'start'])->name('/');
-Route::get('/kiosk', [ProductsController::class, 'kiosk'])->name('kiosk');
-Route::get('queue', [ProductsController::class, 'queue'])->name('queue');
-Route::get('/qrCode', [ProductsController::class, 'qrCode'])->name('qrCode');
-
-// Post Method
-Route::post('/serve/{order}', [ProductsController::class, 'orderServe'])->name('order.serve');
-Route::post('/serving/{order}', [ProductsController::class, 'serving'])->name('serving');
-Route::post('/create-order', [ProductsController::class, 'createOrder'])->name('create.order');
-// Delete Method
-Route::delete('/serve/{serve}', [ProductsController::class, 'destroyServe'])->name('serve.destroy');
-
-Route::controller(KioskController::class)->group(function () {  
-// Product Routes
+    // Product Routes
     Route::get('/donmono','donmono')->name('donmono'); 
     Route::get('/ippin','ippin')->name('ippin');   
     Route::get('/kushiyaki','kushiyaki')->name('kushiyaki'); 
@@ -97,4 +90,13 @@ Route::controller(KioskController::class)->group(function () {
     Route::get('/tempura','tempura')->name('tempura'); 
     Route::get('/yakizakana','yakizakana')->name('yakizakana'); 
     Route::get('/zensai','zensai')->name('zensai'); 
+});
+
+Route::controller(KioskController::class)->group(function () {  
+    Route::get('/', 'start')->name('/');  
+    Route::get('/kiosk','kiosk')->name('kiosk'); 
+    Route::get('addToCart/{id}','addToCart')->name('addToCart');
+    Route::get('/removeFromCart/{id}','removeFromCart')->name('cart.remove');
+    Route::post('/create-order', 'createOrder')->name('create.order');
+    Route::get('/receipt/{orderID}','showReceipt')->name('receipt');
  });

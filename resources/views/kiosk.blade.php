@@ -6,7 +6,7 @@
 
                 <!-- Product  -->
                 <div class="p-2">
-                    <a href="{{ route('donmono') }}">
+                    <a href="{{ route('donmono') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="/images/donmono.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -18,7 +18,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('ippin') }}">
+                    <a href="{{ route('ippin') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/ippin.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -30,7 +30,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('kushiyaki') }}">
+                    <a href="{{ route('kushiyaki') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/kushiyaki.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -42,7 +42,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('makizushi') }}">
+                    <a href="{{ route('makizushi') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/makisushi.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -54,7 +54,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('men') }}">
+                    <a href="{{ route('men') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/men.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -66,7 +66,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('nigirizushi') }}">
+                    <a href="{{ route('nigirizushi') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/nigiri.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -78,7 +78,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('ochazuke') }}">
+                    <a href="{{ route('ochazuke') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/ochazuke.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -90,7 +90,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('ramen') }}">
+                    <a href="{{ route('ramen') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/ramen.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -102,7 +102,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('salad') }}">
+                    <a href="{{ route('salad') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/salad.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -114,7 +114,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('sashimi') }}">
+                    <a href="{{ route('sashimi') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/sashimi.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -126,7 +126,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('tempura') }}">
+                    <a href="{{ route('tempura') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/tempura.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -138,7 +138,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('yakizakana') }}">
+                    <a href="{{ route('yakizakana') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/yakizakana.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
@@ -150,7 +150,7 @@
 
                  <!-- Product  -->
                  <div class="p-2">
-                    <a href="{{ route('zensai') }}">
+                    <a href="{{ route('zensai') }}" wire:navigate>
                         <div class="shadow-lg">
                             <img src="images/zenkai.jpeg"
                                 alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
