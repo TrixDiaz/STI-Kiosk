@@ -192,12 +192,12 @@ class ProductsController extends Controller
         Session::put('session_id', $response->data->id);
         Session::put('checkout_url', $response->data->attributes->checkout_url);
 
-        return redirect()->to($response->data->attributes->checkout_url);
+        // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        // return redirect()
-        //     ->route('qrCode', ['orderDetails' => $orderDetails])
-        //     ->with('checkout_url', $response->data->attributes->checkout_url);
+        return redirect()
+            ->route('qrCode', ['orderDetails' => $orderDetails])
+            ->with('checkout_url', $response->data->attributes->checkout_url);
     }
 
     /**
