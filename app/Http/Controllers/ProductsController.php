@@ -212,7 +212,7 @@ class ProductsController extends Controller
      */
     public function successOrder(Request $request)
 {
-    dd(session()->all());
+    // dd(session()->all());
     // Retrieve products from the session
     $cart = session('cart') ?? [];
 
