@@ -14,12 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProductsController extends Controller
 {
-    
-
-
     // Start
-
-    
 
     public function start()
     {
@@ -29,7 +24,6 @@ class ProductsController extends Controller
 
     public function kiosk()
     {
-        
         return view('kiosk');
     }
 
@@ -46,8 +40,8 @@ class ProductsController extends Controller
     {
         $queues = DB::table('queues')->get();
         $serves = DB::table('serves')->get();
-    
-        return view('queue', compact('queues','serves'));
+
+        return view('queue', compact('queues', 'serves'));
     }
 
     public function orderServe(Request $request, Order $order)
@@ -143,28 +137,28 @@ class ProductsController extends Controller
      */
     public function qrPayment(Request $request)
     {
-          // Retrieve products from the session
-          $cart = session('cart');
+        // Retrieve products from the session
+        $cart = session('cart');
 
-          $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
-          $total = $request->input('total');
-          $orderType = $request->input('order_type');
-  
-          $orderDetails = [];
-  
-          // You can now insert the products into your orders table.
-          // Assuming you have an "Order" model and an "orders" table:
-          foreach ($cart as $item) {
-              $orderDetails[] = [
-                  'order_id' => $orderID,
-                  'product_name' => $item['product_name'],
-                  'product_price' => $item['product_price'],
-                  'quantity' => $item['quantity'],
-                  'order_type' => $orderType,
-                  'total' => $total,
-                  // Add other fields as needed
-              ];
-          }
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $total = $request->input('total');
+        $orderType = $request->input('order_type');
+
+        $orderDetails = [];
+
+        // You can now insert the products into your orders table.
+        // Assuming you have an "Order" model and an "orders" table:
+        foreach ($cart as $item) {
+            $orderDetails[] = [
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $orderType,
+                'total' => $total,
+                // Add other fields as needed
+            ];
+        }
 
         $data = [
             'data' => [
@@ -196,64 +190,65 @@ class ProductsController extends Controller
 
         // dd($response);
         Session::put('session_id', $response->data->id);
-
-        // Storing the checkout_url in the session
         Session::put('checkout_url', $response->data->attributes->checkout_url);
 
         // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return redirect()->route('qrCode')->with('checkout_url', $response->data->attributes->checkout_url);
-
+        return redirect()
+            ->route('qrCode',['orderDetails' => $orderDetails])
+            ->with('checkout_url', $response->data->attributes->checkout_url);
     }
 
     /**
      * Success Payment in API
      */
     public function successOrder(Request $request)
-{
-    // dd(session()->all());
-    // Retrieve products from the session
-    $cart = session('cart') ?? [];
+    {
+        // dd(session()->all());
+        // Retrieve products from the session
+        $cart = session('cart') ?? [];
 
-    // Check if the cart is not empty
-    if (empty($cart)) {
-        return redirect()->route('/')->with('error', 'Cart is empty.');
+        // Check if the cart is not empty
+        if (empty($cart)) {
+            return redirect()
+                ->route('/')
+                ->with('error', 'Cart is empty.');
+        }
+
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+
+        $orderDetails = [];
+
+        // Retrieve additional data from the request
+        $total = $request->input('total');
+        $orderType = $request->input('order_type');
+
+        // You can now insert the products into your orders table.
+        // Assuming you have an "Order" model and an "orders" table:
+        foreach ($cart as $item) {
+            $orderDetails[] = [
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $orderType,
+                'total' => $total,
+                // Add other fields as needed
+            ];
+        }
+
+        // Insert all the order details into the database
+        Order::insert($orderDetails);
+
+        // Optionally, you can clear the cart after the order is created
+        session()->forget('cart');
+
+        // Redirect back or to a confirmation page
+        return redirect()
+            ->route('order', ['orderID' => $orderID])
+            ->with('success', 'Order has been created successfully.');
     }
-
-    $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
-
-    $orderDetails = [];
-
-    // Retrieve additional data from the request
-    $total = $request->input('total');
-    $orderType = $request->input('order_type');
-
-    // You can now insert the products into your orders table.
-    // Assuming you have an "Order" model and an "orders" table:
-    foreach ($cart as $item) {
-        $orderDetails[] = [
-            'order_id' => $orderID,
-            'product_name' => $item['product_name'],
-            'product_price' => $item['product_price'],
-            'quantity' => $item['quantity'],
-            'order_type' => $orderType,
-            'total' => $total,
-            // Add other fields as needed
-        ];
-    }
-
-    // Insert all the order details into the database
-    Order::insert($orderDetails);
-
-    // Optionally, you can clear the cart after the order is created
-    session()->forget('cart');
-
-    // Redirect back or to a confirmation page
-    return redirect()
-        ->route('order', ['orderID' => $orderID])
-        ->with('success', 'Order has been created successfully.');
-}
 
     /**
      * Fetch all the orders of Customer | Receipt
