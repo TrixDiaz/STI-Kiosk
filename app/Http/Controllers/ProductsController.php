@@ -193,10 +193,10 @@ class ProductsController extends Controller
         // Storing the checkout_url in the session
         Session::put('checkout_url', $response->data->attributes->checkout_url);
 
-        // return redirect()->to($response->data->attributes->checkout_url);
+        return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return view('qrCode', ['checkout_url' => $response->data->attributes->checkout_url]);
+        // return view('qrCode', ['checkout_url' => $response->data->attributes->checkout_url]);
     }
 
     /**
@@ -204,12 +204,13 @@ class ProductsController extends Controller
      */
     public function successOrder(Request $request)
 {
+    dd(session()->all());
     // Retrieve products from the session
     $cart = session('cart') ?? [];
 
     // Check if the cart is not empty
     if (empty($cart)) {
-        return redirect()->route('kiosk')->with('error', 'Cart is empty.');
+        return redirect()->route('/')->with('error', 'Cart is empty.');
     }
 
     $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
