@@ -19,6 +19,11 @@ class ProductsController extends Controller
 
     // Start
 
+    public function qrCode()
+    {
+        return view('qrCode');
+    }
+
     public function start()
     {
         session()->forget('cart');
