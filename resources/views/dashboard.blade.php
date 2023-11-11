@@ -35,28 +35,29 @@
 
             <div data-tab-content="" class="p-5">
                 <div class="block opacity-100" id="app" role="tabpanel">
-                    <!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
                     <div class="bg-white">
                         <!-- Button trigger modal -->
-                        <div class="p-5">
+                        <div class="p-5 flex">
+                            <!-- Toggler -->
+                            <button
+                                class="mr-5 ml-3 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                                data-te-sidenav-toggle-ref data-te-target="#sidenav-1" aria-controls="#sidenav-1"
+                                aria-haspopup="true">
+                                <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="h-5 w-5">
+                                        <path fill-rule="evenodd"
+                                            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </button>
+                            <!-- Toggler -->
                             <button type="button"
-                                class="float-right inline-block rounded bg-primary px-6 pb-2 pt-2.5  text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5  text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                                 data-te-toggle="modal" data-te-target="#rightTopModal" data-te-ripple-init
                                 data-te-ripple-color="light">
-                                Modal
+                                Cart
                             </button>
                         </div>
 
@@ -84,29 +85,133 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    <div class="relative flex flex-auto p-4" data-te-modal-body-ref>
-                                        <span class="text-info-600 [&>svg]:h-16 [&>svg]:w-20">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path
-                                                    d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                                            </svg>
-                                        </span>
-                                        <div class="ml-8">
-                                            <p class="my-4">
-                                                Do you need more time to make a purchase decision?
-                                            </p>
-                                            <p class="my-4">
-                                                No pressure, your product will be waiting for you in the cart.
-                                            </p>
+                                    <div class="max-h-80 mt-5 mx-3" data-te-modal-body-ref>
+
+                                        <form id="checkout-form" method="post" action="{{ route('create.order') }}"
+                                            class="overflow-y-auto max-h-72">
+                                            @csrf
+                                            <ul role="list" class="-my-6 divide-y divide-gray-200">
+                                                @if (session('cart'))
+                                                    @foreach (session('cart') as $id => $item)
+                                                        <li class="flex py-6">
+                                                            <div
+                                                                class="h-24 w-24 flex-shrink-0  rounded-md border border-gray-200">
+                                                                <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
+                                                                    alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+                                                                    class="h-full w-full object-cover object-center">
+                                                            </div>
+
+                                                            <div class="ml-4 flex flex-1 flex-col">
+                                                                <div>
+                                                                    <div
+                                                                        class="flex justify-between text-base font-medium text-gray-900">
+                                                                        <h3>
+                                                                            <a
+                                                                                href="#">{{ $item['product_name'] }}</a>
+                                                                        </h3>
+                                                                        <p class="ml-4">₱
+                                                                            {{ $item['product_price'] }}</p>
+                                                                    </div>
+                                                                    <p class="mt-1 text-sm text-gray-500 float-left">
+                                                                        {{ $item['product_category'] }}
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="flex flex-1 items-end justify-between text-sm">
+                                                                    <p class="text-gray-500">Qty
+                                                                        {{ $item['quantity'] }}</p>
+
+                                                                    <p class="text-gray-500">Total: ₱
+                                                                        {{ $item['product_price'] * $item['quantity'] }}
+                                                                    </p> <!-- Add this line -->
+                                                                    <div class="flex">
+                                                                        <button type="button"
+                                                                            class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                            onclick="confirmRemove('{{ route('cart.remove', $id) }}')">Remove</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <p>Your cart is empty.</p>
+                                                @endif
+                                            </ul>
+
+                                            {{-- End of Body Cart --}}
+                                    </div>
+                                    <div class="border-gray-200 px-4 sm:px-6">
+                                        @php
+                                            $total = 0;
+                                        @endphp
+
+                                        @foreach ((array) session('cart') as $id => $item)
+                                            @php
+                                                $total += $item['product_price'] * $item['quantity'];
+                                            @endphp
+                                        @endforeach
+                                        <div class="flex justify-between text-base pb-3 font-medium text-gray-900">
+                                            <div>
+                                                <p>Subtotal</p>
+                                            </div>
+
+                                            <div> <input type="text" value="{{ $total }}" name="total"
+                                                    class="hidden">₱ {{ $total }}</div>
                                         </div>
+
+                                        <ul class="grid w-full gap-2 grid-cols-2 ">
+                                            <li>
+                                                <input type="radio" id="dine-in" name="order_type"
+                                                    value="dine in" class="hidden peer uppercase" checked required>
+                                                <label for="dine-in"
+                                                    class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                                    <div class="block">
+                                                        <div class="w-full text-lg font-semibold">Dine in</div>
+
+                                                    </div>
+                                                    <svg class="w-3 h-3 ml-3" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 14 10">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                                    </svg>
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="take-out" name="order_type"
+                                                    value="take out" class="hidden peer uppercase" required>
+                                                <label for="take-out"
+                                                    class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                                    <div class="block">
+                                                        <div class="w-full text-lg font-semibold">Take out</div>
+
+                                                    </div>
+                                                    <svg class="w-5 h-5 ml-3" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 14 10">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                                    </svg>
+                                                </label>
+                                            </li>
+                                        </ul>
+
+
                                     </div>
                                     <div
                                         class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-                                        <button type="button"
+                                        <button type="submit"
                                             class="mr-2 inline-block rounded bg-info px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
-                                            data-te-ripple-init data-te-ripple-color="light">
-                                            Go to the cart
+                                            data-te-ripple-init data-te-ripple-color="light"
+                                            onclick="changePaymentMethod('cash')">
+                                            Cash
+                                        </button>
+                                        <button type="submit"
+                                            class="mr-2 inline-block rounded bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#e4a11b] transition duration-150 ease-in-out hover:bg-warning-600 hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:bg-warning-600 focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:outline-none focus:ring-0 active:bg-warning-700 active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(228,161,27,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)]"
+                                            onclick="changePaymentMethod('qrPayment')">
+                                            Cashless
                                         </button>
                                         <button type="button"
                                             class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
@@ -114,59 +219,368 @@
                                             Close
                                         </button>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                            <h2 class="sr-only">Products</h2>
-
-                            <div
-                                class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                                <a href="#" class="group">
-                                    <div
-                                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
-                                            alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
-                                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                        <div class="py-0">
+                            <div class="mx-auto sm:px-6 lg:px-8">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    
+                                    <!-- Product  -->
+                                    <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="/images/donmono.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
                                     </div>
-                                    <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
-                                    <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
-                                </a>
-                                <a href="#" class="group">
-                                    <div
-                                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg"
-                                            alt="Olive drab green insulated bottle with flared screw lid and flat top."
-                                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/ippin.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
                                     </div>
-                                    <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
-                                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-                                </a>
-                                <a href="#" class="group">
-                                    <div
-                                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg"
-                                            alt="Person using a pen to cross a task off a productivity paper card."
-                                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/kushiyaki.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
                                     </div>
-                                    <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
-                                    <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
-                                </a>
-                                <a href="#" class="group">
-                                    <div
-                                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                                        <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg"
-                                            alt="Hand holding black machined steel mechanical pencil with brass tip and top."
-                                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/makisushi.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
                                     </div>
-                                    <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
-                                    <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-                                </a>
-
-                                <!-- More products... -->
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/men.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/nigiri.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/ochazuke.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/ramen.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/salad.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/sashimi.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/tempura.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/yakizakana.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                     <!-- Product  -->
+                                     <div class="p-2">
+                                        <a href="{{ route('donmono') }}">
+                                            <div class="shadow-lg">
+                                                <img src="images/zenkai.jpeg"
+                                                    alt="Product Image" class="w-full h-60 rounded-lg shadow-lg"> <!-- Set the height here -->
+                                                    
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {{-- End of Product --}}
+                    
+                                    
+                    
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- Sidenav -->
+                    <nav id="sidenav-1"
+                        class="absolute left-0 top-0 z-[1035] h-full w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-hidden='true']:translate-x-0 dark:bg-zinc-800"
+                        data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-position="absolute">
+                        <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('kiosk') }}"    
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">Home</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('donmono') }}"     
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">Donmono</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('ippin') }}"       
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">ippin ryori</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('kushiyaki') }}"        
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">kushiyaki</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('makizushi') }}"     
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">makizushi</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('men') }}"  
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">men</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('nigirizushi') }}"   
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">nigirizushi</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('ochazuke') }}"    
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">ochazuke</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('ramen') }}"    
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">ramen</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('salad') }}"       
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">salad</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('sashimi') }}"          
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">sashimi</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('tempura') }}" 
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">tempura</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('yakizakana') }}"   
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">yakizakana</span>
+                                </a>
+                            </li>
+                            <li class="relative">
+                                <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                                href="{{ route('zensai') }}"      
+                                data-te-sidenav-link-ref>
+                                    <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                          </svg>
+                                          
+                                    </span>
+                                    <span class="uppercase">zensai</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- Sidenav -->
 
                 </div>
 

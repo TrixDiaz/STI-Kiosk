@@ -321,46 +321,46 @@
                                     @endif
                                 </ul>
 
-                                {{-- End of Body Cart --}}
-                        </div>
-                        <div class="border-gray-200 px-4 sm:px-6">
-                            @php
-                                $total = 0;
-                            @endphp
+                                        {{-- End of Body Cart --}}
+                                    </div>
+                                <div class="border-gray-200 px-4 sm:px-6">
+                                    @php
+                                        $total = 0;
+                                    @endphp
 
-                            @foreach ((array) session('cart') as $id => $item)
-                                @php
-                                    $total += $item['product_price'] * $item['quantity'];
-                                @endphp
-                            @endforeach
-                            <div class="flex justify-between text-base pb-3 font-medium text-gray-900">
-                                <div>
-                                    <p>Subtotal</p>
+                                    @foreach ((array) session('cart') as $id => $item)
+                                        @php
+                                            $total += $item['product_price'] * $item['quantity'];
+                                        @endphp
+                                @endforeach
+                                <div class="flex justify-between text-base pb-3 font-medium text-gray-900">
+                                    <div>
+                                        <p>Subtotal</p>
+                                    </div>
+
+                                    <div> <input type="text" value="{{ $total }}" name="total"
+                                            class="hidden">₱ {{ $total }}</div>
                                 </div>
 
-                                <div> <input type="text" value="{{ $total }}" name="total"
-                                        class="hidden">₱ {{ $total }}</div>
-                            </div>
+                                <ul class="grid w-full gap-2 grid-cols-2 ">
+                                    <li>
+                                        <input type="radio" id="dine-in" name="order_type" value="dine in"
+                                            class="hidden peer uppercase" checked required>
+                                        <label for="dine-in"
+                                            class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <div class="block">
+                                                <div class="w-full text-lg font-semibold">Dine in</div>
 
-                            <ul class="grid w-full gap-2 grid-cols-2 ">
-                                <li>
-                                    <input type="radio" id="dine-in" name="order_type" value="dine in"
-                                        class="hidden peer uppercase" checked required>
-                                    <label for="dine-in"
-                                        class="inline-flex items-center justify-between w-full p-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                        <div class="block">
-                                            <div class="w-full text-lg font-semibold">Dine in</div>
-
-                                        </div>
-                                        <svg class="w-3 h-3 ml-3" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
-                                                d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                        </svg>
-                                    </label>
-                                </li>
-                                <li>
+                                            </div>
+                                            <svg class="w-3 h-3 ml-3" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                            </svg>
+                                        </label>
+                                    </li>
+                                    <li>
                                     <input type="radio" id="take-out" name="order_type" value="take out"
                                         class="hidden peer uppercase" required>
                                     <label for="take-out"
@@ -374,32 +374,32 @@
                                             <path stroke="currentColor" stroke-linecap="round"
                                                 stroke-linejoin="round" stroke-width="2"
                                                 d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                        </svg>
-                                    </label>
-                                </li>
-                            </ul>
-                            </form>
+                                            </svg>
+                                            </label>
+                                        </li>
+                                    </ul>
                            
-                        </div>
-                        <div
-                            class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-                            <button type="submit"
-                                class="mr-2 inline-block rounded bg-info px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
-                                data-te-ripple-init data-te-ripple-color="light"
-                                onclick="changePaymentMethod('cash')">
-                                Cash
-                            </button>
-                            <button type="submit"
-                                class="mr-2 inline-block rounded bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#e4a11b] transition duration-150 ease-in-out hover:bg-warning-600 hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:bg-warning-600 focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:outline-none focus:ring-0 active:bg-warning-700 active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(228,161,27,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)]"
-                                onclick="changePaymentMethod('qrPayment')">
-                                Cashless
-                            </button>
-                            <button type="button"
-                                class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-                                data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
-                                Close
-                            </button>
-                        </div>
+                           
+                                </div>
+                                <div
+                                    class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                                    <button type="submit"
+                                        class="mr-2 inline-block rounded bg-info px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
+                                        data-te-ripple-init data-te-ripple-color="light"
+                                        onclick="changePaymentMethod('cash')">
+                                        Cash
+                                    </button>
+                                    <button type="submit"
+                                        class="mr-2 inline-block rounded bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#e4a11b] transition duration-150 ease-in-out hover:bg-warning-600 hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:bg-warning-600 focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:outline-none focus:ring-0 active:bg-warning-700 active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(228,161,27,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)]"
+                                        onclick="changePaymentMethod('qrPayment')">
+                                        Cashless
+                                    </button>
+                                    <button type="button"
+                                        class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                                        data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
+                                        Close
+                                    </button>
+                                </div>
                         </form>
                     </div>
                 </div>
