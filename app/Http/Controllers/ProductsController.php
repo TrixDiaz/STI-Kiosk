@@ -136,7 +136,28 @@ class ProductsController extends Controller
      */
     public function qrPayment(Request $request)
     {
-        $total = $request->input('total');
+          // Retrieve products from the session
+          $cart = session('cart');
+
+          $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+          $total = $request->input('total');
+          $orderType = $request->input('order_type');
+  
+          $orderDetails = [];
+  
+          // You can now insert the products into your orders table.
+          // Assuming you have an "Order" model and an "orders" table:
+          foreach ($cart as $item) {
+              $orderDetails[] = [
+                  'order_id' => $orderID,
+                  'product_name' => $item['product_name'],
+                  'product_price' => $item['product_price'],
+                  'quantity' => $item['quantity'],
+                  'order_type' => $orderType,
+                  'total' => $total,
+                  // Add other fields as needed
+              ];
+          }
 
         $data = [
             'data' => [
@@ -151,7 +172,7 @@ class ProductsController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => route('successOrder'),
+                    'success_url' => route('successOrder', ['total' => $total, 'orderDetails' => $orderDetails]),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
