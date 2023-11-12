@@ -6,8 +6,9 @@ import {
   Ripple,
   Sidenav,
   initTE,
+  Dropdown,
 } from "tw-elements";
 
-initTE({ Sidenav, Modal, Ripple  });
+initTE({ Sidenav, Modal, Ripple, Dropdown  });
   
 

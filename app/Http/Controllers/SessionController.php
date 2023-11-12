@@ -16,10 +16,20 @@ class SessionController extends Controller
         session()->forget('cart'); // Clear the Session in Cart
         return view('welcome'); // Tab to Start 
     }
+
+    public function kiosk()
+    {
+        return view('kiosk');
+    }
     
     public function cart()
     {
         return view('cart');
+    }
+
+    public function qrCode()
+    {
+        return view('qrCode');
     }
 
       /**
@@ -39,6 +49,7 @@ class SessionController extends Controller
             $cart[$id] = [
                 'product_name' => $product->product_name,
                 'product_price' => $product->product_price,
+                'product_image' => $product->product_image,
                 'product_category' => $product->product_category,
                 'quantity' => 1,
                 'order_type' => $orderType, 
@@ -93,6 +104,7 @@ class SessionController extends Controller
                 'order_id' => $orderID,
                 'product_name' => $item['product_name'],
                 'product_price' => $item['product_price'],
+                // 'product_image' => $item['product_image'],
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
@@ -108,10 +120,6 @@ class SessionController extends Controller
 
         return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order has been created successfully.');
     }
-
-
-    
-
 
     /**
      * Qr Code Generator
@@ -162,19 +170,12 @@ class SessionController extends Controller
     }
 
 
-    public function qrCode()
-    {
-        return view('qrCode');
-    }
-
-
      /**
      * Success Payment in API
      */
     public function successOrder(Request $request)
     {
         // dd(session()->all());
-        // Assuming the cart data is stored in the session
         $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $total = $request->input('total'); // Get the Total Request from input
@@ -187,6 +188,7 @@ class SessionController extends Controller
                     'order_id' => $orderID,
                     'product_name' => $item['product_name'],
                     'product_price' => $item['product_price'],
+                    // 'product_image' => $item['product_image'],
                     'quantity' => $item['quantity'],
                     'order_type' => $item['order_type'],
                     'total' => $total,

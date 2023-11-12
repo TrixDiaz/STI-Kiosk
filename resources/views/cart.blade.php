@@ -1,3 +1,4 @@
+<x-kiosk-layout>
 @extends('layout')
    
 @section('content')
@@ -22,7 +23,7 @@
                 <tr data-id="{{ $id }}">
                     <td data-th="Product">
                         <div class="row">
-                            <div class="col-sm-3 hidden-xs"><img src="" width="100" height="100" class="img-responsive"/></div>
+                            <div class="col-sm-3 hidden-xs"><img src="{{ asset('storage/' . $details['product_image']) }}" width="100" height="100" class="img-responsive"/></div>
                             <div class="col-sm-9">
                                 <h4 class="nomargin">{{ $details['product_name'] }}</h4>
                             </div>
@@ -139,4 +140,5 @@
         form.submit();
     }
 </script>
-@endsection
+{{-- @endsection --}}
+</x-kiosk-layout>

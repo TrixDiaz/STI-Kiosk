@@ -876,7 +876,7 @@
                                 <img src="/images/iz-logo.png" class="max-h-20" alt="logo">
                             </div>
                             <div class="order-last">
-                                <a href="{{ route('donmono') }}" type="button"
+                                <a href="{{ route('kiosk') }}" type="button"
                                     class="animate-pulse w-full justify-center px-4 py-5 font-bold text-white text-2xl uppercase">
                                     Tap to Start
                                 </a>

@@ -90,7 +90,8 @@ Route::controller(ProductsController::class)->group(function () {
 
 
 Route::controller(SessionController::class)->group(function () {  
-     Route::get('/', 'start')->name('/');  
+    Route::get('/', 'start')->name('/');  
+    Route::get('kiosk', 'kiosk')->name('kiosk');
     Route::get('cart', 'cart')->name('cart');
     Route::get('add-to-cart/{id}','addToCart')->name('add_to_cart');
     Route::patch('update-cart', 'update')->name('update_cart');

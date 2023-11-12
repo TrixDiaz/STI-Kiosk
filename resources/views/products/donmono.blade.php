@@ -1,4 +1,4 @@
-
+<x-kiosk-layout>
   @extends('layout')
     
   @section('content')
@@ -7,7 +7,7 @@
       @foreach($products as $product)
           <div class="col-xs-18 col-sm-6 col-md-4" style="margin-top:10px;">
               <div class="img_thumbnail productlist">
-                  <img src="" class="img-fluid">
+                  <img src="/storage/{{ $product->product_image }}" class="img-fluid">
                   <div class="caption">
                       <h4>{{ $product->product_name }}</h4>
                       <p>{{ $product->product_category }}</p>
@@ -21,3 +21,4 @@
        
   @endsection
 
+</x-kiosk-layout>
