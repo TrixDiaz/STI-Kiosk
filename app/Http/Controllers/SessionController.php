@@ -58,7 +58,7 @@ class SessionController extends Controller
         }
         session()->put('cart', $cart); // update the cart
         
-        return redirect()->back()->with('success', 'Product add to cart Successfully!');
+        return redirect()->back()->with('success', 'Product added to cart!');
     }
  
     public function update(Request $request)
@@ -67,7 +67,7 @@ class SessionController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('success', 'Cart successfully updated!');
+            session()->flash('success', 'Cart updated!');
         }
     }
  
@@ -79,7 +79,7 @@ class SessionController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product successfully removed!');
+            session()->flash('success', 'Product removed!');
         }
     }
 
@@ -118,7 +118,7 @@ class SessionController extends Controller
 
         session()->forget('cart'); // Optionally, you can clear the cart after the order is created
 
-        return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order has been created successfully.');
+        return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
     }
 
     /**
@@ -201,7 +201,7 @@ class SessionController extends Controller
             session()->forget('cart');
     
             // Redirect back or to a confirmation page
-            return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order has been created successfully.');
+            return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
         } else {
             // Handle the case where there is no cart data
             return redirect()->route('donmono')->with('error', 'Cart is empty.');

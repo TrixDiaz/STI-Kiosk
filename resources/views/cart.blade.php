@@ -6,7 +6,7 @@
 
         <div class="fixed inset-0 overflow-hidden">
             <div class="absolute inset-0 overflow-hidden">
-                <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
 
                     <div class="pointer-events-auto w-screen max-w-md">
                         <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
@@ -29,7 +29,28 @@
                                        </a>
                                     </div>
                                 </div>
-
+                                @if (session('success'))
+                                <div data-aos="fade-left" data-aos-duration="1000">
+                                    <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
+                                        data-dismissible="alert" id="success-alert">
+                                        <div class="absolute top-4 left-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                        <div class="ml-8 mr-12">{{ session('success') }}</div>
+                                    </div>
+                                </div>
+                    
+                                <script>
+                                    // Close the success message after 2 seconds
+                                    setTimeout(function() {
+                                        document.getElementById('success-alert').remove();
+                                    }, 2000);
+                                </script>
+                            @endif
                                 <div class="mt-8">
                                     <div class="flow-root">
                                         <ul id="cart" role="list" class="-my-6 divide-y divide-gray-200">
@@ -72,13 +93,11 @@
                                                                 </div>
                                                                 <div
                                                                     class="flex flex-1 items-end justify-between text-sm">
-                                                                    <button>-</button>
                                                                     <p data-th="Quantity" class="text-gray-500"> <input
                                                                             type="number"
                                                                             class="w-12 quantity cart_update"
                                                                             value="{{ $details['quantity'] }}"
                                                                             min="1" /></p>
-                                                                    <button>+</button>
                                                                     <div class="actions flex" data-th="">
                                                                         <button type="button"
                                                                             class="font-medium text-indigo-600 hover:text-indigo-500 cart_remove">Remove</button>
@@ -91,6 +110,8 @@
                                                 @php
                                                     $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
                                                 @endphp
+                                                <input type="text" value="{{ $total }}" name="total" class="hidden">
+                                                <input type="text" value="{{ $orderID }}" name="orderID" class="hidden">
                                             </form>
                                             <!-- More products... -->
                                         </ul>
@@ -104,18 +125,22 @@
                                     <p>₱{{ $total }}</p>
                                 </div>
                                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                                <div class="mt-6">
-                                    <a href="#"
-                                        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                <div class="mt-6 flex justify-evenly">
+                                    <button onclick="changePaymentMethod('cash')"
+                                        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button>
+                                        <button  onclick="changePaymentMethod('qrPayment')"
+                                        class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-indigo-600">Cashless</button>
                                 </div>
                                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>
                                         or
-                                        <button type="button"
+                                        <a href="{{ route('kiosk') }}">
+                                            <button type="button"
                                             class="font-medium text-indigo-600 hover:text-indigo-500">
                                             Continue Shopping
                                             <span aria-hidden="true"> &rarr;</span>
                                         </button>
+                                        </a>
                                     </p>
                                 </div>
                             </div>
