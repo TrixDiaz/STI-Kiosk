@@ -148,7 +148,7 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-      
+        session()->put('cart', $orderDetails);
         $data = [
             'data' => [
                 'attributes' => [
@@ -162,7 +162,7 @@ class SessionController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => route('successOrder', ['orderDetails' => $orderDetails, 'orderType', $orderType]),
+                    'success_url' => route('successOrder', ['orderDetails' => $orderDetails]),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
