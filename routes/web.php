@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\KioskController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +23,7 @@ use App\Http\Controllers\ProductsController;
 */
 
 
-Route::get('/cart', function () {
-    return view('kiosk');
-})->name('cart');
 
-Route::get('/order', function () {
-    return view('orderType');
-})->name('orderType');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -100,3 +95,10 @@ Route::controller(KioskController::class)->group(function () {
     Route::post('/create-order', 'createOrder')->name('create.order');
     Route::get('/receipt/{orderID}','showReceipt')->name('receipt');
  });
+
+
+
+Route::get('cart', [SessionController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [SessionController::class, 'addToCart'])->name('add_to_cart');
+Route::patch('update-cart', [SessionController::class, 'update'])->name('update_cart');
+Route::delete('remove-from-cart', [SessionController::class, 'remove'])->name('remove_from_cart');

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('product_id')->unique()->index();
             $table->string('product_name');
             $table->integer('product_stock');
-            $table->integer('product_price');
+            $table->decimal("product_price", 6, 2); 
             $table->string('product_status');
             $table->string('product_image');
             $table->string('product_category');
