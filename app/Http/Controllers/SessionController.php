@@ -146,7 +146,7 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-        // dd($cart);
+        
         $data = [
             'data' => [
                 'attributes' => [
@@ -183,7 +183,7 @@ class SessionController extends Controller
         // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return view('qrCode')
+        return redirect()->to('qrCode')
             ->with('checkout_url', $response->data->attributes->checkout_url,'cart', $cart);
     }
 
@@ -193,8 +193,9 @@ class SessionController extends Controller
      */
     public function successOrder(Request $request)
     {
+        $cart = $request->session()->get('cart');
+        dd($cart);
         $cartData = session('cart');
-        dd(session()->all());
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $total = $request->input('total'); // Get the Total Request from input
     
