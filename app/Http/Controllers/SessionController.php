@@ -175,7 +175,7 @@ class SessionController extends Controller
      */
     public function successOrder(Request $request)
     {
-        dd(session()->all());
+        //dd(session()->all());
         $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $total = $request->input('total'); // Get the Total Request from input
