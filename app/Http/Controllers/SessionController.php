@@ -180,7 +180,7 @@ class SessionController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => redirect()->to('successOrder', ['total' => $total])->with('cart',$cart),
+                    'success_url' => redirect()->route('successOrder', ['total' => $total])->with('cart',$cart),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
@@ -203,7 +203,7 @@ class SessionController extends Controller
         // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return redirect()->to('qrCode')
+        return redirect()->route('qrCode')
             ->with('checkout_url', $response->data->attributes->checkout_url,'cart', $cart);
     }
 
