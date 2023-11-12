@@ -84,7 +84,7 @@ class SessionController extends Controller
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         
         $total = $request->input('total'); // Get the Total Request from input
-        
+        $orderID = $request->input('orderID'); 
         $orderType = $request->input('order_type'); // Get the order type Request from input
         
         // You can now insert the products into your orders table.
@@ -110,17 +110,7 @@ class SessionController extends Controller
     }
 
 
-     /**
-     * Fetch all the orders of Customer or Receipt
-     */
-    public function showReceipt($orderID)
-    {
-        // Retrieve the order details from the database based on the order ID
-        $orderDetails = Order::where('order_id', $orderID)->get();
-
-        // You can pass the order details to a view for displaying
-        return view('receipt', ['orderDetails' => $orderDetails]);
-    }
+    
 
 
     /**
@@ -129,7 +119,7 @@ class SessionController extends Controller
     public function qrPayment(Request $request)
     {
         $total = $request->input('total');
-
+       
         $data = [
             'data' => [
                 'attributes' => [
@@ -143,7 +133,7 @@ class SessionController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => route('successOrder'),
+                    'success_url' => route('successOrder', ['total' => $total]),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
@@ -162,6 +152,7 @@ class SessionController extends Controller
         Session::put('session_id', $response->data->id);
         Session::put('checkout_url', $response->data->attributes->checkout_url);
 
+        
         return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
@@ -180,50 +171,50 @@ class SessionController extends Controller
      /**
      * Success Payment in API
      */
-    public function successOrder(Request $request,$orderDetails)
+    public function successOrder(Request $request)
     {
         // dd(session()->all());
-        // Retrieve products from the session
-        $cart = session('cart') ?? [];
-
-        // Check if the cart is not empty
-        if (empty($cart)) {
-            return redirect()
-                ->route('/')
-                ->with('error', 'Cart is empty.');
+        // Assuming the cart data is stored in the session
+        $cartData = session('cart');
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
+        $total = $request->input('total'); // Get the Total Request from input
+    
+        // Check if the cart data exists and is an array
+        if ($cartData && is_array($cartData)) {
+            foreach ($cartData as $item) {
+                // Insert each item into the orders table
+                Order::create([
+                    'order_id' => $orderID,
+                    'product_name' => $item['product_name'],
+                    'product_price' => $item['product_price'],
+                    'quantity' => $item['quantity'],
+                    'order_type' => $item['order_type'],
+                    'total' => $total,
+                    'product_category' => $item['product_category'],
+                    // Add other fields as needed
+                ]);
+            }
+    
+            // Optionally, you can clear the cart after the order is created
+            session()->forget('cart');
+    
+            // Redirect back or to a confirmation page
+            return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order has been created successfully.');
+        } else {
+            // Handle the case where there is no cart data
+            return redirect()->route('donmono')->with('error', 'Cart is empty.');
         }
+    }
 
-        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+     /**
+     * Fetch all the orders of Customer or Receipt
+     */
+    public function showReceipt($orderID)
+    {
+        // Retrieve the order details from the database based on the order ID
+        $orderDetails = Order::where('order_id', $orderID)->get();
 
-        $orderDetails = [];
-
-        // Retrieve additional data from the request
-        $total = $request->input('total');
-        $orderType = $request->input('order_type');
-
-        // You can now insert the products into your orders table.
-        // Assuming you have an "Order" model and an "orders" table:
-        foreach ($cart as $item) {
-            $orderDetails[] = [
-                'order_id' => $orderID,
-                'product_name' => $item['product_name'],
-                'product_price' => $item['product_price'],
-                'quantity' => $item['quantity'],
-                'order_type' => $orderType,
-                'total' => $total,
-                // Add other fields as needed
-            ];
-        }
-
-        // Insert all the order details into the database
-        Order::insert($orderDetails);
-
-        // Optionally, you can clear the cart after the order is created
-        session()->forget('cart');
-
-        // Redirect back or to a confirmation page
-        return redirect()
-            ->route('order', ['orderID' => $orderID])
-            ->with('success', 'Order has been created successfully.');
+        // You can pass the order details to a view for displaying
+        return view('receipt', ['orderDetails' => $orderDetails]);
     }
 }

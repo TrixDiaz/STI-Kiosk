@@ -39,7 +39,11 @@
                 </tr>
                 @endforeach
                 @endif
-                <input type="text" value="{{ $total }}" name="total" class="invisible">
+                @php
+                 $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator 
+                 @endphp
+                 <input type="text" value="{{ $total }}" name="total" class="invisible">
+                <input type="text" value="{{ $orderID }}" name="orderID" class="invisible">
             </form>
         </tbody>
         <tfoot>

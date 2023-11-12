@@ -21,6 +21,7 @@ class Order extends Model
         'product_status',
         'payment_status',
         'product_image',
+        'session_id',
     ];
 
     use HasFactory;

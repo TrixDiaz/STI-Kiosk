@@ -99,5 +99,5 @@ Route::controller(SessionController::class)->group(function () {
     Route::get('/receipt/{orderID}','showReceipt')->name('receipt');
     Route::get('/qrCode','qrCode')->name('qrCode');
     Route::get('/qrPayment','qrPayment')->name('qrPayment');
-    Route::get('/successOrder','successOrder')->name('successOrder');
+    Route::get('/success-order/{total?}','successOrder')->name('successOrder');
 });

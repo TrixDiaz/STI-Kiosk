@@ -17,7 +17,7 @@ class StockFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => $this->faker->uuid(6),
+            'product_id' => $this->faker->numberBetween('100','999'),
             'product_name' => $this->faker->firstName(),
             'product_stock' => $this->faker->numberBetween('100','999'),
             'product_price' => $this->faker->numberBetween('100','999'),
