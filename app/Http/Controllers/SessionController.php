@@ -129,7 +129,23 @@ class SessionController extends Controller
     {
         
         $total = $request->input('total');
-       
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
+        $orderType = $request->input('order_type'); // Get the order type Request from input
+        $cart = session('cart');
+        foreach ($cart as $item) {
+            $orderDetails[] = [
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                // 'product_image' => $item['product_image'],
+                'quantity' => $item['quantity'],
+                'order_type' => $orderType,
+                'total' => $total,
+                'created_at' => now(),
+                'updated_at' => now(),
+                // Add other fields as needed
+            ];
+        }
         $data = [
             'data' => [
                 'attributes' => [
@@ -167,7 +183,7 @@ class SessionController extends Controller
 
         // Redirect or display a success message
         return view('qrCode')
-            ->with('checkout_url', $response->data->attributes->checkout_url);
+            ->with('checkout_url', $response->data->attributes->checkout_url,'cart', $cart);
     }
 
 
