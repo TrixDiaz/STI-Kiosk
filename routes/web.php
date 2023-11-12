@@ -92,13 +92,14 @@ Route::controller(KioskController::class)->group(function () {
     Route::get('/kiosk','kiosk')->name('kiosk'); 
     Route::get('addToCart/{id}','addToCart')->name('addToCart');
     Route::get('/removeFromCart/{id}','removeFromCart')->name('cart.remove');
-    Route::post('/create-order', 'createOrder')->name('create.order');
-    Route::get('/receipt/{orderID}','showReceipt')->name('receipt');
+   
  });
 
-
-
-Route::get('cart', [SessionController::class, 'cart'])->name('cart');
-Route::get('add-to-cart/{id}', [SessionController::class, 'addToCart'])->name('add_to_cart');
-Route::patch('update-cart', [SessionController::class, 'update'])->name('update_cart');
-Route::delete('remove-from-cart', [SessionController::class, 'remove'])->name('remove_from_cart');
+ Route::controller(SessionController::class)->group(function () {  
+    Route::get('cart', 'cart')->name('cart');
+    Route::get('add-to-cart/{id}','addToCart')->name('add_to_cart');
+    Route::patch('update-cart', 'update')->name('update_cart');
+    Route::delete('remove-from-cart','remove')->name('remove_from_cart');
+    Route::post('/create-order', 'createOrder')->name('create.order');
+    Route::get('/receipt/{orderID}','showReceipt')->name('receipt');
+});

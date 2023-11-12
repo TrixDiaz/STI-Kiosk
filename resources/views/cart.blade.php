@@ -12,6 +12,9 @@
         </tr>
     </thead>
     <tbody>
+        <form id="checkout-form" method="post" action="{{ route('create.order') }}"
+        class="overflow-y-auto max-h-72">
+        @csrf
         @php $total = 0 @endphp
         @if(session('cart'))
             @foreach(session('cart') as $id => $details)
@@ -34,17 +37,20 @@
                         <button class="btn btn-danger btn-sm cart_remove"><i class="fa fa-trash-o"></i> Delete</button>
                     </td>
                 </tr>
+                <input type="text" value="{{ $total }}" name="total" class="invisible">
             @endforeach
         @endif
+        </form>
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="5" class="text-right"><h3><strong>Total ${{ $total }}</strong></h3></td>
+            <td colspan="5" class="text-right">
+                <h3><strong>Total ${{ $total }}</strong></h3></td>
         </tr>
         <tr>
             <td colspan="5" class="text-right">
-                <a href="{{ url('/') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
-                <button class="btn btn-success"><i class="fa fa-money"></i> Checkout</button>
+                <a href="{{ route('donmono') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
+                <button  onclick="changePaymentMethod('cash')" class="btn btn-success"><i class="fa fa-money"></i> Checkout</button>
             </td>
         </tr>
     </tfoot>
@@ -93,5 +99,39 @@
         }
     });
    
+</script>
+<script>
+    function changePaymentMethod(paymentMethod) {
+        // Get the form element by its id
+        var form = document.getElementById('checkout-form');
+
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Update the form's action attribute to the new route
+        if (paymentMethod === 'cash') {
+            form.action = "{{ route('create.order') }}";
+            form.method = 'post';
+        } else if (paymentMethod === 'qrPayment') {
+            form.action = "{{ route('qrPayment') }}";
+            form.method = 'get';
+        }
+
+        // Remove existing hidden input fields with name 'payment_method'
+        var existingInput = form.querySelector('input[name="payment_method"]');
+        if (existingInput) {
+            existingInput.remove();
+        }
+
+        // Create a new hidden input for payment_method
+        var hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'payment_method';
+        hiddenInput.value = paymentMethod;
+        form.appendChild(hiddenInput);
+
+        // Submit the form
+        form.submit();
+    }
 </script>
 @endsection
