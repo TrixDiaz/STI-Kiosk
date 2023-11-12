@@ -126,6 +126,7 @@ class SessionController extends Controller
      */
     public function qrPayment(Request $request)
     {
+        
         $total = $request->input('total');
        
         $data = [
@@ -198,13 +199,13 @@ class SessionController extends Controller
             }
     
             // Optionally, you can clear the cart after the order is created
-            session()->forget('cart');
+            // session()->forget('cart');
     
             // Redirect back or to a confirmation page
             return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
         } else {
             // Handle the case where there is no cart data
-            return redirect()->route('donmono')->with('success', 'Cart is empty.');
+            return redirect()->route('kiosk')->with('success', 'Cart is empty.');
         }
     }
 
