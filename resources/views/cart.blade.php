@@ -115,7 +115,7 @@
                                                 <input type="text" value="{{ $orderID }}" name="orderID"
                                                     class="hidden">
 
-                                            </form>
+                                          
                                             <!-- More products... -->
                                         </ul>
                                     </div>
@@ -147,6 +147,7 @@
                                         </label>
                                     </div>
                                 </div>
+                            </form>
                                 {{-- Radio --}}
                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                     <p>Subtotal</p>

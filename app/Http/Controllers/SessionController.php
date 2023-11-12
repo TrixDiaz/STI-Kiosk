@@ -109,6 +109,7 @@ class SessionController extends Controller
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
+                'payment_status' => 'pending',
                 'created_at' => now(),
                 'updated_at' => now(),
                 // Add other fields as needed

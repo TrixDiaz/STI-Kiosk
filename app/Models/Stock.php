@@ -13,11 +13,11 @@ class Stock extends Model
         'product_id',
         'product_name',
         'product_stock',
-        'product_price',
         'product_image',
+        'product_price',
         'product_expiration',
+        'payment_status',
         'product_category',
-        'product_status',
     ];
 
     use HasFactory;

@@ -918,12 +918,12 @@
                         </a>
                     @endauth
                 </div>
-                <h1 class="font-bold text-2xl my-4 text-center text-blue-600">Izakaya Shonantei</h1>
+                <h1 class="font-bold text-2xl my-4 text-center text-blue-600">Izakaya Shonantei</h1>    
+               <div><p class="text-end">{{ \Carbon\Carbon::parse($orderDetails->first()->created_at)->diffForHumans() }}</p></div>
                 <hr class="mb-2">
                 <div class="flex justify-between mb-6">
-                    <h1 class="text-lg font-bold">Invoice</h1>
+                    <h1 class="text-lg font-bold">{{ $orderDetails->first()->order_type }}</h1>
                     <div class="text-gray-700">
-                        <div>{{ $orderDetails->first()->created_at }}</div>
                         <div>Invoice #: {{ $orderDetails->first()->order_id }}</div>
                     </div>
                 </div>
@@ -949,9 +949,8 @@
                                 <td class="text-left text-gray-700">{{ $orderDetail->product_name }}</td>
                                 <td class="text-right text-gray-700">{{ $orderDetail->quantity }}</td>
                                 <td class="text-right text-gray-700">{{ $orderDetail->product_price }}</td>
-
                             </tr>
-                        @endforeach
+                       
                     </tbody>
                     <tfoot>
                         <tr>
@@ -962,6 +961,7 @@
                     </tfoot>
                 </table>
                 <div class="text-gray-700 mb-2">Thanks for visiting us!</div>
+                @endforeach
                 <div class="text-gray-700 text-sm uppercase">Disclaimer this is not your offical Receipt!</div>
             </div>
 

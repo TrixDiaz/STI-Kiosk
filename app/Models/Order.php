@@ -18,9 +18,7 @@ class Order extends Model
         'total',
         'order_type',
         'product_category',
-        'product_status',
         'payment_status',
-        'product_image',
         'session_id',
     ];
 
