@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\Session;
 
@@ -27,9 +28,28 @@ class SessionController extends Controller
         return view('cart');
     }
 
-    public function qrCode()
+    public function qrCode(Request $request)
     {
-        return view('qrCode');
+        $cart = session()->get('cart', []);
+
+        $orderType = $request->input('order_type'); // Get the selected order type from the input
+        $total = $request->input('total');
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'product_name' => $product->product_name,
+                'product_price' => $product->product_price,
+                'product_image' => $product->product_image,
+                'product_category' => $product->product_category,
+                'quantity' => 1,
+                'order_type' => $orderType, 
+                'total' =>  $total,
+            ];
+        }
+        session()->put('cart', $cart); 
+
+        return view('qrCode')->with('cart',$cart);
     }
 
       /**
@@ -113,7 +133,8 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-      
+        session()->put('cart', $orderDetails);
+
         Order::insert($orderDetails);   // Insert all the order details into the database
 
         session()->forget('cart'); // Optionally, you can clear the cart after the order is created
@@ -145,7 +166,7 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-        
+        session()->put('cart', $cart);
         $data = [
             'data' => [
                 'attributes' => [
@@ -159,7 +180,7 @@ class SessionController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => route('successOrder', ['total' => $total,'cart' => $cart]),
+                    'success_url' => redirect()->to('successOrder', ['total' => $total])->with('cart',$cart),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
