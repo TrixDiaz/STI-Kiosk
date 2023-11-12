@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -263,7 +263,7 @@
             </button>
             <ul class="absolute z-[1000] float-left m-0 hidden w-80 list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
                 aria-labelledby="dropdownMenuButton9" data-te-dropdown-menu-ref>
-                <li>
+                <li class="m-1">
                     <a class="block w-full whitespace-nowrap bg-transparent px-4 pt-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                         data-te-dropdown-item-ref>
                         <div class="row total-header-section">
@@ -277,7 +277,7 @@
                         </div>
                     </a>
                 </li>
-                <li class="h-40 overflow-y-auto">
+                <li class="h-48 overflow-y-auto my-2 mx-2">
                     <a class="block w-full whitespace-nowrap bg-transparent px-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                          data-te-dropdown-item-ref>
                         @if(session('cart'))
@@ -288,7 +288,7 @@
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8">
                                     <p class="">{{ $details['product_name'] }}</p>
-                                    <span class="price text-info mr-5"> ${{ $details['product_price'] }}</span> <span class="count"> Qty:{{ $details['quantity'] }}</span>
+                                    <span class="price text-info "> ${{ $details['product_price'] }}</span> <span class="bn n"> Qty:{{ $details['quantity'] }}</span>
                                 </div>
                             </div>
                         <hr class="my-1">
@@ -297,8 +297,8 @@
                     </a>
                 </li>
                 <li class="">
-                    <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                        href="#" data-te-dropdown-item-ref>
+                    <a class="my-2"
+                        data-te-dropdown-item-ref>
                         <div class="row">
                             <div class="text-center m-2">
                                 <a href="{{ route('cart') }}" class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
@@ -339,6 +339,8 @@
     @stack('scripts')
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     @livewireScripts
+
+    
 </body>
 
 </html>
