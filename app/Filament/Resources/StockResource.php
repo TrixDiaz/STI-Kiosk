@@ -80,6 +80,7 @@ class StockResource extends Resource
                         ->required('create')
                         ->visibleOn('create', 'view')
                         ->native(false),
+                        
                      Select::make('product_status')
                         ->label('Status')
                         ->options([
