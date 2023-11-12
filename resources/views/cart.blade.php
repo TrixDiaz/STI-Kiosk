@@ -37,19 +37,20 @@
                         <button class="btn btn-danger btn-sm cart_remove"><i class="fa fa-trash-o"></i> Delete</button>
                     </td>
                 </tr>
+                @endforeach
+                @endif
                 <input type="text" value="{{ $total }}" name="total" class="invisible">
-            @endforeach
-        @endif
-        </form>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="5" class="text-right">
+            </form>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-right">
                 <h3><strong>Total ${{ $total }}</strong></h3></td>
         </tr>
         <tr>
             <td colspan="5" class="text-right">
                 <a href="{{ route('donmono') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
+                <button  onclick="changePaymentMethod('qrPayment')" class="btn btn-success"><i class="fa fa-money"></i> Cashless</button>
                 <button  onclick="changePaymentMethod('cash')" class="btn btn-success"><i class="fa fa-money"></i> Checkout</button>
             </td>
         </tr>

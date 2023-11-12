@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\Session;
 
 class SessionController extends Controller
 {
   
- 
+    public function start()
+    {
+        session()->forget('cart'); // Clear the Session in Cart
+        return view('welcome'); // Tab to Start 
+    }
+    
     public function cart()
     {
         return view('cart');
@@ -113,5 +120,110 @@ class SessionController extends Controller
 
         // You can pass the order details to a view for displaying
         return view('receipt', ['orderDetails' => $orderDetails]);
+    }
+
+
+    /**
+     * Qr Code Generator
+     */
+    public function qrPayment(Request $request)
+    {
+        $total = $request->input('total');
+
+        $data = [
+            'data' => [
+                'attributes' => [
+                    'line_items' => [
+                        [
+                            'currency' => 'PHP',
+                            'amount' => $total * 100,
+                            'description' => 'text',
+                            'name' => 'Add Credits',
+                            'quantity' => 1,
+                        ],
+                    ],
+                    'payment_method_types' => ['card', 'gcash'],
+                    'success_url' => route('successOrder'),
+                    'cancel_url' => route('/'),
+                    'description' => 'text',
+                ],
+            ],
+        ];
+
+        $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
+            ->withHeader('Content-Type: application/json')
+            ->withHeader('accept: application/json')
+            ->withHeader('Authorization: Basic c2tfdGVzdF9TZkhKUDFTb05nb1ltWFRBWDJ6d3NNYlI6')
+            ->withData($data)
+            ->asJson()
+            ->post();
+
+        // dd($response);
+        Session::put('session_id', $response->data->id);
+        Session::put('checkout_url', $response->data->attributes->checkout_url);
+
+        return redirect()->to($response->data->attributes->checkout_url);
+
+        // Redirect or display a success message
+        // return redirect()
+        //     ->route('qrCode', ['orderDetails' => $orderDetails])
+        //     ->with('checkout_url', $response->data->attributes->checkout_url);
+    }
+
+
+    public function qrCode()
+    {
+        return view('qrCode');
+    }
+
+
+     /**
+     * Success Payment in API
+     */
+    public function successOrder(Request $request,$orderDetails)
+    {
+        // dd(session()->all());
+        // Retrieve products from the session
+        $cart = session('cart') ?? [];
+
+        // Check if the cart is not empty
+        if (empty($cart)) {
+            return redirect()
+                ->route('/')
+                ->with('error', 'Cart is empty.');
+        }
+
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+
+        $orderDetails = [];
+
+        // Retrieve additional data from the request
+        $total = $request->input('total');
+        $orderType = $request->input('order_type');
+
+        // You can now insert the products into your orders table.
+        // Assuming you have an "Order" model and an "orders" table:
+        foreach ($cart as $item) {
+            $orderDetails[] = [
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $orderType,
+                'total' => $total,
+                // Add other fields as needed
+            ];
+        }
+
+        // Insert all the order details into the database
+        Order::insert($orderDetails);
+
+        // Optionally, you can clear the cart after the order is created
+        session()->forget('cart');
+
+        // Redirect back or to a confirmation page
+        return redirect()
+            ->route('order', ['orderID' => $orderID])
+            ->with('success', 'Order has been created successfully.');
     }
 }

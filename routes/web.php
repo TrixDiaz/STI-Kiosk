@@ -59,13 +59,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 Route::controller(ProductsController::class)->group(function () { 
     Route::get('queue', 'queue')->name('queue');
-    Route::get('/qrCode','qrCode')->name('qrCode');
+  
  
-    Route::get('/successOrder/{order_id}','successOrder')->name('successOrder');
+  
     Route::get('/prepare-order/{order_id}','prepareOrder')->name('prepare.order');
     
    
-    Route::get('/qrPayment','qrPayment')->name('qrPayment');
+   
     Route::post('/serve/{order}', 'orderServe')->name('order.serve');
     Route::post('/serving/{order}','serving')->name('serving');
     
@@ -87,19 +87,17 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/zensai','zensai')->name('zensai'); 
 });
 
-Route::controller(KioskController::class)->group(function () {  
-    Route::get('/', 'start')->name('/');  
-    Route::get('/kiosk','kiosk')->name('kiosk'); 
-    Route::get('addToCart/{id}','addToCart')->name('addToCart');
-    Route::get('/removeFromCart/{id}','removeFromCart')->name('cart.remove');
-   
- });
 
- Route::controller(SessionController::class)->group(function () {  
+
+Route::controller(SessionController::class)->group(function () {  
+     Route::get('/', 'start')->name('/');  
     Route::get('cart', 'cart')->name('cart');
     Route::get('add-to-cart/{id}','addToCart')->name('add_to_cart');
     Route::patch('update-cart', 'update')->name('update_cart');
     Route::delete('remove-from-cart','remove')->name('remove_from_cart');
     Route::post('/create-order', 'createOrder')->name('create.order');
     Route::get('/receipt/{orderID}','showReceipt')->name('receipt');
+    Route::get('/qrCode','qrCode')->name('qrCode');
+    Route::get('/qrPayment','qrPayment')->name('qrPayment');
+    Route::get('/successOrder','successOrder')->name('successOrder');
 });
