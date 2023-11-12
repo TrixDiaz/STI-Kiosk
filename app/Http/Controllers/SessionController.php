@@ -180,7 +180,7 @@ class SessionController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => redirect()->route('successOrder', ['total' => $total])->with('cart',$cart),
+                    'success_url' => route('successOrder', ['orderDetails' => $orderDetails]),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
@@ -213,8 +213,9 @@ class SessionController extends Controller
      */
     public function successOrder(Request $request)
     {
-        
-        dd(session()->all());
+         // Retrieve orderDetails from URL parameters
+    $orderDetails = $request->input('orderDetails');
+        dd($orderDetails);
         $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $total = $request->input('total'); // Get the Total Request from input
