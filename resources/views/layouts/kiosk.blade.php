@@ -264,7 +264,7 @@
             <ul class="absolute z-[1000] float-left m-0 hidden w-80 list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
                 aria-labelledby="dropdownMenuButton9" data-te-dropdown-menu-ref>
                 <li>
-                    <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                    <a class="block w-full whitespace-nowrap bg-transparent px-4 pt-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                         data-te-dropdown-item-ref>
                         <div class="row total-header-section">
                             @php $total = 0 @endphp
@@ -277,21 +277,18 @@
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                        href="#" data-te-dropdown-item-ref>
+                <li class="h-40 overflow-y-auto">
+                    <a class="block w-full whitespace-nowrap bg-transparent px-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                         data-te-dropdown-item-ref>
                         @if(session('cart'))
                         @foreach(session('cart') as $id => $details)
-                        <hr class="my-1">
-                            <div class="flex mx-5">
+                            <div class="flex mr-5">
                                 <div class="col-lg-4 col-sm-4 col-4">
-                                    <img src="{{ asset('storage/' . $details['product_image']) }}" alt="{{ $details['product_name'] }}" class="h-10 w-10 mr-5" />
+                                    <img src="{{ asset('storage/' . $details['product_image']) }}" alt="{{ $details['product_name'] }}" class="h-14 w-14 bg-cover rounded-md" />
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8">
-                                    <p>{{ $details['product_name'] }}</p>
-                                   <div class="flex justify-between">
+                                    <p class="">{{ $details['product_name'] }}</p>
                                     <span class="price text-info mr-5"> ${{ $details['product_price'] }}</span> <span class="count"> Qty:{{ $details['quantity'] }}</span>
-                                   </div>
                                 </div>
                             </div>
                         <hr class="my-1">
@@ -299,12 +296,12 @@
                     @endif
                     </a>
                 </li>
-                <li>
+                <li class="">
                     <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                         href="#" data-te-dropdown-item-ref>
                         <div class="row">
-                            <div class="text-center m-3">
-                                <a href="{{ route('cart') }}" class="bg-blue-200 p-3 rounded-md">View all</a>
+                            <div class="text-center m-2">
+                                <a href="{{ route('cart') }}" class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
                             </div>
                         </div>
                     </a>
