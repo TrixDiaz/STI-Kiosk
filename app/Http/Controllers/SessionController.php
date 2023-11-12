@@ -146,6 +146,7 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
+        dd($cart);
         $data = [
             'data' => [
                 'attributes' => [
