@@ -146,7 +146,7 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-        dd($cart);
+        // dd($cart);
         $data = [
             'data' => [
                 'attributes' => [
@@ -193,8 +193,8 @@ class SessionController extends Controller
      */
     public function successOrder(Request $request)
     {
-        dd(session()->all());
         $cartData = session('cart');
+        dd(session()->all());
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $total = $request->input('total'); // Get the Total Request from input
     
