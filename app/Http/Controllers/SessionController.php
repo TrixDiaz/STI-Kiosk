@@ -196,14 +196,14 @@ class SessionController extends Controller
     {
          // Retrieve orderDetails from URL parameters
     $orderDetails = $request->input('orderDetails');
-        dd($orderDetails);
-        $cartData = session('cart');
+        // dd($orderDetails);
+        // $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $total = $request->input('total'); // Get the Total Request from input
     
         // Check if the cart data exists and is an array
-        if ($cartData && is_array($cartData)) {
-            foreach ($cartData as $item) {
+     
+            foreach ($orderDetails as $item) {
                 // Insert each item into the orders table
                 Order::create([
                     'order_id' => $orderID,
@@ -219,14 +219,10 @@ class SessionController extends Controller
             }
     
             // Optionally, you can clear the cart after the order is created
-            // session()->forget('cart');
+            session()->forget('cart');
     
             // Redirect back or to a confirmation page
-            return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
-        } else {
-            // Handle the case where there is no cart data
-            return redirect()->route('kiosk')->with('success', 'Cart is empty.');
-        }
+            return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');   
     }
 
      /**
