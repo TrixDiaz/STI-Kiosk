@@ -213,7 +213,6 @@ class SessionController extends Controller
                     'quantity' => $item['quantity'],
                     'order_type' => $orderType,
                     'total' => $item['total'],
-                    'product_category' => $item['product_category'],
                     // Add other fields as needed
                 ]);
             }
