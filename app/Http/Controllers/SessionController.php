@@ -197,7 +197,7 @@ class SessionController extends Controller
     {
          // Retrieve orderDetails from URL parameters
     $orderDetails = $request->input('orderDetails');
-        // dd($orderDetails);
+        dd($orderDetails);
         // $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         // $total = $request->input('total'); // Get the Total Request from input
