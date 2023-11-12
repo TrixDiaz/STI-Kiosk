@@ -175,7 +175,7 @@ class SessionController extends Controller
      */
     public function successOrder(Request $request)
     {
-        // dd(session()->all());
+        dd(session()->all());
         $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $total = $request->input('total'); // Get the Total Request from input
@@ -204,7 +204,7 @@ class SessionController extends Controller
             return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
         } else {
             // Handle the case where there is no cart data
-            return redirect()->route('donmono')->with('error', 'Cart is empty.');
+            return redirect()->route('donmono')->with('success', 'Cart is empty.');
         }
     }
 
