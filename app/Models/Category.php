@@ -10,7 +10,6 @@ class Category extends Model
 {
 
     protected $fillable = [
-        'product_name',
         'product_category',
     ];
 

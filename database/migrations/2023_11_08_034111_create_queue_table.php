@@ -14,7 +14,13 @@ return new class extends Migration
         Schema::create('queues', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('order_id')->unique()->index();
-            $table->string('product_status')->default('preparing');
+            $table->string('product_name');
+            $table->integer('product_price');
+            $table->integer('quantity');
+            $table->decimal('total', 10, 2);
+            $table->string('order_type');
+            $table->string('payment_status');
+            $table->string('product_status')->default('Preparing');
             $table->timestamps();
         });
     }

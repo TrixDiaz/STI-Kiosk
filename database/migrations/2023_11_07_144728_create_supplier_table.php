@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('product_name')->nullable();
-            $table->string('products')->nullable();
+            $table->string('product_name');
             $table->string('contact');
             $table->string('company');
             $table->string('status');
