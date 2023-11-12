@@ -203,7 +203,7 @@ class SessionController extends Controller
         // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return redirect()->route('qrCode')
+        return redirect()->to('qrCode')
             ->with('checkout_url', $response->data->attributes->checkout_url,'cart', $cart);
     }
 
