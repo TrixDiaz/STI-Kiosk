@@ -209,10 +209,12 @@ class SessionController extends Controller
                     'order_id' => $orderID,
                     'product_name' => $item['product_name'],
                     'product_price' => $item['product_price'],
-                    // 'product_image' => $item['product_image'],
                     'quantity' => $item['quantity'],
                     'order_type' => $orderType,
                     'total' => $item['total'],
+                    'payment_status' => 'Gcash',
+                    'created_at' => now(),
+                    'updated_at' => now(),
                     // Add other fields as needed
                 ]);
             }

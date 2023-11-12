@@ -15,42 +15,43 @@
                                     <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart
                                     </h2>
                                     <div class="ml-3 flex h-7 items-center">
-                                       <a href="{{ route('kiosk') }}">
-                                        <button type="button"
-                                        class="relative -m-2 p-2 text-gray-400 hover:text-gray-500">
-                                        <span class="absolute -inset-0.5"></span>
-                                        <span class="sr-only">Close panel</span>
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </button>
-                                       </a>
+                                        <a href="{{ route('kiosk') }}">
+                                            <button type="button"
+                                                class="relative -m-2 p-2 text-gray-400 hover:text-gray-500">
+                                                <span class="absolute -inset-0.5"></span>
+                                                <span class="sr-only">Close panel</span>
+                                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                                 @if (session('success'))
-                                <div data-aos="fade-left" data-aos-duration="1000">
-                                    <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
-                                        data-dismissible="alert" id="success-alert">
-                                        <div class="absolute top-4 left-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
+                                    <div data-aos="fade-left" data-aos-duration="1000">
+                                        <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
+                                            data-dismissible="alert" id="success-alert">
+                                            <div class="absolute top-4 left-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-8 mr-12">{{ session('success') }}</div>
                                         </div>
-                                        <div class="ml-8 mr-12">{{ session('success') }}</div>
                                     </div>
-                                </div>
-                    
-                                <script>
-                                    // Close the success message after 2 seconds
-                                    setTimeout(function() {
-                                        document.getElementById('success-alert').remove();
-                                    }, 2000);
-                                </script>
-                            @endif
+
+                                    <script>
+                                        // Close the success message after 2 seconds
+                                        setTimeout(function() {
+                                            document.getElementById('success-alert').remove();
+                                        }, 2000);
+                                    </script>
+                                @endif
                                 <div class="mt-8">
                                     <div class="flow-root">
                                         <ul id="cart" role="list" class="-my-6 divide-y divide-gray-200">
@@ -75,8 +76,7 @@
                                                                     <div
                                                                         class="flex justify-between text-base font-medium text-gray-900">
                                                                         <h3>
-                                                                            <a
-                                                                               >{{ $details['product_name'] }}</a>
+                                                                            <a>{{ $details['product_name'] }}</a>
                                                                         </h3>
                                                                         <div class="flex flex-col">
                                                                             <p data-th="Price" class="ml-2">
@@ -110,8 +110,11 @@
                                                 @php
                                                     $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
                                                 @endphp
-                                                <input type="text" value="{{ $total }}" name="total" class="hidden">
-                                                <input type="text" value="{{ $orderID }}" name="orderID" class="hidden">
+                                                <input type="text" value="{{ $total }}" name="total"
+                                                    class="hidden">
+                                                <input type="text" value="{{ $orderID }}" name="orderID"
+                                                    class="hidden">
+
                                             </form>
                                             <!-- More products... -->
                                         </ul>
@@ -119,16 +122,42 @@
                                 </div>
                             </div>
 
-                            <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+                            <div class="border-t border-gray-200 px-4 py-2 sm:px-6">
+
+                                {{-- Radio --}}
+                                <div class="flex justify-around m-2">
+                                    <div>
+                                        <input type="radio" id="dine-in" name="order_type" value="Dine in" checked
+                                            class="hidden peer" required>
+                                        <label for="dine-in"
+                                            class="inline-flex items-center justify-between w-auto p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <div class="block">
+                                                <div class="w-full text-lg font-semibold">Dine in</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="take-out" name="order_type" value="Take out"
+                                            class="hidden peer">
+                                        <label for="take-out"
+                                            class="inline-flex items-center justify-between w-auto p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <div class="block">
+                                                <div class="w-full text-lg font-semibold">Take out</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                {{-- Radio --}}
                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                     <p>Subtotal</p>
                                     <p>₱{{ $total }}</p>
                                 </div>
+
                                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                 <div class="mt-6 flex justify-evenly">
                                     <button onclick="changePaymentMethod('cash')"
                                         class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button>
-                                        <button  onclick="changePaymentMethod('qrPayment')"
+                                    <button onclick="changePaymentMethod('qrPayment')"
                                         class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-indigo-600">Cashless</button>
                                 </div>
                                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
@@ -136,10 +165,10 @@
                                         or
                                         <a href="{{ route('kiosk') }}">
                                             <button type="button"
-                                            class="font-medium text-indigo-600 hover:text-indigo-500">
-                                            Continue Shopping
-                                            <span aria-hidden="true"> &rarr;</span>
-                                        </button>
+                                                class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                Continue Shopping
+                                                <span aria-hidden="true"> &rarr;</span>
+                                            </button>
                                         </a>
                                     </p>
                                 </div>
