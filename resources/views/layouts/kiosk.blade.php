@@ -284,7 +284,7 @@
                         @foreach(session('cart') as $id => $details)
                             <div class="flex mr-5">
                                 <div class="col-lg-4 col-sm-4 col-4">
-                                    <img src="{{ asset('storage/' . $details['product_image']) }}" alt="{{ $details['product_name'] }}" class="h-14 w-14 bg-cover rounded-md" />
+                                    <img src="storage/{{ $details['product_image'] }}" alt="{{ $details['product_name'] }}" class="h-14 w-14 bg-cover rounded-md" />
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8">
                                     <p class="">{{ $details['product_name'] }}</p>

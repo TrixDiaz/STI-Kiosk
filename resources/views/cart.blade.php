@@ -65,7 +65,7 @@
                                                             <div
                                                                 class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                                 <img data-th="Product"
-                                                                    src="{{ asset('storage/' . $details['product_image']) }}"
+                                                                    src="storage/{{ $details['product_image'] }}"
                                                                     alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
                                                                     class="h-full w-full object-cover object-center">
                                                             </div>
