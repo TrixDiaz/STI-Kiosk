@@ -278,7 +278,7 @@
                     </a>
                 </li>
                 <li class="h-48 overflow-y-auto my-2 mx-2">
-                    <a class="block w-full whitespace-nowrap bg-transparent px-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+                    <a class="mt-3 block w-full whitespace-nowrap bg-transparent px-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
                          data-te-dropdown-item-ref>
                         @if(session('cart'))
                         @foreach(session('cart') as $id => $details)

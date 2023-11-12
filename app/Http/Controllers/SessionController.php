@@ -161,12 +161,12 @@ class SessionController extends Controller
         Session::put('checkout_url', $response->data->attributes->checkout_url);
 
         
-        return redirect()->to($response->data->attributes->checkout_url);
+        // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        // return redirect()
-        //     ->route('qrCode', ['orderDetails' => $orderDetails])
-        //     ->with('checkout_url', $response->data->attributes->checkout_url);
+        return redirect()
+            ->route('qrCode')
+            ->with('checkout_url', $response->data->attributes->checkout_url);
     }
 
 
