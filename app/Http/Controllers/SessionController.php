@@ -147,7 +147,7 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-        session()->put('cart', $cart);
+        session()->put('cart', $orderDetails);
         $data = [
             'data' => [
                 'attributes' => [
