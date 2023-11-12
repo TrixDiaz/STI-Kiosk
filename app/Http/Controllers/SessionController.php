@@ -29,6 +29,7 @@ class SessionController extends Controller
 
     public function qrCode()
     {
+        
         return view('qrCode');
     }
 
@@ -165,8 +166,7 @@ class SessionController extends Controller
         // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return redirect()
-            ->route('qrCode')
+        return view('qrCode')
             ->with('checkout_url', $response->data->attributes->checkout_url);
     }
 
