@@ -197,11 +197,10 @@ class SessionController extends Controller
     {
          // Retrieve orderDetails from URL parameters
     $orderDetails = $request->input('orderDetails');
-        dd($orderDetails);
+        // dd($orderDetails);
         // $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         // $total = $request->input('total'); // Get the Total Request from input
-        $orderType = $request->input('orderType');
         // Check if the cart data exists and is an array
      
             foreach ($orderDetails as $item) {
@@ -211,7 +210,7 @@ class SessionController extends Controller
                     'product_name' => $item['product_name'],
                     'product_price' => $item['product_price'],
                     'quantity' => $item['quantity'],
-                    'order_type' => $orderType,
+                    'order_type' => $item['order_type'],
                     'total' => $item['total'],
                     'payment_status' => 'Gcash',
                     'created_at' => now(),
