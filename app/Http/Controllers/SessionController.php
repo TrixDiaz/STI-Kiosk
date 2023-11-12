@@ -29,7 +29,6 @@ class SessionController extends Controller
 
     public function qrCode()
     {
-        dd(session()->all());
         return view('qrCode');
     }
 
@@ -160,7 +159,7 @@ class SessionController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => route('successOrder', ['total' => $total]),
+                    'success_url' => route('successOrder', ['total' => $total,'cart' => $cart]),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
