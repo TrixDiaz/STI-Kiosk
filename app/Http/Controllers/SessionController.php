@@ -147,7 +147,7 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-        session()->put('cart', $orderDetails);
+      
         $data = [
             'data' => [
                 'attributes' => [
@@ -161,7 +161,7 @@ class SessionController extends Controller
                         ],
                     ],
                     'payment_method_types' => ['card', 'gcash'],
-                    'success_url' => route('successOrder', ['orderDetails' => $orderDetails]),
+                    'success_url' => route('successOrder', ['orderDetails' => $orderDetails, 'orderType', $orderType]),
                     'cancel_url' => route('/'),
                     'description' => 'text',
                 ],
@@ -196,11 +196,11 @@ class SessionController extends Controller
     {
          // Retrieve orderDetails from URL parameters
     $orderDetails = $request->input('orderDetails');
-        dd($orderDetails);
+        // dd($orderDetails);
         // $cartData = session('cart');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
-        $total = $request->input('total'); // Get the Total Request from input
-    
+        // $total = $request->input('total'); // Get the Total Request from input
+        $orderType = $request->input('orderType');
         // Check if the cart data exists and is an array
      
             foreach ($orderDetails as $item) {
@@ -211,8 +211,8 @@ class SessionController extends Controller
                     'product_price' => $item['product_price'],
                     // 'product_image' => $item['product_image'],
                     'quantity' => $item['quantity'],
-                    'order_type' => $item['order_type'],
-                    'total' => $total,
+                    'order_type' => $orderType,
+                    'total' => $item['total'],
                     'product_category' => $item['product_category'],
                     // Add other fields as needed
                 ]);
