@@ -28,28 +28,9 @@ class SessionController extends Controller
         return view('cart');
     }
 
-    public function qrCode(Request $request)
+    public function qrCode()
     {
-        $cart = session()->get('cart', []);
-
-        $orderType = $request->input('order_type'); // Get the selected order type from the input
-        $total = $request->input('total');
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                'product_name' => $product->product_name,
-                'product_price' => $product->product_price,
-                'product_image' => $product->product_image,
-                'product_category' => $product->product_category,
-                'quantity' => 1,
-                'order_type' => $orderType, 
-                'total' =>  $total,
-            ];
-        }
-        session()->put('cart', $cart); 
-
-        return view('qrCode')->with('cart',$cart);
+        return view('qrCode');
     }
 
       /**
