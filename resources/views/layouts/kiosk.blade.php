@@ -282,8 +282,8 @@
                          data-te-dropdown-item-ref>
                         @if(session('cart'))
                         @foreach(session('cart') as $id => $details)
-                            <div class="flex mr-5">
-                                <div class="col-lg-4 col-sm-4 col-4">
+                            <div class="flex">
+                                <div class="col-lg-4 col-sm-4 col-4 mr-5">
                                     <img src="storage/{{ $details['product_image'] }}" alt="{{ $details['product_name'] }}" class="h-14 w-14 bg-cover rounded-md" />
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8">
