@@ -301,7 +301,7 @@
                         data-te-dropdown-item-ref>
                         <div class="row">
                             <div class="text-center m-2">
-                                <a href="{{ route('cart') }}" class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
+                                <a href="{{ route('cart') }}" wire:navigate class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
                             </div>
                         </div>
                     </a>

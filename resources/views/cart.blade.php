@@ -15,7 +15,7 @@
                                     <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart
                                     </h2>
                                     <div class="ml-3 flex h-7 items-center">
-                                        <a href="{{ route('kiosk') }}">
+                                        <a href="{{ route('kiosk') }}" wire:navigate>
                                             <button type="button"
                                                 class="relative -m-2 p-2 text-gray-400 hover:text-gray-500">
                                                 <span class="absolute -inset-0.5"></span>
@@ -164,7 +164,7 @@
                                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>
                                         or
-                                        <a href="{{ route('kiosk') }}">
+                                        <a href="{{ route('kiosk') }}" wire:navigate>
                                             <button type="button"
                                                 class="font-medium text-indigo-600 hover:text-indigo-500">
                                                 Continue Shopping
