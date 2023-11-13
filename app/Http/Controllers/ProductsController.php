@@ -152,21 +152,33 @@ class ProductsController extends Controller
      * Remove the specified order id from queue
      * and insert to serve.
      */
-    public function serving(Request $request, Queue $order)
+    public function serving(Request $request, $order_id)
     {
-        // Insert the order into the "serve" table
-        Serve::create([
-            'order_id' => $order->order_id,
-            // Add any other fields you need for the "serve" table
-        ]);
-
-        // Delete the order from the "queue" table
-        $order->delete();
-
-        return redirect()
-            ->route('dashboard')
-            ->with('success', 'Order served successfully');
+        // Find the order in the "queue" table
+        $order = Queue::where('order_id', $order_id)->first();
+    
+        // Check if the order exists
+        if ($order) {
+            // Insert the order into the "serve" table
+            Serve::create([
+                'order_id' => $order->order_id,
+                // Add any other fields you need for the "serve" table
+            ]);
+    
+            // Delete the order from the "queue" table
+            $order->delete();
+    
+            return redirect()
+                ->route('dashboard')
+                ->with('success', 'Order served successfully');
+        } else {
+            // Handle the case where the order does not exist
+            return redirect()
+                ->route('dashboard')
+                ->with('error', 'Order not found');
+        }
     }
+    
 
     /**
      *
