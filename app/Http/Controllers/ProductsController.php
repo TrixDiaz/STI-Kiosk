@@ -186,17 +186,19 @@ class ProductsController extends Controller
      *
      **/
 
+
+
     /**
      *
      * Delete From Order Insert to Queue
      *
      **/
 
-     public function prepareOrder($order_id)
+     public function prepareOrder(Request $request,$order_id)
      {
-         // Retrieve the order details before deleting
-         $orderDetails = Order::where('order_id', $order_id)->first();
-     
+        // dd(session()->all());
+        $orderData = Order::where('order_id', $order_id)->first();
+        dd($orderData);
          // Check if the order exists
          if (!$orderDetails) {
              return redirect()

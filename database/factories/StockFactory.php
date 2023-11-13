@@ -21,8 +21,10 @@ class StockFactory extends Factory
             'product_name' => $this->faker->firstName(),
             'product_stock' => $this->faker->numberBetween('100','999'),
             'product_price' => $this->faker->numberBetween('100','999'),
+            'product_category' => 'Donmono',
             'product_status' => $this->faker->firstName(),
             'product_expiration' => now(),
+
         ];
     }
 }

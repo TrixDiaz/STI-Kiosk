@@ -301,7 +301,7 @@
                         data-te-dropdown-item-ref>
                         <div class="row">
                             <div class="text-center m-2">
-                                <a href="{{ route('cart') }}" wire:navigate class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
+                                <a href="{{ route('cart') }}" class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
                             </div>
                         </div>
                     </a>
@@ -339,7 +339,27 @@
     @stack('scripts')
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     @livewireScripts
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          document.addEventListener('dblclick', function () {
+            toggleFullscreen();
+          });
+        });
+    
+        function toggleFullscreen() {
+          const doc = window.document;
+          const docEl = doc.documentElement;
+    
+          const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+          const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+    
+          if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+            requestFullScreen.call(docEl);
+          } else {
+            cancelFullScreen.call(doc);
+          }
+        }
+      </script>
     
 </body>
 

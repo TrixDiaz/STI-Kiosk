@@ -55,8 +55,7 @@
                                 <div class="mt-8">
                                     <div class="flow-root">
                                         <ul id="cart" role="list" class="-my-6 divide-y divide-gray-200">
-                                            <form id="checkout-form" method="post"
-                                                action="{{ route('create.order') }}">
+                                            <form id="checkout-form" method="post" action="{{ route('create.order') }}">
                                                 @csrf
                                                 @php $total = 0 @endphp
                                                 @if (session('cart'))

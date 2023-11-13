@@ -93,9 +93,7 @@ class SessionController extends Controller
         $orderDetails = []; // Declarad null array
 
         $cart = session('cart'); // Retrieve products from the session
-
-        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
-        
+ 
         $total = $request->input('total'); // Get the Total Request from input
         $orderID = $request->input('orderID'); 
         $orderType = $request->input('order_type'); // Get the order type Request from input
@@ -206,7 +204,7 @@ class SessionController extends Controller
      
             foreach ($orderDetails as $item) {
                 // Insert each item into the orders table
-                Order::create([
+                Queue::create([
                     'order_id' => $orderID,
                     'product_name' => $item['product_name'],
                     'product_price' => $item['product_price'],
