@@ -28,7 +28,6 @@ use App\Http\Controllers\SessionController;
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         // Retrieve all data from the "queue" and "serve" tables
-        $queues = DB::table('queues')->get();
         $serves = DB::table('serves')->get();
 
         $uniqueOrderIDs = DB::table('orders')
@@ -36,7 +35,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             ->distinct()
             ->get();
 
+        $uniqueQueueIDs = DB::table('queues')
+        ->select('order_id')
+        ->distinct()
+        ->get();
+
         $orders = [];
+        $queues = [];
 
         foreach ($uniqueOrderIDs as $order) {
             $orderInfo = DB::table('orders')
@@ -58,6 +63,28 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
                 'created_at' => $created_at,
             ];
         }
+
+        foreach ($uniqueQueueIDs as $queue) {
+            $queueInfo = DB::table('queues')
+            ->select('order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'payment_status','created_at')
+            ->where('order_id', $queue->order_id)
+            ->get();        
+
+            $QueueorderType = $queueInfo->first()->order_type;
+            $Queuepayment_status = $queueInfo->first()->payment_status;
+            $Queuetotal = $queueInfo->first()->total;
+            $Queuecreated_at = \Carbon\Carbon::parse($queueInfo->first()->created_at)->diffForHumans();
+
+            $queues[] = [
+                'order_id' => $queue->order_id,
+                'order_info' => $queueInfo,
+                'order_type' => $QueueorderType,
+                'payment_status' => $Queuepayment_status,
+                'total' => $Queuetotal,
+                'created_at' => $Queuecreated_at,
+            ];
+        }
+
         return view('dashboard', compact('orders','queues','serves'));
     })->name('dashboard');
 });

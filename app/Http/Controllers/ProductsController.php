@@ -180,20 +180,36 @@ class ProductsController extends Controller
      *
      **/
 
-    public function prepareOrder($order_id)
-    {
-        // Soft delete the order from the orders table
-        DB::table('orders')
-            ->where('order_id', $order_id)
-            ->delete();
-
-        // Insert the order ID into the queue table
-        DB::table('queues')->insert([
-            'order_id' => $order_id,
-        ]);
-
-        return redirect()
-            ->back()
-            ->with('success', 'Order prepared and added to the queue.');
-    }
+     public function prepareOrder($order_id)
+     {
+         // Retrieve the order details before deleting
+         $orderDetails = Order::where('order_id', $order_id)->first();
+     
+         // Check if the order exists
+         if (!$orderDetails) {
+             return redirect()
+                 ->back()
+                 ->with('error', 'Order not found.');
+         }
+     
+         // Soft delete the order from the orders table
+         Order::where('order_id', $order_id)->delete();
+     
+         // Insert the order ID into the queue table
+         DB::table('queues')->insert([
+             'order_id'         => $orderDetails->order_id,
+             'product_name'     => $orderDetails->product_name,
+             'product_price'    => $orderDetails->product_price,
+             'quantity'         => $orderDetails->quantity,
+             'total'            => $orderDetails->total,
+             'order_type'       => $orderDetails->order_type,
+             'payment_status'   => 'Cash',
+             'created_at'       => now(),
+             'updated_at'       => now(),
+         ]);
+     
+         return redirect()
+             ->back()
+             ->with('success', 'Order prepared and added to the queue.');
+     }
 }

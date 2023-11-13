@@ -951,6 +951,7 @@
                                 <td class="text-right text-gray-700">{{ $orderDetail->product_price }}</td>
                             </tr>
                        
+                            @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -960,8 +961,7 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="text-gray-700 mb-2">Thanks for visiting us!</div>
-                @endforeach
+                {{-- <div class="text-gray-700 mb-2">Thanks for visiting us!</div> --}}
                 <div class="text-gray-700 text-sm uppercase">Disclaimer this is not your offical Receipt!</div>
             </div>
 
