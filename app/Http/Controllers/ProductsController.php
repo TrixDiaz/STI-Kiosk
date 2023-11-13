@@ -171,11 +171,13 @@ class ProductsController extends Controller
     /**
      *
      * Fetch Orders
+     *
      **/
 
     /**
      *
      * Delete From Order Insert to Queue
+     *
      **/
 
     public function prepareOrder($order_id)

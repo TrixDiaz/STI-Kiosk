@@ -14,7 +14,6 @@ class Order extends Model
         'product_name',
         'product_price',
         'quantity',
-        'order',
         'total',
         'order_type',
         'product_category',

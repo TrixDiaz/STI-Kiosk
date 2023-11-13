@@ -40,19 +40,24 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
         foreach ($uniqueOrderIDs as $order) {
             $orderInfo = DB::table('orders')
-                ->select('product_name', 'quantity', 'order_type')
-                ->where('order_id', $order->order_id)
-                ->get();
+            ->select('order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'payment_status','created_at')
+            ->where('order_id', $order->order_id)
+            ->get();        
 
             $orderType = $orderInfo->first()->order_type;
+            $payment_status = $orderInfo->first()->payment_status;
+            $total = $orderInfo->first()->total;
+            $created_at = \Carbon\Carbon::parse($orderInfo->first()->created_at)->diffForHumans();
 
             $orders[] = [
                 'order_id' => $order->order_id,
                 'order_info' => $orderInfo,
                 'order_type' => $orderType,
+                'payment_status' => $payment_status,
+                'total' => $total,
+                'created_at' => $created_at,
             ];
         }
-
         return view('dashboard', compact('orders','queues','serves'));
     })->name('dashboard');
 });
