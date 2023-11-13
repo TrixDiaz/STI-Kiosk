@@ -115,13 +115,24 @@ class ProductsController extends Controller
     **/
 
     public function destroyServe(Serve $serve)
-    {
-        $serve->delete();
+{
+    // Get the order_id of the serve
+    $orderId = $serve->order_id;
 
-        return redirect()
-            ->back()
-            ->with('success', 'Order served and removed from the "serve" table');
-    }
+    // Delete all serves with the same order_id
+    Serve::where('order_id', $orderId)->delete();
+
+    // Delete all orders with the same order_id from the "queue" table
+    Queue::where('order_id', $orderId)->delete();
+
+    // Delete the specific serve record
+    $serve->delete();
+
+    return redirect()
+        ->back()
+        ->with('success', 'Order served and removed from the "serve" table, along with related orders');
+}
+
 
     public function queue()
     {
@@ -154,30 +165,33 @@ class ProductsController extends Controller
      */
     public function serving(Request $request, $order_id)
     {
-        // Find the order in the "queue" table
-        $order = Queue::where('order_id', $order_id)->first();
+        // Find all orders in the "queue" table with the same order_id
+        $orders = Queue::where('order_id', $order_id)->get();
     
-        // Check if the order exists
-        if ($order) {
-            // Insert the order into the "serve" table
-            Serve::create([
-                'order_id' => $order->order_id,
-                // Add any other fields you need for the "serve" table
-            ]);
+        // Check if any orders exist
+        if ($orders->isNotEmpty()) {
+            // Insert each order into the "serve" table
+            foreach ($orders as $order) {
+                Serve::create([
+                    'order_id' => $order->order_id,
+                    // Add any other fields you need for the "serve" table
+                ]);
     
-            // Delete the order from the "queue" table
-            $order->delete();
+                // Delete the order from the "queue" table
+                $order->delete();
+            }
     
             return redirect()
                 ->route('dashboard')
-                ->with('success', 'Order served successfully');
+                ->with('success', 'Orders served successfully');
         } else {
-            // Handle the case where the order does not exist
+            // Handle the case where no orders with the specified order_id were found
             return redirect()
                 ->route('dashboard')
-                ->with('error', 'Order not found');
+                ->with('error', 'Orders not found');
         }
     }
+    
     
 
     /**
