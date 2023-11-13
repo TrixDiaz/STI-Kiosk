@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CashierController;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +43,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         function getOrderInfo($table, $order_id)
         {
             return DB::table($table)
-                ->select('order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'payment_status', 'created_at')
+                ->select('id','order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'payment_status', 'created_at')
                 ->where('order_id', $order_id)
                 ->get();
         }
@@ -52,6 +53,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             $orderInfo = getOrderInfo('orders', $order->order_id);
 
             $orders[] = [
+                'id' => $orderInfo->isEmpty() ? null : $orderInfo->first()->id,
                 'order_id' => $order->order_id,
                 'order_info' => $orderInfo,
                 'order_type' => $orderInfo->isEmpty() ? null : $orderInfo->first()->order_type,
@@ -118,3 +120,5 @@ Route::controller(SessionController::class)->group(function () {
     Route::get('/qrPayment', 'qrPayment')->name('qrPayment');
     Route::get('/success-order/{total?}', 'successOrder')->name('successOrder');
 });
+
+Route::delete('/orders/{order}', [CashierController::class, 'moveToQueueAndDelete'])->name('orders.move-to-queue');

@@ -76,7 +76,7 @@
                                         <td scope="row"
                                             class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 
-                                            <!-- Button trigger modal -->
+                                          
                                             <button type="button"
                                                 class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                                                 data-te-toggle="modal"
@@ -85,7 +85,7 @@
                                                 {{ $order['order_id'] }}
                                             </button>
 
-                                            <!-- Modal -->
+                                      
                                             <div data-te-modal-init
                                                 class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
                                                 id="exampleModal{{ $order['order_id'] }}" tabindex="-1"
@@ -151,21 +151,18 @@
                                                                 data-te-ripple-color="light">
                                                                 Close
                                                             </button>
-                                                            {{-- <button type="button"
-                                                                class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                                                                data-te-ripple-init data-te-ripple-color="light">
-                                                                Save changes
-                                                            </button> --}}
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <form method="POST" action="{{ route('serving', $order['order_id']) }}">
+                                            <form action="{{ route('orders.move-to-queue', $order['id']) }}" method="POST">
                                                 @csrf
-                                                <button type="submit"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-center">Serve</button>
+                                                @method('DELETE')
+                                                <button type="submit" onclick="return confirm('Are you sure you want to move this order to the queue?')">Move to Queue</button>
+                                            </form>
                                             </form>
                                         </td>
                                     </tr>
