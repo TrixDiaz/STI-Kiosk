@@ -121,4 +121,19 @@ Route::controller(SessionController::class)->group(function () {
     Route::get('/success-order/{total?}', 'successOrder')->name('successOrder');
 });
 
-Route::delete('/orders/{order}', [CashierController::class, 'moveToQueueAndDelete'])->name('orders.move-to-queue');
+Route::controller(CashierController::class)->group(function () {
+    Route::get('/pos-donmono', 'donmono')->name('pos.donmono');
+    Route::get('/pos-ippin', 'ippin')->name('pos.ippin');
+    Route::get('/pos-kushiyaki', 'kushiyaki')->name('pos.kushiyaki');
+    Route::get('/pos-makizushi', 'makizushi')->name('pos.makizushi');
+    Route::get('/pos-men', 'men')->name('pos.men');
+    Route::get('/pos-nigirizushi', 'nigirizushi')->name('pos.nigirizushi');
+    Route::get('/pos-ochazuke', 'ochazuke')->name('pos.ochazuke');
+    Route::get('/pos-ramen', 'ramen')->name('pos.ramen');
+    Route::get('/pos-salad', 'salad')->name('pos.salad');
+    Route::get('/pos-sashimi', 'sashimi')->name('pos.sashimi');
+    Route::get('/pos-tempura', 'tempura')->name('pos.tempura');
+    Route::get('/pos-yakizakana', 'yakizakana')->name('pos.yakizakana');
+    Route::get('/pos-zensai', 'zensai')->name('pos.zensai');
+    Route::delete('/orders/{order}', 'moveToQueueAndDelete')->name('orders.move-to-queue');
+    });
