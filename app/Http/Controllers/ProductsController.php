@@ -196,9 +196,9 @@ class ProductsController extends Controller
 
      public function prepareOrder(Request $request,$order_id)
      {
-        // dd(session()->all());
-        $orderData = Order::where('order_id', $order_id)->first();
-        dd($orderData);
+         // dd(session()->all());
+         $orderDetails = Order::where('order_id', $order_id)->first();
+         dd($orderDetails);
          // Check if the order exists
          if (!$orderDetails) {
              return redirect()
@@ -206,9 +206,7 @@ class ProductsController extends Controller
                  ->with('error', 'Order not found.');
          }
      
-         // Soft delete the order from the orders table
-         Order::where('order_id', $order_id)->delete();
-     
+        
          // Insert the order ID into the queue table
          DB::table('queues')->insert([
              'order_id'         => $orderDetails->order_id,
@@ -221,7 +219,8 @@ class ProductsController extends Controller
              'created_at'       => now(),
              'updated_at'       => now(),
          ]);
-     
+     // Soft delete the order from the orders table
+     Order::where('order_id', $order_id)->delete();
          return redirect()
              ->back()
              ->with('success', 'Order prepared and added to the queue.');

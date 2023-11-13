@@ -66,70 +66,110 @@
                                             Order ID
                                         </th>
                                         <th scope="col" class="py-3">
-                                            Products
-                                        </th>
-                                        <th scope="col" class="py-3">
-                                            Quantity
-                                        </th>
-                                        <th scope="col" class="py-3">
-                                            Order type
-                                        </th>
-                                        <th scope="col" class="py-3">
-                                            Payment Status
-                                        </th>
-                                        <th scope="col" class="py-3">
-                                            Total
-                                        </th>
-                                        <th scope="col" class="py-3">
-                                            Created
-                                        </th>
-                                        <th scope="col" class="py-3">
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                                            <th scope="row"
-                                                class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $order['order_id'] }}
-                                            </th>
-                                            <td>
-                                                @foreach ($order['order_info'] as $info)
-                                                    {{ $info->product_name }}
-                                                    @if (!$loop->last)
-                                                        <br>
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                @foreach ($order['order_info'] as $info)
-                                                    {{ $info->quantity }}
-                                                    @if (!$loop->last)
-                                                        <br>
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                {{ $order['order_type'] }}
-                                            </td>
-                                            <td>
-                                                {{ $order['payment_status'] }}
-                                            </td>
-                                            <td>
-                                                {{ $order['total'] }}
-                                            </td>
-                                            <td>
-                                                {{ $order['created_at'] }}
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('prepare.order', ['order_id' => $order['order_id']]) }}"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Paid</a>
-                                            </td>
+                                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center">
+                                        <td scope="row"
+                                            class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 
-                                        </tr>
-                                    @endforeach
+                                            <!-- Button trigger modal -->
+                                            <button type="button"
+                                                class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                                                data-te-toggle="modal"
+                                                data-te-target="#exampleModal{{ $order['order_id'] }}"
+                                                data-te-ripple-init data-te-ripple-color="light">
+                                                {{ $order['order_id'] }}
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div data-te-modal-init
+                                                class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+                                                id="exampleModal{{ $order['order_id'] }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div data-te-modal-dialog-ref
+                                                    class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
+                                                    <div
+                                                        class="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)] pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                                                        <div
+                                                            class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                                                            <!--Modal title-->
+                                                            <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+                                                                id="exampleModalLabel">
+                                                                Order ID {{ $order['order_id'] }}
+                                                            </h5>
+                                                            <!--Close button-->
+                                                            <button type="button"
+                                                                class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                                                data-te-modal-dismiss aria-label="Close">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" class="h-6 w-6">
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
+                                                                        d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+
+                                                        <!--Modal body-->
+                                                        <div class="relative flex-auto p-4" data-te-modal-body-ref>
+
+                                                            <p>Order ID : {{ $order['order_id'] }}</p>
+                                                            <p>Product Name :
+                                                                @foreach ($order['order_info'] as $info)
+                                                                    {{ $info->product_name }}
+                                                                    @if (!$loop->last)
+                                                                        <br>
+                                                                    @endif
+                                                                @endforeach
+                                                            </p>
+                                                            <p>Qty
+                                                                @foreach ($order['order_info'] as $info)
+                                                                    {{ $info->quantity }}
+                                                                    @if (!$loop->last)
+                                                                        <br>
+                                                                    @endif
+                                                                @endforeach
+                                                            </p>
+                                                            <p>Order Type : {{ $order['order_type'] }}</p>
+                                                            <p>Payment Status : {{ $order['payment_status'] }}</p>
+                                                            <p>Total : {{ $order['total'] }}</p>
+                                                            <p>Created : {{ $order['created_at'] }}</p>
+
+                                                        </div>
+
+                                                        <!--Modal footer-->
+                                                        <div
+                                                            class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                                                            <button type="button"
+                                                                class="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
+                                                                data-te-modal-dismiss data-te-ripple-init
+                                                                data-te-ripple-color="light">
+                                                                Close
+                                                            </button>
+                                                            {{-- <button type="button"
+                                                                class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                                                                data-te-ripple-init data-te-ripple-color="light">
+                                                                Save changes
+                                                            </button> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <form method="POST" action="{{ route('serving', $order['order_id']) }}">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-center">Serve</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
