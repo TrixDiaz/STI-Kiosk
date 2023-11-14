@@ -123,15 +123,15 @@ Route::controller(SessionController::class)->group(function () {
 
 Route::controller(CashierController::class)->group(function () {
 
-    Route::get('pos-add-to-cart/{id}', 'posAddToCart')->name('posAddToCart');
-    Route::get('posCart', 'posCart')->name('posCart');
-    Route::patch('pos-update-cart', 'posUpdate')->name('pos_update_cart');
-    Route::delete('pos-remove-from-cart', 'posRemove')->name('pos_remove_from_cart');
-    Route::post('/pos-create-order', 'posCreateOrder')->name('pos_create.order');
-    Route::get('/pos-receipt/{orderID}', 'posShowReceipt')->name('pos_receipt');
-    Route::get('/posQrCode', 'posQrCode')->name('posQrCode');
-    Route::get('/pos-qrPayment', 'posQrPayment')->name('posQrPayment');
-    Route::get('/pos-success-order/{total?}', 'posSuccessOrder')->name('posSuccessOrder');
+    // Route::get('pos-add-to-cart/{id}', 'posAddToCart')->name('posAddToCart');
+    // Route::get('posCart', 'posCart')->name('posCart');
+    // Route::patch('pos-update-cart', 'posUpdate')->name('pos_update_cart');
+    // Route::delete('pos-remove-from-cart', 'posRemove')->name('pos_remove_from_cart');
+    // Route::post('/pos-create-order', 'posCreateOrder')->name('pos_create.order');
+    // Route::get('/pos-receipt/{orderID}', 'posShowReceipt')->name('pos_receipt');
+    // Route::get('/posQrCode', 'posQrCode')->name('posQrCode');
+    // Route::get('/pos-qrPayment', 'posQrPayment')->name('posQrPayment');
+    // Route::get('/pos-success-order/{total?}', 'posSuccessOrder')->name('posSuccessOrder');
 
     Route::get('/pos-donmono', 'donmono')->name('pos.donmono');
     Route::get('/pos-ippin', 'ippin')->name('pos.ippin');
