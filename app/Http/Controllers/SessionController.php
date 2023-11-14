@@ -193,37 +193,41 @@ class SessionController extends Controller
      * Success Payment in API
      */
     public function successOrder(Request $request)
-    {
-         // Retrieve orderDetails from URL parameters
+{
+    // Retrieve orderDetails from URL parameters
     $orderDetails = $request->input('orderDetails');
-        // dd($orderDetails);
-        // $cartData = session('cart');
-        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
-        // $total = $request->input('total'); // Get the Total Request from input
-        // Check if the cart data exists and is an array
-     
-            foreach ($orderDetails as $item) {
-                // Insert each item into the orders table
-                Queue::create([
-                    'order_id' => $orderID,
-                    'product_name' => $item['product_name'],
-                    'product_price' => $item['product_price'],
-                    'quantity' => $item['quantity'],
-                    'order_type' => $item['order_type'],
-                    'total' => $item['total'],
-                    'payment_status' => 'Gcash',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                    // Add other fields as needed
-                ]);
-            }
-    
-            // Optionally, you can clear the cart after the order is created
-            session()->forget('cart');
-    
-            // Redirect back or to a confirmation page
-            return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');   
+    $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); // Create random 6 digit generator
+
+    foreach ($orderDetails as $item) {
+        // Insert each item into the orders table
+        Queue::create([
+            'order_id' => $orderID,
+            'product_name' => $item['product_name'],
+            'product_price' => $item['product_price'],
+            'quantity' => $item['quantity'],
+            'order_type' => $item['order_type'],
+            'total' => $item['total'],
+            'payment_status' => 'Gcash',
+            'created_at' => now(),
+            'updated_at' => now(),
+            // Add other fields as needed
+        ]);
+
+        // Update the product stock quantity
+        $product = Stock::where('product_name', $item['product_name'])->first();
+        if ($product) {
+            $newQuantity = $product->quantity - $item['quantity'];
+            $product->update(['quantity' => $newQuantity]);
+        }
     }
+
+    // Optionally, you can clear the cart after the order is created
+    session()->forget('cart');
+
+    // Redirect back or to a confirmation page
+    return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
+}
+
 
      /**
      * Fetch all the orders of Customer or Receipt
