@@ -209,8 +209,7 @@ class SessionController extends Controller
             'order_type' => $item['order_type'],
             'total' => $item['total'],
             'payment_status' => 'Gcash',
-            'created_at' => now(),
-            'updated_at' => now(),
+ 
             // Add other fields as needed
         ]);
          // Insert each item into the orders table
@@ -222,8 +221,7 @@ class SessionController extends Controller
             'order_type' => $item['order_type'],
             'total' => $item['total'],
             'payment_status' => 'Gcash',
-            'created_at' => now(),
-            'updated_at' => now(),
+           
             // Add other fields as needed
         ]);
 
