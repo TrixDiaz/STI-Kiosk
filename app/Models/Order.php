@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Stock;
 use App\Models\Product;
+use App\Models\Revenue;
 use App\Models\OrderLog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +65,7 @@ class Order extends Model
             ]);
     
             // Create a new record in the orderLog table for each order item
-            OrderLog::create([
+            Revenue::create([
                 'order_id' => $item->order_id,
                 'product_name' => $item->product_name,
                 'product_price' => $item->product_price,
