@@ -19,6 +19,8 @@ class Serve extends Model
         'payment_status',
         'product_status',
         'session_id',
+        'created_at',
+        'updated_at',
     ];
     
     use HasFactory;
