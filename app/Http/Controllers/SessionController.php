@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Queue;
+use App\Models\Revenue;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -201,6 +202,19 @@ class SessionController extends Controller
     foreach ($orderDetails as $item) {
         // Insert each item into the orders table
         Queue::create([
+            'order_id' => $orderID,
+            'product_name' => $item['product_name'],
+            'product_price' => $item['product_price'],
+            'quantity' => $item['quantity'],
+            'order_type' => $item['order_type'],
+            'total' => $item['total'],
+            'payment_status' => 'Gcash',
+            'created_at' => now(),
+            'updated_at' => now(),
+            // Add other fields as needed
+        ]);
+         // Insert each item into the orders table
+         Revenue::create([
             'order_id' => $orderID,
             'product_name' => $item['product_name'],
             'product_price' => $item['product_price'],
