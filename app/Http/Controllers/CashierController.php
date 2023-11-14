@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CashierController extends Controller
 {
     public function moveToQueueAndDelete(Order $order)
     {
+        
         $order->moveToQueueAndDelete();
 
         // Redirect to the dashboard view

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Stock;
 use App\Models\Product;
 use App\Models\OrderLog;
 use Illuminate\Support\Facades\DB;
@@ -43,7 +44,7 @@ class Order extends Model
         $orderItems = DB::table('orders')
             ->where('order_id', $orderId)
             ->get();
-        
+
         // Delete all products associated with the order
         DB::table('orders')->where('order_id', $orderId)->delete();
         
@@ -74,6 +75,10 @@ class Order extends Model
                 'created_at' => now(),
             ]);
         }
+
+          // Update the product_stock in the stocks table using Eloquent
+          Stock::where('product_name', $item->product_name)
+          ->decrement('product_stock', $item->quantity);
     }
     
     
