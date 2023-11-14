@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -341,7 +341,7 @@
              <a class="my-2" data-te-dropdown-item-ref>
                  <div class="row">
                      <div class="text-center m-2">
-                         <a href="{{ route('cart') }}"
+                         <a href="{{ route('posCart') }}"
                              class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
                      </div>
                  </div>

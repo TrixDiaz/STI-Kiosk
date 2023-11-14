@@ -11,10 +11,10 @@
                         <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                             <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                 <div class="flex items-start justify-between">
-                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart
+                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">POS Shopping cart
                                     </h2>
                                     <div class="ml-3 flex h-7 items-center">
-                                        <a href="{{ route('kiosk') }}" wire:navigate>
+                                        <a href="{{ route('dashboard') }}" wire:navigate>
                                             <button type="button"
                                                 class="relative -m-2 p-2 text-gray-400 hover:text-gray-500">
                                                 <span class="absolute -inset-0.5"></span>
@@ -54,7 +54,7 @@
                                 <div class="mt-8">
                                     <div class="flow-root">
                                         <ul id="cart" role="list" class="-my-6 divide-y divide-gray-200">
-                                            <form id="checkout-form" method="post" action="{{ route('create.order') }}">
+                                            <form id="checkout-form" method="post" action="{{ route('pos_create.order') }}">
                                                 @csrf
                                                 @php $total = 0 @endphp
                                                 @if (session('cart'))
@@ -154,15 +154,15 @@
 
                                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                 <div class="mt-6 flex justify-evenly">
-                                    <button onclick="changePaymentMethod('cash')"
+                                    <button onclick="changePaymentMethod('posCash')"
                                         class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button>
-                                    <button onclick="changePaymentMethod('qrPayment')"
+                                    <button onclick="changePaymentMethod('posQrPayment')"
                                         class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-indigo-600">Cashless</button>
                                 </div>
                                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>
                                         or
-                                        <a href="{{ route('kiosk') }}" wire:navigate>
+                                        <a href="{{ route('dashboard') }}" wire:navigate>
                                             <button type="button"
                                                 class="font-medium text-indigo-600 hover:text-indigo-500">
                                                 Continue Shopping
@@ -186,7 +186,7 @@
             var ele = $(this);
 
             $.ajax({
-                url: '{{ route('update_cart') }}',
+                url: '{{ route('pos_update_cart') }}',
                 method: "patch",
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -206,7 +206,7 @@
 
             if (confirm("Do you really want to remove?")) {
                 $.ajax({
-                    url: '{{ route('remove_from_cart') }}',
+                    url: '{{ route('pos_remove_from_cart') }}',
                     method: "DELETE",
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -228,11 +228,11 @@
             event.preventDefault();
 
             // Update the form's action attribute to the new route
-            if (paymentMethod === 'cash') {
-                form.action = "{{ route('create.order') }}";
+            if (paymentMethod === 'posCash') {
+                form.action = "{{ route('pos_create.order') }}";
                 form.method = 'post';
-            } else if (paymentMethod === 'qrPayment') {
-                form.action = "{{ route('qrPayment') }}";
+            } else if (paymentMethod === 'posQrPayment') {
+                form.action = "{{ route('posQrPayment') }}";
                 form.method = 'get';
             }
 

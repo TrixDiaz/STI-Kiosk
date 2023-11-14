@@ -14,6 +14,7 @@ class Queue extends Model
         'quantity',
         'order',
         'total',
+        'name',
         'order_type',
         'product_category',
         'payment_status',

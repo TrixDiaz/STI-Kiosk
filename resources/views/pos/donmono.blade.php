@@ -4,7 +4,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                 @foreach ($products as $product)
                     <div class="relative">
-                        <a href="{{ route('add_to_cart', $product->id) }}">
+                        <a href="{{ route('posAddToCart', $product->id) }}">
                             <img src="/storage/{{ $product->product_image }}"
                                 class="h-40 max-w-full bg-cover rounded-lg" alt="" />
                             <div class="">

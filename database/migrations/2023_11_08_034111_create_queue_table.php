@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('product_price');
             $table->integer('quantity');
             $table->decimal('total', 10, 2);
+            $table->string('name');
             $table->string('order_type');
             $table->string('payment_status');
             $table->string('product_status')->default('Preparing');

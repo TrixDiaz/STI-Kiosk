@@ -73,6 +73,8 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         return $this->hasRole([1]);
     }
 
+    
+
     public function getEmailVerifiedAttribute()
     {
         // If email_verified_at is not null and not false, return true, else return false

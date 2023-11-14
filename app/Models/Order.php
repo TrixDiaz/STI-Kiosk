@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
-    protected $fillable = ['order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'product_category', 'payment_status', 'session_id'];
+    protected $fillable = ['order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'product_category', 'payment_status', 'session_id','name','user_id','created_at'];
 
     use HasFactory;
 
@@ -32,6 +32,7 @@ class Order extends Model
     {
         return $this->hasOne(Queue::class);
     }
+    
 
     public function moveToQueueAndDelete()
     {
