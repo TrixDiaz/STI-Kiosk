@@ -44,12 +44,13 @@ class Order extends Model
         $orderItems = DB::table('orders')
             ->where('order_id', $orderId)
             ->get();
-
-        // Delete all products associated with the order
-        DB::table('orders')->where('order_id', $orderId)->delete();
-        
+    
         // Iterate over order items
         foreach ($orderItems as $item) {
+            // Update the product_stock in the stocks table using Eloquent
+            Stock::where('product_name', $item->product_name)
+                  ->decrement('product_stock', $item->quantity);
+    
             // Create a new record in the queue table with the order item data
             Queue::create([
                 'order_id' => $item->order_id,
@@ -75,10 +76,6 @@ class Order extends Model
                 'created_at' => now(),
             ]);
         }
-
-          // Update the product_stock in the stocks table using Eloquent
-          Stock::where('product_name', $item->product_name)
-          ->decrement('product_stock', $item->quantity);
     }
     
     
