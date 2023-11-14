@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Queue;
+use App\Models\Revenue;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
@@ -118,7 +119,8 @@ class CashierController extends Controller
         }
         session()->put('cart', $orderDetails);
 
-        Queue::insert($orderDetails);   // Insert all the order details into the database
+        Queue::insert($orderDetails); 
+        Revenue::insert($orderDetails);  // Insert all the order details into the database
 
         session()->forget('cart'); // Optionally, you can clear the cart after the order is created
 
