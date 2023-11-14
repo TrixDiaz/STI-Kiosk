@@ -112,6 +112,8 @@
                                                     class="hidden">
                                                 <input type="text" value="{{ $orderID }}" name="orderID"
                                                     class="hidden">
+                                                    <input type="text" value="{{ Auth::user()->name }}" name="name"
+                                                    class="hidden">
 
                                           
                                             <!-- More products... -->
