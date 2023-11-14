@@ -213,7 +213,18 @@ class SessionController extends Controller
             'updated_at' => now(),
             // Add other fields as needed
         ]);
-         
+        Revenue::create([
+            'order_id' => $orderID,
+            'product_name' => $item['product_name'],
+            'product_price' => $item['product_price'],
+            'quantity' => $item['quantity'],
+            'order_type' => $item['order_type'],
+            'total' => $item['total'],
+            'payment_status' => 'Gcash',
+            'created_at' => now(),
+            'updated_at' => now(),
+            // Add other fields as needed
+        ]);
 
         // Update the product stock quantity
         $product = Stock::where('product_name', $item['product_name'])->first();

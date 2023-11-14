@@ -234,6 +234,19 @@ class CashierController extends Controller
             'updated_at' => now(),
             // Add other fields as needed
         ]);
+        Revenue::create([
+            'order_id' => $orderID,
+            'product_name' => $item['product_name'],
+            'product_price' => $item['product_price'],
+            'quantity' => $item['quantity'],
+            'order_type' => $item['order_type'],
+            'total' => $item['total'],
+            'payment_status' => 'Gcash',
+            'name' => Auth::user()->name,
+            'created_at' => now(),
+            'updated_at' => now(),
+            // Add other fields as needed
+        ]);
 
      
 
