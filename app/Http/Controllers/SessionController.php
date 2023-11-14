@@ -216,11 +216,11 @@ class SessionController extends Controller
          
 
         // Update the product stock quantity
-        $product = Stock::where('product_name', $item['product_name'])->first();
-        if ($product) {
-            $newQuantity = $product->quantity - $item['quantity'];
-            $product->update(['quantity' => $newQuantity]);
-        }
+        // $product = Stock::where('product_name', $item['product_name'])->first();
+        // if ($product) {
+        //     $newQuantity = $product->quantity - $item['quantity'];
+        //     $product->update(['quantity' => $newQuantity]);
+        // }
     }
 
     // Optionally, you can clear the cart after the order is created
