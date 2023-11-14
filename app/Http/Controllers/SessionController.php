@@ -216,18 +216,18 @@ class SessionController extends Controller
          
 
         // Update the product stock quantity
-        // $product = Stock::where('product_name', $item['product_name'])->first();
-        // if ($product) {
-        //     $newQuantity = $product->quantity - $item['quantity'];
-        //     $product->update(['quantity' => $newQuantity]);
-        // }
+        $product = Stock::where('product_name', $item['product_name'])->first();
+        if ($product) {
+            $newQuantity = $product->quantity - $item['quantity'];
+            $product->update(['quantity' => $newQuantity]);
+        }
     }
 
     // Optionally, you can clear the cart after the order is created
     session()->forget('cart');
 
     // Redirect back or to a confirmation page
-    return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
+    return redirect()->route('QRreceipt', ['orderID' => $orderID])->with('success', 'Order created.');
 }
 
 
@@ -238,6 +238,15 @@ class SessionController extends Controller
     {
         // Retrieve the order details from the database based on the order ID
         $orderDetails = Order::where('order_id', $orderID)->get();
+
+        // You can pass the order details to a view for displaying
+        return view('receipt', ['orderDetails' => $orderDetails]);
+    }
+
+    public function QRshowReceipt($orderID)
+    {
+        // Retrieve the order details from the database based on the order ID
+        $orderDetails = Queue::where('order_id', $orderID)->get();
 
         // You can pass the order details to a view for displaying
         return view('receipt', ['orderDetails' => $orderDetails]);

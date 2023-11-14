@@ -116,6 +116,7 @@ Route::controller(SessionController::class)->group(function () {
     Route::delete('remove-from-cart', 'remove')->name('remove_from_cart');
     Route::post('/create-order', 'createOrder')->name('create.order');
     Route::get('/receipt/{orderID}', 'showReceipt')->name('receipt');
+    Route::get('/QRreceipt/{orderID}', 'QRshowReceipt')->name('QRreceipt');
     Route::get('/qrCode', 'qrCode')->name('qrCode');
     Route::get('/qrPayment', 'qrPayment')->name('qrPayment');
     Route::get('/success-order/{total?}', 'successOrder')->name('successOrder');
