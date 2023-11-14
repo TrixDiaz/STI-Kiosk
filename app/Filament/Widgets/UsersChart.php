@@ -3,23 +3,36 @@
 namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use App\Models\Revenue; // Assuming your Revenue model is in the App\Models namespace
 
 class UsersChart extends ChartWidget
 {
-    protected static ?string $heading = 'Account Monthly Creation';
+    protected static ?string $heading = 'Monthly Income Revenue';
 
     protected static string $color = 'info';
 
     protected function getData(): array
     {
-        return [
-            'datasets' => [
-                [
-                    'label' => 'Accounts created',
-                    'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 89],
-                ],
+        $monthlyData = Revenue::selectRaw('SUM(total) as total_income, MONTH(created_at) as month')
+            ->whereYear('created_at', now()->year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        $datasets = [
+            [
+                'label' => 'Monthly Income',
+                'data' => $monthlyData->pluck('total_income')->toArray(),
             ],
-            'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        ];
+
+        $labels = $monthlyData->pluck('month')->map(function ($month) {
+            return date('M', mktime(0, 0, 0, $month, 1));
+        })->toArray();
+
+        return [
+            'datasets' => $datasets,
+            'labels' => $labels,
         ];
     }
 

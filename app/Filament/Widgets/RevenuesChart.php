@@ -3,26 +3,35 @@
 namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use App\Models\Revenue; // Assuming your Revenue model is in the App\Models namespace
 
 class RevenuesChart extends ChartWidget
 {
-    protected static ?string $heading = 'Chart';
+    protected static ?string $heading = 'Payment Types Distribution';
 
     protected function getData(): array
     {
-        return [
-            'datasets' => [
-                [
-                    'label' => 'Accounts created',
-                    'data' => [45, 77, 89],
-                    'backgroundColor' => [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                      ],
+        $paymentData = Revenue::selectRaw('COUNT(*) as count, payment_status')
+            ->groupBy('payment_status')
+            ->whereIn('payment_status', ['Cash', 'Gcash']) // Adjust payment types as needed
+            ->get();
+
+        $datasets = [
+            [
+                'label' => 'Payments',
+                'data' => $paymentData->pluck('count')->toArray(),
+                'backgroundColor' => [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
                 ],
             ],
-            'labels' => ['Cash', 'E-wallet', 'QR-Code',],
+        ];
+
+        $labels = $paymentData->pluck('payment_status')->toArray();
+
+        return [
+            'datasets' => $datasets,
+            'labels' => $labels,
         ];
     }
 
