@@ -36,8 +36,7 @@ class Order extends Model
 
     public function moveToQueueAndDelete()
     {
-        // Update the payment status to "cash"
-        $this->update(['payment_status' => 'cash']);
+        
         
         // Get the order ID
         $orderId = $this->order_id;
@@ -49,6 +48,10 @@ class Order extends Model
     
         // Iterate over order items
         foreach ($orderItems as $item) {
+
+            // Update the payment status to "cash"
+        $this->update(['payment_status' => 'Cash']);
+
             // Update the product_stock in the stocks table using Eloquent
             Stock::where('product_name', $item->product_name)
                   ->decrement('product_stock', $item->quantity);
@@ -61,7 +64,8 @@ class Order extends Model
                 'quantity' => $item->quantity,
                 'total' => $item->total,
                 'order_type' => $item->order_type,
-                'payment_status' => $item->payment_status,
+                'name' => Auth::user()->name, 
+                'payment_status' => 'Cash', // Update payment_status to "cash"
                 'created_at' => now(),
             ]);
     
@@ -73,14 +77,16 @@ class Order extends Model
                 'quantity' => $item->quantity,
                 'total' => $item->total,
                 'order_type' => $item->order_type,
-                'payment_status' => $item->payment_status,
+                'payment_status' => 'Cash', // Update payment_status to "cash"
                 'name' => Auth::user()->name, // Update with the authenticated user's name
                 'created_at' => now(),
             ]);
         }
+    
         // Delete all orders with the same order_id from the orders table
-    DB::table('orders')->where('order_id', $orderId)->delete();
+        DB::table('orders')->where('order_id', $orderId)->delete();
     }
+    
     
     
     
