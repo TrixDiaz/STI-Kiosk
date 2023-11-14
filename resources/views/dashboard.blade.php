@@ -27,7 +27,7 @@
 
             <div data-tab-content="" class="">
                 <div class="block opacity-100" id="app" role="tabpanel">{{-- Start  of First panel --}}
-                   
+
                     <div class="">
                         <div class="mx-auto sm:px-6 lg:px-8">
                             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2">
@@ -267,6 +267,7 @@
                                                                     id="exampleModalLabel">
                                                                     Order ID {{ $order['order_id'] }}
                                                                 </h5>
+                                                                <p class="float-right">{{ $order['created_at'] }}</p>
                                                                 <!--Close button-->
                                                                 <button type="button"
                                                                     class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
@@ -284,28 +285,76 @@
 
                                                             <!--Modal body-->
                                                             <div class="relative flex-auto p-4" data-te-modal-body-ref>
+                                                                <div class="flex justify-between mb-6">
+                                                                    <h1 class="text-lg font-bold">
+                                                                        {{ $order['order_type'] }}</h1>
+                                                                    <div class="text-gray-700">
+                                                                        <div>Invoice #: {{ $order['created_at'] }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                                <p>Order ID : {{ $order['order_id'] }}</p>
-                                                                <p>Product Name :
-                                                                    @foreach ($order['order_info'] as $info)
-                                                                        {{ $info->product_name }}
-                                                                        @if (!$loop->last)
-                                                                            <br>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </p>
-                                                                <p>Qty
-                                                                    @foreach ($order['order_info'] as $info)
-                                                                        {{ $info->quantity }}
-                                                                        @if (!$loop->last)
-                                                                            <br>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </p>
-                                                                <p>Order Type : {{ $order['order_type'] }}</p>
-                                                                <p>Payment Status : {{ $order['payment_status'] }}</p>
-                                                                <p>Total : {{ $order['total'] }}</p>
-                                                                <p>Created : {{ $order['created_at'] }}</p>
+                                                                <table class="w-full mb-8">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th
+                                                                                class="text-left font-bold text-gray-700">
+                                                                                Product</th>
+                                                                            <th
+                                                                                class="text-right font-bold text-gray-700">
+                                                                                Qty</th>
+                                                                            <th
+                                                                                class="text-right font-bold text-gray-700">
+                                                                                Amount</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    
+                                                                            <tr>
+                                                                                <td class="text-left text-gray-700">
+                                                                                    @foreach ($order['order_info'] as $info)
+                                                                                        {{ $info->product_name }}
+                                                                                        @if (!$loop->last)
+                                                                                            <br>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </td>
+                                                                                <td class="text-right text-gray-700">
+                                                                                    @foreach ($order['order_info'] as $info)
+                                                                                        {{ $info->quantity }}
+                                                                                        @if (!$loop->last)
+                                                                                            <br>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </td>
+                                                                                <td class="text-right text-gray-700">
+                                                                                    @foreach ($order['order_info'] as $info)
+                                                                                    {{ $info->product_price }}
+                                                                                    @if (!$loop->last)
+                                                                                        <br>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                                </td>
+                                                                            </tr>
+                                                                    
+                                                                    </tbody>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <td
+                                                                                class="text-left font-bold text-gray-700">
+                                                                                Total</td>
+                                                                            <td class=""></td>
+                                                                            <td
+                                                                                class="text-right font-bold text-gray-700">
+                                                                                {{ $order['total'] }} <br>
+                                                                                {{ $order['payment_status'] }}
+                                                                           
+                                                                            </td>
+                                                                           
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
 
                                                             </div>
 
@@ -330,8 +379,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
-                                                        onclick="return confirm('Are you sure you want to move this order to the queue?')">Move
-                                                        to Queue</button>
+                                                        onclick="return confirm('Are you sure you want to move this order to the queue?')">Paid</button>
                                                 </form>
                                                 </form>
                                             </td>
@@ -409,27 +457,67 @@
                                                         <!--Modal body-->
                                                         <div class="relative flex-auto p-4" data-te-modal-body-ref>
 
-                                                            <p>Order ID : {{ $queue['order_id'] }}</p>
-                                                            <p>Product Name :
-                                                                @foreach ($queue['order_info'] as $info)
-                                                                    {{ $info->product_name }}
-                                                                    @if (!$loop->last)
-                                                                        <br>
-                                                                    @endif
-                                                                @endforeach
-                                                            </p>
-                                                            <p>Qty
-                                                                @foreach ($queue['order_info'] as $info)
-                                                                    {{ $info->quantity }}
-                                                                    @if (!$loop->last)
-                                                                        <br>
-                                                                    @endif
-                                                                @endforeach
-                                                            </p>
-                                                            <p>Order Type : {{ $queue['order_type'] }}</p>
-                                                            <p>Payment Status : {{ $queue['payment_status'] }}</p>
-                                                            <p>Total : {{ $queue['total'] }}</p>
-                                                            <p>Created : {{ $queue['created_at'] }}</p>
+                                                            <table class="w-full mb-8">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th
+                                                                            class="text-left font-bold text-gray-700">
+                                                                            Product</th>
+                                                                        <th
+                                                                            class="text-right font-bold text-gray-700">
+                                                                            Qty</th>
+                                                                        <th
+                                                                            class="text-right font-bold text-gray-700">
+                                                                            Amount</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                
+                                                                        <tr>
+                                                                            <td class="text-left text-gray-700">
+                                                                                @foreach ($queue['order_info'] as $info)
+                                                                                    {{ $info->product_name }}
+                                                                                    @if (!$loop->last)
+                                                                                        <br>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                            <td class="text-right text-gray-700">
+                                                                                @foreach ($queue['order_info'] as $info)
+                                                                                    {{ $info->quantity }}
+                                                                                    @if (!$loop->last)
+                                                                                        <br>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                            <td class="text-right text-gray-700">
+                                                                                @foreach ($queue['order_info'] as $info)
+                                                                                {{ $info->product_price }}
+                                                                                @if (!$loop->last)
+                                                                                    <br>
+                                                                                @endif
+                                                                            @endforeach
+                                                                            </td>
+                                                                        </tr>
+                                                                
+                                                                </tbody>
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <td
+                                                                            class="text-left font-bold text-gray-700">
+                                                                            Total</td>
+                                                                        <td class=""></td>
+                                                                        <td
+                                                                            class="text-right font-bold text-gray-700">
+                                                                            {{ $queue['total'] }} <br>
+                                                                            {{ $queue['payment_status'] }}
+                                                                       
+                                                                        </td>
+                                                                       
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
 
                                                         </div>
 
@@ -442,11 +530,7 @@
                                                                 data-te-ripple-color="light">
                                                                 Close
                                                             </button>
-                                                            {{-- <button type="button"
-                                                                class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                                                                data-te-ripple-init data-te-ripple-color="light">
-                                                                Save changes
-                                                            </button> --}}
+                                                     
                                                         </div>
                                                     </div>
                                                 </div>
