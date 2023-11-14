@@ -34,7 +34,7 @@ class CashierController extends Controller
     public function posAddToCart(Request $request, $id)
     {
         $product = Stock::findOrFail($id);
-
+        $authUser = $request->input('name'); 
         $cart = session()->get('cart', []);
 
         $orderType = $request->input('order_type'); // Get the selected order type from the input
@@ -48,6 +48,7 @@ class CashierController extends Controller
                 'product_image' => $product->product_image,
                 'product_category' => $product->product_category,
                 'quantity' => 1,
+                'name' => $authUser,
                 'order_type' => $orderType, 
                 'total' =>  $total,
             ];
@@ -148,7 +149,7 @@ class CashierController extends Controller
      */
     public function posQrPayment(Request $request)
     {
-        
+        $authUser = $request->input('name'); 
         $total = $request->input('total');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $orderType = $request->input('order_type'); // Get the order type Request from input
@@ -162,7 +163,7 @@ class CashierController extends Controller
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
-                'name' => Auth::user()->name,
+                'name' => $authUser,
                 'created_at' => now(),
                 'updated_at' => now(),
                 // Add other fields as needed
