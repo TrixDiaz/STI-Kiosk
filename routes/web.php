@@ -122,6 +122,8 @@ Route::controller(SessionController::class)->group(function () {
 });
 
 Route::controller(CashierController::class)->group(function () {
+    Route::get('add-to-cart/{id}', 'addToCart')->name('posAddToCart');
+
     Route::get('/pos-donmono', 'donmono')->name('pos.donmono');
     Route::get('/pos-ippin', 'ippin')->name('pos.ippin');
     Route::get('/pos-kushiyaki', 'kushiyaki')->name('pos.kushiyaki');

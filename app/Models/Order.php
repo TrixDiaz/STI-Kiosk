@@ -77,6 +77,8 @@ class Order extends Model
                 'created_at' => now(),
             ]);
         }
+        // Delete all orders with the same order_id from the orders table
+    DB::table('orders')->where('order_id', $orderId)->delete();
     }
     
     

@@ -6,9 +6,12 @@ use App\Models\Order;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CashierController extends Controller
 {
+
+
     public function moveToQueueAndDelete(Order $order)
     {
         
@@ -19,6 +22,43 @@ class CashierController extends Controller
             ->route('dashboard')
             ->with('success', 'Order moved to queue successfully.');
     }
+
+     /**
+     * Find by ID the User order and store to Shopping Cart Session
+     */
+    public function POSaddToCart(Request $request, $id)
+    {
+        $product = Stock::findOrFail($id);
+    
+        $user = Auth::user();
+    
+        // Retrieve the user's cart or create a new one
+        $cart = $user->cart ?? [];
+    
+        $orderType = $request->input('order_type');
+        $total = $request->input('total');
+    
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'product_name' => $product->product_name,
+                'product_price' => $product->product_price,
+                'product_image' => $product->product_image,
+                'product_category' => $product->product_category,
+                'quantity' => 1,
+                'order_type' => $orderType,
+                'total' => $total,
+            ];
+        }
+    
+        // Update the user's cart
+        $user->cart = $cart;
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Product added to cart!');
+    }
+
 
       /** 
     * Start of Products 
