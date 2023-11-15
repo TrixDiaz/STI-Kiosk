@@ -353,7 +353,7 @@
 </div>
         {{-- end of top nav --}}
         <!-- Page Content -->
-        <main class="">
+        <main class="font-sans text-gray-900 antialiased">
             @if (session('success'))
             <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
                 <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
