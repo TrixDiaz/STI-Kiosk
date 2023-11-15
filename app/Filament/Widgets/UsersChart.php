@@ -3,7 +3,7 @@
 namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use App\Models\Revenue; // Assuming your Revenue model is in the App\Models namespace
+use App\Models\Revenue;
 
 class UsersChart extends ChartWidget
 {
@@ -19,6 +19,9 @@ class UsersChart extends ChartWidget
             ->orderBy('month')
             ->get();
 
+        // Sort data by month to ensure labels are in the correct order
+        $monthlyData = $monthlyData->sortBy('month');
+
         $datasets = [
             [
                 'label' => 'Monthly Income',
@@ -29,6 +32,13 @@ class UsersChart extends ChartWidget
         $labels = $monthlyData->pluck('month')->map(function ($month) {
             return date('M', mktime(0, 0, 0, $month, 1));
         })->toArray();
+
+        // Reorder the months so that labels start from January
+        $orderedLabels = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+
+        $labels = array_merge($orderedLabels, array_diff($labels, $orderedLabels));
 
         return [
             'datasets' => $datasets,
