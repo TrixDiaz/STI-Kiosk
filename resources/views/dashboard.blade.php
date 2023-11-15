@@ -466,9 +466,9 @@
                                                                         <th
                                                                             class="text-right font-bold text-gray-700">
                                                                             Qty</th>
-                                                                        <th
+                                                                        {{-- <th
                                                                             class="text-right font-bold text-gray-700">
-                                                                            Amount</th>
+                                                                            Amount</th> --}}
 
                                                                     </tr>
                                                                 </thead>
