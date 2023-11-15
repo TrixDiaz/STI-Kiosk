@@ -884,7 +884,7 @@
                     </div>
                 </div>
                 <p class="text-gray-300 text-xs mt-3">Scan a QR Code</p>
-                <a href="#" class="text-gray-300 text-xs mt-3">Return to Merchant</a>
+                <a href="{{ route('dashboard') }}" class="text-gray-300 text-xs mt-3">Return to Merchant</a>
                 <div class="mt-5 w-full flex items-center justify-between space-x-3 my-3 absolute bottom-0 left-0 px-2">
                     <div class="flex ">
                         <svg xmlns="http://www.w3.org/2000/svg"
