@@ -62,7 +62,7 @@ class CashierController extends Controller
 
             return redirect()
                 ->back()
-                ->with('error', 'No stocks available for this product.');
+                ->with('success', 'No stocks available for this product.');
         }
 
         $cart = session()->get('cart', []);
