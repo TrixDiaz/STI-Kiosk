@@ -153,6 +153,7 @@ class CashierController extends Controller
         $total = $request->input('total');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $orderType = $request->input('order_type'); // Get the order type Request from input
+        $authUser = $request->input('name'); 
         $cart = session('cart');
         foreach ($cart as $item) {
             $orderDetails[] = [
@@ -163,7 +164,7 @@ class CashierController extends Controller
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
-                'name' => $item['name'],
+                'name' => $authUser,
                 'created_at' => now(),
                 'updated_at' => now(),
                 // Add other fields as needed
@@ -229,7 +230,7 @@ class CashierController extends Controller
             'order_type' => $item['order_type'],
             'total' => $item['total'],
             'payment_status' => 'Gcash',
-            'name' => Auth::user()->name,
+            'order_type' => $item['name'],
             'created_at' => now(),
             'updated_at' => now(),
             // Add other fields as needed
@@ -242,7 +243,7 @@ class CashierController extends Controller
             'order_type' => $item['order_type'],
             'total' => $item['total'],
             'payment_status' => 'Gcash',
-            'name' => Auth::user()->name,
+            'order_type' => $item['name'],
             'created_at' => now(),
             'updated_at' => now(),
             // Add other fields as needed
