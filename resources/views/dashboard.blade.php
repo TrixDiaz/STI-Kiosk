@@ -502,7 +502,7 @@
                                                                         </tr>
                                                                 
                                                                 </tbody>
-                                                                <tfoot>
+                                                                {{-- <tfoot>
                                                                     <tr>
                                                                         <td
                                                                             class="text-left font-bold text-gray-700">
@@ -516,7 +516,7 @@
                                                                         </td>
                                                                        
                                                                     </tr>
-                                                                </tfoot>
+                                                                </tfoot> --}}
                                                             </table>
 
                                                         </div>

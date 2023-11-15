@@ -107,12 +107,13 @@
                                                 @endif
                                                 @php
                                                     $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
+                                                    $authUser = Auth::user()->name;
                                                 @endphp
                                                 <input type="text" value="{{ $total }}" name="total"
                                                     class="hidden">
                                                 <input type="text" value="{{ $orderID }}" name="orderID"
                                                     class="hidden">
-                                                    <input type="text" value="{{ Auth::user()->name }}" name="name"
+                                                    <input type="text" value="{{ $authUser }}" name="name"
                                                     class="hidden">
 
                                           

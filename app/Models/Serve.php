@@ -12,6 +12,7 @@ class Serve extends Model
         'product_name',
         'product_price',
         'quantity',
+        'name',
         'order',
         'total',
         'order_type',
