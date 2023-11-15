@@ -41,13 +41,20 @@ class QueueResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('order_id')
-                ->searchable(),
-                TextColumn::make('product_status')
-                    ->searchable(),
-                    TextColumn::make('name')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('order_id'),
+                TextColumn::make('product_name'),
+                TextColumn::make('product_price'),
+                TextColumn::make('quantity'),
+                TextColumn::make('order_type'),
+                TextColumn::make('name'),
+                  Tables\Columns\TextColumn::make('created_at')
+                      ->dateTime()
+                      ->sortable()
+                      ->toggleable(isToggledHiddenByDefault: true),
+                  Tables\Columns\TextColumn::make('updated_at')
+                      ->dateTime()
+                      ->sortable()
+                      ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
