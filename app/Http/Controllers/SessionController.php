@@ -45,7 +45,7 @@ class SessionController extends Controller
     // Check if product_stock is zero
     if ($product->product_stock == 0) {
 
-        return redirect()->back()->with('success', 'No stocks available for this product.');
+        return redirect()->back()->with('error', 'No stocks available for this product.');
     }
 
     $cart = session()->get('cart', []);

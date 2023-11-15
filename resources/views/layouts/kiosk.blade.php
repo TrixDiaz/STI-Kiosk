@@ -116,8 +116,8 @@
                 <a class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-black  outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                     href="{{ route('nigirizushi') }}" wire:navigate data-te-sidenav-link-ref>
                     <span class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                         </svg>
@@ -269,7 +269,7 @@
                         data-te-dropdown-item-ref>
                         <div class="row total-header-section">
                             @php $total = 0 @endphp
-                            @foreach((array) session('cart') as $id => $details)
+                            @foreach ((array) session('cart') as $id => $details)
                                 @php $total += $details['product_price'] * $details['quantity'] @endphp
                             @endforeach
                             <div class="col-lg-12 col-sm-12 col-12 total-section text-right">
@@ -280,29 +280,32 @@
                 </li>
                 <li class="h-48 overflow-y-auto my-2 mx-2">
                     <a class="mt-3 block w-full whitespace-nowrap bg-transparent px-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
-                         data-te-dropdown-item-ref>
-                        @if(session('cart'))
-                        @foreach(session('cart') as $id => $details)
-                            <div class="flex">
-                                <div class="col-lg-4 col-sm-4 col-4 mr-5">
-                                    <img src="storage/{{ $details['product_image'] }}" alt="{{ $details['product_name'] }}" class="h-14 w-14 bg-cover rounded-md" />
+                        data-te-dropdown-item-ref>
+                        @if (session('cart'))
+                            @foreach (session('cart') as $id => $details)
+                                <div class="flex">
+                                    <div class="col-lg-4 col-sm-4 col-4 mr-5">
+                                        <img src="storage/{{ $details['product_image'] }}"
+                                            alt="{{ $details['product_name'] }}"
+                                            class="h-14 w-14 bg-cover rounded-md" />
+                                    </div>
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <p class="">{{ $details['product_name'] }}</p>
+                                        <span class="price text-info "> ${{ $details['product_price'] }}</span> <span
+                                            class="bn n"> Qty:{{ $details['quantity'] }}</span>
+                                    </div>
                                 </div>
-                                <div class="col-lg-8 col-sm-8 col-8">
-                                    <p class="">{{ $details['product_name'] }}</p>
-                                    <span class="price text-info "> ${{ $details['product_price'] }}</span> <span class="bn n"> Qty:{{ $details['quantity'] }}</span>
-                                </div>
-                            </div>
-                        <hr class="my-1">
-                        @endforeach
-                    @endif
+                                <hr class="my-1">
+                            @endforeach
+                        @endif
                     </a>
                 </li>
                 <li class="">
-                    <a class="my-2"
-                        data-te-dropdown-item-ref>
+                    <a class="my-2" data-te-dropdown-item-ref>
                         <div class="row">
                             <div class="text-center m-2">
-                                <a href="{{ route('cart') }}" class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
+                                <a href="{{ route('cart') }}"
+                                    class="text-center w-full bg-blue-200 p-2 rounded-md">View all</a>
                             </div>
                         </div>
                     </a>
@@ -334,6 +337,29 @@
                 }, 2000);
             </script>
         @endif
+
+        @if (session('error'))
+            <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
+                <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-red-400 to-red-300 px-4 py-4 text-base text-white"
+                    data-dismissible="alert" id="success-alert">
+                    <div class="absolute top-4 left-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="ml-8 mr-12">{{ session('error') }}</div>
+                </div>
+            </div>
+
+            <script>
+                // Close the success message after 2 seconds
+                setTimeout(function() {
+                    document.getElementById('success-alert').remove();
+                }, 2000);
+            </script>
+        @endif
         {{ $slot }}
     </div>
 
@@ -341,27 +367,30 @@
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     @livewireScripts
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          document.addEventListener('dblclick', function () {
-            toggleFullscreen();
-          });
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('dblclick', function() {
+                toggleFullscreen();
+            });
         });
-    
+
         function toggleFullscreen() {
-          const doc = window.document;
-          const docEl = doc.documentElement;
-    
-          const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-          const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-    
-          if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-            requestFullScreen.call(docEl);
-          } else {
-            cancelFullScreen.call(doc);
-          }
+            const doc = window.document;
+            const docEl = doc.documentElement;
+
+            const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl
+                .webkitRequestFullScreen || docEl.msRequestFullscreen;
+            const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc
+                .msExitFullscreen;
+
+            if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc
+                .msFullscreenElement) {
+                requestFullScreen.call(docEl);
+            } else {
+                cancelFullScreen.call(doc);
+            }
         }
-      </script>
-    
+    </script>
+
 </body>
 
 </html>
