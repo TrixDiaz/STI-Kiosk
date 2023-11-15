@@ -491,14 +491,14 @@
                                                                                     @endif
                                                                                 @endforeach
                                                                             </td>
-                                                                            <td class="text-right text-gray-700">
+                                                                            {{-- <td class="text-right text-gray-700">
                                                                                 @foreach ($queue['order_info'] as $info)
                                                                                 {{ $info->product_price }}
                                                                                 @if (!$loop->last)
                                                                                     <br>
                                                                                 @endif
                                                                             @endforeach
-                                                                            </td>
+                                                                            </td> --}}
                                                                         </tr>
                                                                 
                                                                 </tbody>
