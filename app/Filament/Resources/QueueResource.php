@@ -46,7 +46,8 @@ class QueueResource extends Resource
                 TextColumn::make('product_price'),
                 TextColumn::make('quantity'),
                 TextColumn::make('order_type'),
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('payment_status'),
                   Tables\Columns\TextColumn::make('created_at')
                       ->dateTime()
