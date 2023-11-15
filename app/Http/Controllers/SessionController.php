@@ -119,21 +119,23 @@ class SessionController extends Controller
      */
     public function createOrder(Request $request)
     {
-        $orderDetails = []; // Declarad null array
-
-        $cart = session('cart'); // Retrieve products from the session
-
-        $total = $request->input('total'); // Get the Total Request from input
+        $cart = session('cart');
+    
+        // Check if the cart is empty
+        if (empty($cart)) {
+            return redirect()->back()->with('success', 'No items in the cart. Please add items to your cart before placing an order.');
+        }
+    
+        $orderDetails = [];
+        $total = $request->input('total');
         $orderID = $request->input('orderID');
-        $orderType = $request->input('order_type'); // Get the order type Request from input
-
-        // You can now insert the products into your orders table.
+        $orderType = $request->input('order_type');
+    
         foreach ($cart as $item) {
             $orderDetails[] = [
                 'order_id' => $orderID,
                 'product_name' => $item['product_name'],
                 'product_price' => $item['product_price'],
-                // 'product_image' => $item['product_image'],
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
@@ -143,16 +145,16 @@ class SessionController extends Controller
                 // Add other fields as needed
             ];
         }
-        session()->put('cart', $orderDetails);
-
-        Order::insert($orderDetails); // Insert all the order details into the database
-
-        session()->forget('cart'); // Optionally, you can clear the cart after the order is created
-
+    
+        Order::insert($orderDetails);
+    
+        session()->forget('cart');
+    
         return redirect()
             ->route('receipt', ['orderID' => $orderID])
             ->with('success', 'Order created.');
     }
+    
 
     /**
      * Qr Code Generator

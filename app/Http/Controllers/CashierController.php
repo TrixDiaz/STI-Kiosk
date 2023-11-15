@@ -128,6 +128,12 @@ class CashierController extends Controller
         $orderDetails = []; // Declarad null array
 
         $cart = session('cart'); // Retrieve products from the session
+
+         // Check if the cart is empty
+         if (empty($cart)) {
+            return redirect()->back()->with('success', 'No items in the cart. Please add items to your cart before placing an order.');
+        }
+
         $authUser = $request->input('name'); 
         $total = $request->input('total'); // Get the Total Request from input
         $orderID = $request->input('orderID'); 
