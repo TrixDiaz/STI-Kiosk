@@ -310,34 +310,34 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    
-                                                                            <tr>
-                                                                                <td class="text-left text-gray-700">
-                                                                                    @foreach ($order['order_info'] as $info)
-                                                                                        {{ $info->product_name }}
-                                                                                        @if (!$loop->last)
-                                                                                            <br>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                </td>
-                                                                                <td class="text-right text-gray-700">
-                                                                                    @foreach ($order['order_info'] as $info)
-                                                                                        {{ $info->quantity }}
-                                                                                        @if (!$loop->last)
-                                                                                            <br>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                </td>
-                                                                                <td class="text-right text-gray-700">
-                                                                                    @foreach ($order['order_info'] as $info)
+
+                                                                        <tr>
+                                                                            <td class="text-left text-gray-700">
+                                                                                @foreach ($order['order_info'] as $info)
+                                                                                    {{ $info->product_name }}
+                                                                                    @if (!$loop->last)
+                                                                                        <br>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                            <td class="text-right text-gray-700">
+                                                                                @foreach ($order['order_info'] as $info)
+                                                                                    {{ $info->quantity }}
+                                                                                    @if (!$loop->last)
+                                                                                        <br>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                            <td class="text-right text-gray-700">
+                                                                                @foreach ($order['order_info'] as $info)
                                                                                     {{ $info->product_price }}
                                                                                     @if (!$loop->last)
                                                                                         <br>
                                                                                     @endif
                                                                                 @endforeach
-                                                                                </td>
-                                                                            </tr>
-                                                                    
+                                                                            </td>
+                                                                        </tr>
+
                                                                     </tbody>
                                                                     <tfoot>
                                                                         <tr>
@@ -349,9 +349,9 @@
                                                                                 class="text-right font-bold text-gray-700">
                                                                                 {{ $order['total'] }} <br>
                                                                                 {{ $order['payment_status'] }}
-                                                                           
+
                                                                             </td>
-                                                                           
+
                                                                         </tr>
                                                                     </tfoot>
                                                                 </table>
@@ -460,11 +460,9 @@
                                                             <table class="w-full mb-8">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th
-                                                                            class="text-left font-bold text-gray-700">
+                                                                        <th class="text-left font-bold text-gray-700">
                                                                             Product</th>
-                                                                        <th
-                                                                            class="text-right font-bold text-gray-700">
+                                                                        <th class="text-right font-bold text-gray-700">
                                                                             Qty</th>
                                                                         {{-- <th
                                                                             class="text-right font-bold text-gray-700">
@@ -473,25 +471,25 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                
-                                                                        <tr>
-                                                                            <td class="text-left text-gray-700">
-                                                                                @foreach ($queue['order_info'] as $info)
-                                                                                    {{ $info->product_name }}
-                                                                                    @if (!$loop->last)
-                                                                                        <br>
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </td>
-                                                                            <td class="text-right text-gray-700">
-                                                                                @foreach ($queue['order_info'] as $info)
-                                                                                    {{ $info->quantity }}
-                                                                                    @if (!$loop->last)
-                                                                                        <br>
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </td>
-                                                                            {{-- <td class="text-right text-gray-700">
+
+                                                                    <tr>
+                                                                        <td class="text-left text-gray-700">
+                                                                            @foreach ($queue['order_info'] as $info)
+                                                                                {{ $info->product_name }}
+                                                                                @if (!$loop->last)
+                                                                                    <br>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </td>
+                                                                        <td class="text-right text-gray-700">
+                                                                            @foreach ($queue['order_info'] as $info)
+                                                                                {{ $info->quantity }}
+                                                                                @if (!$loop->last)
+                                                                                    <br>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </td>
+                                                                        {{-- <td class="text-right text-gray-700">
                                                                                 @foreach ($queue['order_info'] as $info)
                                                                                 {{ $info->product_price }}
                                                                                 @if (!$loop->last)
@@ -499,8 +497,8 @@
                                                                                 @endif
                                                                             @endforeach
                                                                             </td> --}}
-                                                                        </tr>
-                                                                
+                                                                    </tr>
+
                                                                 </tbody>
                                                                 {{-- <tfoot>
                                                                     <tr>
@@ -530,7 +528,7 @@
                                                                 data-te-ripple-color="light">
                                                                 Close
                                                             </button>
-                                                     
+
                                                         </div>
                                                     </div>
                                                 </div>
