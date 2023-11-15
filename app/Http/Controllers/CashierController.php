@@ -190,18 +190,23 @@ class CashierController extends Controller
      */
     public function posQrPayment(Request $request)
     {
-        // $authUser = $request->input('name'); 
         $total = $request->input('total');
-        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
-        $orderType = $request->input('order_type'); // Get the order type Request from input
-        $authUser = $request->input('name'); 
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $orderType = $request->input('order_type');
+        $authUser = $request->input('name');
         $cart = session('cart');
+    
+        // Check if the cart is empty
+        if (empty($cart)) {
+            return redirect()->back()->with('success', 'No items in the cart. Please add items to your cart before making a payment.');
+        }
+    
+        $orderDetails = [];
         foreach ($cart as $item) {
             $orderDetails[] = [
                 'order_id' => $orderID,
                 'product_name' => $item['product_name'],
                 'product_price' => $item['product_price'],
-                // 'product_image' => $item['product_image'],
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
@@ -211,7 +216,9 @@ class CashierController extends Controller
                 // Add other fields as needed
             ];
         }
+    
         session()->put('cart', $orderDetails);
+    
         $data = [
             'data' => [
                 'attributes' => [
@@ -231,7 +238,7 @@ class CashierController extends Controller
                 ],
             ],
         ];
-
+    
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
@@ -239,18 +246,14 @@ class CashierController extends Controller
             ->withData($data)
             ->asJson()
             ->post();
-
-        // dd($response);
+    
         Session::put('session_id', $response->data->id);
         Session::put('checkout_url', $response->data->attributes->checkout_url);
-
-        
-        // return redirect()->to($response->data->attributes->checkout_url);
-
-        // Redirect or display a success message
+    
         return redirect()->to('posQrCode')
-            ->with('checkout_url', $response->data->attributes->checkout_url,'cart', $cart);
+            ->with('checkout_url', $response->data->attributes->checkout_url, 'cart', $cart);
     }
+    
 
  /**
      * Success Payment in API
