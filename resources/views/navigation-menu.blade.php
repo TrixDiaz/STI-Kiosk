@@ -101,7 +101,7 @@
                         <div class="mx-5"> 
                             <p class="font-semibold pt-2 text-md">Notification</p>
                             <!-- Clear Notifications Button -->
-                            <form action="#" method="POST">
+                            <form action="{{ route('clear') }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-400 text-sm">Clear</button>

@@ -16,7 +16,15 @@ use Illuminate\Support\Facades\Session;
 class CashierController extends Controller
 {
 
+    public function clear()
+    {
+        Auth::user()
+            ->notifications()
+            ->delete();
 
+        return back()->with('success', 'Notifications cleared successfully.');
+    }
+    
     public function moveToQueueAndDelete(Order $order)
     {
         

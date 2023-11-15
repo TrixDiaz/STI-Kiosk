@@ -148,4 +148,5 @@ Route::controller(CashierController::class)->group(function () {
     Route::get('/pos-yakizakana', 'yakizakana')->name('pos.yakizakana');
     Route::get('/pos-zensai', 'zensai')->name('pos.zensai');
     Route::delete('/orders/{order}', 'moveToQueueAndDelete')->name('orders.move-to-queue');
+    Route::delete('/clear','clear')->name('clear');
     });
