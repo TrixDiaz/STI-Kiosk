@@ -14,21 +14,19 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 use Filament\Notifications\Notification;
 
-
 class SessionController extends Controller
 {
-  
     public function start()
     {
         session()->forget('cart'); // Clear the Session in Cart
-        return view('welcome'); // Tab to Start 
+        return view('welcome'); // Tab to Start
     }
 
     public function kiosk()
     {
         return view('kiosk');
     }
-    
+
     public function cart()
     {
         return view('cart');
@@ -39,74 +37,76 @@ class SessionController extends Controller
         return view('qrCode');
     }
 
-      /**
+    /**
      * Find by ID the User order and store to Shopping Cart Session
      */
     public function addToCart(Request $request, $id)
-{
-    $product = Stock::findOrFail($id);
+    {
+        $product = Stock::findOrFail($id);
 
-    // Check if product_stock is zero
-    if ($product->product_stock == 0) {
+        // Check if product_stock is zero
+        if ($product->product_stock == 0) {
+            // You can add additional logic here as per your requirements
+            Notification::make()
+                ->success()
+                ->icon('heroicon-o-archive-box')
+                ->title('Stocks Notification')
+                ->body(Auth::user()->name . ' No stock Available for product ' . $product->product_name)
+                ->sendToDatabase(
+                    $usersToNotify = User::whereHas('roles', function ($query) {
+                        $query->where('id', [1, 2]);
+                    })->get(),
+                );
 
-        
-        // You can add additional logic here as per your requirements
-        Notification::make()
-        ->success()
-        ->icon('heroicon-o-archive-box')
-        ->title('Stocks Notification')
-        ->body(Auth::user()->name . ' No stock Available for product ' . $product->product_name)
-        ->sendToDatabase(
-            $usersToNotify =    User::whereHas('roles', function ($query) {
-                $query->where('id', [1, 2]);
-            })->get());
-            
-            $usersToNotify->push(Auth::user()); 
+            $usersToNotify->push(Auth::user());
 
-            return redirect()->back()->with('error', 'No stocks available for this product.');
+            return redirect()
+                ->back()
+                ->with('error', 'No stocks available for this product.');
+        }
+
+        $cart = session()->get('cart', []);
+
+        $orderType = $request->input('order_type'); // Get the selected order type from the input
+        $total = $request->input('total');
+
+        // Check if the product is already in the cart
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'product_name' => $product->product_name,
+                'product_price' => $product->product_price,
+                'product_image' => $product->product_image,
+                'product_category' => $product->product_category,
+                'quantity' => 1,
+                'order_type' => $orderType,
+                'total' => $total,
+            ];
+        }
+
+        session()->put('cart', $cart); // update the cart
+
+        return redirect()
+            ->back()
+            ->with('success', 'Product added to cart!');
     }
 
-    $cart = session()->get('cart', []);
-
-    $orderType = $request->input('order_type'); // Get the selected order type from the input
-    $total = $request->input('total');
-    
-    // Check if the product is already in the cart
-    if (isset($cart[$id])) {
-        $cart[$id]['quantity']++;
-    } else {
-        $cart[$id] = [
-            'product_name' => $product->product_name,
-            'product_price' => $product->product_price,
-            'product_image' => $product->product_image,
-            'product_category' => $product->product_category,
-            'quantity' => 1,
-            'order_type' => $orderType, 
-            'total' => $total,
-        ];
-    }
-
-    session()->put('cart', $cart); // update the cart
-    
-    return redirect()->back()->with('success', 'Product added to cart!');
-}
-
- 
     public function update(Request $request)
     {
-        if($request->id && $request->quantity){
+        if ($request->id && $request->quantity) {
             $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
+            $cart[$request->id]['quantity'] = $request->quantity;
             session()->put('cart', $cart);
             session()->flash('success', 'Cart updated!');
         }
     }
- 
+
     public function remove(Request $request)
     {
-        if($request->id) {
+        if ($request->id) {
             $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
+            if (isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
@@ -114,7 +114,7 @@ class SessionController extends Controller
         }
     }
 
-     /**
+    /**
      * Get the User order from shopping cart and insert to Order Table and will return to receipt show the order
      */
     public function createOrder(Request $request)
@@ -122,11 +122,11 @@ class SessionController extends Controller
         $orderDetails = []; // Declarad null array
 
         $cart = session('cart'); // Retrieve products from the session
- 
+
         $total = $request->input('total'); // Get the Total Request from input
-        $orderID = $request->input('orderID'); 
+        $orderID = $request->input('orderID');
         $orderType = $request->input('order_type'); // Get the order type Request from input
-        
+
         // You can now insert the products into your orders table.
         foreach ($cart as $item) {
             $orderDetails[] = [
@@ -145,11 +145,13 @@ class SessionController extends Controller
         }
         session()->put('cart', $orderDetails);
 
-        Order::insert($orderDetails);   // Insert all the order details into the database
+        Order::insert($orderDetails); // Insert all the order details into the database
 
         session()->forget('cart'); // Optionally, you can clear the cart after the order is created
 
-        return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
+        return redirect()
+            ->route('receipt', ['orderID' => $orderID])
+            ->with('success', 'Order created.');
     }
 
     /**
@@ -157,7 +159,6 @@ class SessionController extends Controller
      */
     public function qrPayment(Request $request)
     {
-        
         $total = $request->input('total');
         $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); //Create random 6 digit generator
         $orderType = $request->input('order_type'); // Get the order type Request from input
@@ -209,68 +210,68 @@ class SessionController extends Controller
         Session::put('session_id', $response->data->id);
         Session::put('checkout_url', $response->data->attributes->checkout_url);
 
-        
         // return redirect()->to($response->data->attributes->checkout_url);
 
         // Redirect or display a success message
-        return redirect()->to('qrCode')
-            ->with('checkout_url', $response->data->attributes->checkout_url,'cart', $cart);
+        return redirect()
+            ->to('qrCode')
+            ->with('checkout_url', $response->data->attributes->checkout_url, 'cart', $cart);
     }
 
-
-     /**
+    /**
      * Success Payment in API
      */
     public function successOrder(Request $request)
-{
-    // Retrieve orderDetails from URL parameters
-    $orderDetails = $request->input('orderDetails');
-    $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); // Create random 6 digit generator
+    {
+        // Retrieve orderDetails from URL parameters
+        $orderDetails = $request->input('orderDetails');
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); // Create random 6 digit generator
 
-    foreach ($orderDetails as $item) {
-        // Insert each item into the orders table
-        Queue::create([
-            'order_id' => $orderID,
-            'product_name' => $item['product_name'],
-            'product_price' => $item['product_price'],
-            'quantity' => $item['quantity'],
-            'order_type' => $item['order_type'],
-            'total' => $item['total'],
-            'payment_status' => 'Gcash',
-            'created_at' => now(),
-            'updated_at' => now(),
-            // Add other fields as needed
-        ]);
-        Revenue::create([
-            'order_id' => $orderID,
-            'product_name' => $item['product_name'],
-            'product_price' => $item['product_price'],
-            'quantity' => $item['quantity'],
-            'order_type' => $item['order_type'],
-            'total' => $item['total'],
-            'payment_status' => 'Gcash',
-            'created_at' => now(),
-            'updated_at' => now(),
-            // Add other fields as needed
-        ]);
+        foreach ($orderDetails as $item) {
+            // Insert each item into the orders table
+            Queue::create([
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $item['order_type'],
+                'total' => $item['total'],
+                'payment_status' => 'Gcash',
+                'created_at' => now(),
+                'updated_at' => now(),
+                // Add other fields as needed
+            ]);
+            Revenue::create([
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $item['order_type'],
+                'total' => $item['total'],
+                'payment_status' => 'Gcash',
+                'created_at' => now(),
+                'updated_at' => now(),
+                // Add other fields as needed
+            ]);
 
-        // Update the product stock quantity
-        $product = Stock::where('product_name', $item['product_name'])->first();
-        if ($product) {
-            $newQuantity = $product->quantity - $item['quantity'];
-            $product->update(['quantity' => $newQuantity]);
+            // Update the product stock quantity
+            $product = Stock::where('product_name', $item['product_name'])->first();
+            if ($product) {
+                $newQuantity = $product->quantity - $item['quantity'];
+                $product->update(['quantity' => $newQuantity]);
+            }
         }
+
+        // Optionally, you can clear the cart after the order is created
+        session()->forget('cart');
+
+        // Redirect back or to a confirmation page
+        return redirect()
+            ->route('QRreceipt', ['orderID' => $orderID])
+            ->with('success', 'Order created.');
     }
 
-    // Optionally, you can clear the cart after the order is created
-    session()->forget('cart');
-
-    // Redirect back or to a confirmation page
-    return redirect()->route('QRreceipt', ['orderID' => $orderID])->with('success', 'Order created.');
-}
-
-
-     /**
+    /**
      * Fetch all the orders of Customer or Receipt
      */
     public function showReceipt($orderID)
