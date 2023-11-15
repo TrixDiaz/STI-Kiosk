@@ -355,53 +355,52 @@
         <!-- Page Content -->
         <div class="font-sans text-gray-900 antialiased">
             @if (session('success'))
-            <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
-                <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
-                    data-dismissible="alert" id="success-alert">
-                    <div class="absolute top-4 left-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
+                    <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
+                        data-dismissible="alert" id="success-alert">
+                        <div class="absolute top-4 left-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-8 mr-12">{{ session('success') }}</div>
                     </div>
-                    <div class="ml-8 mr-12">{{ session('success') }}</div>
                 </div>
-            </div>
-
-            <script>
-                // Close the success message after 2 seconds
-                setTimeout(function() {
-                    document.getElementById('success-alert').remove();
-                }, 2000);
-            </script>
-        @endif
-
-        @if (session('error'))
-            <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
-                <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-red-600 to-red-500  px-4 py-4 text-base text-white"
-                    data-dismissible="alert" id="success-alert">
-                    <div class="absolute top-4 left-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+    
+                <script>
+                    // Close the success message after 2 seconds
+                    setTimeout(function() {
+                        document.getElementById('success-alert').remove();
+                    }, 2000);
+                </script>
+            @endif
+    
+            @if (session('error'))
+                <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
+                    <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-red-400 to-red-300 px-4 py-4 text-base text-white"
+                        data-dismissible="alert" id="success-alert">
+                        <div class="absolute top-4 left-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-8 mr-12">{{ session('error') }}</div>
                     </div>
-                    <div class="ml-8 mr-12">{{ session('error') }}</div>
                 </div>
-            </div>
-
-            <script>
-                // Close the success message after 2 seconds
-                setTimeout(function() {
-                    document.getElementById('success-alert').remove();
-                }, 2000);
-            </script>
-        @endif
+    
+                <script>
+                    // Close the success message after 2 seconds
+                    setTimeout(function() {
+                        document.getElementById('success-alert').remove();
+                    }, 2000);
+                </script>
+            @endif
             {{ $slot }}
         </div>
-    </div>
 
     @stack('modals')
 
