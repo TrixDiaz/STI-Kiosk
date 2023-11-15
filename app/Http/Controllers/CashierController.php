@@ -93,7 +93,7 @@ class CashierController extends Controller
         $orderDetails = []; // Declarad null array
 
         $cart = session('cart'); // Retrieve products from the session
-        // $authUser = $request->input('name'); 
+        $authUser = $request->input('name'); 
         $total = $request->input('total'); // Get the Total Request from input
         $orderID = $request->input('orderID'); 
         $orderType = $request->input('order_type'); // Get the order type Request from input
@@ -108,7 +108,7 @@ class CashierController extends Controller
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
-                'name' => $item['name'],
+                'name' => $authUser,
                 'payment_status' => 'Cash',
                 'created_at' => now(),
                 'updated_at' => now(),
