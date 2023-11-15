@@ -39,30 +39,40 @@ class SessionController extends Controller
      * Find by ID the User order and store to Shopping Cart Session
      */
     public function addToCart(Request $request, $id)
-    {
-        $product = Stock::findOrFail($id);
+{
+    $product = Stock::findOrFail($id);
 
-        $cart = session()->get('cart', []);
+    // Check if product_stock is zero
+    if ($product->product_stock == 0) {
 
-        $orderType = $request->input('order_type'); // Get the selected order type from the input
-        $total = $request->input('total');
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                'product_name' => $product->product_name,
-                'product_price' => $product->product_price,
-                'product_image' => $product->product_image,
-                'product_category' => $product->product_category,
-                'quantity' => 1,
-                'order_type' => $orderType, 
-                'total' =>  $total,
-            ];
-        }
-        session()->put('cart', $cart); // update the cart
-        
-        return redirect()->back()->with('success', 'Product added to cart!');
+        return redirect()->back()->with('success', 'No stocks available for this product.');
     }
+
+    $cart = session()->get('cart', []);
+
+    $orderType = $request->input('order_type'); // Get the selected order type from the input
+    $total = $request->input('total');
+    
+    // Check if the product is already in the cart
+    if (isset($cart[$id])) {
+        $cart[$id]['quantity']++;
+    } else {
+        $cart[$id] = [
+            'product_name' => $product->product_name,
+            'product_price' => $product->product_price,
+            'product_image' => $product->product_image,
+            'product_category' => $product->product_category,
+            'quantity' => 1,
+            'order_type' => $orderType, 
+            'total' => $total,
+        ];
+    }
+
+    session()->put('cart', $cart); // update the cart
+    
+    return redirect()->back()->with('success', 'Product added to cart!');
+}
+
  
     public function update(Request $request)
     {

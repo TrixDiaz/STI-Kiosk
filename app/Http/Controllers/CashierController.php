@@ -42,11 +42,19 @@ class CashierController extends Controller
     public function posAddToCart(Request $request, $id)
     {
         $product = Stock::findOrFail($id);
+        
+        // Check if product_stock is zero
+        if ($product->product_stock == 0) {
+            return redirect()->back()->with('success', 'No stocks available for this product.');
+        }
+    
         $authUser = $request->input('name'); 
         $cart = session()->get('cart', []);
-
+    
         $orderType = $request->input('order_type'); // Get the selected order type from the input
         $total = $request->input('total');
+    
+        // Check if the product is already in the cart
         if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -58,13 +66,15 @@ class CashierController extends Controller
                 'quantity' => 1,
                 'name' => $authUser,
                 'order_type' => $orderType, 
-                'total' =>  $total,
+                'total' => $total,
             ];
         }
+    
         session()->put('cart', $cart); // update the cart
         
         return redirect()->back()->with('success', 'Product added to cart!');
     }
+    
 
     public function posCart()
     {
