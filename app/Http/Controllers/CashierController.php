@@ -218,6 +218,8 @@ class CashierController extends Controller
 {
     // Retrieve orderDetails from URL parameters
     $orderDetails = $request->input('orderDetails');
+    $authUser = $request->input('name'); 
+    $total = $request->input('total');
     $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); // Create random 6 digit generator
 
     foreach ($orderDetails as $item) {
@@ -231,6 +233,7 @@ class CashierController extends Controller
             'total' => $item['total'],
             'payment_status' => 'Gcash',
             'order_type' => $item['name'],
+            'name' => $authUser,
             'created_at' => now(),
             'updated_at' => now(),
             // Add other fields as needed
@@ -244,6 +247,7 @@ class CashierController extends Controller
             'total' => $item['total'],
             'payment_status' => 'Gcash',
             'order_type' => $item['name'],
+            'name' => $authUser,
             'created_at' => now(),
             'updated_at' => now(),
             // Add other fields as needed
