@@ -9,6 +9,7 @@ use App\Models\OrderLog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
@@ -36,8 +37,6 @@ class Order extends Model
 
     public function moveToQueueAndDelete()
     {
-        
-        
         // Get the order ID
         $orderId = $this->order_id;
         
@@ -48,14 +47,33 @@ class Order extends Model
     
         // Iterate over order items
         foreach ($orderItems as $item) {
-
-            // Update the payment status to "cash"
-        $this->update(['payment_status' => 'Cash']);
-
-            // Update the product_stock in the stocks table using Eloquent
-            Stock::where('product_name', $item->product_name)
-                  ->decrement('product_stock', $item->quantity);
     
+            // Update the payment status to "cash"
+            $this->update(['payment_status' => 'Cash']);
+    
+            // Update the product_stock in the stocks table using Eloquent
+            $productStock = Stock::where('product_name', $item->product_name)
+                ->decrement('product_stock', $item->quantity);
+    
+            // Check if the product stock is less than 300
+            if ($productStock < 300) {
+                // Update the product status to "critical"
+                Stock::where('product_name', $item->product_name)->update(['product_status' => 'critical']);
+    
+                Notification::make()
+                ->success()
+                ->icon('heroicon-o-archive-box')
+                ->title('Stocks in Critical Notification')
+                ->body(Auth::user()->name . ' Stock for this is Critical ' .  $item->product_name )
+                ->sendToDatabase(
+                    $usersToNotify = User::whereHas('roles', function ($query) {
+                        $query->where('id', [1, 2, 3]);
+                    })->get(),
+                );
+
+            $usersToNotify->push(Auth::user());
+            }
+                
             // Create a new record in the queue table with the order item data
             Queue::create([
                 'order_id' => $item->order_id,
@@ -86,6 +104,7 @@ class Order extends Model
         // Delete all orders with the same order_id from the orders table
         DB::table('orders')->where('order_id', $orderId)->delete();
     }
+    
     
     
     

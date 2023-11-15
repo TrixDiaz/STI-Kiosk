@@ -54,7 +54,7 @@ class SessionController extends Controller
                 ->body(Auth::user()->name . ' No stock Available for product ' . $product->product_name)
                 ->sendToDatabase(
                     $usersToNotify = User::whereHas('roles', function ($query) {
-                        $query->where('id', [1, 2]);
+                        $query->where('id', [1, 2, 3]);
                     })->get(),
                 );
 
