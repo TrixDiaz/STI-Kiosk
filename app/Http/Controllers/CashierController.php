@@ -125,20 +125,20 @@ class CashierController extends Controller
      */
     public function posCreateOrder(Request $request)
     {
-        $orderDetails = []; // Declarad null array
-
+        $orderDetails = []; // Declare null array
+    
         $cart = session('cart'); // Retrieve products from the session
-
-         // Check if the cart is empty
-         if (empty($cart)) {
+    
+        // Check if the cart is empty
+        if (empty($cart)) {
             return redirect()->back()->with('success', 'No items in the cart. Please add items to your cart before placing an order.');
         }
-
+    
         $authUser = $request->input('name'); 
         $total = $request->input('total'); // Get the Total Request from input
         $orderID = $request->input('orderID'); 
         $orderType = $request->input('order_type'); // Get the order type Request from input
-        
+    
         // You can now insert the products into your orders table.
         foreach ($cart as $item) {
             $orderDetails[] = [
@@ -155,19 +155,42 @@ class CashierController extends Controller
                 'updated_at' => now(),
                 // Add other fields as needed
             ];
-             // Update product_stock in the Stock table
-        Stock::where('product_name', $item['product_name'])
-        ->decrement('product_stock', $item['quantity']);
-        }
-        session()->put('cart', $orderDetails);
+    
+            // Update product_stock in the Stock table
+            $updatedStock = Stock::where('product_name', $item['product_name'])
+                ->decrement('product_stock', $item['quantity']);
+    
+            // Check if the updated stock is less than a threshold (e.g., 300)
+            if ($updatedStock < 300) {
+                 // Update the product status to "critical"
+                 Stock::where('product_name', $item['product_name'])->update(['product_status' => 'critical']);
+                // Send a database notification or perform any other action
+                // You need to define your notification class and customize it as needed
+                Notification::make()
+                ->success()
+                ->icon('heroicon-o-archive-box')
+                ->title('Stocks in Critical Notification')
+                ->body(Auth::user()->name . ' Stock for this is Critical ' . $item['product_name'])
+                ->sendToDatabase(
+                    $usersToNotify = User::whereHas('roles', function ($query) {
+                        $query->where('id', [1, 2, 3]);
+                    })->get(),
+                );
 
+            $usersToNotify->push(Auth::user());
+            }
+        }
+    
+        session()->put('cart', $orderDetails);
+    
         Queue::insert($orderDetails); 
         Revenue::insert($orderDetails);  // Insert all the order details into the database
-
+    
         session()->forget('cart'); // Optionally, you can clear the cart after the order is created
-
+    
         return redirect()->route('pos_receipt', ['orderID' => $orderID])->with('success', 'Order created.');
     }
+    
       /**
      * Fetch all the orders of Customer or Receipt
      */
