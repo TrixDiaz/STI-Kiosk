@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Queue;
-use App\Models\Revenue;
 use App\Models\Stock;
+use App\Models\Revenue;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
+use Filament\Notifications\Notification;
+
 
 class SessionController extends Controller
 {
@@ -45,7 +49,21 @@ class SessionController extends Controller
     // Check if product_stock is zero
     if ($product->product_stock == 0) {
 
-        return redirect()->back()->with('error', 'No stocks available for this product.');
+        
+        // You can add additional logic here as per your requirements
+        Notification::make()
+        ->success()
+        ->icon('heroicon-o-archive-box')
+        ->title('Stocks Notification')
+        ->body(Auth::user()->name . ' No stock Available for product ')
+        ->sendToDatabase(
+            $usersToNotify =    User::whereHas('roles', function ($query) {
+                $query->where('id', [1, 2]);
+            })->get());
+            
+            $usersToNotify->push(Auth::user()); 
+
+            return redirect()->back()->with('error', 'No stocks available for this product.');
     }
 
     $cart = session()->get('cart', []);
