@@ -353,7 +353,7 @@
 </div>
         {{-- end of top nav --}}
         <!-- Page Content -->
-        <main class="font-sans text-gray-900 antialiased">
+        <div class="font-sans text-gray-900 antialiased">
             @if (session('success'))
             <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
                 <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-400 to-green-300 px-4 py-4 text-base text-white"
@@ -379,7 +379,7 @@
 
         @if (session('error'))
             <div data-aos="fade-left" data-aos-duration="1000" class="mx-5">
-                <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-green-600 to-red-500  px-4 py-4 text-base text-white"
+                <div class="mt-3 font-regular relative block w-full rounded-lg bg-gradient-to-tr from-red-600 to-red-500  px-4 py-4 text-base text-white"
                     data-dismissible="alert" id="success-alert">
                     <div class="absolute top-4 left-4">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -400,7 +400,7 @@
             </script>
         @endif
             {{ $slot }}
-        </main>
+        </div>
     </div>
 
     @stack('modals')
