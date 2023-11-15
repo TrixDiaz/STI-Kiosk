@@ -263,7 +263,7 @@ class CashierController extends Controller
     session()->forget('cart');
 
     // Redirect back or to a confirmation page
-    return redirect()->route('receipt', ['orderID' => $orderID])->with('success', 'Order created.');
+    return redirect()->route('pos_receipt', ['orderID' => $orderID])->with('success', 'Order created.');
 }
       /** 
     * Start of Products 
