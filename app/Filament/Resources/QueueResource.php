@@ -47,6 +47,7 @@ class QueueResource extends Resource
                 TextColumn::make('quantity'),
                 TextColumn::make('order_type'),
                 TextColumn::make('name'),
+                TextColumn::make('payment_status'),
                   Tables\Columns\TextColumn::make('created_at')
                       ->dateTime()
                       ->sortable()
