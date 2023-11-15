@@ -45,6 +45,9 @@ class QueueResource extends Resource
                 ->searchable(),
                 TextColumn::make('product_status')
                     ->searchable(),
+                    TextColumn::make('name')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //
