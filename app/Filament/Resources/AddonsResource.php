@@ -61,11 +61,10 @@ class AddonsResource extends Resource
     {
         return $table
             ->columns([
-              TextColumn::make('order_id'),
+              TextColumn::make('product_id'),
               TextColumn::make('product_name'),
-              TextColumn::make('product_price'),
-              TextColumn::make('quantity'),
-              TextColumn::make('order_type'),
+              TextColumn::make('product_image'),
+              TextColumn::make('product_status'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

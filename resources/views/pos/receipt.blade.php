@@ -920,7 +920,7 @@
                     @endauth
                 </div>
                 <h1 class="font-bold text-2xl my-4 text-center text-blue-600">Izakaya Shonantei</h1>    
-               <div><p class="text-end">{{ \Carbon\Carbon::parse($orderDetails->first()->created_at)->diffForHumans() }}</p></div>
+               <div><p class="text-end">{{ \Carbon\Carbon::parse($orderDetails->first()->created_at) }}</p></div>
                 <hr class="mb-2">
                 <div class="flex justify-between mb-6">
                     <h1 class="text-lg font-bold">{{ $orderDetails->first()->order_type }}</h1>

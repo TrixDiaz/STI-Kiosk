@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Addons;
 use App\Models\Order;
 use App\Models\Queue;
 use App\Models\Serve;
@@ -108,6 +109,13 @@ class ProductsController extends Controller
        $products = Stock::where('product_category', 'Zensai')->get();
 
        return view('products.zensai', compact('products'));
+   }
+
+   public function addons()
+   {
+       $products = Addons::all();
+
+       return view('products.addons', compact('products'));
    }
 
    /** 

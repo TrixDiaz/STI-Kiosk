@@ -105,6 +105,7 @@ Route::controller(ProductsController::class)->group(function () {
     Route::get('/tempura', 'tempura')->name('tempura');
     Route::get('/yakizakana', 'yakizakana')->name('yakizakana');
     Route::get('/zensai', 'zensai')->name('zensai');
+    Route::get('/addons', 'addons')->name('addons');
 });
 
 Route::controller(SessionController::class)->group(function () {
