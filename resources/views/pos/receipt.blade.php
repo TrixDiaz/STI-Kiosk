@@ -925,7 +925,7 @@
                 <div class="flex justify-between mb-6">
                     <h1 class="text-lg font-bold">{{ $orderDetails->first()->order_type }}</h1>
                     <div class="text-gray-700">
-                        <div>Invoice #: {{ $orderDetails->first()->order_id }}</div>
+                        <div>Invoice / Order #: {{ $orderDetails->first()->order_id }}</div>
                     </div>
                 </div>
                 <div class="mb-8">

@@ -900,8 +900,8 @@
             }
         </style>
 
-        <div data-aos="fade-up" data-aos-duration="2000" class="mx-2 max-w-screen-sm text-center">
-            <div class="bg-white border rounded-lg shadow-lg px-6 py-4 max-w-md mx-auto">
+        <div data-aos="fade-up" data-aos-duration="2000" class="w-full text-center">
+            <div class="bg-white border rounded-lg shadow-lg px-6 py-4 max-w-2xl mx-auto">
                 <div class="flex flex-row-reverse">
                     <button type="button" id="print"
                         class="text-green-700  hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
@@ -925,18 +925,13 @@
                 <div class="flex justify-between mb-6">
                     <h1 class="text-lg font-bold">{{ $orderDetails->first()->order_type }}</h1>
                     <div class="text-gray-700">
-                        <div>Invoice #: {{ $orderDetails->first()->order_id }}</div>
+                        <div>Invoice / Order #: {{ $orderDetails->first()->order_id }}</div>
                     </div>
                 </div>
                 <div class="mb-8">
-                    {{-- <h2 class="text-lg font-bold mb-4">Bill To:</h2>
-                    <div class="text-gray-700 mb-2">John Doe</div>
-                    <div class="text-gray-700 mb-2">123 Main St.</div>
-                    <div class="text-gray-700 mb-2">Anytown, USA 12345</div> --}}
-                    {{-- <div class="text-gray-700">johndoe@example.com</div> --}}
                 </div>
                 <table class="w-full mb-8">
-                    <thead>
+                    <thead class="">
                         <tr>
                             <th class="text-left font-bold text-gray-700">Product</th>
                             <th class="text-right font-bold text-gray-700">Qty</th>
@@ -962,7 +957,7 @@
                         </tr>
                     </tfoot>
                 </table>
-                {{-- <div class="text-gray-700 mb-2">Thanks for visiting us!</div> --}}
+             
                 <div class="text-gray-700 text-sm uppercase">Disclaimer this is not your offical Receipt!</div>
             </div>
 
