@@ -172,6 +172,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Ixudra\Curl\CurlServiceProvider::class,
+        Ladumor\LaravelPwa\PWAServiceProvider::class,   
     ])->toArray(),
 
     /*
@@ -188,6 +189,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Curl'          => Ixudra\Curl\Facades\Curl::class,
+        'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
     ])->toArray(),
 
 ];
