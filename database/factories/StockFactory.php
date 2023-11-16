@@ -24,7 +24,6 @@ class StockFactory extends Factory
             'product_category' => 'Donmono',
             'product_status' => $this->faker->firstName(),
             'product_expiration' => now(),
-
         ];
     }
 }
