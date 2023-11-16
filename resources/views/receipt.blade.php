@@ -884,13 +884,12 @@
                     background-color: #fffffff;
                     height: 100%;
                     width: 100%;
-                    position: fixed;
                     top: 0;
                     left: 0;
                     margin: 0;
-                    padding: 15px;
-                    font-size: 14px;
-                    line-height: 1rem;
+                    padding: 0px;
+                    font-size: 16px;
+                    line-height: 0rem;
                 }
 
                 #print {
