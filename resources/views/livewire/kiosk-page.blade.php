@@ -2,7 +2,7 @@
     <div class="mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             @foreach ($products as $product)
-                <div class="relative">
+                <div class="relative mx-10">
                     <a href="{{ route('posAddToCart', $product->id) }}">
                         <img src="/storage/{{ $product->product_image }}"
                             class="h-40 w-full bg-cover rounded-lg" alt="" />
