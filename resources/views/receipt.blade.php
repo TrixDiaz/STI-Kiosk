@@ -883,12 +883,13 @@
                     border: 0;
                     background-color: #fffffff;
                     height: 100%;
-                    width: 50%;
+                    width: 100%;
+                    position: relative;
                     top: 0;
                     left: 0;
                     margin: 0;
                     padding: 0px;
-                    font-size: 8px;
+                    font-size: 16px;
                     line-height: 0rem;
                 }
 
