@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Queue;
 use App\Models\Stock;
 use App\Models\Revenue;
+use Filament\Notifications\Events\DatabaseNotificationsSent;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\Auth;
@@ -52,14 +53,16 @@ class SessionController extends Controller
                 ->icon('heroicon-o-archive-box')
                 ->title('Stocks Notification')
                 ->body(' No stock Available for product ' . $product->product_name)
+                // ->broadcast($usersToNotify);
                 ->sendToDatabase(
                     $usersToNotify = User::whereHas('roles', function ($query) {
                         $query->where('id', [1, 2, 3]);
                     })->get(),
-                );
+                )->broadcast($usersToNotify);
 
             $usersToNotify->push(Auth::user());
-
+            
+                // event(new DatabaseNotificationsSent($usersToNotify));
             return redirect()
                 ->back()
                 ->with('success', 'No stocks available for this product.');
