@@ -5,7 +5,7 @@
                 <div class="relative">
                     <a href="{{ route('posAddToCart', $product->id) }}">
                         <img src="/storage/{{ $product->product_image }}"
-                            class="h-40 max-w-full bg-cover rounded-lg" alt="" />
+                            class="h-40 w-full bg-cover rounded-lg" alt="" />
                         <div class="">
                             <div class="flex flex-col w-full text-black text-md text-md px-2 py-2 rounded-md">
                                 <div class="uppercase"><p class="font-thin">{{ $product->product_name }}</p></div>
