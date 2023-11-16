@@ -51,7 +51,7 @@ class CashierController extends Controller
                 ->success()
                 ->icon('heroicon-o-archive-box')
                 ->title('Stocks Notification')
-                ->body(Auth::user()->name . ' No stock Available for product ' . $product->product_name)
+                ->body(' No stock Available for product ' . $product->product_name)
                 ->sendToDatabase(
                     $usersToNotify = User::whereHas('roles', function ($query) {
                         $query->where('id', [1, 2, 3]);
