@@ -900,7 +900,7 @@
             }
         </style>
 
-        <div data-aos="fade-up" data-aos-duration="2000" class="w-full text-center">
+        <div data-aos="fade-up" data-aos-duration="2000" class="max-w-md text-center">
             <div class="bg-white border rounded-lg shadow-lg px-6 py-4 w-full mx-auto">
                 <div class="flex flex-row-reverse">
                     <button type="button" id="print"
