@@ -28,7 +28,7 @@ class StockResource extends Resource
     protected static ?string $model = Stock::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationGroup = 'Products';
@@ -36,68 +36,54 @@ class StockResource extends Resource
     public static function form(Form $form): Form
     {
         $randomNumber = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
-        
-        return $form
-            ->schema([
-                Wizard::make([
-                    Step::make('Create Stock')
-                        ->schema([
-                            TextInput::make('product_id')
-                            ->label('Product ID')
-                            ->readOnly()
-                            ->default($randomNumber)
-                            ->columnSpanFull()
-                            ->required(),
-                            Select::make('product_name')
-                            ->label('Name')
-                            ->searchable()
-                            ->required('create')
-                            ->options(Product::all()->pluck('product_name', 'product_name'))
-                            ->live(),
-                            TextInput::make('product_price')
-                            ->label('Price')
-                            ->required()
-                            ->numeric(),
-                        ]),
-                    Step::make('Storage')
-                        ->schema([
-                            TextInput::make('product_stock')
-                            ->label('Stock')
-                            ->required()
-                            ->numeric(),
-                            Select::make('product_category')
-                            ->label('Category')
-                            ->searchable()
-                            // ->required('create')
-                            ->options(Category::all()->pluck('product_category', 'product_category')),
-                        ]),
-                    Step::make('Status')
-                        ->schema([
-                    Datepicker::make('product_expiration')
-                        ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
-                        ->format('Y-m-d')
-                        ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
-                        ->required('create')
-                        ->visibleOn('create', 'view')
-                        ->native(false),
-                        
-                     Select::make('product_status')
-                        ->label('Status')
-                        ->options([
-                            'In Stock' => 'In Stock',
-                            'Low Stock' => 'Low Stock',
-                            'Critical' => 'Critical',
-                        ])
-                        ->native(false)
-                        ->required(),
-                        FileUpload::make('product_image')
-                        ->label('Attachment')
-                        ->image(),
-                            ]),
-                    ])
-                    ->submitAction(new HtmlString('<button type="submit">Submit</button>'))
-                    ->columnSpanFull(),
-            ]);
+
+        return $form->schema([
+            TextInput::make('product_id')
+                ->label('Product ID')
+                ->readOnly()
+                ->default($randomNumber)
+                ->columnSpanFull()
+                ->required(),
+            Select::make('product_name')
+                ->label('Name')
+                ->searchable()
+                ->required('create')
+                ->options(Product::all()->pluck('product_name', 'product_name'))
+                ->live(),
+            TextInput::make('product_price')
+                ->label('Price')
+                ->required()
+                ->numeric(),
+            TextInput::make('product_stock')
+                ->label('Stock')
+                ->required()
+                ->numeric(),
+            Select::make('product_category')
+                ->label('Category')
+                ->searchable()
+                // ->required('create')
+                ->options(Category::all()->pluck('product_category', 'product_category')),
+            Datepicker::make('product_expiration')
+                ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
+                ->format('Y-m-d')
+                ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
+                ->required('create')
+                ->visibleOn('create', 'view')
+                ->native(false),
+
+            Select::make('product_status')
+                ->label('Status')
+                ->options([
+                    'In Stock' => 'In Stock',
+                    'Low Stock' => 'Low Stock',
+                    'Critical' => 'Critical',
+                ])
+                ->native(false)
+                ->required(),
+            FileUpload::make('product_image')
+                ->label('Attachment')
+                ->image()->columnSpanFull(),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -107,9 +93,8 @@ class StockResource extends Resource
                 Tables\Columns\TextColumn::make('product_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('product_name')
-                    ->searchable(),
-                    ImageColumn::make('product_image')
+                Tables\Columns\TextColumn::make('product_name')->searchable(),
+                ImageColumn::make('product_image')
                     ->circular()
                     ->label('attachment')
                     ->toggleable(isToggledHiddenByDefault: false),
@@ -119,10 +104,8 @@ class StockResource extends Resource
                 Tables\Columns\TextColumn::make('product_price')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('product_status')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('product_category')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('product_status')->searchable(),
+                Tables\Columns\TextColumn::make('product_category')->searchable(),
                 Tables\Columns\TextColumn::make('product_expiration')
                     ->date()
                     ->sortable(),
@@ -135,31 +118,18 @@ class StockResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
-                ]),
-            ]);
+            ->filters([Tables\Filters\TrashedFilter::make()])
+            ->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make(), Tables\Actions\ForceDeleteAction::make(), Tables\Actions\RestoreAction::make()])
+            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make(), Tables\Actions\ForceDeleteBulkAction::make(), Tables\Actions\RestoreBulkAction::make()])]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+                //
+            ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -167,5 +137,5 @@ class StockResource extends Resource
             'create' => Pages\CreateStock::route('/create'),
             'edit' => Pages\EditStock::route('/{record}/edit'),
         ];
-    }    
+    }
 }
