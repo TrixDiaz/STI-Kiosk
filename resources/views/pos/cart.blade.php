@@ -184,8 +184,7 @@
                                                 <p id="changeLabel" class="text-gray-700 px-4 mb-4">0.00</p>
 
                                                 <!-- Buttons for digits -->
-                                                <div class="grid grid-cols-3 gap-4 p-4">
-                                                    <div class="col-span-2 grid grid-cols-4 gap-4 mx-auto">
+                                                <div class="col-span-2 grid grid-cols-4 gap-4 ml-4">
                                                         <button onclick="appendToInput('1')"
                                                             class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
                                                         <button onclick="appendToInput('2')"
@@ -208,7 +207,6 @@
                                                             class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
                                                         <button onclick="clearInput()"
                                                             class="bg-red-500 text-white w-16 h-16 rounded-md">Clear</button>
-                                                    </div>
                                                 </div>
 
                                                 <!-- The script remains the same -->
