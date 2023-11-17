@@ -331,7 +331,7 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button id="checkoutButton"
-                                                                    class="bg-gray-300 hover:bg-gray-400 text-gray font-bold py-2 px-4 rounded"
+                                                                    class="bg-blue-300 text-gray font-bold py-2 px-4 rounded"
                                                                     onclick="return confirm('Are you sure you want to move this order to the queue?')">
                                                                     Paid
                                                                 </button>
