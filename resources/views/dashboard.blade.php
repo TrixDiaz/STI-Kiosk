@@ -59,7 +59,7 @@
                     <div id="datatable">
                         {{-- Table --}}
 
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-5">
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-5 ">
                             <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -74,7 +74,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center">
+                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center ">
                                             <td scope="row"
                                                 class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 
