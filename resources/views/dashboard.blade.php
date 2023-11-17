@@ -511,7 +511,7 @@
                                             <form method="POST" action="{{ route('serving', $queue['order_id']) }}">
                                                 @csrf
                                                 <button type="submit"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-center">Serve</button>
+                                                    class="font-medium bg-primary-100 text-black dark:text-blue-500 hover:underline text-center">Serve</button>
                                             </form>
                                         </td>
                                     </tr>
