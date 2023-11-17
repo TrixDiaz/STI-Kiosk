@@ -899,7 +899,7 @@
                 }
             }
         </style>
-
+<div class="flex justify-center items-center h-screen">
         <div data-aos="fade-up" data-aos-duration="2000" class="max-w-sm text-center">
             <div class="bg-white border rounded-lg shadow-lg px-6 py-4 w-sm mx-auto">
                 <div class="flex flex-row-reverse">
@@ -962,7 +962,7 @@
             </div>
 
         </div>
-
+    </div>
     </div>
     <script src="{{ asset('js/html2.js') }}"></script>
 
