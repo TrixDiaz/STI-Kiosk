@@ -212,7 +212,7 @@
                                             <td>
                                                 <!-- Trigger button -->
                                                 <button
-                                                    class="bg-warning-500 hover:bg-warning-700 text-white font-bold py-2 px-4 rounded"
+                                                    class="bg-warning hover:bg-warning text-white font-bold py-2 px-4 rounded"
                                                     onclick="openModal()">
                                                     Paid
                                                 </button>
@@ -331,7 +331,7 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button id="checkoutButton"
-                                                                    class="bg-success-500 hover:bg-success-700 text-white font-bold py-2 px-4 rounded"
+                                                                    class="bg-success hover:bg-success text-white font-bold py-2 px-4 rounded"
                                                                     onclick="return confirm('Are you sure you want to move this order to the queue?')">
                                                                     Paid
                                                                 </button>
