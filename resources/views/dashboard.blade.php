@@ -60,7 +60,7 @@
                         {{-- Table --}}
 
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-5 ">
-                            <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+                            <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">
                                 <thead
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
@@ -125,7 +125,7 @@
                                                                     <h1 class="text-lg font-bold">
                                                                         {{ $order['order_type'] }}</h1>
                                                                     <div class="text-gray-700">
-                                                                        <div>Invoice #: {{ $order['created_at'] }}
+                                                                        <div>Invoice / Order #: {{ $order['order_id'] }}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -214,7 +214,7 @@
                                                 <button
                                                     class=" hover:bg-primary-100 text-gray font-bold py-2 px-4 rounded"
                                                     onclick="openModal()">
-                                                    Paid
+                                                    Pay
                                                 </button>
 
                                                 <!-- Modal -->

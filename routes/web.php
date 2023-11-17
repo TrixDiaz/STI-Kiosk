@@ -55,7 +55,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
                 'order_type' => $orderInfo->isEmpty() ? null : $orderInfo->first()->order_type,
                 'payment_status' => $orderInfo->isEmpty() ? null : $orderInfo->first()->payment_status,
                 'total' => $orderInfo->isEmpty() ? null : $orderInfo->first()->total,
-                'created_at' => $orderInfo->isEmpty() ? null : \Carbon\Carbon::parse($orderInfo->first()->created_at)->diffForHumans(),
+                'created_at' => $orderInfo->isEmpty() ? null : \Carbon\Carbon::parse($orderInfo->first()->created_at),
             ];
         }
         // Process queues
@@ -67,7 +67,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
                 'order_type' => $queueInfo->isEmpty() ? null : $queueInfo->first()->order_type,
                 'payment_status' => $queueInfo->isEmpty() ? null : $queueInfo->first()->payment_status,
                 'total' => $queueInfo->isEmpty() ? null : $queueInfo->first()->total,
-                'created_at' => $queueInfo->isEmpty() ? null : \Carbon\Carbon::parse($queueInfo->first()->created_at)->diffForHumans(),
+                'created_at' => $queueInfo->isEmpty() ? null : \Carbon\Carbon::parse($queueInfo->first()->created_at),
             ];
         }
         return view('dashboard', compact('orders', 'queues', 'serves'));
