@@ -175,7 +175,7 @@
                                                 <h2 class="text-lg font-medium text-gray-900 p-4">Input Customer Amount
                                                     - ₱{{ $total }}</h2>
                                                 <p class="text-gray-700 px-4">
-                                                    <input id="amountInput" wire:model-live type="number"
+                                                    <input id="amountInput" type="number"
                                                         placeholder="Amount"
                                                         class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
                                                 </p>

@@ -27,9 +27,9 @@
 
             <div data-tab-content="" class="">
                 <div class="block opacity-100" id="app" role="tabpanel">{{-- Start  of First panel --}}
-                                <!-- Product  -->
-                               <livewire:posPage/>
-                                {{-- End of Product --}}
+                    <!-- Product  -->
+                    <livewire:posPage />
+                    {{-- End of Product --}}
 
                 </div> {{-- End of First panel --}}
 
@@ -74,8 +74,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center">
+                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center">
                                             <td scope="row"
                                                 class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 
@@ -83,8 +82,8 @@
                                                 <button type="button"
                                                     class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                                                     data-te-toggle="modal"
-                                                    data-te-target="#order{{ $order['order_id'] }}"
-                                                    data-te-ripple-init data-te-ripple-color="light">
+                                                    data-te-target="#order{{ $order['order_id'] }}" data-te-ripple-init
+                                                    data-te-ripple-color="light">
                                                     {{ $order['order_id'] }}
                                                 </button>
 
@@ -211,14 +210,151 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <form action="{{ route('orders.move-to-queue', $order['id']) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        onclick="return confirm('Are you sure you want to move this order to the queue?')">Paid</button>
-                                                </form>
-                                                </form>
+                                                <!-- Trigger button -->
+                                                <button
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                                    onclick="openModal()">
+                                                    Paid
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div id="myModal"
+                                                    class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center hidden">
+                                                    <div class="bg-white p-8 rounded shadow-lg w-3/4">
+                                                        <div class="flex justify-between items-center mb-4">
+                                                            <h2 class="text-lg font-bold">Payment -
+                                                                {{ $order['total'] }} </h2>
+                                                            <button class="text-gray-500 hover:text-gray-700"
+                                                                onclick="closeModal()">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    class="h-6 w-6" fill="none"
+                                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round" stroke-width="2"
+                                                                        d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        <p class="text-gray-700 px-4">
+                                                            <input id="amountInput" type="number"
+                                                                placeholder="Amount"
+                                                                class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
+                                                        </p>
+                                                        <label for="changeLabel"
+                                                            class="block text-gray-700 px-4 mt-2">Change:</label>
+                                                        <p id="changeLabel" class="text-gray-700 px-4 mb-4">0.00</p>
+
+                                                        <!-- Buttons for digits -->
+                                                        <div class="col-span-2 grid grid-cols-4 gap-4 mx-auto">
+                                                                <button onclick="appendToInput('1')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
+                                                                <button onclick="appendToInput('2')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">2</button>
+                                                                <button onclick="appendToInput('3')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">3</button>
+                                                                <button onclick="appendToInput('4')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">4</button>
+                                                                <button onclick="appendToInput('5')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">5</button>
+                                                                <button onclick="appendToInput('6')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">6</button>
+                                                                <button onclick="appendToInput('7')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">7</button>
+                                                                <button onclick="appendToInput('8')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">8</button>
+                                                                <button onclick="appendToInput('9')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">9</button>
+                                                                <button onclick="appendToInput('0')"
+                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
+                                                                <button onclick="clearInput()"
+                                                                    class="bg-red-500 text-white w-16 h-16 rounded-lg">Clear</button>
+                                                           
+                                                        </div>
+
+
+                                                        <!-- The script remains the same -->
+                                                        <script>
+                                                            // Get the value from the <p> element
+                                                            var valueFromP = document.getElementById('changeLabel').innerText;
+
+                                                            // Set the value to the input field
+                                                            document.getElementById('changeInput').value = valueFromP;
+
+                                                            function clearInput() {
+                                                                var inputField = document.getElementById('amountInput');
+                                                                inputField.value = ''; // Clear the input field
+                                                                calculateChange(); // Recalculate change after clearing input
+                                                            }
+
+                                                            function appendToInput(digit) {
+                                                                var inputField = document.getElementById('amountInput');
+                                                                inputField.value += digit;
+                                                                calculateChange(); // Calculate change when digits are appended
+                                                            }
+
+                                                            function calculateChange() {
+                                                                var total = {{ $order['total'] }}; // Get the initial total from PHP
+                                                                var amountInput = parseFloat(document.getElementById('amountInput').value);
+                                                                var changeLabel = document.getElementById('changeLabel');
+                                                                var checkoutButton = document.getElementById('checkoutButton'); // The "Paid" button
+
+                                                                if (!isNaN(amountInput)) {
+                                                                    // Calculate change
+                                                                    var change = amountInput - total;
+                                                                    changeLabel.textContent = '₱' + change.toFixed(2);
+
+                                                                    // Disable or enable the checkout button based on change value
+                                                                    checkoutButton.disabled = change < 0; // Disable if change is negative or zero
+                                                                } else {
+                                                                    changeLabel.textContent = '₱0.00';
+                                                                    checkoutButton.disabled = true;
+                                                                }
+                                                            }
+
+                                                            function changePaymentMethod(paymentMethod) {
+                                                                // ... (existing code remains the same)
+
+                                                                calculateChange(); // Calculate change before submitting the form
+                                                            }
+                                                        </script>
+
+                                                        <!-- Modal Footer -->
+                                                        <div class="mt-6 flex justify-end">
+                                                            <button
+                                                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2"
+                                                                onclick="closeModal()">
+                                                                Close
+                                                            </button>
+                                                            <form
+                                                                action="{{ route('orders.move-to-queue', $order['id']) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button id="checkoutButton"
+                                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                                                    onclick="return confirm('Are you sure you want to move this order to the queue?')">
+                                                                    Paid
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+                                                    function openModal() {
+                                                        document.getElementById('myModal').classList.remove('hidden');
+                                                    }
+
+                                                    function closeModal() {
+                                                        document.getElementById('myModal').classList.add('hidden');
+                                                    }
+
+                                                    function saveChanges() {
+                                                        // Logic to save changes
+                                                        closeModal(); // Close modal after saving changes
+                                                    }
+                                                </script>
+
                                             </td>
                                         </tr>
                                     @endforeach

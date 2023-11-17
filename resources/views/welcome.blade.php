@@ -864,8 +864,6 @@
                                         <img src="/images/izakaya-header.png" class="max-h-80" alt="header">
                                         {{-- <img src="/images/intro-image.png" class="animate-bounce max-h-96 my-10 place-self-center" alt="Ramen"> --}}
 
-
-
                                         <div id="default-carousel" class="relative w-full p-3" data-carousel="slide">
                                             <!-- Carousel wrapper -->
                                             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
