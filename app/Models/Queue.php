@@ -19,6 +19,7 @@ class Queue extends Model
         'product_category',
         'payment_status',
         'product_status',
+        'change',
         'session_id',
         'created_at',
         'updated_at',

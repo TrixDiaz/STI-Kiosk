@@ -928,13 +928,6 @@
                         <div>Invoice / Order #: {{ $orderDetails->first()->order_id }}</div>
                     </div>
                 </div>
-                <div class="mb-8">
-                    {{-- <h2 class="text-lg font-bold mb-4">Bill To:</h2>
-                    <div class="text-gray-700 mb-2">John Doe</div>
-                    <div class="text-gray-700 mb-2">123 Main St.</div>
-                    <div class="text-gray-700 mb-2">Anytown, USA 12345</div> --}}
-                    {{-- <div class="text-gray-700">johndoe@example.com</div> --}}
-                </div>
                 <table class="w-full mb-8">
                     <thead>
                         <tr>
@@ -958,7 +951,12 @@
                         <tr>
                             <td class="text-left font-bold text-gray-700">Total</td>
                             <td class=""></td>
-                            <td class="text-right font-bold text-gray-700">{{ $orderDetail->total }}</td>
+                            <td class="text-right font-bold text-gray-700">₱{{ $orderDetail->total }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left font-bold text-gray-700">Change</td>
+                            <td class=""></td>
+                            <td class="text-right font-bold text-gray-700">₱{{ $orderDetail->change }}</td>
                         </tr>
                     </tfoot>
                 </table>

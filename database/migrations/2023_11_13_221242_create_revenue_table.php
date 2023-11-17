@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('total', 10, 2);
             $table->string('order_type');
+            $table->string('change')->nullable();
             $table->string('name')->nullable();
             $table->string('payment_status');
             $table->timestamps();

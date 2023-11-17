@@ -11,7 +11,8 @@
                         <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                             <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                 <div class="flex items-start justify-between">
-                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">POS Shopping cart
+                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">POS Shopping
+                                        cart
                                     </h2>
                                     <div class="ml-3 flex h-7 items-center">
                                         <a href="{{ route('dashboard') }}" wire:navigate>
@@ -54,7 +55,8 @@
                                 <div class="mt-8">
                                     <div class="flow-root">
                                         <ul id="cart" role="list" class="-my-6 divide-y divide-gray-200">
-                                            <form id="checkout-form" method="post" action="{{ route('pos_create.order') }}">
+                                            <form id="checkout-form" method="post"
+                                                action="{{ route('pos_create.order') }}">
                                                 @csrf
                                                 @php $total = 0 @endphp
                                                 @if (session('cart'))
@@ -113,11 +115,11 @@
                                                     class="hidden">
                                                 <input type="text" value="{{ $orderID }}" name="orderID"
                                                     class="hidden">
-                                                    <input type="text" value="{{ $authUser }}" name="name"
+                                                <input type="text" value="{{ $authUser }}" name="name"
                                                     class="hidden">
+                                                <input type="hidden" name="change" id="changeInput">
 
-                                          
-                                            <!-- More products... -->
+                                                <!-- More products... -->
                                         </ul>
                                     </div>
                                 </div>
@@ -148,7 +150,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </form>
+                                </form>
                                 {{-- Radio --}}
                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                     <p>Subtotal</p>
@@ -157,8 +159,145 @@
 
                                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                 <div class="mt-6 flex justify-evenly">
-                                    <button onclick="changePaymentMethod('posCash')"
-                                        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button>
+                                    {{-- <livewire:kioskcalculator/> --}}
+
+                                    {{-- calculate --}}
+                                    <div>
+
+                                        <button onclick="openModal()"
+                                            class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium bg-indigo-600 text-white">Checkout</button>
+
+                                        <!-- Modal Structure -->
+                                        <div id="myModal"
+                                            class="hidden fixed inset-0 z-50 overflow-auto bg-gray-500 bg-opacity-75 flex justify-center items-center">
+                                            <!-- Modal Content -->
+                                            <div class="bg-white rounded-lg shadow-xl w-3/4">
+                                                <h2 class="text-lg font-medium text-gray-900 p-4">Input Customer Amount
+                                                    - ₱{{ $total }}</h2>
+                                                <p class="text-gray-700 px-4">
+                                                    <input id="amountInput" wire:model-live type="number"
+                                                        placeholder="Amount"
+                                                        class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
+                                                </p>
+                                                <label for="changeLabel"
+                                                    class="block text-gray-700 px-4 mt-2">Change:</label>
+                                                <p id="changeLabel" class="text-gray-700 px-4 mb-4">0.00</p>
+
+                                                <!-- Buttons for digits -->
+                                                <div class="grid grid-cols-3 gap-4 p-4">
+                                                    <div class="col-span-2 grid grid-cols-4 gap-4 mx-auto">
+                                                        <button onclick="appendToInput('1')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
+                                                        <button onclick="appendToInput('2')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">2</button>
+                                                        <button onclick="appendToInput('3')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">3</button>
+                                                        <button onclick="appendToInput('4')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">4</button>
+                                                        <button onclick="appendToInput('5')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">5</button>
+                                                        <button onclick="appendToInput('6')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">6</button>
+                                                        <button onclick="appendToInput('7')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">7</button>
+                                                        <button onclick="appendToInput('8')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">8</button>
+                                                        <button onclick="appendToInput('9')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">9</button>
+                                                        <button onclick="appendToInput('0')"
+                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
+                                                        <button onclick="clearInput()"
+                                                            class="bg-red-500 text-white w-16 h-16 rounded-md">Clear</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- The script remains the same -->
+                                                <script>
+                                                    // Get the value from the <p> element
+                                                    var valueFromP = document.getElementById('changeLabel').innerText;
+
+                                                    // Set the value to the input field
+                                                    document.getElementById('changeInput').value = valueFromP;
+
+                                                    function clearInput() {
+                                                        var inputField = document.getElementById('amountInput');
+                                                        inputField.value = ''; // Clear the input field
+                                                        calculateChange(); // Recalculate change after clearing input
+                                                    }
+
+                                                    function appendToInput(digit) {
+                                                        var inputField = document.getElementById('amountInput');
+                                                        inputField.value += digit;
+                                                        calculateChange(); // Calculate change when digits are appended
+                                                    }
+
+                                                    function calculateChange() {
+                                                        var total = {{ $total }}; // Get the initial total from PHP
+                                                        var amountInput = document.getElementById('amountInput').value;
+                                                        var changeLabel = document.getElementById('changeLabel');
+
+                                                        var changeInput = document.getElementById('changeInput'); // Get the hidden input field
+
+                                                        if (amountInput !== '') {
+                                                            // Calculate change
+                                                            var change = parseFloat(amountInput) - total;
+                                                            changeLabel.textContent = '₱' + change.toFixed(2);
+                                                            changeInput.value = change.toFixed(2); // Assign the change value to the hidden input field
+
+                                                            // Disable or enable the checkout button based on change value
+                                                            var checkoutButton = document.getElementById('checkoutButton');
+                                                            if (change >= 0) {
+                                                                checkoutButton.disabled = false;
+                                                            } else {
+                                                                checkoutButton.disabled = true;
+                                                            }
+                                                        } else {
+                                                            changeLabel.textContent = '₱0.00';
+                                                            var checkoutButton = document.getElementById('checkoutButton');
+                                                            checkoutButton.disabled = true;
+                                                        }
+                                                    }
+
+                                                    function changePaymentMethod(paymentMethod) {
+                                                        // ... (existing code remains the same)
+
+                                                        calculateChange(); // Calculate change before submitting the form
+                                                    }
+                                                </script>
+
+
+                                                <div class="flex justify-between p-4">
+                                                    <button id="checkoutButton"
+                                                        onclick="changePaymentMethod('posCash')"
+                                                        class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium bg-indigo-600 text-white">Checkout</button>
+
+                                                    <button onclick="closeModal()"
+                                                        class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md focus:outline-none">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            // Function to open the modal
+                                            function openModal() {
+                                                var modal = document.getElementById('myModal');
+                                                modal.classList.remove('hidden');
+                                            }
+
+                                            // Function to close the modal
+                                            function closeModal() {
+                                                var modal = document.getElementById('myModal');
+                                                modal.classList.add('hidden');
+                                            }
+                                        </script>
+                                    </div>
+
+
+                                    {{-- end of calculator --}}
+
+
+                                    {{-- <button onclick="changePaymentMethod('posCash')"
+                                        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button> --}}
                                     <button onclick="changePaymentMethod('posQrPayment')"
                                         class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-indigo-600">Cashless</button>
                                 </div>

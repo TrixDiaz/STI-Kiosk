@@ -137,6 +137,7 @@ class CashierController extends Controller
         $authUser = $request->input('name'); 
         $total = $request->input('total'); // Get the Total Request from input
         $orderID = $request->input('orderID'); 
+        $change = $request->input('change'); 
         $orderType = $request->input('order_type'); // Get the order type Request from input
     
         // You can now insert the products into your orders table.
@@ -149,6 +150,7 @@ class CashierController extends Controller
                 'quantity' => $item['quantity'],
                 'order_type' => $orderType,
                 'total' => $total,
+                'change' => $change,
                 'name' => $authUser,
                 'payment_status' => 'Cash',
                 'created_at' => now(),
