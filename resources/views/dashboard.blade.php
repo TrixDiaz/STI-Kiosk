@@ -331,7 +331,7 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button id="checkoutButton"
-                                                                    class="bg-success hover:bg-success text-white font-bold py-2 px-4 rounded"
+                                                                    class="bg-primary hover:bg-primary text-black font-bold py-2 px-4 rounded"
                                                                     onclick="return confirm('Are you sure you want to move this order to the queue?')">
                                                                     Paid
                                                                 </button>
@@ -511,7 +511,7 @@
                                             <form method="POST" action="{{ route('serving', $queue['order_id']) }}">
                                                 @csrf
                                                 <button type="submit"
-                                                    class="font-medium bg-primary-100 text-black dark:text-blue-500 hover:underline text-center">Serve</button>
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-center">Serve</button>
                                             </form>
                                         </td>
                                     </tr>
