@@ -105,7 +105,7 @@ class StockResource extends Resource
                 ImageColumn::make('product_image')
                     ->circular()
                     ->label('attachment')
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('product_stock')
                     ->numeric()
                     ->sortable(),

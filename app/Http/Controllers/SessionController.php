@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Queue;
 use App\Models\Stock;
 use App\Models\Revenue;
+use App\Models\Trending;
 use Filament\Notifications\Events\DatabaseNotificationsSent;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
@@ -19,8 +20,10 @@ class SessionController extends Controller
 {
     public function start()
     {
+        $trending = Trending::all();
+
         session()->forget('cart'); // Clear the Session in Cart
-        return view('welcome'); // Tab to Start
+        return view('welcome', compact('trending')); // Tab to Start
     }
 
     public function kiosk()

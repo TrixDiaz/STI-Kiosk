@@ -28,7 +28,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         $orders = [];
         $queues = [];
         $serves = DB::table('serves')->get();
-
         // Retrieve unique order IDs from both 'orders' and 'queues' tables
         $uniqueOrderIDs = DB::table('orders')
             ->select('order_id')
@@ -38,20 +37,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             ->select('order_id')
             ->distinct()
             ->get();
-
         // Function to retrieve order/queue info based on the table and order ID
         function getOrderInfo($table, $order_id)
         {
             return DB::table($table)
-                ->select('id','order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'payment_status', 'created_at')
+                ->select('id', 'order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'payment_status', 'created_at')
                 ->where('order_id', $order_id)
                 ->get();
         }
-
         // Process orders
         foreach ($uniqueOrderIDs as $order) {
             $orderInfo = getOrderInfo('orders', $order->order_id);
-
             $orders[] = [
                 'id' => $orderInfo->isEmpty() ? null : $orderInfo->first()->id,
                 'order_id' => $order->order_id,
@@ -62,11 +58,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
                 'created_at' => $orderInfo->isEmpty() ? null : \Carbon\Carbon::parse($orderInfo->first()->created_at)->diffForHumans(),
             ];
         }
-
         // Process queues
         foreach ($uniqueQueueIDs as $queue) {
             $queueInfo = getOrderInfo('queues', $queue->order_id);
-
             $queues[] = [
                 'order_id' => $queue->order_id,
                 'order_info' => $queueInfo,
@@ -76,21 +70,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
                 'created_at' => $queueInfo->isEmpty() ? null : \Carbon\Carbon::parse($queueInfo->first()->created_at)->diffForHumans(),
             ];
         }
-
         return view('dashboard', compact('orders', 'queues', 'serves'));
     })->name('dashboard');
 });
 
 Route::controller(ProductsController::class)->group(function () {
     Route::get('queue', 'queue')->name('queue');
-
     Route::get('/prepare-order/{order_id}', 'prepareOrder')->name('prepare.order');
-
     Route::post('/serve/{order}', 'orderServe')->name('order.serve');
     Route::post('/serving/{order}', 'serving')->name('serving');
-
     Route::delete('/serve/{serve}', 'destroyServe')->name('serve.destroy');
-
     // Product Routes
     Route::get('/donmono', 'donmono')->name('donmono');
     Route::get('/ippin', 'ippin')->name('ippin');
@@ -124,7 +113,6 @@ Route::controller(SessionController::class)->group(function () {
 });
 
 Route::controller(CashierController::class)->group(function () {
-
     Route::get('pos-add-to-cart/{id}', 'posAddToCart')->name('posAddToCart');
     Route::get('posCart', 'posCart')->name('posCart');
     Route::patch('pos-update-cart', 'posUpdate')->name('pos_update_cart');
@@ -149,5 +137,5 @@ Route::controller(CashierController::class)->group(function () {
     Route::get('/pos-yakizakana', 'yakizakana')->name('pos.yakizakana');
     Route::get('/pos-zensai', 'zensai')->name('pos.zensai');
     Route::delete('/orders/{order}', 'moveToQueueAndDelete')->name('orders.move-to-queue');
-    Route::delete('/clear','clear')->name('clear');
-    });
+    Route::delete('/clear', 'clear')->name('clear');
+});
