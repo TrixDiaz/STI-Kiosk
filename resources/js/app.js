@@ -2,6 +2,7 @@ import './bootstrap';
 import 'flowbite';
 
 import {
+  Offcanvas,
   Modal,
   Ripple,
   Sidenav,
@@ -9,6 +10,6 @@ import {
   initTE,
 } from "tw-elements";
 
-initTE({ Sidenav, Modal, Ripple, Dropdown  });
+initTE({ Sidenav, Modal, Ripple, Dropdown,  Offcanvas,  });
   
 

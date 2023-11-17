@@ -9,6 +9,6 @@ class Addons extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'product_name', 'product_image', 'product_status'];
+    protected $fillable = ['product_id', 'product_name', 'product_stock', 'product_image', 'product_price', 'product_expiration', 'product_category', 'product_status'];
 
 }

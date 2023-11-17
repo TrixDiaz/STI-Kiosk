@@ -113,7 +113,7 @@ class ProductsController extends Controller
 
    public function addons()
    {
-       $products = Addons::all();
+    $products = Stock::where('product_category', 'Addons')->get();
 
        return view('products.addons', compact('products'));
    }
