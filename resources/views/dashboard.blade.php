@@ -212,7 +212,7 @@
                                             <td>
                                                 <!-- Trigger button -->
                                                 <button
-                                                    class="bg-primary hover:bg-primary-100 text-white font-bold py-2 px-4 rounded"
+                                                    class=" hover:bg-primary-100 text-gray font-bold py-2 px-4 rounded"
                                                     onclick="openModal()">
                                                     Paid
                                                 </button>
