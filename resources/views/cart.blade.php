@@ -92,11 +92,15 @@
                                                                 </div>
                                                                 <div
                                                                     class="flex flex-1 items-end justify-between text-sm">
-                                                                    <p data-th="Quantity" class="text-gray-500"> <input
-                                                                            type="number"
-                                                                            class="w-12 quantity cart_update"
-                                                                            value="{{ $details['quantity'] }}"
-                                                                            min="1" /></p>
+                                                                    <p data-th="Quantity" class="text-gray-500 flex items-center">
+                                                                        <span>Quantity:</span>
+                                                                        <div class="ml-2 flex items-center">
+                                                                            <button type="button" class="px-2 py-1 bg-gray-200 rounded-l-md border border-gray-300" onclick="decrementQuantity(this, {{ $details['quantity'] }})">-</button>
+                                                                            <span class="px-4 py-1 bg-white border border-gray-300">{{ $details['quantity'] }}</span>
+                                                                            <button type="button" class="px-2 py-1 bg-gray-200 rounded-r-md border border-gray-300" onclick="incrementQuantity(this)">+</button>
+                                                                        </div>
+                                                                    </p>
+                                                                    
                                                                     <div class="actions flex" data-th="">
                                                                         <button type="button"
                                                                             class="font-medium text-indigo-600 hover:text-indigo-500 cart_remove">Remove</button>
@@ -179,7 +183,43 @@
             </div>
         </div>
     </div>
+<script>
+    function incrementQuantity(button) {
+    var quantityElement = button.parentNode.querySelector('span');
+    var quantity = parseInt(quantityElement.textContent);
+    quantity++;
+    updateQuantity(quantityElement, quantity);
+}
 
+function decrementQuantity(button, currentQuantity) {
+    if (currentQuantity > 1) {
+        var quantityElement = button.parentNode.querySelector('span');
+        var quantity = parseInt(quantityElement.textContent);
+        quantity--;
+        updateQuantity(quantityElement, quantity);
+    }
+}
+
+function updateQuantity(element, quantity) {
+    var id = element.closest('li').getAttribute('data-id');
+    
+    $.ajax({
+        url: '{{ route('update_cart') }}',
+        method: "patch",
+        data: {
+            _token: '{{ csrf_token() }}',
+            id: id,
+            quantity: quantity
+        },
+        success: function(response) {
+            window.location.reload();
+        }
+    });
+
+    element.textContent = quantity;
+}
+
+</script>
     <script type="text/javascript">
         $(".cart_update").change(function(e) {
             e.preventDefault();
