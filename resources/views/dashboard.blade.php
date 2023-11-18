@@ -278,41 +278,19 @@
                                                                             class="text-gray-600 hover:text-gray-800 font-semibold">
                                                                             Close
                                                                         </button> --}}
-                                                                        <form id="moveToQueueForm{{ $order['order_id'] }}">
+                                                                        <form
+                                                                            action="{{ route('orders.move-to-queue', $order['id']) }}"
+                                                                            method="POST">
                                                                             @csrf
                                                                             @method('DELETE')
-                                                                            <button type="button"
-                                                                                    id="saveChangesBtn{{ $order['order_id'] }}"
-                                                                                    onclick="moveToQueue('{{ route('orders.move-to-queue', $order['id']) }}', {{ $order['order_id'] }})"
-                                                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded"
-                                                                                    disabled> <!-- Initially disabled -->
+                                                                            <button type="submit"
+                                                                                id="saveChangesBtn{{ $order['order_id'] }}"
+                                                                                onclick="return confirm('Are you sure you want to move this order to the queue?')"
+                                                                                class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded"
+                                                                                disabled> <!-- Initially disabled -->
                                                                                 Save
                                                                             </button>
                                                                         </form>
-                                                                        
-                                                                        <script>
-                                                                            function moveToQueue(route, orderId) {
-                                                                                if (confirm('Are you sure you want to move this order to the queue?')) {
-                                                                                    // Disable the button to prevent multiple submissions
-                                                                                    document.getElementById('saveChangesBtn' + orderId).setAttribute('disabled', 'disabled');
-                                                                        
-                                                                                    // Make an AJAX request using Axios
-                                                                                    axios.delete(route)
-                                                                                        .then(function (response) {
-                                                                                            // Handle success, e.g., show a success message
-                                                                                            alert('Order moved to queue successfully.');
-                                                                                            // Redirect to the dashboard view (optional)
-                                                                                            window.location.href = '{{ route('dashboard') }}';
-                                                                                        })
-                                                                                        .catch(function (error) {
-                                                                                            // Handle errors, e.g., show an error message
-                                                                                            alert('Error moving order to queue.');
-                                                                                            console.error(error);
-                                                                                        });
-                                                                                }
-                                                                            }
-                                                                        </script>
-                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
