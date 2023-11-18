@@ -176,120 +176,99 @@
                                         <button onclick="openModal()"
                                             class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium bg-indigo-600 text-white">Checkout</button>
 
-                                        <!-- Modal Structure -->
-                                        <div id="myModal"
-                                            class="hidden fixed inset-0 z-50 overflow-auto bg-gray-500 bg-opacity-75 flex justify-center items-center">
-                                            <!-- Modal Content -->
-                                            <div class="bg-white rounded-lg shadow-xl w-3/4">
-                                                <h2 class="text-lg font-medium text-gray-900 p-4">Input Customer Amount
-                                                    - ₱{{ $total }}</h2>
-                                                <p class="text-gray-700 px-4">
-                                                    <input id="amountInput" type="number" placeholder="Amount"
-                                                        class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
-                                                </p>
-                                                <label for="changeLabel"
-                                                    class="block text-gray-700 px-4 mt-2">Change:</label>
-                                                <p id="changeLabel" class="text-gray-700 px-4 mb-4">0.00</p>
-
-                                                <!-- Buttons for digits -->
-                                                <div class="col-span-2 grid grid-cols-4 gap-4 ml-4">
-                                                    <button onclick="appendToInput('1')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
-                                                    <button onclick="appendToInput('2')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">2</button>
-                                                    <button onclick="appendToInput('3')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">3</button>
-                                                    <button onclick="appendToInput('4')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">4</button>
-                                                    <button onclick="appendToInput('5')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">5</button>
-                                                    <button onclick="appendToInput('6')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">6</button>
-                                                    <button onclick="appendToInput('7')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">7</button>
-                                                    <button onclick="appendToInput('8')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">8</button>
-                                                    <button onclick="appendToInput('9')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">9</button>
-                                                    <button onclick="appendToInput('0')"
-                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
-                                                    <button onclick="clearInput()"
-                                                        class="bg-red-500 text-white w-16 h-16 rounded-md">Clear</button>
-                                                </div>
-
-                                                <!-- The script remains the same -->
-                                                <script>
-                                                    // Get the value from the <p> element
-                                                    var valueFromP = document.getElementById('changeLabel').innerText;
-
-                                                    // Set the value to the input field
-                                                    document.getElementById('changeInput').value = valueFromP;
-
-                                                    function clearInput() {
-                                                        var inputField = document.getElementById('amountInput');
-                                                        inputField.value = ''; // Clear the input field
-                                                        calculateChange(); // Recalculate change after clearing input
-                                                    }
-
-                                                    function appendToInput(digit) {
-                                                        var inputField = document.getElementById('amountInput');
-                                                        inputField.value += digit;
-                                                        calculateChange(); // Calculate change when digits are appended
-                                                    }
-
-                                                    function calculateChange() {
-                                                        var total = {{ $total }}; // Get the initial total from PHP
-                                                        var amountInput = parseFloat(document.getElementById('amountInput').value);
-                                                        var changeLabel = document.getElementById('changeLabel');
-                                                        var checkoutButton = document.getElementById('checkoutButton');
-
-                                                        if (!isNaN(amountInput)) {
-                                                            // Calculate change
-                                                            var change = amountInput - total;
-                                                            changeLabel.textContent = '₱' + change.toFixed(2);
-
-                                                            // Enable or disable the checkout button based on the change value
-                                                            checkoutButton.disabled = change < 0; // Enable if change is greater than or equal to 0
-
-                                                            // Change button color based on the disabled state
-                                                            if (checkoutButton.disabled) {
-                                                                checkoutButton.classList.remove('bg-green-500', 'hover:bg-green-600');
-                                                                checkoutButton.classList.add('bg-gray-500');
-                                                            } else {
-                                                                checkoutButton.classList.remove('bg-gray-500');
-                                                                checkoutButton.classList.add('bg-green-500', 'hover:bg-green-600');
-                                                            }
-                                                        } else {
-                                                            changeLabel.textContent = '₱0.00';
-                                                            checkoutButton.disabled = true; // Disable if the input is not a valid number
-                                                            checkoutButton.classList.remove('bg-green-500', 'hover:bg-green-600');
-                                                            checkoutButton.classList.add('bg-gray-500');
-                                                        }
-                                                    }
-
-                                                    function changePaymentMethod(paymentMethod) {
-                                                        // ... (existing code remains the same)
-
-                                                        calculateChange(); // Calculate change before submitting the form
-                                                    }
-                                                </script>
-
-
-                                                <div class="flex justify-between p-4">
-                                                    <button id="checkoutButton"
-                                                        onclick="changePaymentMethod('posCash')"
-                                                        class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-black"
-                                                        disabled>Checkout</button>
-
-                                                    <button onclick="closeModal()"
-                                                        class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md focus:outline-none">Close</button>
+                                            <div id="myModal" class="hidden fixed inset-0 z-50 overflow-auto bg-gray-500 bg-opacity-75 flex justify-center items-center">
+                                                <!-- Modal Content -->
+                                                <div class="bg-white rounded-lg shadow-xl sm:w-11/12 lg:w-3/4">
+                                                    <h2 class="text-lg font-medium text-gray-900 p-4">Input Customer Amount - ₱{{ $total }}</h2>
+                                                    <p class="text-gray-700 px-4">
+                                                        <input id="amountInput" type="number" placeholder="Amount"
+                                                            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
+                                                    </p>
+                                                    <label for="changeLabel" class="block text-gray-700 px-4 mt-2">Change:</label>
+                                                    <p id="changeLabel" class="text-gray-700 px-4 mb-4">0.00</p>
+                                            
+                                                    <!-- Buttons for digits -->
+                                                    <div class="grid grid-cols-3 sm:grid-cols-4 gap-4 ml-4">
+                                                        <button onclick="appendToInput('1')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
+                                                        <button onclick="appendToInput('2')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">2</button>
+                                                        <button onclick="appendToInput('3')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">3</button>
+                                                        <button onclick="appendToInput('4')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">4</button>
+                                                        <button onclick="appendToInput('5')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">5</button>
+                                                        <button onclick="appendToInput('6')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">6</button>
+                                                        <button onclick="appendToInput('7')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">7</button>
+                                                        <button onclick="appendToInput('8')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">8</button>
+                                                        <button onclick="appendToInput('9')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">9</button>
+                                                        <button onclick="appendToInput('0')" class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
+                                                        <button onclick="clearInput()" class="bg-red-500 text-white w-16 h-16 rounded-md">Clear</button>
+                                                    </div>
+                                            
+                                                    <div class="flex justify-between p-4">
+                                                        <button id="checkoutButton" onclick="changePaymentMethod('posCash')"
+                                                            class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-black"
+                                                            disabled>Checkout</button>
+                                            
+                                                        <button onclick="closeModal()"
+                                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md focus:outline-none">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            
 
                                         <script>
-                                            // Function to open the modal
-                                            // Function to open the modal
+                                            // Get the value from the <p> element
+                                            var valueFromP = document.getElementById('changeLabel').innerText;
+
+                                            // Set the value to the input field
+                                            document.getElementById('changeInput').value = valueFromP;
+
+                                            function clearInput() {
+                                                var inputField = document.getElementById('amountInput');
+                                                inputField.value = ''; // Clear the input field
+                                                calculateChange(); // Recalculate change after clearing input
+                                            }
+
+                                            function appendToInput(digit) {
+                                                var inputField = document.getElementById('amountInput');
+                                                inputField.value += digit;
+                                                calculateChange(); // Calculate change when digits are appended
+                                            }
+
+                                            function calculateChange() {
+                                                var total = {{ $total }}; // Get the initial total from PHP
+                                                var amountInput = parseFloat(document.getElementById('amountInput').value);
+                                                var changeLabel = document.getElementById('changeLabel');
+                                                var checkoutButton = document.getElementById('checkoutButton');
+
+                                                if (!isNaN(amountInput)) {
+                                                    // Calculate change
+                                                    var change = amountInput - total;
+                                                    changeLabel.textContent = '₱' + change.toFixed(2);
+
+                                                    // Enable or disable the checkout button based on the change value
+                                                    checkoutButton.disabled = change < 0; // Enable if change is greater than or equal to 0
+
+                                                    // Change button color based on the disabled state
+                                                    if (checkoutButton.disabled) {
+                                                        checkoutButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+                                                        checkoutButton.classList.add('bg-gray-500');
+                                                    } else {
+                                                        checkoutButton.classList.remove('bg-gray-500');
+                                                        checkoutButton.classList.add('bg-green-500', 'hover:bg-green-600');
+                                                    }
+                                                } else {
+                                                    changeLabel.textContent = '₱0.00';
+                                                    checkoutButton.disabled = true; // Disable if the input is not a valid number
+                                                    checkoutButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+                                                    checkoutButton.classList.add('bg-gray-500');
+                                                }
+                                            }
+
+                                            function changePaymentMethod(paymentMethod) {
+                                                // ... (existing code remains the same)
+
+                                                calculateChange(); // Calculate change before submitting the form
+                                            }
+
                                             function openModal() {
                                                 var modal = document.getElementById('myModal');
                                                 modal.classList.remove('hidden');
