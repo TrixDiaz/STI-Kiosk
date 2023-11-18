@@ -250,13 +250,21 @@
 
                                                                     <!-- Buttons for numbers 0-9 and Clear -->
                                                                     <div class="grid grid-cols-3 gap-2">
-                                                                        @for ($i = 0; $i <= 9; $i++)
-                                                                            <button type="button"
-                                                                                onclick="updateAmount({{ $i }}, '{{ $order['order_id'] }}')"
-                                                                                class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded">
-                                                                                {{ $i }}
-                                                                            </button>
-                                                                        @endfor
+                                                                        @for ($i = 1; $i <= 9; $i++)
+                                                                        <button type="button"
+                                                                            onclick="updateAmount({{ $i }}, '{{ $order['order_id'] }}')"
+                                                                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded">
+                                                                            {{ $i }}
+                                                                        </button>
+                                                                    @endfor
+                                                                    
+                                                                    <!-- Add a button for value 0 -->
+                                                                    <button type="button"
+                                                                        onclick="updateAmount(0, '{{ $order['order_id'] }}')"
+                                                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded">
+                                                                        0
+                                                                    </button>
+                                                                    
                                                                         <button type="button"
                                                                             onclick="clearAmount('{{ $order['order_id'] }}')"
                                                                             class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded">
@@ -264,12 +272,12 @@
                                                                         </button>
                                                                     </div>
                                                                     <!-- Footer -->
-                                                                    <div class="flex justify-between w-full px-4 mt-4">
-                                                                        <button type="button"
+                                                                    <div class="flex justify-end w-full px-4 mt-4">
+                                                                        {{-- <button type="button"
                                                                             onclick="closeModal('{{ $order['order_id'] }}')"
                                                                             class="text-gray-600 hover:text-gray-800 font-semibold">
                                                                             Close
-                                                                        </button>
+                                                                        </button> --}}
                                                                         <form
                                                                             action="{{ route('orders.move-to-queue', $order['id']) }}"
                                                                             method="POST">

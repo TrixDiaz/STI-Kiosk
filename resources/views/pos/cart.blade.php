@@ -93,13 +93,19 @@
                                                                 </div>
                                                                 <div
                                                                     class="flex flex-1 items-end justify-between text-sm">
-                                                                    <p data-th="Quantity" class="text-gray-500 flex items-center">
+                                                                    <p data-th="Quantity"
+                                                                        class="text-gray-500 flex items-center">
                                                                         <span>Quantity:</span>
-                                                                        <div class="ml-2 flex items-center">
-                                                                            <button type="button" class="px-2 py-1 bg-gray-200 rounded-l-md border border-gray-300" onclick="decrementQuantity(this, {{ $details['quantity'] }})">-</button>
-                                                                            <span class="px-4 py-1 bg-white border border-gray-300">{{ $details['quantity'] }}</span>
-                                                                            <button type="button" class="px-2 py-1 bg-gray-200 rounded-r-md border border-gray-300" onclick="incrementQuantity(this)">+</button>
-                                                                        </div>
+                                                                    <div class="ml-2 flex items-center">
+                                                                        <button type="button"
+                                                                            class="px-2 py-1 bg-gray-200 rounded-l-md border border-gray-300"
+                                                                            onclick="decrementQuantity(this, {{ $details['quantity'] }})">-</button>
+                                                                        <span
+                                                                            class="px-4 py-1 bg-white border border-gray-300">{{ $details['quantity'] }}</span>
+                                                                        <button type="button"
+                                                                            class="px-2 py-1 bg-gray-200 rounded-r-md border border-gray-300"
+                                                                            onclick="incrementQuantity(this)">+</button>
+                                                                    </div>
                                                                     </p>
                                                                     <div class="actions flex" data-th="">
                                                                         <button type="button"
@@ -133,8 +139,8 @@
                                 {{-- Radio --}}
                                 <div class="flex justify-around m-2">
                                     <div>
-                                        <input type="radio" id="dine-in" name="order_type" value="Dine in" checked
-                                            class="hidden peer" required>
+                                        <input type="radio" id="dine-in" name="order_type" value="Dine in"
+                                            checked class="hidden peer" required>
                                         <label for="dine-in"
                                             class="inline-flex items-center justify-between w-auto p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                             <div class="block">
@@ -178,8 +184,7 @@
                                                 <h2 class="text-lg font-medium text-gray-900 p-4">Input Customer Amount
                                                     - ₱{{ $total }}</h2>
                                                 <p class="text-gray-700 px-4">
-                                                    <input id="amountInput" type="number"
-                                                        placeholder="Amount"
+                                                    <input id="amountInput" type="number" placeholder="Amount"
                                                         class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
                                                 </p>
                                                 <label for="changeLabel"
@@ -188,28 +193,28 @@
 
                                                 <!-- Buttons for digits -->
                                                 <div class="col-span-2 grid grid-cols-4 gap-4 ml-4">
-                                                        <button onclick="appendToInput('1')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
-                                                        <button onclick="appendToInput('2')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">2</button>
-                                                        <button onclick="appendToInput('3')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">3</button>
-                                                        <button onclick="appendToInput('4')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">4</button>
-                                                        <button onclick="appendToInput('5')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">5</button>
-                                                        <button onclick="appendToInput('6')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">6</button>
-                                                        <button onclick="appendToInput('7')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">7</button>
-                                                        <button onclick="appendToInput('8')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">8</button>
-                                                        <button onclick="appendToInput('9')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">9</button>
-                                                        <button onclick="appendToInput('0')"
-                                                            class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
-                                                        <button onclick="clearInput()"
-                                                            class="bg-red-500 text-white w-16 h-16 rounded-md">Clear</button>
+                                                    <button onclick="appendToInput('1')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
+                                                    <button onclick="appendToInput('2')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">2</button>
+                                                    <button onclick="appendToInput('3')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">3</button>
+                                                    <button onclick="appendToInput('4')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">4</button>
+                                                    <button onclick="appendToInput('5')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">5</button>
+                                                    <button onclick="appendToInput('6')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">6</button>
+                                                    <button onclick="appendToInput('7')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">7</button>
+                                                    <button onclick="appendToInput('8')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">8</button>
+                                                    <button onclick="appendToInput('9')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">9</button>
+                                                    <button onclick="appendToInput('0')"
+                                                        class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
+                                                    <button onclick="clearInput()"
+                                                        class="bg-red-500 text-white w-16 h-16 rounded-md">Clear</button>
                                                 </div>
 
                                                 <!-- The script remains the same -->
@@ -234,28 +239,31 @@
 
                                                     function calculateChange() {
                                                         var total = {{ $total }}; // Get the initial total from PHP
-                                                        var amountInput = document.getElementById('amountInput').value;
+                                                        var amountInput = parseFloat(document.getElementById('amountInput').value);
                                                         var changeLabel = document.getElementById('changeLabel');
+                                                        var checkoutButton = document.getElementById('checkoutButton');
 
-                                                        var changeInput = document.getElementById('changeInput'); // Get the hidden input field
-
-                                                        if (amountInput !== '') {
+                                                        if (!isNaN(amountInput)) {
                                                             // Calculate change
-                                                            var change = parseFloat(amountInput) - total;
+                                                            var change = amountInput - total;
                                                             changeLabel.textContent = '₱' + change.toFixed(2);
-                                                            changeInput.value = change.toFixed(2); // Assign the change value to the hidden input field
 
-                                                            // Disable or enable the checkout button based on change value
-                                                            var checkoutButton = document.getElementById('checkoutButton');
-                                                            if (change >= 0) {
-                                                                checkoutButton.disabled = false;
+                                                            // Enable or disable the checkout button based on the change value
+                                                            checkoutButton.disabled = change < 0; // Enable if change is greater than or equal to 0
+
+                                                            // Change button color based on the disabled state
+                                                            if (checkoutButton.disabled) {
+                                                                checkoutButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+                                                                checkoutButton.classList.add('bg-gray-500');
                                                             } else {
-                                                                checkoutButton.disabled = true;
+                                                                checkoutButton.classList.remove('bg-gray-500');
+                                                                checkoutButton.classList.add('bg-green-500', 'hover:bg-green-600');
                                                             }
                                                         } else {
                                                             changeLabel.textContent = '₱0.00';
-                                                            var checkoutButton = document.getElementById('checkoutButton');
-                                                            checkoutButton.disabled = true;
+                                                            checkoutButton.disabled = true; // Disable if the input is not a valid number
+                                                            checkoutButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+                                                            checkoutButton.classList.add('bg-gray-500');
                                                         }
                                                     }
 
@@ -270,7 +278,8 @@
                                                 <div class="flex justify-between p-4">
                                                     <button id="checkoutButton"
                                                         onclick="changePaymentMethod('posCash')"
-                                                        class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium bg-indigo-600 text-white">Checkout</button>
+                                                        class="flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-black"
+                                                        disabled>Checkout</button>
 
                                                     <button onclick="closeModal()"
                                                         class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md focus:outline-none">Close</button>
@@ -279,6 +288,7 @@
                                         </div>
 
                                         <script>
+                                            // Function to open the modal
                                             // Function to open the modal
                                             function openModal() {
                                                 var modal = document.getElementById('myModal');
@@ -323,40 +333,39 @@
     </div>
     <script>
         function incrementQuantity(button) {
-        var quantityElement = button.parentNode.querySelector('span');
-        var quantity = parseInt(quantityElement.textContent);
-        quantity++;
-        updateQuantity(quantityElement, quantity);
-    }
-    
-    function decrementQuantity(button, currentQuantity) {
-        if (currentQuantity > 1) {
             var quantityElement = button.parentNode.querySelector('span');
             var quantity = parseInt(quantityElement.textContent);
-            quantity--;
+            quantity++;
             updateQuantity(quantityElement, quantity);
         }
-    }
-    
-    function updateQuantity(element, quantity) {
-        var id = element.closest('li').getAttribute('data-id');
-        
-        $.ajax({
-            url: '{{ route('update_cart') }}',
-            method: "patch",
-            data: {
-                _token: '{{ csrf_token() }}',
-                id: id,
-                quantity: quantity
-            },
-            success: function(response) {
-                window.location.reload();
+
+        function decrementQuantity(button, currentQuantity) {
+            if (currentQuantity > 1) {
+                var quantityElement = button.parentNode.querySelector('span');
+                var quantity = parseInt(quantityElement.textContent);
+                quantity--;
+                updateQuantity(quantityElement, quantity);
             }
-        });
-    
-        element.textContent = quantity;
-    }
-    
+        }
+
+        function updateQuantity(element, quantity) {
+            var id = element.closest('li').getAttribute('data-id');
+
+            $.ajax({
+                url: '{{ route('update_cart') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    window.location.reload();
+                }
+            });
+
+            element.textContent = quantity;
+        }
     </script>
     <script type="text/javascript">
         $(".cart_update").change(function(e) {

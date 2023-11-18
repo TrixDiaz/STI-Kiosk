@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->integer('product_price');
             $table->integer('quantity');
+            $table->string('product_image')->nullable();
             $table->decimal('total', 10, 2);
             $table->string('order_type');
             $table->string('change')->nullable();
