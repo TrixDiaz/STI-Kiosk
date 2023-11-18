@@ -16,7 +16,6 @@ use Filament\Notifications\Notification;
 
 class CashierController extends Controller
 {
-
     public function clear()
     {
         Auth::user()
@@ -25,10 +24,9 @@ class CashierController extends Controller
 
         return back()->with('success', 'Notifications cleared successfully.');
     }
-    
+
     public function moveToQueueAndDelete(Order $order)
     {
-        
         $order->moveToQueueAndDelete();
 
         // Redirect to the dashboard view
@@ -37,7 +35,7 @@ class CashierController extends Controller
             ->with('success', 'Order moved to queue successfully.');
     }
 
-     /**
+    /**
      * Find by ID the User order and store to Shopping Cart Session
      */
     public function posAddToCart(Request $request, $id)
@@ -91,7 +89,6 @@ class CashierController extends Controller
             ->back()
             ->with('success', 'Product added to cart!');
     }
-    
 
     public function posCart()
     {
@@ -100,9 +97,9 @@ class CashierController extends Controller
 
     public function posUpdate(Request $request)
     {
-        if($request->id && $request->quantity){
+        if ($request->id && $request->quantity) {
             $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
+            $cart[$request->id]['quantity'] = $request->quantity;
             session()->put('cart', $cart);
             session()->flash('success', 'Cart updated!');
         }
@@ -110,9 +107,9 @@ class CashierController extends Controller
 
     public function posRemove(Request $request)
     {
-        if($request->id) {
+        if ($request->id) {
             $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
+            if (isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
@@ -126,20 +123,22 @@ class CashierController extends Controller
     public function posCreateOrder(Request $request)
     {
         $orderDetails = []; // Declare null array
-    
+
         $cart = session('cart'); // Retrieve products from the session
-    
+
         // Check if the cart is empty
         if (empty($cart)) {
-            return redirect()->back()->with('success', 'No items in the cart. Please add items to your cart before placing an order.');
+            return redirect()
+                ->back()
+                ->with('success', 'No items in the cart. Please add items to your cart before placing an order.');
         }
-    
-        $authUser = $request->input('name'); 
+
+        $authUser = $request->input('name');
         $total = $request->input('total'); // Get the Total Request from input
-        $orderID = $request->input('orderID'); 
-        $change = $request->input('change'); 
+        $orderID = $request->input('orderID');
+        $change = $request->input('change');
         $orderType = $request->input('order_type'); // Get the order type Request from input
-    
+
         // You can now insert the products into your orders table.
         foreach ($cart as $item) {
             $orderDetails[] = [
@@ -157,43 +156,53 @@ class CashierController extends Controller
                 'updated_at' => now(),
                 // Add other fields as needed
             ];
-    
-            // Update product_stock in the Stock table
-            $updatedStock = Stock::where('product_name', $item['product_name'])
-                ->decrement('product_stock', $item['quantity']);
-    
-            // Check if the updated stock is less than a threshold (e.g., 300)
-            if ($updatedStock < 300) {
-                 // Update the product status to "critical"
-                 Stock::where('product_name', $item['product_name'])->update(['product_status' => 'critical']);
-                // Send a database notification or perform any other action
-                // You need to define your notification class and customize it as needed
-                Notification::make()
-                ->success()
-                ->icon('heroicon-o-archive-box')
-                ->title('Stocks in Critical Notification')
-                ->body(Auth::user()->name . ' Stock for this is Critical ' . $item['product_name'])
-                ->sendToDatabase(
-                    $usersToNotify = User::whereHas('roles', function ($query) {
-                        $query->where('id', [1, 2, 3]);
-                    })->get(),
-                );
 
-            $usersToNotify->push(Auth::user());
+            // Update product_stock in the Stock table
+            // $updatedStock = Stock::where('product_name', $item['product_name'])->decrement('product_stock', $item['quantity']);
+            $stock = Stock::where('product_name', $item['product_name'])->first();
+
+            if ($stock) {
+                $updatedStock = $stock->product_stock - $item['quantity'];
+
+                // Update the product stock in the database
+                $stock->update(['product_stock' => $updatedStock]);
+
+                // Check if the updated stock is less than a threshold (e.g., 300)
+                if ($updatedStock <= 300) {
+                    // Update the product status to "critical"
+                    Stock::where('product_name', $item['product_name'])->update(['product_status' => 'critical']);
+                    // Send a database notification or perform any other action
+                    // You need to define your notification class and customize it as needed
+                    Notification::make()
+                        ->success()
+                        ->icon('heroicon-o-archive-box')
+                        ->title('Stocks in Critical Notification')
+                        ->body(Auth::user()->name . ' Stock for this is Critical ' . $item['product_name'])
+                        ->sendToDatabase(
+                            $usersToNotify = User::whereHas('roles', function ($query) {
+                                $query->where('id', [1, 2, 3]);
+                            })->get(),
+                        )
+                        ->broadcast($usersToNotify);
+
+                    $usersToNotify->push(Auth::user());
+                }
             }
         }
-    
+
         session()->put('cart', $orderDetails);
-    
-        Queue::insert($orderDetails); 
-        Revenue::insert($orderDetails);  // Insert all the order details into the database
-    
+
+        Queue::insert($orderDetails);
+        Revenue::insert($orderDetails); // Insert all the order details into the database
+
         session()->forget('cart'); // Optionally, you can clear the cart after the order is created
-    
-        return redirect()->route('pos_receipt', ['orderID' => $orderID])->with('success', 'Order created.');
+
+        return redirect()
+            ->route('pos_receipt', ['orderID' => $orderID])
+            ->with('success', 'Order created.');
     }
-    
-      /**
+
+    /**
      * Fetch all the orders of Customer or Receipt
      */
     public function posShowReceipt($orderID)
@@ -207,11 +216,10 @@ class CashierController extends Controller
 
     public function posQrCode()
     {
-      
         return view('pos.qrCode');
     }
 
-      /**
+    /**
      * Qr Code Generator
      */
     public function posQrPayment(Request $request)
@@ -221,12 +229,14 @@ class CashierController extends Controller
         $orderType = $request->input('order_type');
         $authUser = $request->input('name');
         $cart = session('cart');
-    
+
         // Check if the cart is empty
         if (empty($cart)) {
-            return redirect()->back()->with('success', 'No items in the cart. Please add items to your cart before making a payment.');
+            return redirect()
+                ->back()
+                ->with('success', 'No items in the cart. Please add items to your cart before making a payment.');
         }
-    
+
         $orderDetails = [];
         foreach ($cart as $item) {
             $orderDetails[] = [
@@ -242,9 +252,9 @@ class CashierController extends Controller
                 // Add other fields as needed
             ];
         }
-    
+
         session()->put('cart', $orderDetails);
-    
+
         $data = [
             'data' => [
                 'attributes' => [
@@ -264,7 +274,7 @@ class CashierController extends Controller
                 ],
             ],
         ];
-    
+
         $response = Curl::to('https://api.paymongo.com/v1/checkout_sessions')
             ->withHeader('Content-Type: application/json')
             ->withHeader('accept: application/json')
@@ -272,170 +282,169 @@ class CashierController extends Controller
             ->withData($data)
             ->asJson()
             ->post();
-    
+
         Session::put('session_id', $response->data->id);
         Session::put('checkout_url', $response->data->attributes->checkout_url);
-    
-        return redirect()->to('posQrCode')
+
+        return redirect()
+            ->to('posQrCode')
             ->with('checkout_url', $response->data->attributes->checkout_url, 'cart', $cart);
     }
-    
 
- /**
+    /**
      * Success Payment in API
      */
     public function posSuccessOrder(Request $request)
-{
-    // Retrieve orderDetails from URL parameters
-    $orderDetails = $request->input('orderDetails');
-    $authUser = $request->input('name'); 
-    $total = $request->input('total');
-    $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); // Create random 6 digit generator
+    {
+        // Retrieve orderDetails from URL parameters
+        $orderDetails = $request->input('orderDetails');
+        $authUser = $request->input('name');
+        $total = $request->input('total');
+        $orderID = '' . str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT); // Create random 6 digit generator
 
-    foreach ($orderDetails as $item) {
-        // Insert each item into the orders table
-        Queue::create([
-            'order_id' => $orderID,
-            'product_name' => $item['product_name'],
-            'product_price' => $item['product_price'],
-            'quantity' => $item['quantity'],
-            'order_type' => $item['order_type'],
-            'total' => $item['total'],
-            'payment_status' => 'Gcash',
-            'order_type' => $item['name'],
-            'name' => $authUser,
-            'created_at' => now(),
-            'updated_at' => now(),
-            // Add other fields as needed
-        ]);
-        Revenue::create([
-            'order_id' => $orderID,
-            'product_name' => $item['product_name'],
-            'product_price' => $item['product_price'],
-            'quantity' => $item['quantity'],
-            'order_type' => $item['order_type'],
-            'total' => $item['total'],
-            'payment_status' => 'Gcash',
-            'order_type' => $item['name'],
-            'name' => $authUser,
-            'created_at' => now(),
-            'updated_at' => now(),
-            // Add other fields as needed
-        ]);
+        foreach ($orderDetails as $item) {
+            // Insert each item into the orders table
+            Queue::create([
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $item['order_type'],
+                'total' => $item['total'],
+                'payment_status' => 'Gcash',
+                'order_type' => $item['name'],
+                'name' => $authUser,
+                'created_at' => now(),
+                'updated_at' => now(),
+                // Add other fields as needed
+            ]);
+            Revenue::create([
+                'order_id' => $orderID,
+                'product_name' => $item['product_name'],
+                'product_price' => $item['product_price'],
+                'quantity' => $item['quantity'],
+                'order_type' => $item['order_type'],
+                'total' => $item['total'],
+                'payment_status' => 'Gcash',
+                'order_type' => $item['name'],
+                'name' => $authUser,
+                'created_at' => now(),
+                'updated_at' => now(),
+                // Add other fields as needed
+            ]);
 
-     
-
-        // Update the product stock quantity
-        $product = Stock::where('product_name', $item['product_name'])->first();
-        if ($product) {
-            $newQuantity = $product->quantity - $item['quantity'];
-            $product->update(['quantity' => $newQuantity]);
+            // Update the product stock quantity
+            $product = Stock::where('product_name', $item['product_name'])->first();
+            if ($product) {
+                $newQuantity = $product->quantity - $item['quantity'];
+                $product->update(['quantity' => $newQuantity]);
+            }
         }
+
+        // Optionally, you can clear the cart after the order is created
+        session()->forget('cart');
+
+        // Redirect back or to a confirmation page
+        return redirect()
+            ->route('pos_receipt', ['orderID' => $orderID])
+            ->with('success', 'Order created.');
+    }
+    /**
+     * Start of Products
+     **/
+
+    public function donmono()
+    {
+        $products = Stock::where('product_category', 'Donmono')->get();
+
+        return view('pos.donmono', compact('products'));
     }
 
-    // Optionally, you can clear the cart after the order is created
-    session()->forget('cart');
+    public function ippin()
+    {
+        $products = Stock::where('product_category', 'Ippin ryori')->get();
 
-    // Redirect back or to a confirmation page
-    return redirect()->route('pos_receipt', ['orderID' => $orderID])->with('success', 'Order created.');
-}
-      /** 
-    * Start of Products 
-    **/
+        return view('products.ippin', compact('products'));
+    }
 
-   public function donmono()
-   {
-       $products = Stock::where('product_category', 'Donmono')->get();
+    public function kushiyaki()
+    {
+        $products = Stock::where('product_category', 'Kushiyaki')->get();
 
-       return view('pos.donmono', compact('products'));
-   }
+        return view('products.kushiyaki', compact('products'));
+    }
 
-   public function ippin()
-   {
-       $products = Stock::where('product_category', 'Ippin ryori')->get();
+    public function makizushi()
+    {
+        $products = Stock::where('product_category', 'Makizushi')->get();
 
-       return view('products.ippin', compact('products'));
-   }
+        return view('products.makisushi', compact('products'));
+    }
 
-   public function kushiyaki()
-   {
-       $products = Stock::where('product_category', 'Kushiyaki')->get();
+    public function men()
+    {
+        $products = Stock::where('product_category', 'Men')->get();
 
-       return view('products.kushiyaki', compact('products'));
-   }
+        return view('products.men', compact('products'));
+    }
 
-   public function makizushi()
-   {
-       $products = Stock::where('product_category', 'Makizushi')->get();
+    public function nigirizushi()
+    {
+        $products = Stock::where('product_category', 'Nigirizushi')->get();
 
-       return view('products.makisushi', compact('products'));
-   }
+        return view('products.nigirizushi', compact('products'));
+    }
 
-   public function men()
-   {
-       $products = Stock::where('product_category', 'Men')->get();
+    public function ochazuke()
+    {
+        $products = Stock::where('product_category', 'Ochazuke')->get();
 
-       return view('products.men', compact('products'));
-   }
+        return view('products.ochazuke', compact('products'));
+    }
 
-   public function nigirizushi()
-   {
-       $products = Stock::where('product_category', 'Nigirizushi')->get();
+    public function ramen()
+    {
+        $products = Stock::where('product_category', 'Ramen')->get();
 
-       return view('products.nigirizushi', compact('products'));
-   }
+        return view('products.ramen', compact('products'));
+    }
 
-   public function ochazuke()
-   {
-       $products = Stock::where('product_category', 'Ochazuke')->get();
+    public function salad()
+    {
+        $products = Stock::where('product_category', 'Salad')->get();
 
-       return view('products.ochazuke', compact('products'));
-   }
+        return view('products.salad', compact('products'));
+    }
 
-   public function ramen()
-   {
-       $products = Stock::where('product_category', 'Ramen')->get();
+    public function sashimi()
+    {
+        $products = Stock::where('product_category', 'Sashimi')->get();
 
-       return view('products.ramen', compact('products'));
-   }
+        return view('products.sashimi', compact('products'));
+    }
 
-   public function salad()
-   {
-       $products = Stock::where('product_category', 'Salad')->get();
+    public function tempura()
+    {
+        $products = Stock::where('product_category', 'Tempura')->get();
 
-       return view('products.salad', compact('products'));
-   }
+        return view('products.tempura', compact('products'));
+    }
 
-   public function sashimi()
-   {
-       $products = Stock::where('product_category', 'Sashimi')->get();
+    public function yakizakana()
+    {
+        $products = Stock::where('product_category', 'Yakizakana')->get();
 
-       return view('products.sashimi', compact('products'));
-   }
+        return view('products.yakizakana', compact('products'));
+    }
 
-   public function tempura()
-   {
-       $products = Stock::where('product_category', 'Tempura')->get();
+    public function zensai()
+    {
+        $products = Stock::where('product_category', 'Zensai')->get();
 
-       return view('products.tempura', compact('products'));
-   }
+        return view('products.zensai', compact('products'));
+    }
 
-   public function yakizakana()
-   {
-       $products = Stock::where('product_category', 'Yakizakana')->get();
-
-       return view('products.yakizakana', compact('products'));
-   }
-
-   public function zensai()
-   {
-       $products = Stock::where('product_category', 'Zensai')->get();
-
-       return view('products.zensai', compact('products'));
-   }
-
-   /** 
-    * End of Products 
-    **/
-    
+    /**
+     * End of Products
+     **/
 }
