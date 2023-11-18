@@ -312,7 +312,7 @@
                                                             }
 
                                                             function changePaymentMethod(paymentMethod) {
-                                                                // ... (existing code remains the same)
+                                                            
 
                                                                 calculateChange(); // Calculate change before submitting the form
                                                             }

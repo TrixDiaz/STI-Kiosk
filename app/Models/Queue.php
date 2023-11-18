@@ -11,6 +11,7 @@ class Queue extends Model
         'order_id', 
         'product_name',
         'product_price',
+        'product_image',
         'quantity',
         'order',
         'total',

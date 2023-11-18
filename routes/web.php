@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         function getOrderInfo($table, $order_id)
         {
             return DB::table($table)
-                ->select('id', 'order_id', 'product_name', 'product_price', 'quantity', 'total', 'order_type', 'payment_status', 'created_at')
+                ->select('id', 'order_id', 'product_name', 'product_image', 'product_price', 'quantity', 'total', 'order_type', 'payment_status', 'created_at')
                 ->where('order_id', $order_id)
                 ->get();
         }
