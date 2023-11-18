@@ -278,46 +278,19 @@
                                                                             class="text-gray-600 hover:text-gray-800 font-semibold">
                                                                             Close
                                                                         </button> --}}
-                                                                        <form id="moveToQueueForm{{ $order['order_id'] }}" action="{{ route('orders.move-to-queue', $order['id']) }}" method="POST">
+                                                                        <form
+                                                                            action="{{ route('orders.move-to-queue', $order['id']) }}"
+                                                                            method="POST">
                                                                             @csrf
                                                                             @method('DELETE')
-                                                                            <button type="button"
-                                                                                    id="saveChangesBtn{{ $order['order_id'] }}"
-                                                                                    onclick="moveToQueue({{ $order['order_id'] }})"
-                                                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded">
-                                                                                    Save
+                                                                            <button type="submit"
+                                                                                id="saveChangesBtn{{ $order['order_id'] }}"
+                                                                                onclick="return confirm('Are you sure you want to move this order to the queue?')"
+                                                                                class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded"
+                                                                                disabled> <!-- Initially disabled -->
+                                                                                Save
                                                                             </button>
                                                                         </form>
-                                                                        
-                                                                        <script>
-                                                                            function moveToQueue(orderId) {
-                                                                                if (confirm('Are you sure you want to move this order to the queue?')) {
-                                                                                    // Disable button to prevent multiple clicks
-                                                                                    document.getElementById(`saveChangesBtn${orderId}`).setAttribute('disabled', 'disabled');
-                                                                        
-                                                                                    // Send AJAX request
-                                                                                    $.ajax({
-                                                                                        type: 'POST',
-                                                                                        url: `/orders/move-to-queue/${orderId}`,
-                                                                                        data: {
-                                                                                            _token: '{{ csrf_token() }}',
-                                                                                            _method: 'DELETE'
-                                                                                        },
-                                                                                        success: function(response) {
-                                                                                            // Handle success, e.g., show a success message
-                                                                                            alert(response.message);
-                                                                                            window.location.reload(); // Reload the page or update UI as needed
-                                                                                        },
-                                                                                        error: function(xhr, status, error) {
-                                                                                            // Handle errors, e.g., enable button and show an error message
-                                                                                            alert('Error: ' + error);
-                                                                                            document.getElementById(`saveChangesBtn${orderId}`).removeAttribute('disabled');
-                                                                                        }
-                                                                                    });
-                                                                                }
-                                                                            }
-                                                                        </script>
-                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
