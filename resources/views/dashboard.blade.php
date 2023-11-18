@@ -74,7 +74,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center ">
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 text-center ">
                                             <td scope="row"
                                                 class="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
 
@@ -210,154 +211,139 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <!-- Trigger button -->
-                                                <button
-                                                    class=" hover:bg-primary-100 text-gray font-bold py-2 px-4 rounded"
-                                                    onclick="openModal()">
+                                                <!-- Button trigger modal -->
+                                                <button type="button"
+                                                    class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                                                    data-te-toggle="modal"
+                                                    data-te-target="#exampleFrameBottomModal{{ $order['order_id'] }}"
+                                                    data-te-ripple-init data-te-ripple-color="light">
                                                     Pay
                                                 </button>
-
                                                 <!-- Modal -->
-                                                <div id="myModal"
-                                                    class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center hidden">
-                                                    <div class="bg-white p-8 rounded shadow-lg w-3/4">
-                                                        <div class="flex justify-between items-center mb-4">
-                                                            <h2 class="text-lg font-bold">Payment -
-                                                                {{ $order['total'] }} </h2>
-                                                            <button class="text-gray-500 hover:text-gray-700"
-                                                                onclick="closeModal()">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="h-6 w-6" fill="none"
-                                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path stroke-linecap="round"
-                                                                        stroke-linejoin="round" stroke-width="2"
-                                                                        d="M6 18L18 6M6 6l12 12" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                        <p class="text-gray-700 px-4">
-                                                            <input id="amountInput" type="number"
-                                                                placeholder="Amount"
-                                                                class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
-                                                        </p>
-                                                        <label for="changeLabel"
-                                                            class="block text-gray-700 px-4 mt-2">Change:</label>
-                                                        <p id="changeLabel" class="text-gray-700 px-4 mb-4">0.00</p>
+                                                <div data-te-modal-init
+                                                    class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-hidden outline-none"
+                                                    id="exampleFrameBottomModal{{ $order['order_id'] }}"
+                                                    tabindex="-1" aria-labelledby="exampleFrameBottomModalLabel"
+                                                    aria-hidden="true">
+                                                    <div data-te-modal-dialog-ref
+                                                        class="pointer-events-none absolute bottom-0 w-full translate-y-[50px] opacity-0 transition-all duration-300 ease-in-out">
+                                                        <div
+                                                            class="pointer-events-auto relative flex w-full flex-col border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                                                            <div class="relative flex-auto py-1"
+                                                                data-te-modal-body-ref>
+                                                                <div
+                                                                    class="my-4 flex flex-col items-center justify-center">
+                                                                    <h2 class="text-lg font-bold"
+                                                                        id="totalPayment{{ $order['order_id'] }}">
+                                                                        Payment -
+                                                                        {{ $order['total'] }} </h2>
+                                                                    <p class="text-gray-700 px-4">
+                                                                        <input
+                                                                            id="amountInput{{ $order['order_id'] }}"
+                                                                            type="number" placeholder="Amount"
+                                                                            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500">
+                                                                    </p>
+                                                                    <label for="changeLabel"
+                                                                        class="block text-gray-700 px-4 mt-2">Change:</label>
+                                                                    <p id="changeLabel{{ $order['order_id'] }}"
+                                                                        class="text-gray-700 px-4 mb-4">0.00</p>
 
-                                                        <!-- Buttons for digits -->
-                                                        <div class="col-span-2 grid grid-cols-4 gap-4 mx-auto">
-                                                                <button onclick="appendToInput('1')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">1</button>
-                                                                <button onclick="appendToInput('2')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">2</button>
-                                                                <button onclick="appendToInput('3')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">3</button>
-                                                                <button onclick="appendToInput('4')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">4</button>
-                                                                <button onclick="appendToInput('5')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">5</button>
-                                                                <button onclick="appendToInput('6')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">6</button>
-                                                                <button onclick="appendToInput('7')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">7</button>
-                                                                <button onclick="appendToInput('8')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">8</button>
-                                                                <button onclick="appendToInput('9')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">9</button>
-                                                                <button onclick="appendToInput('0')"
-                                                                    class="digit-button w-16 h-16 bg-blue-300 rounded-lg">0</button>
-                                                                <button onclick="clearInput()"
-                                                                    class="bg-red-500 text-white w-16 h-16 rounded-lg">Clear</button>
-                                                           
-                                                        </div>
-
-
-                                                        <!-- The script remains the same -->
-                                                        <script>
-                                                            // Get the value from the <p> element
-                                                            var valueFromP = document.getElementById('changeLabel').innerText;
-
-                                                            // Set the value to the input field
-                                                            document.getElementById('changeInput').value = valueFromP;
-
-                                                            function clearInput() {
-                                                                var inputField = document.getElementById('amountInput');
-                                                                inputField.value = ''; // Clear the input field
-                                                                calculateChange(); // Recalculate change after clearing input
-                                                            }
-
-                                                            function appendToInput(digit) {
-                                                                var inputField = document.getElementById('amountInput');
-                                                                inputField.value += digit;
-                                                                calculateChange(); // Calculate change when digits are appended
-                                                            }
-
-                                                            function calculateChange() {
-                                                                var total = {{ $order['total'] }}; // Get the initial total from PHP
-                                                                var amountInput = parseFloat(document.getElementById('amountInput').value);
-                                                                var changeLabel = document.getElementById('changeLabel');
-                                                                var checkoutButton = document.getElementById('checkoutButton'); // The "Paid" button
-
-                                                                if (!isNaN(amountInput)) {
-                                                                    // Calculate change
-                                                                    var change = amountInput - total;
-                                                                    changeLabel.textContent = '₱' + change.toFixed(2);
-
-                                                                    // Disable or enable the checkout button based on change value
-                                                                    checkoutButton.disabled = change < 0; // Disable if change is negative or zero
-                                                                } else {
-                                                                    changeLabel.textContent = '₱0.00';
-                                                                    checkoutButton.disabled = true;
-                                                                }
-                                                            }
-
-                                                            function changePaymentMethod(paymentMethod) {
-                                                            
-
-                                                                calculateChange(); // Calculate change before submitting the form
-                                                            }
-                                                        </script>
-
-                                                        <!-- Modal Footer -->
-                                                        <div class="mt-6 flex justify-end">
-                                                            <button
-                                                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2"
-                                                                onclick="closeModal()">
-                                                                Close
-                                                            </button>
-                                                            <form
-                                                                action="{{ route('orders.move-to-queue', $order['id']) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button id="checkoutButton"
-                                                                    class="bg-gray-50text-gray font-bold py-2 px-4 rounded"
-                                                                    onclick="return confirm('Are you sure you want to move this order to the queue?')">
-                                                                    Pay
-                                                                </button>
-                                                            </form>
+                                                                    <!-- Buttons for numbers 0-9 and Clear -->
+                                                                    <div class="grid grid-cols-3 gap-2">
+                                                                        @for ($i = 0; $i <= 9; $i++)
+                                                                            <button type="button"
+                                                                                onclick="updateAmount({{ $i }}, '{{ $order['order_id'] }}')"
+                                                                                class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded">
+                                                                                {{ $i }}
+                                                                            </button>
+                                                                        @endfor
+                                                                        <button type="button"
+                                                                            onclick="clearAmount('{{ $order['order_id'] }}')"
+                                                                            class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded">
+                                                                            Clear
+                                                                        </button>
+                                                                    </div>
+                                                                    <!-- Footer -->
+                                                                    <div class="flex justify-between w-full px-4 mt-4">
+                                                                        <button type="button"
+                                                                            onclick="closeModal('{{ $order['order_id'] }}')"
+                                                                            class="text-gray-600 hover:text-gray-800 font-semibold">
+                                                                            Close
+                                                                        </button>
+                                                                        <form
+                                                                            action="{{ route('orders.move-to-queue', $order['id']) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit"
+                                                                                id="saveChangesBtn{{ $order['order_id'] }}"
+                                                                                onclick="return confirm('Are you sure you want to move this order to the queue?')"
+                                                                                class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded"
+                                                                                disabled> <!-- Initially disabled -->
+                                                                                Save
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
-
-                                                <script>
-                                                    function openModal() {
-                                                        document.getElementById('myModal').classList.remove('hidden');
-                                                    }
-
-                                                    function closeModal() {
-                                                        document.getElementById('myModal').classList.add('hidden');
-                                                    }
-
-                                                    function saveChanges() {
-                                                        // Logic to save changes
-                                                        closeModal(); // Close modal after saving changes
-                                                    }
-                                                </script>
 
                                             </td>
                                         </tr>
                                     @endforeach
+
+                                    <script>
+                                        function updateAmount(value, orderId) {
+                                            const amountInput = document.getElementById(`amountInput${orderId}`);
+                                            const totalPayment = document.getElementById(`totalPayment${orderId}`);
+                                            const changeLabel = document.getElementById(`changeLabel${orderId}`);
+                                            const saveButton = document.getElementById(`saveChangesBtn${orderId}`);
+
+                                            const currentValue = parseFloat(amountInput.value) || 0;
+                                            const orderTotal = parseFloat(totalPayment.innerText.split('-')[1].trim());
+
+                                            const updatedValue = currentValue * 10 + value; // Concatenate value as number
+
+                                            amountInput.value = updatedValue;
+                                            const change = (updatedValue - orderTotal).toFixed(2);
+                                            changeLabel.innerText = change < 0 ? '0.00' : change;
+
+                                            // Enable/disable and change style based on conditions
+                                            if (updatedValue >= orderTotal) {
+                                                saveButton.disabled = false;
+                                                saveButton.classList.remove('bg-gray-500');
+                                                saveButton.classList.add('bg-green-500', 'hover:bg-green-600');
+                                            } else {
+                                                saveButton.disabled = true;
+                                                saveButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+                                                saveButton.classList.add('bg-gray-500');
+                                            }
+                                        }
+
+                                        function clearAmount(orderId) {
+                                            const amountInput = document.getElementById(`amountInput${orderId}`);
+                                            const changeLabel = document.getElementById(`changeLabel${orderId}`);
+
+                                            amountInput.value = '';
+                                            changeLabel.innerText = '0.00';
+                                        }
+
+                                        function closeModal(orderId) {
+                                            const modal = document.getElementById(`exampleFrameBottomModal${orderId}`);
+                                            modal.classList.add('hidden');
+                                        }
+
+                                        // function saveChanges(orderId) {
+                                        //     // Add logic here to save changes
+                                        //     // For example, you can retrieve values and perform necessary actions
+                                        //     // For demonstration purposes, let's log a message
+                                        //     console.log(`Changes saved for order ID: ${orderId}`);
+                                        //     return true;
+                                        // }
+                                    </script>
                                 </tbody>
                             </table>
                         </div>
