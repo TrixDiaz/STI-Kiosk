@@ -53,7 +53,7 @@ class Order extends Model
     
             // Update the product_stock in the stocks table using Eloquent
             $productStock = Stock::where('product_name', $item->product_name)
-                ->decrement('product_stock', $item->quantity)->broadcast($item->quantity);
+                ->decrement('product_stock', $item->quantity);
     
             // Check if the product stock is less than 300
             if ($productStock < 300) {
