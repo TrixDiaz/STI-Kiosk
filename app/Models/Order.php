@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
@@ -99,7 +100,22 @@ class Order extends Model
                 'name' => Auth::user()->name, // Update with the authenticated user's name
                 'created_at' => now(),
             ]);
-        }
+        }   // Notify clients about changes using Pusher
+        $data = [
+            'message' => 'Order moved to queue and deleted successfully',
+            'user_id' => Auth::id(),
+            'order_id' => $orderId,
+        ];
+
+        // Trigger an event to broadcast to the clients
+        Broadcast::channel('orders', function ($data) {
+            return true; // You may want to define your logic for who should receive this broadcast
+        });
+
+        // Broadcast the event
+        Broadcast::event('orders', $data);
+
+
     
         // Delete all orders with the same order_id from the orders table
         DB::table('orders')->where('order_id', $orderId)->delete();
