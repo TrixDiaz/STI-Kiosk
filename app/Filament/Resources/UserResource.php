@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use Carbon\Carbon;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Textarea;
@@ -19,6 +21,7 @@ use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class UserResource extends Resource
 {
@@ -51,14 +54,13 @@ class UserResource extends Resource
                             ->prefix('@Ctona123')
                             ->visibleOn(['create'])
                             ->readOnly(),
-                        DateTimePicker::make('email_verified_at')
+                            Radio::make('email_verified_at')
                             ->label('Account Activation')
-                            ->timezone('Asia/Manila')
-                            ->displayFormat('d/m/Y')
-                            ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
-                            ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
-                            ->native(false)
-                            ->readOnly('edit'),
+                            ->options([
+                                Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
+                            ])
+                            ->visible(fn ($record) => !$record || $record->email_verified_at === null)
+                            ->inline(false),
                     ])->columns(2),
                 Fieldset::make('User Management')
                     ->schema([
@@ -89,7 +91,6 @@ class UserResource extends Resource
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->since()
                     ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('updated_at')
                     ->dateTime()
@@ -107,6 +108,7 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make(),
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),

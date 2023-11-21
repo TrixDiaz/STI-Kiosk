@@ -74,10 +74,10 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     }
 
     
-
-    public function getEmailVerifiedAttribute()
+    public function getIsEmailVerifiedAttribute()
     {
-        // If email_verified_at is not null and not false, return true, else return false
-        return !is_null($this->attributes['email_verified_at']) && $this->attributes['email_verified_at'] !== false;
+        return !is_null($this->email_verified_at);
     }
+    
+    
 }
