@@ -1,10 +1,10 @@
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
     @foreach ($products as $product)
         <div class="relative mx-2">
             <button class="w-full" wire:click="openModal({{ $product->id }})">
-                <img src="/storage/{{ $product->product_image }}" class="h-40 w-full bg-cover rounded-lg" alt="" />
+                <img src="/storage/{{ $product->product_image }}" class="h-40 md:h-48 lg:h-56 xl:h-64 w-full bg-cover rounded-lg" alt="" />
                 <div class="">
-                    <div class="flex flex-col w-full text-black text-md text-md px-2 py-2 rounded-md">
+                    <div class="flex flex-col w-full text-black text-md px-2 py-2 rounded-md">
                         <div class="uppercase">
                             <p class="font-thin">{{ $product->product_name }}</p>
                         </div>
@@ -34,11 +34,11 @@
                 <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-lg w-full">
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <div class="mt-3 text-center w-full sm:mt-0 sm:ml-4 sm:text-left">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                    <img src="/storage/{{ $selectedProduct->product_image }}" class="h-40 w-full bg-cover rounded-lg" alt="" />
+                                    <img src="/storage/{{ $selectedProduct->product_image }}" class="h-40 md:h-48 lg:h-56 xl:h-64 w-full bg-cover rounded-lg" alt="" />
                                     <div class="">
-                                        <div class="flex flex-col w-full text-black text-md text-md px-2 py-2 rounded-md">
+                                        <div class="flex flex-col w-full text-black text-md px-2 py-2 rounded-md">
                                             <div class="uppercase">
                                                 <p class="font-thin">{{ $selectedProduct->product_name }}</p>
                                             </div>
