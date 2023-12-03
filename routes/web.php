@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CashierController;
-use App\Livewire\Donmono;
+use App\Livewire\KioskProducts;
 use App\Livewire\KioskPage;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -21,7 +21,22 @@ use App\Http\Controllers\SessionController;
 |
 */
 
-Route::get('/Donmono', Donmono::class)->name('donmono');
+Route::get('/Donmono', KioskProducts::class)->name('donmono');
+Route::get('/Ippin', KioskProducts::class)->name('ippin');
+Route::get('/kushiyaki', KioskProducts::class)->name('kushiyaki');
+Route::get('/makizushi', KioskProducts::class)->name('makizushi');
+Route::get('/men', KioskProducts::class)->name('men');
+Route::get('/nigirizushi', KioskProducts::class)->name('nigirizushi');
+Route::get('/ochazuke', KioskProducts::class)->name('ochazuke');
+Route::get('/ramen', KioskProducts::class)->name('ramen');
+Route::get('/salad', KioskProducts::class)->name('salad');
+Route::get('/sashimi', KioskProducts::class)->name('sashimi');
+Route::get('/tempura', KioskProducts::class)->name('tempura');
+Route::get('/yakizakana', KioskProducts::class)->name('yakizakana');
+Route::get('/zensai', KioskProducts::class)->name('zensai');
+Route::get('/addons', KioskProducts::class)->name('addons');
+
+
 Route::get('/Kiosk', KioskPage::class)->name('kiosk');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -81,20 +96,8 @@ Route::controller(ProductsController::class)->group(function () {
     Route::post('/serve/{order}', 'orderServe')->name('order.serve');
     Route::post('/serving/{order}', 'serving')->name('serving');
     Route::delete('/serve/{serve}', 'destroyServe')->name('serve.destroy');
-    // Product Routes
-    Route::get('/ippin', 'ippin')->name('ippin');
-    Route::get('/kushiyaki', 'kushiyaki')->name('kushiyaki');
-    Route::get('/makizushi', 'makizushi')->name('makizushi');
-    Route::get('/men', 'men')->name('men');
-    Route::get('/nigirizushi', 'nigirizushi')->name('nigirizushi');
-    Route::get('/ochazuke', 'ochazuke')->name('ochazuke');
-    Route::get('/ramen', 'ramen')->name('ramen');
-    Route::get('/salad', 'salad')->name('salad');
-    Route::get('/sashimi', 'sashimi')->name('sashimi');
-    Route::get('/tempura', 'tempura')->name('tempura');
-    Route::get('/yakizakana', 'yakizakana')->name('yakizakana');
-    Route::get('/zensai', 'zensai')->name('zensai');
-    Route::get('/addons', 'addons')->name('addons');
+
+
 });
 
 Route::controller(SessionController::class)->group(function () {

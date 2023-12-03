@@ -16,105 +16,10 @@ use Illuminate\Support\Facades\Session;
 class ProductsController extends Controller
 {
 
-   /** 
-    * Start of Products 
-    **/
 
-  
 
-   public function ippin()
-   {
-       $products = Stock::where('product_category', 'Ippin ryori')->get();
-
-       return view('products.ippin', compact('products'));
-   }
-
-   public function kushiyaki()
-   {
-       $products = Stock::where('product_category', 'Kushiyaki')->get();
-
-       return view('products.kushiyaki', compact('products'));
-   }
-
-   public function makizushi()
-   {
-       $products = Stock::where('product_category', 'Makizushi')->get();
-
-       return view('products.makisushi', compact('products'));
-   }
-
-   public function men()
-   {
-       $products = Stock::where('product_category', 'Men')->get();
-
-       return view('products.men', compact('products'));
-   }
-
-   public function nigirizushi()
-   {
-       $products = Stock::where('product_category', 'Nigirizushi')->get();
-
-       return view('products.nigirizushi', compact('products'));
-   }
-
-   public function ochazuke()
-   {
-       $products = Stock::where('product_category', 'Ochazuke')->get();
-
-       return view('products.ochazuke', compact('products'));
-   }
-
-   public function ramen()
-   {
-       $products = Stock::where('product_category', 'Ramen')->get();
-
-       return view('products.ramen', compact('products'));
-   }
-
-   public function salad()
-   {
-       $products = Stock::where('product_category', 'Salad')->get();
-
-       return view('products.salad', compact('products'));
-   }
-
-   public function sashimi()
-   {
-       $products = Stock::where('product_category', 'Sashimi')->get();
-
-       return view('products.sashimi', compact('products'));
-   }
-
-   public function tempura()
-   {
-       $products = Stock::where('product_category', 'Tempura')->get();
-
-       return view('products.tempura', compact('products'));
-   }
-
-   public function yakizakana()
-   {
-       $products = Stock::where('product_category', 'Yakizakana')->get();
-
-       return view('products.yakizakana', compact('products'));
-   }
-
-   public function zensai()
-   {
-       $products = Stock::where('product_category', 'Zensai')->get();
-
-       return view('products.zensai', compact('products'));
-   }
-
-   public function addons()
-   {
-    $products = Stock::where('product_category', 'Addons')->get();
-
-       return view('products.addons', compact('products'));
-   }
-
-   /** 
-    * End of Products 
+   /**
+    * End of Products
     **/
 
     public function destroyServe(Serve $serve)
@@ -159,9 +64,9 @@ class ProductsController extends Controller
             ->with('success', 'Order served successfully');
     }
 
-    
 
-    
+
+
     /**
      * Remove the specified order id from queue
      * and insert to serve.
@@ -170,7 +75,7 @@ class ProductsController extends Controller
     {
         // Find all orders in the "queue" table with the same order_id
         $orders = Queue::where('order_id', $order_id)->get();
-    
+
         // Check if any orders exist
         if ($orders->isNotEmpty()) {
             // Insert each order into the "serve" table
@@ -179,11 +84,11 @@ class ProductsController extends Controller
                     'order_id' => $order->order_id,
                     // Add any other fields you need for the "serve" table
                 ]);
-    
+
                 // Delete the order from the "queue" table
                 $order->delete();
             }
-    
+
             return redirect()
                 ->route('dashboard')
                 ->with('success', 'Orders served successfully');
@@ -194,8 +99,8 @@ class ProductsController extends Controller
                 ->with('error', 'Orders not found');
         }
     }
-    
-    
+
+
 
     /**
      *
@@ -222,8 +127,8 @@ class ProductsController extends Controller
                  ->back()
                  ->with('error', 'Order not found.');
          }
-     
-        
+
+
          // Insert the order ID into the queue table
          DB::table('queues')->insert([
              'order_id'         => $orderDetails->order_id,

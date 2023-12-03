@@ -5,12 +5,13 @@ namespace App\Livewire;
 use App\Models\Stock;
 use Livewire\Component;
 
-class Donmono extends Component
+class KioskProducts extends Component
 {
     public $modalOpen;
     public $selectedProductId;
     public $selectedProduct;
     public $quantity = 1;
+
 
     public function mount()
     {
@@ -68,7 +69,9 @@ class Donmono extends Component
 
     public function render()
     {
-        $products = Stock::where('product_category', 'Donmono')->get();
-        return view('livewire.donmono', ['products' => Stock::paginate(6), ]);
+        $currentRoute = request()->route()->getName();
+        $products = Stock::where('product_category', $currentRoute)->paginate(6);
+        return view('livewire.kiosk-products', compact('products'));
     }
+
 }
