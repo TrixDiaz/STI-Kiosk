@@ -35,8 +35,6 @@ Route::get('/tempura', KioskProducts::class)->name('tempura');
 Route::get('/yakizakana', KioskProducts::class)->name('yakizakana');
 Route::get('/zensai', KioskProducts::class)->name('zensai');
 Route::get('/addons', KioskProducts::class)->name('addons');
-
-
 Route::get('/Kiosk', KioskPage::class)->name('kiosk');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
