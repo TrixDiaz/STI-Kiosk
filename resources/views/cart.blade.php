@@ -100,7 +100,7 @@
                                                                             <button type="button" class="px-2 py-1 bg-gray-200 rounded-r-md border border-gray-300" onclick="incrementQuantity(this)">+</button>
                                                                         </div>
                                                                     </p>
-                                                                    
+
                                                                     <div class="actions flex" data-th="">
                                                                         <button type="button"
                                                                             class="font-medium text-indigo-600 hover:text-indigo-500 cart_remove">Remove</button>
@@ -118,9 +118,10 @@
                                                 <input type="text" value="{{ $orderID }}" name="orderID"
                                                     class="hidden">
 
-                                          
+
                                             <!-- More products... -->
                                         </ul>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +151,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </form>
+
                                 {{-- Radio --}}
                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                     <p>Subtotal</p>
@@ -202,7 +203,7 @@ function decrementQuantity(button, currentQuantity) {
 
 function updateQuantity(element, quantity) {
     var id = element.closest('li').getAttribute('data-id');
-    
+
     $.ajax({
         url: '{{ route('update_cart') }}',
         method: "patch",

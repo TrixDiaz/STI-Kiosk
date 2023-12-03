@@ -1,17 +1,14 @@
 <?php
 
 use App\Http\Controllers\CashierController;
-use App\Models\User;
-use App\Models\Product;
+use App\Livewire\Donmono;
+use App\Livewire\KioskPage;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use App\View\Components\KioskLayout;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\KioskController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SessionController;
-use App\Livewire\Donmono;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +22,7 @@ use App\Livewire\Donmono;
 */
 
 Route::get('/Donmono', Donmono::class)->name('donmono');
+Route::get('/Kiosk', KioskPage::class)->name('kiosk');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -41,7 +39,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             ->distinct()
             ->get();
         // Function to retrieve order/queue info based on the table and order ID
-        function getOrderInfo($table, $order_id)
+        function getOrderInfo($table, $order_id): Collection
         {
             return DB::table($table)
                 ->select('id', 'order_id', 'product_name', 'product_image', 'product_price', 'quantity', 'total', 'order_type', 'payment_status', 'created_at')
@@ -58,7 +56,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
                 'order_type' => $orderInfo->isEmpty() ? null : $orderInfo->first()->order_type,
                 'payment_status' => $orderInfo->isEmpty() ? null : $orderInfo->first()->payment_status,
                 'total' => $orderInfo->isEmpty() ? null : $orderInfo->first()->total,
-                'created_at' => $orderInfo->isEmpty() ? null : \Carbon\Carbon::parse($orderInfo->first()->created_at),
+                'created_at' => $orderInfo->isEmpty() ? null : Carbon::parse($orderInfo->first()->created_at),
             ];
         }
         // Process queues
@@ -70,7 +68,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
                 'order_type' => $queueInfo->isEmpty() ? null : $queueInfo->first()->order_type,
                 'payment_status' => $queueInfo->isEmpty() ? null : $queueInfo->first()->payment_status,
                 'total' => $queueInfo->isEmpty() ? null : $queueInfo->first()->total,
-                'created_at' => $queueInfo->isEmpty() ? null : \Carbon\Carbon::parse($queueInfo->first()->created_at),
+                'created_at' => $queueInfo->isEmpty() ? null : Carbon::parse($queueInfo->first()->created_at),
             ];
         }
         return view('dashboard', compact('orders', 'queues', 'serves'));
@@ -101,7 +99,6 @@ Route::controller(ProductsController::class)->group(function () {
 
 Route::controller(SessionController::class)->group(function () {
     Route::get('/', 'start')->name('/');
-    Route::get('kiosk', 'kiosk')->name('kiosk');
     Route::get('cart', 'cart')->name('cart');
     Route::get('add-to-cart/{id}', 'addToCart')->name('add_to_cart');
     Route::patch('update-cart', 'update')->name('update_cart');

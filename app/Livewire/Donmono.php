@@ -69,6 +69,6 @@ class Donmono extends Component
     public function render()
     {
         $products = Stock::where('product_category', 'Donmono')->get();
-        return view('livewire.donmono', ['products' => Stock::paginate(4), ]);
+        return view('livewire.donmono', ['products' => Stock::paginate(6), ]);
     }
 }

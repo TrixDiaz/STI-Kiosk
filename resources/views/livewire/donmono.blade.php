@@ -27,7 +27,7 @@
                     $selectedProduct = $products->firstWhere('id', $selectedProductId);
                 @endphp
                 <div class="fixed z-10 inset-0 overflow-y-auto">
-                    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
                         <!-- Background overlay -->
                         <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
