@@ -11,6 +11,7 @@ use App\Http\Controllers\KioskController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SessionController;
+use App\Livewire\Donmono;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ use App\Http\Controllers\SessionController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/Donmono', Donmono::class)->name('donmono');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -81,7 +84,6 @@ Route::controller(ProductsController::class)->group(function () {
     Route::post('/serving/{order}', 'serving')->name('serving');
     Route::delete('/serve/{serve}', 'destroyServe')->name('serve.destroy');
     // Product Routes
-    Route::get('/donmono', 'donmono')->name('donmono');
     Route::get('/ippin', 'ippin')->name('ippin');
     Route::get('/kushiyaki', 'kushiyaki')->name('kushiyaki');
     Route::get('/makizushi', 'makizushi')->name('makizushi');

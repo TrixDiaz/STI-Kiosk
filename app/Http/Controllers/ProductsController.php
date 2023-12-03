@@ -20,12 +20,7 @@ class ProductsController extends Controller
     * Start of Products 
     **/
 
-   public function donmono()
-   {
-       $products = Stock::where('product_category', 'Donmono')->get();
-
-       return view('products.donmono', compact('products'));
-   }
+  
 
    public function ippin()
    {
