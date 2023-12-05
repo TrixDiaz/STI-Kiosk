@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\Stock;
 use Livewire\Component;
 
-class KioskProducts extends Component
+class KioskSashimi extends Component
 {
     public $modalOpen;
     public $selectedProductId;
@@ -69,9 +69,7 @@ class KioskProducts extends Component
 
     public function render()
     {
-        $currentRoute = request()->route()->getName();
-        $products = Stock::where('product_category', $currentRoute)->paginate(6);
-        return view('livewire.kiosk-products', compact('products'));
+        $products = Stock::where('product_category', 'Sashimi')->paginate(6);
+        return view('livewire.kiosk-sashimi', compact('products'));
     }
-
 }

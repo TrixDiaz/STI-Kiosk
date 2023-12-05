@@ -9,6 +9,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SessionController;
+use App\Livewire\KioskAddons;
+use App\Livewire\KioskDonmono;
+use App\Livewire\KioskIppin;
+use App\Livewire\KioskKushiyaki;
+use App\Livewire\KioskMakisushi;
+use App\Livewire\KioskMen;
+use App\Livewire\KioskNigirizushi;
+use App\Livewire\KioskOchazuke;
+use App\Livewire\KioskRamen;
+use App\Livewire\KioskSalad;
+use App\Livewire\KioskSashimi;
+use App\Livewire\KioskTempura;
+use App\Livewire\KioskYakizakana;
+use App\Livewire\KioskZensai;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,21 +35,21 @@ use App\Http\Controllers\SessionController;
 |
 */
 
-Route::get('/Donmono', KioskProducts::class)->name('donmono');
-Route::get('/Ippin', KioskProducts::class)->name('ippin');
-Route::get('/kushiyaki', KioskProducts::class)->name('kushiyaki');
-Route::get('/makizushi', KioskProducts::class)->name('makizushi');
-Route::get('/men', KioskProducts::class)->name('men');
-Route::get('/nigirizushi', KioskProducts::class)->name('nigirizushi');
-Route::get('/ochazuke', KioskProducts::class)->name('ochazuke');
-Route::get('/ramen', KioskProducts::class)->name('ramen');
-Route::get('/salad', KioskProducts::class)->name('salad');
-Route::get('/sashimi', KioskProducts::class)->name('sashimi');
-Route::get('/tempura', KioskProducts::class)->name('tempura');
-Route::get('/yakizakana', KioskProducts::class)->name('yakizakana');
-Route::get('/zensai', KioskProducts::class)->name('zensai');
-Route::get('/addons', KioskProducts::class)->name('addons');
 Route::get('/Kiosk', KioskPage::class)->name('kiosk');
+Route::get('/Donmono', KioskDonmono::class)->name('donmono');
+Route::get('/Ippin', KioskIppin::class)->name('ippin');
+Route::get('/kushiyaki', KioskKushiyaki::class)->name('kushiyaki');
+Route::get('/makizushi', KioskMakisushi::class)->name('makizushi');
+Route::get('/men', KioskMen::class)->name('men');
+Route::get('/nigirizushi', KioskNigirizushi::class)->name('nigirizushi');
+Route::get('/ochazuke', KioskOchazuke::class)->name('ochazuke');
+Route::get('/ramen', KioskRamen::class)->name('ramen');
+Route::get('/salad', KioskSalad::class)->name('salad');
+Route::get('/sashimi', KioskSashimi::class)->name('sashimi');
+Route::get('/tempura', KioskTempura::class)->name('tempura');
+Route::get('/yakizakana', KioskYakizakana::class)->name('yakizakana');
+Route::get('/zensai', KioskZensai::class)->name('zensai');
+Route::get('/addons', KioskAddons::class)->name('addons');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
