@@ -2,6 +2,7 @@ import './bootstrap';
 import 'flowbite';
 
 import {
+    Tab,
   Popover,
   Offcanvas,
   Modal,
@@ -12,6 +13,6 @@ import {
   initTE,
 } from "tw-elements";
 
-initTE({ Sidenav, Modal, Ripple, Dropdown,  Offcanvas, Collapse, Popover, });
-  
+initTE({ Sidenav, Modal, Ripple, Dropdown,  Offcanvas, Collapse, Popover,Tab, });
+
 

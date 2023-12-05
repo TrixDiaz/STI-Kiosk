@@ -13,8 +13,57 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
                     </x-nav-link>
+
+                    <!--Tabs navigation-->
+                    <span
+                        class="mb-5 flex list-none flex-row flex-wrap border-b-0 pl-0"
+                        role="tablist"
+                        data-te-nav-ref>
+
+                                <x-nav-link
+                                    role="presentation"
+                                    href="#tabs-home"
+                                    class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500"
+                                    data-te-toggle="pill"
+                                    data-te-target="#tabs-home"
+                                    role="tab"
+                                    aria-controls="tabs-home"
+                                    aria-selected="true"
+                                >Home</x-nav-link
+                                >
+
+
+                            <x-nav-link
+                                role="presentation"
+                                href="#tabs-profile"
+                                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:none"
+                                data-te-toggle="pill"
+                                data-te-target="#tabs-profile"
+                                role="tab"
+                                aria-controls="tabs-profile"
+                                aria-selected="false"
+                            >Profile</x-nav-link
+                            >
+
+{{--                        <li role="presentation">--}}
+{{--                            <x-nav-link--}}
+{{--                                href="#tabs-messages"--}}
+{{--                                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500"--}}
+{{--                                data-te-toggle="pill"--}}
+{{--                                data-te-target="#tabs-messages"--}}
+{{--                                role="tab"--}}
+{{--                                aria-controls="tabs-messages"--}}
+{{--                                aria-selected="false"--}}
+{{--                            >Messages</x-nav-link--}}
+{{--                            >--}}
+{{--                        </li>--}}
+                    </span>
+
+
+
+
                 </div>
             </div>
 
@@ -160,6 +209,7 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
+
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
@@ -203,6 +253,38 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <!--Tabs navigation-->
+            <span
+                class="mb-5 flex list-none flex-row flex-wrap border-b-0 pl-0"
+                role="tablist"
+                data-te-nav-ref>
+
+            <x-responsive-nav-link
+                role="presentation"
+                href="#tabs-home"
+                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500"
+                data-te-toggle="pill"
+                data-te-target="#tabs-home"
+                {{--                                    data-te-nav-active--}}
+                role="tab"
+                aria-controls="tabs-home"
+                aria-selected="true">
+                {{ __('Tab 2') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link
+                role="presentation"
+                href="#tabs-profile"
+                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500"
+                data-te-toggle="pill"
+                data-te-target="#tabs-profile"
+                role="tab"
+                aria-controls="tabs-profile"
+                aria-selected="false">
+                {{ __('Tab 3') }}
+            </x-responsive-nav-link>
+            </span>
         </div>
 
         {{-- Notification Database  --}}

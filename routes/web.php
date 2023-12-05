@@ -23,6 +23,7 @@ use App\Livewire\KioskSashimi;
 use App\Livewire\KioskTempura;
 use App\Livewire\KioskYakizakana;
 use App\Livewire\KioskZensai;
+use App\Livewire\PosDonmono;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ use App\Livewire\KioskZensai;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Kiosk Livewire 
 Route::get('/Kiosk', KioskPage::class)->name('kiosk');
 Route::get('/Donmono', KioskDonmono::class)->name('donmono');
 Route::get('/Ippin', KioskIppin::class)->name('ippin');
@@ -50,6 +51,9 @@ Route::get('/tempura', KioskTempura::class)->name('tempura');
 Route::get('/yakizakana', KioskYakizakana::class)->name('yakizakana');
 Route::get('/zensai', KioskZensai::class)->name('zensai');
 Route::get('/addons', KioskAddons::class)->name('addons');
+
+// Cashier
+Route::get('/pos-donmono', PosDonmono::class)->name('pos.donmono');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -108,8 +112,6 @@ Route::controller(ProductsController::class)->group(function () {
     Route::post('/serve/{order}', 'orderServe')->name('order.serve');
     Route::post('/serving/{order}', 'serving')->name('serving');
     Route::delete('/serve/{serve}', 'destroyServe')->name('serve.destroy');
-
-
 });
 
 Route::controller(SessionController::class)->group(function () {
@@ -136,20 +138,6 @@ Route::controller(CashierController::class)->group(function () {
     Route::get('/posQrCode', 'posQrCode')->name('posQrCode');
     Route::get('/pos-qrPayment', 'posQrPayment')->name('posQrPayment');
     Route::get('/pos-success-order/{total?}', 'posSuccessOrder')->name('posSuccessOrder');
-
-    Route::get('/pos-donmono', 'donmono')->name('pos.donmono');
-    Route::get('/pos-ippin', 'ippin')->name('pos.ippin');
-    Route::get('/pos-kushiyaki', 'kushiyaki')->name('pos.kushiyaki');
-    Route::get('/pos-makizushi', 'makizushi')->name('pos.makizushi');
-    Route::get('/pos-men', 'men')->name('pos.men');
-    Route::get('/pos-nigirizushi', 'nigirizushi')->name('pos.nigirizushi');
-    Route::get('/pos-ochazuke', 'ochazuke')->name('pos.ochazuke');
-    Route::get('/pos-ramen', 'ramen')->name('pos.ramen');
-    Route::get('/pos-salad', 'salad')->name('pos.salad');
-    Route::get('/pos-sashimi', 'sashimi')->name('pos.sashimi');
-    Route::get('/pos-tempura', 'tempura')->name('pos.tempura');
-    Route::get('/pos-yakizakana', 'yakizakana')->name('pos.yakizakana');
-    Route::get('/pos-zensai', 'zensai')->name('pos.zensai');
     Route::delete('/orders/{order}', 'moveToQueueAndDelete')->name('orders.move-to-queue');
     Route::delete('/clear', 'clear')->name('clear');
 });
