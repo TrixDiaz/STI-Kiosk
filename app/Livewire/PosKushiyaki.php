@@ -70,6 +70,6 @@ class PosKushiyaki extends Component
     public function render()
     {
         $products = Stock::where('product_category', 'Kushiyaki')->paginate(6);
-        return view('livewire.pos-kushiyaki', compact('products'))->layout($this->layout));
+        return view('livewire.pos-kushiyaki', compact('products'))->layout($this->layout);
     }
 }

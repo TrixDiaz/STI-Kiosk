@@ -70,6 +70,6 @@ class PosMakizushi extends Component
     public function render()
     {
         $products = Stock::where('product_category', 'Makizushi')->paginate(6);
-        return view('livewire.pos-makizushi', compact('products'))->layout($this->layout));
+        return view('livewire.pos-makizushi', compact('products'))->layout($this->layout);
     }
 }
