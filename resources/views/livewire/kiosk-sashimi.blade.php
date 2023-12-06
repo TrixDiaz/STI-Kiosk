@@ -41,8 +41,9 @@
                                     <div class="mt-3 text-center w-full sm:mt-0 sm:ml-4 sm:text-left">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                                             <img src="{{ asset('storage/' . $selectedProduct->product_image) }}"
-                                                 class="h-40 md:h-48 lg:h-56 xl:h-64 w-full bg-cover rounded-lg"
+                                                 class="h-56 md:h-48 lg:h-56 xl:h-64 w-full bg-cover rounded-lg"
                                                  alt="" />
+                                            <p class="float-right text-sm font-semibold mx-4">Stock: {{ $selectedProduct->product_stock }}</p>
                                             <div class="">
                                                 <div
                                                     class="flex flex-col w-full text-black text-md px-2 py-2 rounded-md">
