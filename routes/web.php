@@ -4,6 +4,9 @@ use App\Http\Controllers\CashierController;
 use App\Livewire\KioskProducts;
 use App\Livewire\KioskPage;
 use App\Livewire\PosIppin;
+use App\Livewire\PosKushiyaki;
+use App\Livewire\PosMakizushi;
+use App\Livewire\PosMen;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -56,6 +59,19 @@ Route::get('/addons', KioskAddons::class)->name('addons');
 // Cashier
 Route::get('/pos-donmono', PosDonmono::class)->name('pos.donmono');
 Route::get('/pos-ippin', PosIppin::class)->name('pos.ippin');
+Route::get('/pos-kushiyaki', PosKushiyaki::class)->name('pos.kushiyaki');
+Route::get('/pos-makizushi', PosMakizushi::class)->name('pos.makizushi');
+Route::get('/pos-men', PosMen::class)->name('pos.men');
+Route::get('/pos-nigirizushi', \App\Livewire\PosNigirizushi::class)->name('pos.nigirizushi');
+Route::get('/pos-ochazuke', \App\Livewire\PosOchazuke::class)->name('pos.ochazuke');
+Route::get('/pos-ramen', \App\Livewire\PosRamen::class)->name('pos.ramen');
+Route::get('/pos-salad', \App\Livewire\PosSalad::class)->name('pos.salad');
+Route::get('/pos-sashimi', \App\Livewire\PosSashimi::class)->name('pos.sashimi');
+Route::get('/pos-tempura', \App\Livewire\PosTempura::class)->name('pos.tempura');
+Route::get('/pos-yakizakana', \App\Livewire\PosYakizakana::class)->name('pos.yakizakana');
+Route::get('/pos-zensai', \App\Livewire\PosZensai::class)->name('pos.zensai');
+Route::get('/pos-addons', \App\Livewire\PosAddons::class)->name('pos.addons');
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {

@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\Stock;
 use Livewire\Component;
 
-class PosIppin extends Component
+class PosKushiyaki extends Component
 {
     public $modalOpen;
     public $selectedProductId;
@@ -69,7 +69,7 @@ class PosIppin extends Component
     }
     public function render()
     {
-        $products = Stock::where('product_category', 'Ippin')->paginate(6);
-        return view('livewire.pos-ippin', compact('products'))->layout($this->layout);
+        $products = Stock::where('product_category', 'Kushiyaki')->paginate(6);
+        return view('livewire.pos-kushiyaki', compact('products'))->layout($this->layout));
     }
 }
