@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Addons;
 use App\Models\Stock;
 use Livewire\Component;
 
@@ -71,7 +72,7 @@ class PosAddons extends Component
 
     public function render()
     {
-        $products = Stock::where('product_category', 'Addons')->paginate(6);
+        $products = Addons::paginate(6);
         return view('livewire.pos-addons', compact('products'))->layout($this->layout);
     }
 }
