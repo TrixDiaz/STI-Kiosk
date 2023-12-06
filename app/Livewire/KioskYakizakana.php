@@ -21,7 +21,9 @@ class KioskYakizakana extends Component
 
     public function incrementQuantity()
     {
-        $this->quantity++;
+        if ($this->selectedProduct && $this->quantity < $this->selectedProduct->product_stock) {
+            $this->quantity++;
+        }
     }
 
     public function decrementQuantity()
@@ -66,7 +68,7 @@ class KioskYakizakana extends Component
             $this->closeModal();
         }
     }
-    
+
     public function render()
     {
         $products = Stock::where('product_category', 'Yakizakana')->paginate(6);

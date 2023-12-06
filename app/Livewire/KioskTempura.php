@@ -21,7 +21,9 @@ class KioskTempura extends Component
 
     public function incrementQuantity()
     {
-        $this->quantity++;
+        if ($this->selectedProduct && $this->quantity < $this->selectedProduct->product_stock) {
+            $this->quantity++;
+        }
     }
 
     public function decrementQuantity()
@@ -66,7 +68,7 @@ class KioskTempura extends Component
             $this->closeModal();
         }
     }
-    
+
     public function render()
     {
         $products = Stock::where('product_category', 'Tempura')->paginate(6);

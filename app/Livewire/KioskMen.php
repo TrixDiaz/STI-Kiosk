@@ -21,7 +21,9 @@ class KioskMen extends Component
 
     public function incrementQuantity()
     {
-        $this->quantity++;
+        if ($this->selectedProduct && $this->quantity < $this->selectedProduct->product_stock) {
+            $this->quantity++;
+        }
     }
 
     public function decrementQuantity()
