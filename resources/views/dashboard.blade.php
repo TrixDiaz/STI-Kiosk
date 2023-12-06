@@ -1,6 +1,4 @@
 <x-app-layout>
-
-
     <!--Tabs content-->
     <div class="mb-6">
         <div
@@ -9,11 +7,8 @@
             role="tabpanel"
             aria-labelledby="tabs-home-tab"
             data-te-tab-active>
-
-            <div id="datatable">
-                {{-- Table --}}
-
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-5 ">
+            <div id="datatable" class="max-h-80 overflow-y-auto overflow-hidden"> {{-- Table --}}
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-5">
                     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">
                         <thead
                             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -309,17 +304,14 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- End of Table --}}
             </div> {{-- End of DataTable --}}
-
         </div>
         <div
             class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
             id="tabs-profile"
             role="tabpanel"
             aria-labelledby="tabs-profile-tab">
-
-            <div class="flex">
+            <div class="flex max-h-80 overflow-y-auto overflow-hidden">
                 <!-- Table for "Queue" -->
                 <table class="w-1/2 text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead
@@ -503,7 +495,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 
