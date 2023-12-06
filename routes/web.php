@@ -3,6 +3,7 @@
 use App\Http\Controllers\CashierController;
 use App\Livewire\KioskProducts;
 use App\Livewire\KioskPage;
+use App\Livewire\PosIppin;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,7 @@ use App\Livewire\PosDonmono;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Kiosk Livewire 
+// Kiosk Livewire
 Route::get('/Kiosk', KioskPage::class)->name('kiosk');
 Route::get('/Donmono', KioskDonmono::class)->name('donmono');
 Route::get('/Ippin', KioskIppin::class)->name('ippin');
@@ -54,6 +55,7 @@ Route::get('/addons', KioskAddons::class)->name('addons');
 
 // Cashier
 Route::get('/pos-donmono', PosDonmono::class)->name('pos.donmono');
+Route::get('/pos-ippin', PosIppin::class)->name('pos.ippin');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {

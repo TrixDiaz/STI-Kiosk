@@ -31,7 +31,7 @@
                                     role="tab"
                                     aria-controls="tabs-home"
                                     aria-selected="true"
-                                >Home</x-nav-link
+                                >Kiosk</x-nav-link
                                 >
 
 
@@ -44,7 +44,7 @@
                                 role="tab"
                                 aria-controls="tabs-profile"
                                 aria-selected="false"
-                            >Profile</x-nav-link
+                            >Kitchen</x-nav-link
                             >
 
 {{--                        <li role="presentation">--}}

@@ -497,6 +497,5 @@
             </div>
         </div>
     </div>
-
     @livewire('posPage')
 </x-app-layout>
