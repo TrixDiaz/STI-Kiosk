@@ -22,14 +22,15 @@ class PosZensai extends Component
 
     public function incrementQuantity()
     {
-        $this->quantity++;
+        if ($this->selectedProduct && $this->quantity < $this->selectedProduct->product_stock) {
+            $this->quantity++;
+        }
     }
 
     public function decrementQuantity()
     {
         $this->quantity = max(1, $this->quantity - 1);
     }
-
     public function openModal($productId)
     {
         $this->selectedProductId = $productId;
