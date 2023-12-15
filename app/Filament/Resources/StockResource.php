@@ -62,7 +62,8 @@ class StockResource extends Resource
                 TextInput::make('product_stock')
                     ->label('Stock')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->minValue(1),
                 Select::make('product_category')
                     ->label('Category')
                     ->searchable()
