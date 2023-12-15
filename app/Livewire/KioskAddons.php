@@ -50,7 +50,7 @@ class KioskAddons extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
-        $this->redirectRoute('donmono');
+        $this->redirectRoute('addons');
     }
 
     public function addToCart()
