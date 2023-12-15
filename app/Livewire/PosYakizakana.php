@@ -37,6 +37,12 @@ class PosYakizakana extends Component
         $this->selectedProductId = $productId;
         $this->selectedProduct = Stock::find($productId); // Replace 'Product' with your actual model name
 
+          // Check if the product is out of stock
+          if ($this->selectedProduct && $this->selectedProduct->product_stock === 0) {
+            $this->dispatch('outOfStock');
+            
+        }
+        
         $this->modalOpen = true;
     }
 
