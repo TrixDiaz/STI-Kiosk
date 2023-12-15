@@ -43,7 +43,7 @@
                                             <img src="{{ asset('storage/' . $selectedProduct->product_image) }}"
                                                  class="h-56 md:h-48 lg:h-56 xl:h-64 w-full bg-cover rounded-lg"
                                                  alt="" />
-                                                <p class="float-right text-sm font-semibold mx-4">Stock: {{ $selectedProduct->product_stock }}</p>
+                                            <p class="float-right text-sm font-semibold mx-4">Stock: {{ $selectedProduct->product_stock }}</p>
                                             <div class="">
                                                 <div
                                                     class="flex flex-col w-full text-black text-md px-2 py-2 rounded-md">
@@ -71,11 +71,17 @@
                             </div>
                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                 <button wire:click="addToCart" type="button"
-                                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 my-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                    Add to Cart
+                                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 my-2 
+                                            {{ $selectedProduct && $selectedProduct->product_stock === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-600' }}
+                                            text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 
+                                            focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                        {{ $selectedProduct && $selectedProduct->product_stock === 0 ? 'disabled' : '' }}>
+                                    {{ $selectedProduct && $selectedProduct->product_stock === 0 ? 'Out of Stock' : 'Add to Cart' }}
                                 </button>
                                 <button wire:click="closeModal" type="button"
-                                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 my-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 my-2 bg-green-600 
+                                            text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 
+                                            focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
                                     Close
                                 </button>
                             </div>
