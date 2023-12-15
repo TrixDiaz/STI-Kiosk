@@ -11,6 +11,7 @@ class KioskPage extends Component
     public $selectedProductId;
     public $selectedProduct;
     public $quantity = 1;
+    
 
 
     public function mount()
@@ -36,6 +37,7 @@ class KioskPage extends Component
         $this->selectedProductId = $productId;
         $this->selectedProduct = Stock::find($productId); // Replace 'Product' with your actual model name
 
+       
          // Check if the product is out of stock
          if ($this->selectedProduct && $this->selectedProduct->product_stock === 0) {
             $this->dispatch('outOfStock');
@@ -80,6 +82,7 @@ class KioskPage extends Component
     {
         return view('livewire.kiosk-page', [
             'products' => Stock::paginate(6),
+            
         ]);
     }
 }

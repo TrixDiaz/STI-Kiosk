@@ -23,9 +23,7 @@
 
             {{-- Modal --}}
             @if ($modalOpen)
-                @php
-                    $selectedProduct = $products->firstWhere('id', $selectedProductId);
-                @endphp
+                
                 <div class="fixed z-10 inset-0 overflow-y-auto">
                     <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
                         <!-- Background overlay -->
