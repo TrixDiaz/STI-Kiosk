@@ -43,6 +43,7 @@ class PosMakizushi extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.makizushi');
     }
 
     public function addToCart()

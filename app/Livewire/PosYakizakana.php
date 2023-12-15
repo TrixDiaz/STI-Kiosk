@@ -43,6 +43,7 @@ class PosYakizakana extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.yakizakana');
     }
 
     public function addToCart()

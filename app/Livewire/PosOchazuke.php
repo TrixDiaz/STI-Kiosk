@@ -43,6 +43,7 @@ class PosOchazuke extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.ochazuke');
     }
 
     public function addToCart()

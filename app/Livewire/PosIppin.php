@@ -43,6 +43,7 @@ class PosIppin extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.ippin');
     }
 
     public function addToCart()

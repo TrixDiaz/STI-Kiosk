@@ -43,6 +43,7 @@ class PosRamen extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.ramen');
     }
 
     public function addToCart()

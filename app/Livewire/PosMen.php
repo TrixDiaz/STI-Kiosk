@@ -43,6 +43,7 @@ class PosMen extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.men');
     }
 
     public function addToCart()

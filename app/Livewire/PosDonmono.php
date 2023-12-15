@@ -43,6 +43,7 @@ class PosDonmono extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.donmono');
     }
 
     public function addToCart()

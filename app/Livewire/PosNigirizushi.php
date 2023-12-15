@@ -43,6 +43,7 @@ class PosNigirizushi extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.nigirizushi');
     }
 
     public function addToCart()

@@ -42,6 +42,7 @@ class PosZensai extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.zensai');
     }
 
     public function addToCart()

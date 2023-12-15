@@ -43,6 +43,7 @@ class PosTempura extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.tempura');
     }
 
     public function addToCart()

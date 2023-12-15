@@ -43,6 +43,7 @@ class PosKushiyaki extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.kushiyaki');
     }
 
     public function addToCart()

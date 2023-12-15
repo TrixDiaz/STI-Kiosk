@@ -43,6 +43,7 @@ class PosSashimi extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.sashimi');
     }
 
     public function addToCart()
