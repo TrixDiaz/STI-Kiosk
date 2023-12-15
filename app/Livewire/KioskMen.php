@@ -42,6 +42,7 @@ class KioskMen extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('men');
     }
 
     public function addToCart()

@@ -45,6 +45,7 @@ class PosAddons extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('pos.addons');
     }
 
     public function addToCart()

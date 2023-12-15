@@ -42,6 +42,7 @@ class KioskSalad extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('salad');
     }
 
     public function addToCart()

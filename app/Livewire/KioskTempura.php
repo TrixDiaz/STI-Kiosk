@@ -42,6 +42,7 @@ class KioskTempura extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('tempura');
     }
 
     public function addToCart()

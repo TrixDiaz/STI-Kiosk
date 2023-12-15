@@ -42,6 +42,7 @@ class KioskZensai extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('zensai');
     }
 
     public function addToCart()

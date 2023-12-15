@@ -43,6 +43,7 @@ class KioskAddons extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('addons');
     }
 
     public function addToCart()

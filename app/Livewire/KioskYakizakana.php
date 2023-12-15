@@ -42,6 +42,7 @@ class KioskYakizakana extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('yakizakana');
     }
 
     public function addToCart()

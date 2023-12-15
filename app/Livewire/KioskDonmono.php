@@ -44,6 +44,7 @@ class KioskDonmono extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('donmono');
     }
 
     public function addToCart()
@@ -68,6 +69,8 @@ class KioskDonmono extends Component
 
             // Close the modal after adding to cart
             $this->closeModal();
+
+            
         }
     }
 

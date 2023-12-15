@@ -42,6 +42,7 @@ class KioskNigirizushi extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('nigirizushi');
     }
 
     public function addToCart()

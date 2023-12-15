@@ -42,6 +42,7 @@ class KioskOchazuke extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('ochazuke');
     }
 
     public function addToCart()

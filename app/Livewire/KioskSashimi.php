@@ -41,6 +41,7 @@ class KioskSashimi extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('sashimi');
     }
 
     public function addToCart()

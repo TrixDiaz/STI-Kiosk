@@ -42,6 +42,7 @@ class KioskIppin extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('ippin');
     }
 
     public function addToCart()

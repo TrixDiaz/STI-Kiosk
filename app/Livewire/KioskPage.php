@@ -42,6 +42,7 @@ class KioskPage extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('kiosk');
     }
 
     public function addToCart()

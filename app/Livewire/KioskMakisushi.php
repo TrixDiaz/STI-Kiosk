@@ -42,6 +42,7 @@ class KioskMakisushi extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
+        $this->redirectRoute('makizushi');
     }
 
     public function addToCart()
