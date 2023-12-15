@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8">
                                     <p class="">{{ $details['product_name'] }}</p>
-                                    <span class="price text-info "> ${{ $details['product_price'] }}</span> <span
+                                    <span class="price text-info "> ₱{{ $details['product_price'] }}</span> <span
                                         class="bn n"> Qty:{{ $details['quantity'] }}</span>
                                 </div>
                             </div>
