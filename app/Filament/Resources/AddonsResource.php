@@ -63,7 +63,8 @@ class AddonsResource extends Resource
                     ->label('Stock')
                     ->required()
                     ->numeric()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->minValue(0),
                 Select::make('product_category')
                     ->label('Category')
                     ->searchable()

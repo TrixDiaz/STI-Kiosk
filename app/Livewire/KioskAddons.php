@@ -32,6 +32,7 @@ class KioskAddons extends Component
         $this->quantity = max(1, $this->quantity - 1);
     }
 
+
     public function openModal($productId)
     {
         $this->selectedProductId = $productId;
@@ -43,7 +44,7 @@ class KioskAddons extends Component
     public function closeModal()
     {
         $this->modalOpen = false;
-        $this->redirectRoute('addons');
+        $this->redirectRoute('donmono');
     }
 
     public function addToCart()
@@ -68,9 +69,10 @@ class KioskAddons extends Component
 
             // Close the modal after adding to cart
             $this->closeModal();
+
+            
         }
     }
-
     public function render()
     {
         $products = Addons::paginate(6);

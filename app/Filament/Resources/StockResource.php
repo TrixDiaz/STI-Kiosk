@@ -63,7 +63,7 @@ class StockResource extends Resource
                     ->label('Stock')
                     ->required()
                     ->numeric()
-                    ->minValue(1),
+                    ->minValue(0),
                 Select::make('product_category')
                     ->label('Category')
                     ->searchable()
