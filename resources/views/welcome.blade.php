@@ -749,11 +749,11 @@
 
                     <!-- This is the actual modal dialog -->
                     <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
-                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:w-full sm:h-full sm:p-0 sm:m-0"> <!-- Updated classes for small devices -->
-                            <div class="bg-red-700 px-4 pt-0 pb-0 sm:p-6 sm:pb-4"> <!-- Updated padding values -->
+                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-0 sm:align-middle">
+                            <div class="bg-red-700 px-4">
                                 <div class="sm:flex sm:items-start">
-                                    <div class="grid mt-0 text-center sm:mt-0 sm:ml-4 sm:text-left"> <!-- Updated margin value -->
-                                        <img src="/images/izakaya-header.png" class="w-full h-full object-cover" alt="header"> <!-- Updated class and styles -->
+                                    <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                        <img src="/images/izakaya-header.png" class="w-full h-full object-cover" alt="header">
                                         <div id="default-carousel" class="relative w-full p-3" data-carousel="slide">
                                             <!-- Carousel wrapper -->
                                             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
@@ -769,7 +769,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-between bg-orange-300 px-4 py-0 sm:px-6"> <!-- Updated padding value -->
+                            <div class="flex justify-between bg-orange-300 px-4 py-3 sm:px-6">
                                 <div class="order-first">
                                     <img src="/images/iz-logo.png" class="max-h-20" alt="logo">
                                 </div>
