@@ -733,7 +733,7 @@
 
 <body class="antialiased">
     <div
-        class="bg-[url('/images/izakayabg.jpg')] relative flex justify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
+        class="bg-[url('/images/izakayabg.jpg')] relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
         {{-- Modal --}}
 
@@ -760,7 +760,7 @@
                                                 @foreach ($trending as $product)
                                                     <!-- Item -->
                                                     <div class="duration-700 ease-in-out" data-carousel-item>
-                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full">
                                                         <p>{{ $product->product_name }}</p>
                                                     </div>
                                                 @endforeach
