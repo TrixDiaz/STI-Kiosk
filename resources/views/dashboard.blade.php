@@ -202,7 +202,7 @@
                                                             @for ($i = 1; $i <= 9; $i++)
                                                                 <button type="button"
                                                                         onclick="updateAmount({{ $i }}, '{{ $order['order_id'] }}')"
-                                                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded">
+                                                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-4xl p-4 font-semibold py-2 px-4 rounded">
                                                                     {{ $i }}
                                                                 </button>
                                                             @endfor
@@ -210,13 +210,13 @@
                                                             <!-- Add a button for value 0 -->
                                                             <button type="button"
                                                                     onclick="updateAmount(0, '{{ $order['order_id'] }}')"
-                                                                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded">
+                                                                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold text-4xl p-4 py-2 px-4 rounded">
                                                                 0
                                                             </button>
 
                                                             <button type="button"
                                                                     onclick="clearAmount('{{ $order['order_id'] }}')"
-                                                                    class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold py-2 px-4 rounded">
+                                                                    class="bg-red-200 hover:bg-red-300 text-red-700 font-semibold text-4xl p-4 py-2 px-4 rounded">
                                                                 Clear
                                                             </button>
                                                         </div>

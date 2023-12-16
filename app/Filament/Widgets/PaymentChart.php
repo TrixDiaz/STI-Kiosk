@@ -8,7 +8,7 @@ use App\Models\Revenue; // Assuming your Revenue model is in the App\Models name
 class PaymentChart extends ApexChartWidget
 {
     protected static string $chartId = 'paymentChart';
-    protected static ?string $heading = 'PaymentChart';
+    protected static ?string $heading = 'Payment Chart';
 
     protected function getOptions(): array
     {

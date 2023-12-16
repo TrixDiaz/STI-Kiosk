@@ -8,7 +8,7 @@ use App\Models\Revenue;
 class MonthlyRevenue extends ApexChartWidget
 {
     protected static string $chartId = 'monthlyRevenue';
-    protected static ?string $heading = 'MonthlyRevenue';
+    protected static ?string $heading = 'Monthly Revenue';
 
     protected function getOptions(): array
     {
