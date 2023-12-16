@@ -888,7 +888,14 @@
                 })
             })
         </script>
+<script>
+    function renderRoute() {
+        window.location.href = "{{ route('/') }}";
+    }
 
+    // Wait for 3 seconds after the page loads, then call renderRoute
+    setTimeout(renderRoute, 10000);
+</script>
     @livewireScripts
 </body>
 
