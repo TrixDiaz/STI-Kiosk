@@ -732,19 +732,24 @@
 </head>
 
 <body class="antialiased">
-    <div class="bg-[url('/images/izakayabg.jpg')] relative flex justify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
+    <div
+        class="bg-[url('/images/izakayabg.jpg')] relative flex justify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
-        <!-- Modal -->
+        {{-- Modal --}}
+
         <div x-data="{ open: true }" class="z-20">
+            {{-- <button @click="open = true">Tap to Start</button> --}}
+
             <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex justify-center items-center px-4 text-center">
-                    <div x-show="open" class="inset-0 transition-opacity ease-in duration-300" aria-hidden="true">
+                    <div x-show="open" class="inset-0 transition-opacity ease-in duration-300"
+                        aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
 
                     <!-- This is the actual modal dialog -->
                     <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
-                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all salign-middle">
                             <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="flex items-center justify-center">
                                     <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -755,7 +760,7 @@
                                                 @foreach ($trending as $product)
                                                     <!-- Item -->
                                                     <div class="duration-700 ease-in-out" data-carousel-item>
-                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full">
+                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                                                         <p>{{ $product->product_name }}</p>
                                                     </div>
                                                 @endforeach
@@ -776,7 +781,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -791,7 +795,9 @@
                 $('a').on('click', function(event) {
                     if (this.hash !== '') {
                         event.preventDefault()
+
                         const hash = this.hash;
+
                         $('html, body').animate({
                                 scrollTop: $(hash).offset().top,
                             },
@@ -804,6 +810,10 @@
                 })
             })
         </script>
+
+
+
+
     </div>
     @livewireScripts
     <script src="{{ asset('/sw.js') }}"></script>
@@ -824,6 +834,5 @@
         }
     </script>
 </body>
-
 
 </html>
