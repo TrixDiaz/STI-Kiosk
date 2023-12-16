@@ -250,8 +250,8 @@ class SessionController extends Controller
                 'order_type' => $item['order_type'],
                 'total' => $item['total'],
                 'payment_status' => 'Gcash',
-                // 'created_at' => now(),
-                // 'updated_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
                 // Add other fields as needed
             ]);
             Revenue::create([
@@ -262,8 +262,8 @@ class SessionController extends Controller
                 'order_type' => $item['order_type'],
                 'total' => $item['total'],
                 'payment_status' => 'Gcash',
-                // 'created_at' => now(),
-                // 'updated_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
                 // Add other fields as needed
             ]);
 
