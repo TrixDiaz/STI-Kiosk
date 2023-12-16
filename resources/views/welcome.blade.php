@@ -748,10 +748,10 @@
                     </div>
 
                     <!-- This is the actual modal dialog -->
-                    <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
+                    <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center space-y-4">
                         <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all salign-middle">
                             <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <div class="">
+                                <div class="sm:flex sm:items-start">
                                     <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                         <img src="/images/izakaya-header.png" class="w-full h-full object-cover" alt="header">
                                         <div id="default-carousel" class="relative w-full p-3" data-carousel="slide">
