@@ -760,7 +760,7 @@
                                                 @foreach ($trending as $product)
                                                     <!-- Item -->
                                                     <div class="duration-700 ease-in-out" data-carousel-item>
-                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full h-full">
+                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                                                         <p>{{ $product->product_name }}</p>
                                                     </div>
                                                 @endforeach
