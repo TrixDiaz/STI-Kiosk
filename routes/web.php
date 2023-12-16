@@ -74,7 +74,7 @@ Route::get('/pos-addons', \App\Livewire\PosAddons::class)->name('pos.addons');
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/cashier', function () {
         $orders = [];
         $queues = [];
         $serves = DB::table('serves')->get();
