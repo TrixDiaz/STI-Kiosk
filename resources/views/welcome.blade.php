@@ -737,7 +737,7 @@
 
         {{-- Modal --}}
 
-        <div x-data="{ open: true }" class="z-20">
+        <div x-data="{ open: true }" class="z-20 flex items-center justify-center">
             {{-- <button @click="open = true">Tap to Start</button> --}}
 
             <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
