@@ -263,26 +263,26 @@
             <x-responsive-nav-link
                 role="presentation"
                 href="#tabs-home"
-                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500"
+                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500"
                 data-te-toggle="pill"
                 data-te-target="#tabs-home"
                 {{--                                    data-te-nav-active--}}
                 role="tab"
                 aria-controls="tabs-home"
                 aria-selected="true">
-                {{ __('Tab 2') }}
+                {{ __('Kiosk') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link
                 role="presentation"
                 href="#tabs-profile"
-                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500"
+                class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500"
                 data-te-toggle="pill"
                 data-te-target="#tabs-profile"
                 role="tab"
                 aria-controls="tabs-profile"
                 aria-selected="false">
-                {{ __('Tab 3') }}
+                {{ __('Kitchen') }}
             </x-responsive-nav-link>
             </span>
         </div>
@@ -290,7 +290,7 @@
         {{-- Notification Database  --}}
         <!-- Dropdown menu -->
         <button
-            class="mr-1.5 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+            class="block border-x-0 border-b-2 border-t-0 border-transparent px-4 pb-4 text-xs font-medium uppercase leading-tight text-neutral-500"
             type="button" data-te-offcanvas-toggle data-te-target="#offcanvasRight" aria-controls="offcanvasRight"
             data-te-ripple-init data-te-ripple-color="light">
             Notification {{ auth()->user()->notifications->count() }}
@@ -350,13 +350,13 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                @if (Auth::check())
+                {{-- @if (Auth::check())
                     <!-- User is authenticated, you can safely access user properties -->
                     Welcome, {{ Auth::user()->name }}
                 @else
                     <!-- User is not authenticated, show a message or something else -->
                     Welcome to the dashboard!
-                @endif
+                @endif --}}
 
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
