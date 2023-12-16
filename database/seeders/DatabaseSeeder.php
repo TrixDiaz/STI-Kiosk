@@ -10,11 +10,13 @@ use App\Models\Serve;
 use App\Models\Stock;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Revenue;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\PermissionSeeder;
+use RevenueSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +29,7 @@ class DatabaseSeeder extends Seeder
         // Product::factory(10)->create();
         // Category::factory(10)->create();
         Stock::factory(10)->create();
+        Revenue::factory(100)->create();
         // Queue::factory(10)->create();
         // Serve::factory(10)->create();
 
@@ -34,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(CategorySeeder::class);
+       
         
         User::factory()->create([
             'name' => 'Test User',
