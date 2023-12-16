@@ -733,11 +733,11 @@
 
 <body class="antialiased">
     <div
-        class="bg-[url('/images/izakayabg.jpg')] relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
+        class="bg-[url('/images/izakayabg.jpg')] relative flex sjustify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
         {{-- Modal --}}
 
-        <div x-data="{ open: true }" class="z-20 flex items-center justify-center">
+        <div x-data="{ open: true }" class="z-20">
             {{-- <button @click="open = true">Tap to Start</button> --}}
 
             <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
