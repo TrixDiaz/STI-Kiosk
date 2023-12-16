@@ -742,7 +742,7 @@
 
             <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex justify-center items-center px-4 text-center">
-                    <div x-show="open" class="inset-0 transition-opacity ease-in duration-300"
+                    <div x-show="open" class="fixed inset-0 transition-opacity ease-in duration-300"
                         aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
