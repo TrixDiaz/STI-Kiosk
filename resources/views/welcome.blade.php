@@ -741,7 +741,7 @@
             {{-- <button @click="open = true">Tap to Start</button> --}}
 
             <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
-                <div class="flex justify-center items-center min-h-screen px-4 text-center">
+                <div class="flex justify-center items-center px-4 text-center">
                     <div x-show="open" class="fixed inset-0 transition-opacity ease-in duration-300"
                         aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -750,7 +750,7 @@
                     <!-- This is the actual modal dialog -->
                     <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
                         <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-0 sm:align-middle">
-                            <div class="bg-red-700 px-4">
+                            <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
                                     <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                         <img src="/images/izakaya-header.png" class="w-full h-full object-cover" alt="header">
