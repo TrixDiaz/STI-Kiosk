@@ -733,7 +733,7 @@
 
 <body class="antialiased">
     <div
-        class="bg-[url('/images/izakayabg.jpg')] relative flex sjustify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
+        class="bg-[url('/images/izakayabg.jpg')] relative flex justify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
 
         {{-- Modal --}}
 
