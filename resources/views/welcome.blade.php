@@ -753,7 +753,7 @@
                             <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
                                     <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <img src="/images/izakaya-header.png" class="max-h-80 mx-auto mb-4" alt="header">
+                                        <img src="/images/izakaya-header.png" class="max-h-80 w-full object-cover sm:max-h-96" alt="header">
                                         <div id="default-carousel" class="relative w-full p-3" data-carousel="slide">
                                             <!-- Carousel wrapper -->
                                             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
