@@ -749,7 +749,7 @@
 
                     <!-- This is the actual modal dialog -->
                     <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
-                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle">
+                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:w-full sm:h-full sm:p-0 sm:m-0"> <!-- Updated classes for small devices -->
                             <div class="bg-red-700 px-4 pt-0 pb-0 sm:p-6 sm:pb-4"> <!-- Updated padding values -->
                                 <div class="sm:flex sm:items-start">
                                     <div class="grid mt-0 text-center sm:mt-0 sm:ml-4 sm:text-left"> <!-- Updated margin value -->
