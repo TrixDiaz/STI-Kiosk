@@ -280,7 +280,7 @@ class SessionController extends Controller
 
         // Redirect back or to a confirmation page
         return redirect()
-            ->route('receipt', ['orderID' => $orderID])
+            ->route('QRreceipt', ['orderID' => $orderID])
             ->with('success', 'Order created.');
     }
 
