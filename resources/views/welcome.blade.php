@@ -749,11 +749,11 @@
 
                     <!-- This is the actual modal dialog -->
                     <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
-                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
+                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-0 sm:align-middle">
                             <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
                                     <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <img src="/images/izakaya-header.png" class="max-h-80 w-full object-cover sm:max-h-96" alt="header">
+                                        <img src="/images/izakaya-header.png" class="w-full h-full object-cover" alt="header">
                                         <div id="default-carousel" class="relative w-full p-3" data-carousel="slide">
                                             <!-- Carousel wrapper -->
                                             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
