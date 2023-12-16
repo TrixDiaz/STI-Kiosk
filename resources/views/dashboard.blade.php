@@ -202,7 +202,7 @@
                                                             @for ($i = 1; $i <= 9; $i++)
                                                                 <button type="button"
                                                                         onclick="updateAmount({{ $i }}, '{{ $order['order_id'] }}')"
-                                                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded">
+                                                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 p-4 text-2xl rounded">
                                                                     {{ $i }}
                                                                 </button>
                                                             @endfor
