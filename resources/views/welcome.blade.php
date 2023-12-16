@@ -740,7 +740,7 @@
         <div x-data="{ open: true }" class="z-20">
             {{-- <button @click="open = true">Tap to Start</button> --}}
 
-            <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
+            <div x-show="open" class="fixed inset-0 z-10 pt-20">
                 <div class="flex justify-center items-center px-4 text-center">
                     <div x-show="open" class="fixed inset-0 transition-opacity ease-in duration-300"
                         aria-hidden="true">
