@@ -716,12 +716,6 @@
                 padding: 2rem
             }
         }
-        .fixed {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
     </style>
 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
