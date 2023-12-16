@@ -864,6 +864,7 @@
             })
         })
     </script>
+
     @livewireScripts
 </body>
 
