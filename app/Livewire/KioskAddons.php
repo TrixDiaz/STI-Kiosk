@@ -81,7 +81,7 @@ class KioskAddons extends Component
     }
     public function render()
     {
-        $products = Addons::paginate(6);
+        $products = Stock::where('product_category', 'Addons')->paginate(6);
         return view('livewire.kiosk-addons', compact('products'));
     }
 }

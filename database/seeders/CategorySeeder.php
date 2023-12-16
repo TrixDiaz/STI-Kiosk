@@ -26,6 +26,7 @@ class CategorySeeder extends Seeder
         Category::create(['product_category' => 'Tempura']);
         Category::create(['product_category' => 'Yakizakana']);
         Category::create(['product_category' => 'Zensai']);
+        Category::create(['product_category' => 'Addons']);
 
     }
 }
