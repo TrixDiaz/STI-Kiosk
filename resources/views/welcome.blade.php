@@ -760,7 +760,7 @@
                                                 @foreach ($trending as $product)
                                                     <!-- Item -->
                                                     <div class="duration-700 ease-in-out" data-carousel-item>
-                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full h-full align-middle">
+                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full h-full">
                                                         <p>{{ $product->product_name }}</p>
                                                     </div>
                                                 @endforeach
@@ -783,38 +783,34 @@
                     </div>
             </div>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-            AOS.init()
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Add smooth scrolling to all links
-                $('a').on('click', function(event) {
-                    if (this.hash !== '') {
-                        event.preventDefault()
-
-                        const hash = this.hash;
-
-                        $('html, body').animate({
-                                scrollTop: $(hash).offset().top,
-                            },
-                            800,
-                            function() {
-                                window.location.hash = hash
-                            }
-                        )
-                    }
-                })
-            })
-        </script>
-
-
-
-
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init()
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Add smooth scrolling to all links
+            $('a').on('click', function(event) {
+                if (this.hash !== '') {
+                    event.preventDefault()
+
+                    const hash = this.hash;
+
+                    $('html, body').animate({
+                            scrollTop: $(hash).offset().top,
+                        },
+                        800,
+                        function() {
+                            window.location.hash = hash
+                        }
+                    )
+                }
+            })
+        })
+    </script>
     @livewireScripts
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
