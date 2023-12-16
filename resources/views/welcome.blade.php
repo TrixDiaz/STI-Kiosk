@@ -749,7 +749,7 @@
 
                     <!-- This is the actual modal dialog -->
                     <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
-                        <div x-show="open" class="inline-block align-middle min-h-screen bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-0 sm:align-middle">
+                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-0 sm:align-middle">
                             <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
                                     <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -783,34 +783,38 @@
                     </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init()
-    </script>
-    <script>
-        $(document).ready(function() {
-            // Add smooth scrolling to all links
-            $('a').on('click', function(event) {
-                if (this.hash !== '') {
-                    event.preventDefault()
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init()
+        </script>
+        <script>
+            $(document).ready(function() {
+                // Add smooth scrolling to all links
+                $('a').on('click', function(event) {
+                    if (this.hash !== '') {
+                        event.preventDefault()
 
-                    const hash = this.hash;
+                        const hash = this.hash;
 
-                    $('html, body').animate({
-                            scrollTop: $(hash).offset().top,
-                        },
-                        800,
-                        function() {
-                            window.location.hash = hash
-                        }
-                    )
-                }
+                        $('html, body').animate({
+                                scrollTop: $(hash).offset().top,
+                            },
+                            800,
+                            function() {
+                                window.location.hash = hash
+                            }
+                        )
+                    }
+                })
             })
-        })
-    </script>
+        </script>
+
+
+
+
+    </div>
     @livewireScripts
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
