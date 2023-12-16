@@ -733,8 +733,8 @@
             <div class="text-center z-10">
                 <div class="">
                     @php
-    $checkout_url = session('checkout_url');
-@endphp
+                        $checkout_url = session('checkout_url');
+                    @endphp
                     <div class="relative border-corner 	 p-5  m-auto  rounded-xl bg-cover w-48 h-48 flex"
                         style="background-image: url(https://images.unsplash.com/photo-1590520181753-3fff75292722?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2134&amp;q=80);">
                         <span class="border_bottom">{!! QrCode::size(150)->generate($checkout_url) !!}</span>
