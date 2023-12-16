@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a598fe00e5e29264db0901e0be66037",
+    "content-hash": "1479dd925b9fef4a31ea047a1eb9c2fb",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3585,16 +3585,16 @@
         },
         {
             "name": "leandrocfe/filament-apex-charts",
-            "version": "3.0.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leandrocfe/filament-apex-charts.git",
-                "reference": "b01345a7904aecabd996093e869c34758b0e0743"
+                "reference": "b97b332dc0253255522ff944010cf283fdebebbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leandrocfe/filament-apex-charts/zipball/b01345a7904aecabd996093e869c34758b0e0743",
-                "reference": "b01345a7904aecabd996093e869c34758b0e0743",
+                "url": "https://api.github.com/repos/leandrocfe/filament-apex-charts/zipball/b97b332dc0253255522ff944010cf283fdebebbb",
+                "reference": "b97b332dc0253255522ff944010cf283fdebebbb",
                 "shasum": ""
             },
             "require": {
@@ -3653,9 +3653,9 @@
             ],
             "support": {
                 "issues": "https://github.com/leandrocfe/filament-apex-charts/issues",
-                "source": "https://github.com/leandrocfe/filament-apex-charts/tree/3.0.0"
+                "source": "https://github.com/leandrocfe/filament-apex-charts/tree/3.0.2"
             },
-            "time": "2023-07-31T11:43:10+00:00"
+            "time": "2023-11-27T11:55:21+00:00"
         },
         {
             "name": "livewire/livewire",
