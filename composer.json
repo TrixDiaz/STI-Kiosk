@@ -18,7 +18,7 @@
         "laravel/jetstream": "^4.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "leandrocfe/filament-apex-charts": "3.0",
+        "leandrocfe/filament-apex-charts": "^3.0",
         "livewire/livewire": "^3.0",
         "malzariey/filament-daterangepicker-filter": "^2.3",
         "pusher/pusher-php-server": "^7.2",
