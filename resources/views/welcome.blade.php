@@ -749,20 +749,18 @@
 
                     <!-- This is the actual modal dialog -->
                     <div data-aos="fade-up" data-aos-duration="2000" class="mx-auto max-w-screen-sm text-center">
-                        <div x-show="open"
-                            class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
+                        <div x-show="open" class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle">
                             <div class="bg-red-700 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
                                     <div class="grid mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <img src="/images/izakaya-header.png" class="max-h-80" alt="header">
+                                        <img src="/images/izakaya-header.png" class="max-h-80 mx-auto mb-4" alt="header">
                                         <div id="default-carousel" class="relative w-full p-3" data-carousel="slide">
                                             <!-- Carousel wrapper -->
-                                            <div class="relative h-96 overflow-hidden rounded-lg md:h-96">
+                                            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                                                 @foreach ($trending as $product)
                                                     <!-- Item -->
                                                     <div class="duration-700 ease-in-out" data-carousel-item>
-                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}"
-                                                            class="absolute block w-full h-full object-cover">
+                                                        <img src="/storage/{{ $product->product_image }}" alt="{{ $product->product_name }}" class="absolute block w-full h-full object-cover">
                                                         <p>{{ $product->product_name }}</p>
                                                     </div>
                                                 @endforeach
@@ -776,15 +774,13 @@
                                     <img src="/images/iz-logo.png" class="max-h-20" alt="logo">
                                 </div>
                                 <div class="order-last">
-                                    <a href="{{ route('kiosk') }}" type="button"
-                                        class="animate-pulse w-full justify-center px-4 py-5 font-bold text-white text-xl uppercase">
+                                    <a href="{{ route('kiosk') }}" type="button" class="animate-pulse w-full justify-center px-4 py-5 font-bold text-white text-xl uppercase">
                                         Tap to Start
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
