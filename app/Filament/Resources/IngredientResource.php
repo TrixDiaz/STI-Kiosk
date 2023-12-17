@@ -23,7 +23,7 @@ class IngredientResource extends Resource
 {
     protected static ?string $model = Ingredient::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     protected static ?int $navigationSort = 2;
 
@@ -33,12 +33,8 @@ class IngredientResource extends Resource
     {
         return $form->schema([
             Fieldset::make('Product Information')->schema([
-                Select::make('ingredient_name')
-                    ->label('Name')
-                    ->searchable()
-                    ->required('create')
-                    ->options(Product::all()->pluck('product_name', 'product_name'))
-                    ->live(),
+                TextInput::make('ingredient_stock')
+                    ->label('Ingredients Name'),
                 TextInput::make('ingredient_price')
                     ->label('Price')
                     ->required()
