@@ -42,8 +42,8 @@ class ServeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('order_id')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('product_status')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('product_status')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
