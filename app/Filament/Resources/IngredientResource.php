@@ -53,7 +53,7 @@ class IngredientResource extends Resource
                     ->options(Category::all()->pluck('product_category', 'product_category')),
             ]),
             Fieldset::make('Status Information')->schema([
-                Datepicker::make('product_expiration')
+                Datepicker::make('ingredient_expiration')
                     ->minDate(now()->format('Y-m-d')) // Set the minimum date in 'Y-m-d' format
                     ->format('Y-m-d')
                     ->rules(['date', 'after_or_equal:' . now()->format('Y-m-d')])
@@ -78,6 +78,7 @@ class IngredientResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('ingredient_name'),
                 Tables\Columns\TextColumn::make('ingredient_stock')
                     ->numeric()
                     ->sortable(),
