@@ -279,7 +279,7 @@
      </span>
  </button>
     <livewire:cart-counter/>
-    <x-button onclick="window.location='{{ route('login') }}'">Refresh</x-button>
+    <x-button class="py-0" onclick="window.location='{{ route('login') }}'">Refresh</x-button>
 
 </div>
         {{-- end of top nav --}}
