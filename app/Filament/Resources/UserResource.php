@@ -16,6 +16,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\UserResource\Pages;
@@ -54,15 +55,15 @@ class UserResource extends Resource
                             ->prefix('@Ctona123')
                             ->visibleOn(['create'])
                             ->readOnly(),
-                            Datepicker::make('email_verified_at'),
-                    //         Radio::make('email_verified_at')
-                    //         ->label('Account Activation')
-                    //         ->options([
-                    //             Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
-                    //         ])
-                    //         ->visible(fn ($record) => !$record || $record->email_verified_at === null)
-                    //         ->inline(false),
-                    // ])->columns(2),
+                        DatePicker::make('email_verified_at'),
+                            // Radio::make('email_verified_at')
+                            // ->label('Account Activation')
+                            // ->options([
+                            //     Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
+                            // ])
+                            // ->visible(fn ($record) => !$record || $record->email_verified_at === null)
+                            // ->inline(false),
+                    ])->columns(2),
                 Fieldset::make('User Management')
                     ->schema([
                         Select::make('roles')
