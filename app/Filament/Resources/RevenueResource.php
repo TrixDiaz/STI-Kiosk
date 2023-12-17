@@ -31,30 +31,6 @@ class RevenueResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('order_id')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('product_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('product_price')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('quantity')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('total')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('order_type')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('payment_status')
-                    ->required()
-                    ->maxLength(255),
             ]);
     }
 
