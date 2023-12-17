@@ -17,23 +17,7 @@
     {{-- ReCaptcha --}}
     <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
     @livewireStyles
-    <style>
-        /* ... your existing styles ... */
-        
-        /* Add responsive styles here */
-        @media (max-width: 768px) {
-            /* Define styles for smaller screens here */
-            .popup {
-                width: 100%;
-            }
-            .block.text-center.md\:text-left {
-                text-align: center;
-            }
-            .flex.flex-col.items-center.md\:flex-row.md\:items-center.justify-center.md\:justify-between.mt-4 {
-                justify-content: center;
-            }
-        }
-    </style>
+   
     
 </head>
 <body>
