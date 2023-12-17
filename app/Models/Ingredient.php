@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ingredient extends Model
