@@ -50,7 +50,7 @@ class IngredientResource extends Resource
                     ->label('Category')
                     ->searchable()
                     // ->required('create')
-                    ->options(Category::all()->pluck('product_category', 'product_category')),
+                    ->options(['Condiments','Raw']),
             ]),
             Fieldset::make('Status Information')->schema([
                 Datepicker::make('ingredient_expiration')
