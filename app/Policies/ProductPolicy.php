@@ -13,7 +13,7 @@ class ProductPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasRole([1]);
+        return $user->hasRole([1,2]);
     }
 
     /**
