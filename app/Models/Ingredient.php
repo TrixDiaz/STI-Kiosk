@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ingredient extends Model
 {
-    protected $fillable = ['product_name', 'product_stock', 'product_price', 'product_expiration', 'product_category', 'product_status'];
+    protected $fillable = ['ingredient_name', 'ingredient_stock', 'ingredient_price', 'ingredient_expiration', 'ingredient_category', 'ingredient_status'];
 
     use HasFactory;
     use SoftDeletes;
