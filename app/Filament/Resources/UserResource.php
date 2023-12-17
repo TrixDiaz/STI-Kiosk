@@ -54,14 +54,15 @@ class UserResource extends Resource
                             ->prefix('@Ctona123')
                             ->visibleOn(['create'])
                             ->readOnly(),
-                            Radio::make('email_verified_at')
-                            ->label('Account Activation')
-                            ->options([
-                                Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
-                            ])
-                            ->visible(fn ($record) => !$record || $record->email_verified_at === null)
-                            ->inline(false),
-                    ])->columns(2),
+                            Datepicker::make('email_verified_at'),
+                    //         Radio::make('email_verified_at')
+                    //         ->label('Account Activation')
+                    //         ->options([
+                    //             Carbon::now('Asia/Manila')->format('Y-m-d H:i') => 'Activate',
+                    //         ])
+                    //         ->visible(fn ($record) => !$record || $record->email_verified_at === null)
+                    //         ->inline(false),
+                    // ])->columns(2),
                 Fieldset::make('User Management')
                     ->schema([
                         Select::make('roles')
