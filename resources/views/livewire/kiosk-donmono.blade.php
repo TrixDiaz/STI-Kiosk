@@ -41,7 +41,7 @@
                                             <img src="{{ asset('storage/' . $selectedProduct->product_image) }}"
                                                  class="h-56 md:h-48 lg:h-56 xl:h-64 w-full bg-cover rounded-lg"
                                                  alt="" />
-                                            <p class="float-right text-sm font-semibold mx-4">Stock: {{ $selectedProduct->product_stock }}</p>
+                                            <p  wire:poll class="float-right text-sm font-semibold mx-4">Stock: {{ $selectedProduct->product_stock }}</p>
                                             <div class="">
                                                 <div
                                                     class="flex flex-col w-full text-black text-md px-2 py-2 rounded-md">
