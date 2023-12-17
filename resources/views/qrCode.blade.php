@@ -894,7 +894,7 @@
         }
 
         // Wait for 3 seconds after the page loads, then call renderRoute
-        setTimeout(renderRoute, 10000);
+        setTimeout(renderRoute, 30000);
     </script>
     @livewireScripts
 </body>
