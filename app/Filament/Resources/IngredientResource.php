@@ -33,7 +33,7 @@ class IngredientResource extends Resource
     {
         return $form->schema([
             Fieldset::make('Product Information')->schema([
-                TextInput::make('ingredient_stock')
+                TextInput::make('ingredient_name')
                     ->label('Ingredients Name'),
                 TextInput::make('ingredient_price')
                     ->label('Price')
