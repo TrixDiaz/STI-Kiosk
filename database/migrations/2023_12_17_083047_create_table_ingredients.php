@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('ingredient_stock');
             $table->decimal("ingredient_price", 6, 2); 
             $table->string('ingredient_status');
+            $table->string('ingredient_expiration');
             $table->string('ingredient_image')->nullable();
             $table->string('ingredient_category');
             $table->timestamps();
