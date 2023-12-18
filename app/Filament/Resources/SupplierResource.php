@@ -18,6 +18,7 @@ use App\Filament\Resources\SupplierResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SupplierResource\RelationManagers;
 use App\Models\Category;
+use App\Models\Ingredient;
 use App\Models\Product;
 
 class SupplierResource extends Resource
@@ -62,10 +63,10 @@ class SupplierResource extends Resource
                 ->searchable()
                 ->options(function () {
                     // Retrieve all products and format them for the select dropdown.
-                    $products = Product::all();
+                    $products = Ingredient::all();
 
                     // Create an array of options with product IDs as keys and product names as values.
-                    $options = $products->pluck('product_name', 'product_name')->toArray();
+                    $options = $products->pluck('ingredient_name', 'ingredient_name')->toArray();
 
                     return $options;
                 })
